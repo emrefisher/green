@@ -1,0 +1,847 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0E6865418527CCAF695F6ED3 /* Pods_Environmentalists_EnvironmentalistsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90DA857C3CB7A103FB5D2FEA /* Pods_Environmentalists_EnvironmentalistsUITests.framework */; };
+		5234A801295CC8480A8EE946 /* Pods_EnvironmentalistsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 141B42C798305B9037E4EB43 /* Pods_EnvironmentalistsTests.framework */; };
+		A722BCB425008460007C70F1 /* EnvironmentalistsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A722BCB325008460007C70F1 /* EnvironmentalistsApp.swift */; };
+		A722BCB625008460007C70F1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A722BCB525008460007C70F1 /* ContentView.swift */; };
+		A722BCB825008462007C70F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A722BCB725008462007C70F1 /* Assets.xcassets */; };
+		A722BCBB25008462007C70F1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A722BCBA25008462007C70F1 /* Preview Assets.xcassets */; };
+		A722BCC625008462007C70F1 /* EnvironmentalistsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A722BCC525008462007C70F1 /* EnvironmentalistsTests.swift */; };
+		A722BCD125008462007C70F1 /* EnvironmentalistsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A722BCD025008462007C70F1 /* EnvironmentalistsUITests.swift */; };
+		A722BCDF250084DB007C70F1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A722BCDE250084DB007C70F1 /* GoogleService-Info.plist */; };
+		A722BCE0250084DB007C70F1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A722BCDE250084DB007C70F1 /* GoogleService-Info.plist */; };
+		A722BCE1250084DB007C70F1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A722BCDE250084DB007C70F1 /* GoogleService-Info.plist */; };
+		A722BCE425008B36007C70F1 /* UserSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A722BCE325008B36007C70F1 /* UserSessionManager.swift */; };
+		A722BCE625017A2E007C70F1 /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A722BCE525017A2E007C70F1 /* SignUp.swift */; };
+		A722BCE825017A3D007C70F1 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = A722BCE725017A3D007C70F1 /* Login.swift */; };
+		A722BCEA25017A4A007C70F1 /* PasswordReset.swift in Sources */ = {isa = PBXBuildFile; fileRef = A722BCE925017A4A007C70F1 /* PasswordReset.swift */; };
+		A722BCEC2501AC78007C70F1 /* SessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A722BCEB2501AC78007C70F1 /* SessionView.swift */; };
+		A722BCEF25047B94007C70F1 /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A722BCEE25047B94007C70F1 /* EventManager.swift */; };
+		A722BCF125049228007C70F1 /* SearchDirectoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A722BCF025049228007C70F1 /* SearchDirectoryView.swift */; };
+		A722BCF325049466007C70F1 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A722BCF225049466007C70F1 /* MapView.swift */; };
+		A75EEA502538F1D10068EF2E /* CurrentUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75EEA4F2538F1D10068EF2E /* CurrentUser.swift */; };
+		A763DD4A250C4B0C0001FA21 /* CreateEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A763DD49250C4B0C0001FA21 /* CreateEventView.swift */; };
+		A763DD4C250C4BCC0001FA21 /* OrganizerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A763DD4B250C4BCC0001FA21 /* OrganizerManager.swift */; };
+		A763DD4E250C4BFE0001FA21 /* EventCreationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A763DD4D250C4BFE0001FA21 /* EventCreationManager.swift */; };
+		A76FE39A252111330061EF34 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76FE399252111330061EF34 /* Settings.swift */; };
+		A76FE3A2252117890061EF34 /* MyAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76FE3A1252117890061EF34 /* MyAccount.swift */; };
+		A76FE3A7252117A00061EF34 /* TermsAndConditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76FE3A6252117A00061EF34 /* TermsAndConditions.swift */; };
+		A76FE3AC252117CD0061EF34 /* RateThisApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76FE3AB252117CD0061EF34 /* RateThisApp.swift */; };
+		A76FE3B1252117E20061EF34 /* AboutUs.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76FE3B0252117E20061EF34 /* AboutUs.swift */; };
+		A76FE3BC252118140061EF34 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76FE3BB252118140061EF34 /* Notifications.swift */; };
+		A76FE3C12521182B0061EF34 /* PrivacyPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76FE3C02521182B0061EF34 /* PrivacyPolicy.swift */; };
+		C2DE5DEA551576E28B09FE35 /* Pods_Environmentalists.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C51DB3FB339C181A291954 /* Pods_Environmentalists.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A722BCC225008462007C70F1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A722BCA825008460007C70F1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A722BCAF25008460007C70F1;
+			remoteInfo = Environmentalists;
+		};
+		A722BCCD25008462007C70F1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A722BCA825008460007C70F1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A722BCAF25008460007C70F1;
+			remoteInfo = Environmentalists;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		141B42C798305B9037E4EB43 /* Pods_EnvironmentalistsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EnvironmentalistsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D6C0A2ED1B0E8912D99964B /* Pods-EnvironmentalistsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EnvironmentalistsTests.release.xcconfig"; path = "Target Support Files/Pods-EnvironmentalistsTests/Pods-EnvironmentalistsTests.release.xcconfig"; sourceTree = "<group>"; };
+		7C78EE5E6B3F1EBC3DBCEFB1 /* Pods-Environmentalists-EnvironmentalistsUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Environmentalists-EnvironmentalistsUITests.release.xcconfig"; path = "Target Support Files/Pods-Environmentalists-EnvironmentalistsUITests/Pods-Environmentalists-EnvironmentalistsUITests.release.xcconfig"; sourceTree = "<group>"; };
+		90DA857C3CB7A103FB5D2FEA /* Pods_Environmentalists_EnvironmentalistsUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Environmentalists_EnvironmentalistsUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A38EEC6B7688A721ADADA3FA /* Pods-Environmentalists.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Environmentalists.release.xcconfig"; path = "Target Support Files/Pods-Environmentalists/Pods-Environmentalists.release.xcconfig"; sourceTree = "<group>"; };
+		A722BCB025008460007C70F1 /* Environmentalists.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Environmentalists.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A722BCB325008460007C70F1 /* EnvironmentalistsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentalistsApp.swift; sourceTree = "<group>"; };
+		A722BCB525008460007C70F1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		A722BCB725008462007C70F1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A722BCBA25008462007C70F1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		A722BCBC25008462007C70F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A722BCC125008462007C70F1 /* EnvironmentalistsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EnvironmentalistsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A722BCC525008462007C70F1 /* EnvironmentalistsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentalistsTests.swift; sourceTree = "<group>"; };
+		A722BCC725008462007C70F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A722BCCC25008462007C70F1 /* EnvironmentalistsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EnvironmentalistsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A722BCD025008462007C70F1 /* EnvironmentalistsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentalistsUITests.swift; sourceTree = "<group>"; };
+		A722BCD225008462007C70F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A722BCDE250084DB007C70F1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
+		A722BCE325008B36007C70F1 /* UserSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSessionManager.swift; sourceTree = "<group>"; };
+		A722BCE525017A2E007C70F1 /* SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
+		A722BCE725017A3D007C70F1 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
+		A722BCE925017A4A007C70F1 /* PasswordReset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordReset.swift; sourceTree = "<group>"; };
+		A722BCEB2501AC78007C70F1 /* SessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionView.swift; sourceTree = "<group>"; };
+		A722BCEE25047B94007C70F1 /* EventManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventManager.swift; sourceTree = "<group>"; };
+		A722BCF025049228007C70F1 /* SearchDirectoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDirectoryView.swift; sourceTree = "<group>"; };
+		A722BCF225049466007C70F1 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		A75EEA4F2538F1D10068EF2E /* CurrentUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUser.swift; sourceTree = "<group>"; };
+		A763DD49250C4B0C0001FA21 /* CreateEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEventView.swift; sourceTree = "<group>"; };
+		A763DD4B250C4BCC0001FA21 /* OrganizerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizerManager.swift; sourceTree = "<group>"; };
+		A763DD4D250C4BFE0001FA21 /* EventCreationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCreationManager.swift; sourceTree = "<group>"; };
+		A76FE399252111330061EF34 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		A76FE3A1252117890061EF34 /* MyAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccount.swift; sourceTree = "<group>"; };
+		A76FE3A6252117A00061EF34 /* TermsAndConditions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndConditions.swift; sourceTree = "<group>"; };
+		A76FE3AB252117CD0061EF34 /* RateThisApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateThisApp.swift; sourceTree = "<group>"; };
+		A76FE3B0252117E20061EF34 /* AboutUs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUs.swift; sourceTree = "<group>"; };
+		A76FE3BB252118140061EF34 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
+		A76FE3C02521182B0061EF34 /* PrivacyPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicy.swift; sourceTree = "<group>"; };
+		D5C51DB3FB339C181A291954 /* Pods_Environmentalists.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Environmentalists.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D8E78CCD6CE226025120FD75 /* Pods-Environmentalists.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Environmentalists.debug.xcconfig"; path = "Target Support Files/Pods-Environmentalists/Pods-Environmentalists.debug.xcconfig"; sourceTree = "<group>"; };
+		EB8375C0007B95D2AAE90A18 /* Pods-EnvironmentalistsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EnvironmentalistsTests.debug.xcconfig"; path = "Target Support Files/Pods-EnvironmentalistsTests/Pods-EnvironmentalistsTests.debug.xcconfig"; sourceTree = "<group>"; };
+		EECB31BAF9C1F0DE12B494BF /* Pods-Environmentalists-EnvironmentalistsUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Environmentalists-EnvironmentalistsUITests.debug.xcconfig"; path = "Target Support Files/Pods-Environmentalists-EnvironmentalistsUITests/Pods-Environmentalists-EnvironmentalistsUITests.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A722BCAD25008460007C70F1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C2DE5DEA551576E28B09FE35 /* Pods_Environmentalists.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A722BCBE25008462007C70F1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5234A801295CC8480A8EE946 /* Pods_EnvironmentalistsTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A722BCC925008462007C70F1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0E6865418527CCAF695F6ED3 /* Pods_Environmentalists_EnvironmentalistsUITests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		012B4EF2732B34AAFBBF7364 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D8E78CCD6CE226025120FD75 /* Pods-Environmentalists.debug.xcconfig */,
+				A38EEC6B7688A721ADADA3FA /* Pods-Environmentalists.release.xcconfig */,
+				EECB31BAF9C1F0DE12B494BF /* Pods-Environmentalists-EnvironmentalistsUITests.debug.xcconfig */,
+				7C78EE5E6B3F1EBC3DBCEFB1 /* Pods-Environmentalists-EnvironmentalistsUITests.release.xcconfig */,
+				EB8375C0007B95D2AAE90A18 /* Pods-EnvironmentalistsTests.debug.xcconfig */,
+				2D6C0A2ED1B0E8912D99964B /* Pods-EnvironmentalistsTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		A722BCA725008460007C70F1 = {
+			isa = PBXGroup;
+			children = (
+				A722BCB225008460007C70F1 /* Environmentalists */,
+				A722BCC425008462007C70F1 /* EnvironmentalistsTests */,
+				A722BCCF25008462007C70F1 /* EnvironmentalistsUITests */,
+				A722BCB125008460007C70F1 /* Products */,
+				012B4EF2732B34AAFBBF7364 /* Pods */,
+				E3B94BE2C1B1BB0CF36F0084 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		A722BCB125008460007C70F1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A722BCB025008460007C70F1 /* Environmentalists.app */,
+				A722BCC125008462007C70F1 /* EnvironmentalistsTests.xctest */,
+				A722BCCC25008462007C70F1 /* EnvironmentalistsUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A722BCB225008460007C70F1 /* Environmentalists */ = {
+			isa = PBXGroup;
+			children = (
+				A722BCB325008460007C70F1 /* EnvironmentalistsApp.swift */,
+				A722BCB525008460007C70F1 /* ContentView.swift */,
+				A722BCEB2501AC78007C70F1 /* SessionView.swift */,
+				A722BCED25047B75007C70F1 /* Event Management */,
+				A722BCE225008AE9007C70F1 /* User Management */,
+				A76FE39825210FE40061EF34 /* Settings */,
+				A722BCB725008462007C70F1 /* Assets.xcassets */,
+				A722BCBC25008462007C70F1 /* Info.plist */,
+				A722BCDE250084DB007C70F1 /* GoogleService-Info.plist */,
+				A722BCB925008462007C70F1 /* Preview Content */,
+			);
+			path = Environmentalists;
+			sourceTree = "<group>";
+		};
+		A722BCB925008462007C70F1 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				A722BCBA25008462007C70F1 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		A722BCC425008462007C70F1 /* EnvironmentalistsTests */ = {
+			isa = PBXGroup;
+			children = (
+				A722BCC525008462007C70F1 /* EnvironmentalistsTests.swift */,
+				A722BCC725008462007C70F1 /* Info.plist */,
+			);
+			path = EnvironmentalistsTests;
+			sourceTree = "<group>";
+		};
+		A722BCCF25008462007C70F1 /* EnvironmentalistsUITests */ = {
+			isa = PBXGroup;
+			children = (
+				A722BCD025008462007C70F1 /* EnvironmentalistsUITests.swift */,
+				A722BCD225008462007C70F1 /* Info.plist */,
+			);
+			path = EnvironmentalistsUITests;
+			sourceTree = "<group>";
+		};
+		A722BCE225008AE9007C70F1 /* User Management */ = {
+			isa = PBXGroup;
+			children = (
+				A722BCE325008B36007C70F1 /* UserSessionManager.swift */,
+				A75EEA4F2538F1D10068EF2E /* CurrentUser.swift */,
+				A722BCE525017A2E007C70F1 /* SignUp.swift */,
+				A722BCE725017A3D007C70F1 /* Login.swift */,
+				A722BCE925017A4A007C70F1 /* PasswordReset.swift */,
+			);
+			path = "User Management";
+			sourceTree = "<group>";
+		};
+		A722BCED25047B75007C70F1 /* Event Management */ = {
+			isa = PBXGroup;
+			children = (
+				A722BCF025049228007C70F1 /* SearchDirectoryView.swift */,
+				A722BCF225049466007C70F1 /* MapView.swift */,
+				A722BCEE25047B94007C70F1 /* EventManager.swift */,
+				A763DD4B250C4BCC0001FA21 /* OrganizerManager.swift */,
+				A763DD49250C4B0C0001FA21 /* CreateEventView.swift */,
+				A763DD4D250C4BFE0001FA21 /* EventCreationManager.swift */,
+			);
+			path = "Event Management";
+			sourceTree = "<group>";
+		};
+		A76FE39825210FE40061EF34 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				A76FE399252111330061EF34 /* Settings.swift */,
+				A76FE3A1252117890061EF34 /* MyAccount.swift */,
+				A76FE3A6252117A00061EF34 /* TermsAndConditions.swift */,
+				A76FE3AB252117CD0061EF34 /* RateThisApp.swift */,
+				A76FE3B0252117E20061EF34 /* AboutUs.swift */,
+				A76FE3BB252118140061EF34 /* Notifications.swift */,
+				A76FE3C02521182B0061EF34 /* PrivacyPolicy.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		E3B94BE2C1B1BB0CF36F0084 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D5C51DB3FB339C181A291954 /* Pods_Environmentalists.framework */,
+				90DA857C3CB7A103FB5D2FEA /* Pods_Environmentalists_EnvironmentalistsUITests.framework */,
+				141B42C798305B9037E4EB43 /* Pods_EnvironmentalistsTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A722BCAF25008460007C70F1 /* Environmentalists */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A722BCD525008462007C70F1 /* Build configuration list for PBXNativeTarget "Environmentalists" */;
+			buildPhases = (
+				05E59CEE8E13C8C448D0B855 /* [CP] Check Pods Manifest.lock */,
+				A722BCAC25008460007C70F1 /* Sources */,
+				A722BCAD25008460007C70F1 /* Frameworks */,
+				A722BCAE25008460007C70F1 /* Resources */,
+				F39AE022160466722BE4032F /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Environmentalists;
+			productName = Environmentalists;
+			productReference = A722BCB025008460007C70F1 /* Environmentalists.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A722BCC025008462007C70F1 /* EnvironmentalistsTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A722BCD825008462007C70F1 /* Build configuration list for PBXNativeTarget "EnvironmentalistsTests" */;
+			buildPhases = (
+				E49294CACC77A7A6BB71EF60 /* [CP] Check Pods Manifest.lock */,
+				A722BCBD25008462007C70F1 /* Sources */,
+				A722BCBE25008462007C70F1 /* Frameworks */,
+				A722BCBF25008462007C70F1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A722BCC325008462007C70F1 /* PBXTargetDependency */,
+			);
+			name = EnvironmentalistsTests;
+			productName = EnvironmentalistsTests;
+			productReference = A722BCC125008462007C70F1 /* EnvironmentalistsTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		A722BCCB25008462007C70F1 /* EnvironmentalistsUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A722BCDB25008462007C70F1 /* Build configuration list for PBXNativeTarget "EnvironmentalistsUITests" */;
+			buildPhases = (
+				BA967E7D481233FE911A5B55 /* [CP] Check Pods Manifest.lock */,
+				A722BCC825008462007C70F1 /* Sources */,
+				A722BCC925008462007C70F1 /* Frameworks */,
+				A722BCCA25008462007C70F1 /* Resources */,
+				D9A2047CEC7B0BC7FB5BC6CF /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A722BCCE25008462007C70F1 /* PBXTargetDependency */,
+			);
+			name = EnvironmentalistsUITests;
+			productName = EnvironmentalistsUITests;
+			productReference = A722BCCC25008462007C70F1 /* EnvironmentalistsUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A722BCA825008460007C70F1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1200;
+				LastUpgradeCheck = 1200;
+				TargetAttributes = {
+					A722BCAF25008460007C70F1 = {
+						CreatedOnToolsVersion = 12.0;
+					};
+					A722BCC025008462007C70F1 = {
+						CreatedOnToolsVersion = 12.0;
+						TestTargetID = A722BCAF25008460007C70F1;
+					};
+					A722BCCB25008462007C70F1 = {
+						CreatedOnToolsVersion = 12.0;
+						TestTargetID = A722BCAF25008460007C70F1;
+					};
+				};
+			};
+			buildConfigurationList = A722BCAB25008460007C70F1 /* Build configuration list for PBXProject "Environmentalists" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A722BCA725008460007C70F1;
+			productRefGroup = A722BCB125008460007C70F1 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A722BCAF25008460007C70F1 /* Environmentalists */,
+				A722BCC025008462007C70F1 /* EnvironmentalistsTests */,
+				A722BCCB25008462007C70F1 /* EnvironmentalistsUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A722BCAE25008460007C70F1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A722BCBB25008462007C70F1 /* Preview Assets.xcassets in Resources */,
+				A722BCDF250084DB007C70F1 /* GoogleService-Info.plist in Resources */,
+				A722BCB825008462007C70F1 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A722BCBF25008462007C70F1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A722BCE0250084DB007C70F1 /* GoogleService-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A722BCCA25008462007C70F1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A722BCE1250084DB007C70F1 /* GoogleService-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		05E59CEE8E13C8C448D0B855 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Environmentalists-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BA967E7D481233FE911A5B55 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Environmentalists-EnvironmentalistsUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D9A2047CEC7B0BC7FB5BC6CF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Environmentalists-EnvironmentalistsUITests/Pods-Environmentalists-EnvironmentalistsUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Environmentalists-EnvironmentalistsUITests/Pods-Environmentalists-EnvironmentalistsUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Environmentalists-EnvironmentalistsUITests/Pods-Environmentalists-EnvironmentalistsUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E49294CACC77A7A6BB71EF60 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-EnvironmentalistsTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F39AE022160466722BE4032F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Environmentalists/Pods-Environmentalists-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Environmentalists/Pods-Environmentalists-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Environmentalists/Pods-Environmentalists-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A722BCAC25008460007C70F1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A76FE3C12521182B0061EF34 /* PrivacyPolicy.swift in Sources */,
+				A722BCEC2501AC78007C70F1 /* SessionView.swift in Sources */,
+				A76FE3BC252118140061EF34 /* Notifications.swift in Sources */,
+				A722BCB625008460007C70F1 /* ContentView.swift in Sources */,
+				A722BCEF25047B94007C70F1 /* EventManager.swift in Sources */,
+				A76FE3B1252117E20061EF34 /* AboutUs.swift in Sources */,
+				A763DD4A250C4B0C0001FA21 /* CreateEventView.swift in Sources */,
+				A76FE39A252111330061EF34 /* Settings.swift in Sources */,
+				A763DD4E250C4BFE0001FA21 /* EventCreationManager.swift in Sources */,
+				A722BCE825017A3D007C70F1 /* Login.swift in Sources */,
+				A763DD4C250C4BCC0001FA21 /* OrganizerManager.swift in Sources */,
+				A722BCF125049228007C70F1 /* SearchDirectoryView.swift in Sources */,
+				A722BCEA25017A4A007C70F1 /* PasswordReset.swift in Sources */,
+				A722BCE625017A2E007C70F1 /* SignUp.swift in Sources */,
+				A722BCF325049466007C70F1 /* MapView.swift in Sources */,
+				A722BCE425008B36007C70F1 /* UserSessionManager.swift in Sources */,
+				A76FE3AC252117CD0061EF34 /* RateThisApp.swift in Sources */,
+				A76FE3A7252117A00061EF34 /* TermsAndConditions.swift in Sources */,
+				A722BCB425008460007C70F1 /* EnvironmentalistsApp.swift in Sources */,
+				A75EEA502538F1D10068EF2E /* CurrentUser.swift in Sources */,
+				A76FE3A2252117890061EF34 /* MyAccount.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A722BCBD25008462007C70F1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A722BCC625008462007C70F1 /* EnvironmentalistsTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A722BCC825008462007C70F1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A722BCD125008462007C70F1 /* EnvironmentalistsUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A722BCC325008462007C70F1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A722BCAF25008460007C70F1 /* Environmentalists */;
+			targetProxy = A722BCC225008462007C70F1 /* PBXContainerItemProxy */;
+		};
+		A722BCCE25008462007C70F1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A722BCAF25008460007C70F1 /* Environmentalists */;
+			targetProxy = A722BCCD25008462007C70F1 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		A722BCD325008462007C70F1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		A722BCD425008462007C70F1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A722BCD625008462007C70F1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D8E78CCD6CE226025120FD75 /* Pods-Environmentalists.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"Environmentalists/Preview Content\"";
+				DEVELOPMENT_TEAM = A3364F2C5U;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = Environmentalists/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.campbell23567.Environmentalists;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A722BCD725008462007C70F1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A38EEC6B7688A721ADADA3FA /* Pods-Environmentalists.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"Environmentalists/Preview Content\"";
+				DEVELOPMENT_TEAM = A3364F2C5U;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = Environmentalists/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.campbell23567.Environmentalists;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		A722BCD925008462007C70F1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EB8375C0007B95D2AAE90A18 /* Pods-EnvironmentalistsTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = M22RXK6Q4T;
+				INFOPLIST_FILE = EnvironmentalistsTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.iem19047.EnvironmentalistsTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Environmentalists.app/Environmentalists";
+			};
+			name = Debug;
+		};
+		A722BCDA25008462007C70F1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2D6C0A2ED1B0E8912D99964B /* Pods-EnvironmentalistsTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = M22RXK6Q4T;
+				INFOPLIST_FILE = EnvironmentalistsTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.iem19047.EnvironmentalistsTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Environmentalists.app/Environmentalists";
+			};
+			name = Release;
+		};
+		A722BCDC25008462007C70F1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EECB31BAF9C1F0DE12B494BF /* Pods-Environmentalists-EnvironmentalistsUITests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = M22RXK6Q4T;
+				INFOPLIST_FILE = EnvironmentalistsUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.iem19047.EnvironmentalistsUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Environmentalists;
+			};
+			name = Debug;
+		};
+		A722BCDD25008462007C70F1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7C78EE5E6B3F1EBC3DBCEFB1 /* Pods-Environmentalists-EnvironmentalistsUITests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = M22RXK6Q4T;
+				INFOPLIST_FILE = EnvironmentalistsUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.iem19047.EnvironmentalistsUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Environmentalists;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A722BCAB25008460007C70F1 /* Build configuration list for PBXProject "Environmentalists" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A722BCD325008462007C70F1 /* Debug */,
+				A722BCD425008462007C70F1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A722BCD525008462007C70F1 /* Build configuration list for PBXNativeTarget "Environmentalists" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A722BCD625008462007C70F1 /* Debug */,
+				A722BCD725008462007C70F1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A722BCD825008462007C70F1 /* Build configuration list for PBXNativeTarget "EnvironmentalistsTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A722BCD925008462007C70F1 /* Debug */,
+				A722BCDA25008462007C70F1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A722BCDB25008462007C70F1 /* Build configuration list for PBXNativeTarget "EnvironmentalistsUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A722BCDC25008462007C70F1 /* Debug */,
+				A722BCDD25008462007C70F1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A722BCA825008460007C70F1 /* Project object */;
+}
