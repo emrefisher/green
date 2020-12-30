@@ -9,63 +9,28 @@ import SwiftUI
 
 struct OnboardingPageOne: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-        //title
-        //Welcome to Green Sign-Up
-        //text
-        //Here at Green Sign-Up we believe that YOU are the change this world needs. Are you ready to do your part to save our planet?
         
-        //MAKES THE DOTS
-        //let control = UIPageControl()
-        //control.numberOfPages = numberOfpages
-        //control.currentPageIndicatorTintColor = UIColor.red
-        //control.pageIndicatorTintColor = UIColor.black
         
-        //USEFUL STRUCTS
-        /*
-         VStack {
-             PageViewController(currentPageIndex: $currentPageIndex, viewControllers: subviews)
-                 .frame(height: UIScreen.main.bounds.size.height/2)
-             Group {
-                 Text(titles[currentPageIndex])
-                     .font(.title)
-                     .allowsTightening(true)
-                     .lineLimit(2)
-                     .fixedSize(horizontal: true, vertical: false)
-                     .minimumScaleFactor(0.9)
-                 
-                 Text(captions[currentPageIndex])
-                     .font(.subheadline)
-                     .foregroundColor(.gray)
-                     .frame(width: UIScreen.main.bounds.size.width*4/5, height: UIScreen.main.bounds.size.height/3, alignment: .leading)
-                     .lineLimit(4)
-                 
-             }
-             //.padding()
-             
-             HStack {
-                 PageControl(numberOfpages: subviews.count, currentPageIndex: $currentPageIndex)
-                 Spacer()
+        VStack {
+            Image("First")
+                .resizable()
+                .frame(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height/2)
+            Group {
+                Text("Welcome to Environmend!")
+                    .font(.title)
+                    .allowsTightening(true)
+                    .lineLimit(2)
+                    .fixedSize(horizontal: true, vertical: false)
+                    .minimumScaleFactor(0.9)
+                Text("Here at Environmend we believe that YOU are the change this world needs. Are you ready to do your part to save our planet?")
+                    .font(.subheadline)
+                    .foregroundColor(.gray)
+                    .frame(width: UIScreen.main.bounds.size.width*4/5, height: UIScreen.main.bounds.size.height/7, alignment: .leading)
+            }
+            Spacer()
+            
+        }.edgesIgnoringSafeArea(.all)
 
-                 Button(action: {
-                     if self.currentPageIndex + 1 == self.subviews.count {
-                         self.currentPageIndex = 0
-                     } else {
-                         self.currentPageIndex += 1
-                     }
-                 }) {
-                     if self.currentPageIndex != 3 {
-                     ButtonContent()
-                     } else {
-                         GetStartedButton()
-                     }
-                     }
-                 
-         
-             }
-         }
-         .padding()
-         
      }
  }
 
@@ -92,10 +57,6 @@ struct OnboardingPageOne: View {
              .cornerRadius(UIScreen.main.bounds.size.width/10)
              .offset(x: UIScreen.main.bounds.size.width/(-20), y: UIScreen.main.bounds.size.height/(-30))
      }
-         */
-        
-
-    }
 }
 
 struct OnboardingPageOne_Previews: PreviewProvider {

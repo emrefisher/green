@@ -9,11 +9,26 @@ import SwiftUI
 
 struct OnboardingPageThree: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-        //title
-        //Volunteer
-        //text
-        //In Green Sign-Up you can find a variety of opportunties to help in your community. Every set of hands can make a difference.
+        VStack {
+            Image("Third")
+                .resizable()
+                .frame(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height/2)
+            Group {
+                Text("Volunteer")
+                    .font(.title)
+                    .allowsTightening(true)
+                    .lineLimit(2)
+                    .fixedSize(horizontal: true, vertical: false)
+                    .minimumScaleFactor(0.9)
+                Text("In Green Sign-Up you can find a variety of opportunties to help in your community. Every set of hands can make a difference.")
+                    .font(.subheadline)
+                    .foregroundColor(.gray)
+                    .frame(width: UIScreen.main.bounds.size.width*4/5, height: UIScreen.main.bounds.size.height/7, alignment: .leading)
+            }
+            Spacer()
+            
+        }.edgesIgnoringSafeArea(.all)
+        
     }
 }
 
