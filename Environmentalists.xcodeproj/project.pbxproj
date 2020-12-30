@@ -37,6 +37,11 @@
 		A76FE3B1252117E20061EF34 /* AboutUs.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76FE3B0252117E20061EF34 /* AboutUs.swift */; };
 		A76FE3BC252118140061EF34 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76FE3BB252118140061EF34 /* Notifications.swift */; };
 		A76FE3C12521182B0061EF34 /* PrivacyPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76FE3C02521182B0061EF34 /* PrivacyPolicy.swift */; };
+		A795A3E4259C0ED100327F2D /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A795A3E3259C0ED100327F2D /* OnboardingView.swift */; };
+		A795A3ED259C0F1500327F2D /* OnboardingPageOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = A795A3EC259C0F1500327F2D /* OnboardingPageOne.swift */; };
+		A795A3F5259C0F2000327F2D /* OnboardingPageTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A795A3F4259C0F2000327F2D /* OnboardingPageTwo.swift */; };
+		A795A3FA259C0F5100327F2D /* OnboardingPageThree.swift in Sources */ = {isa = PBXBuildFile; fileRef = A795A3F9259C0F5100327F2D /* OnboardingPageThree.swift */; };
+		A795A3FF259C0F5D00327F2D /* OnboardingPageFour.swift in Sources */ = {isa = PBXBuildFile; fileRef = A795A3FE259C0F5D00327F2D /* OnboardingPageFour.swift */; };
 		C2DE5DEA551576E28B09FE35 /* Pods_Environmentalists.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C51DB3FB339C181A291954 /* Pods_Environmentalists.framework */; };
 /* End PBXBuildFile section */
 
@@ -95,6 +100,11 @@
 		A76FE3B0252117E20061EF34 /* AboutUs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUs.swift; sourceTree = "<group>"; };
 		A76FE3BB252118140061EF34 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		A76FE3C02521182B0061EF34 /* PrivacyPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicy.swift; sourceTree = "<group>"; };
+		A795A3E3259C0ED100327F2D /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		A795A3EC259C0F1500327F2D /* OnboardingPageOne.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageOne.swift; sourceTree = "<group>"; };
+		A795A3F4259C0F2000327F2D /* OnboardingPageTwo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageTwo.swift; sourceTree = "<group>"; };
+		A795A3F9259C0F5100327F2D /* OnboardingPageThree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageThree.swift; sourceTree = "<group>"; };
+		A795A3FE259C0F5D00327F2D /* OnboardingPageFour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageFour.swift; sourceTree = "<group>"; };
 		D5C51DB3FB339C181A291954 /* Pods_Environmentalists.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Environmentalists.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8E78CCD6CE226025120FD75 /* Pods-Environmentalists.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Environmentalists.debug.xcconfig"; path = "Target Support Files/Pods-Environmentalists/Pods-Environmentalists.debug.xcconfig"; sourceTree = "<group>"; };
 		EB8375C0007B95D2AAE90A18 /* Pods-EnvironmentalistsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EnvironmentalistsTests.debug.xcconfig"; path = "Target Support Files/Pods-EnvironmentalistsTests/Pods-EnvironmentalistsTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -173,6 +183,7 @@
 				A722BCED25047B75007C70F1 /* Event Management */,
 				A722BCE225008AE9007C70F1 /* User Management */,
 				A76FE39825210FE40061EF34 /* Settings */,
+				A795A3E2259C0EA000327F2D /* Onboarding */,
 				A722BCB725008462007C70F1 /* Assets.xcassets */,
 				A722BCBC25008462007C70F1 /* Info.plist */,
 				A722BCDE250084DB007C70F1 /* GoogleService-Info.plist */,
@@ -244,6 +255,18 @@
 				A76FE3C02521182B0061EF34 /* PrivacyPolicy.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		A795A3E2259C0EA000327F2D /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				A795A3E3259C0ED100327F2D /* OnboardingView.swift */,
+				A795A3EC259C0F1500327F2D /* OnboardingPageOne.swift */,
+				A795A3F4259C0F2000327F2D /* OnboardingPageTwo.swift */,
+				A795A3F9259C0F5100327F2D /* OnboardingPageThree.swift */,
+				A795A3FE259C0F5D00327F2D /* OnboardingPageFour.swift */,
+			);
+			path = Onboarding;
 			sourceTree = "<group>";
 		};
 		E3B94BE2C1B1BB0CF36F0084 /* Frameworks */ = {
@@ -500,7 +523,9 @@
 				A722BCEC2501AC78007C70F1 /* SessionView.swift in Sources */,
 				A76FE3BC252118140061EF34 /* Notifications.swift in Sources */,
 				A722BCB625008460007C70F1 /* ContentView.swift in Sources */,
+				A795A3ED259C0F1500327F2D /* OnboardingPageOne.swift in Sources */,
 				A722BCEF25047B94007C70F1 /* EventManager.swift in Sources */,
+				A795A3FA259C0F5100327F2D /* OnboardingPageThree.swift in Sources */,
 				A76FE3B1252117E20061EF34 /* AboutUs.swift in Sources */,
 				A763DD4A250C4B0C0001FA21 /* CreateEventView.swift in Sources */,
 				A76FE39A252111330061EF34 /* Settings.swift in Sources */,
@@ -515,8 +540,11 @@
 				A76FE3AC252117CD0061EF34 /* RateThisApp.swift in Sources */,
 				A76FE3A7252117A00061EF34 /* TermsAndConditions.swift in Sources */,
 				A722BCB425008460007C70F1 /* EnvironmentalistsApp.swift in Sources */,
+				A795A3F5259C0F2000327F2D /* OnboardingPageTwo.swift in Sources */,
 				A75EEA502538F1D10068EF2E /* CurrentUser.swift in Sources */,
 				A76FE3A2252117890061EF34 /* MyAccount.swift in Sources */,
+				A795A3E4259C0ED100327F2D /* OnboardingView.swift in Sources */,
+				A795A3FF259C0F5D00327F2D /* OnboardingPageFour.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -684,6 +712,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.campbell23567.Environmentalists;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -707,6 +736,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.campbell23567.Environmentalists;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
