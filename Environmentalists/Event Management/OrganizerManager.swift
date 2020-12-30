@@ -19,11 +19,12 @@ struct Organizer: Identifiable {
     var email: String
     var orgWebsite: String
     var orgProfilePic: String
+    var orgCoverPic: String
 }
 
 class OrganizerInfo: ObservableObject {
     
-    @Published var organizerInformation = Organizer(id: "", organizerID: 0, organizerName: "", orgDescription: "", orgFollowers: 0, orgLocation: "", email: "", orgWebsite: "", orgProfilePic: "")
+    @Published var organizerInformation = Organizer(id: "", organizerID: 0, organizerName: "", orgDescription: "", orgFollowers: 0, orgLocation: "", email: "", orgWebsite: "", orgProfilePic: "", orgCoverPic: "")
     
     func getOrganizerInformation(organizationID: Int) {
         let database = Firestore.firestore()
@@ -44,6 +45,7 @@ class OrganizerInfo: ObservableObject {
                 self.organizerInformation.email = document.get("Email") as! String
                 self.organizerInformation.orgWebsite = document.get("Organization Website Link") as! String
                 self.organizerInformation.orgProfilePic = document.get("Profile Pic URL") as! String
+                self.organizerInformation.orgCoverPic = document.get("Cover Pic URL") as! String
                 
             }
         }

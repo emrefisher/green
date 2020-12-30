@@ -137,11 +137,12 @@ final class UserSessionManager: ObservableObject {
         }
     }
     
-    func validateFieldsForOrganizer(email: String, password: String, confirmedPassword: String, orgName: String, profilePic: Data) -> String?{
+    func validateFieldsForOrganizer(email: String, password: String, confirmedPassword: String, orgName: String, profilePic: Data, coverPic: Data) -> String?{
         if email.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
             password.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
             orgName.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
-            profilePic.count == 0 {
+            profilePic.count == 0 ||
+            coverPic.count == 0{
             
             self.errorMessage = "Please fill in all fields and make sure you have selected a profile picture."
             self.alert.toggle()
@@ -166,9 +167,9 @@ final class UserSessionManager: ObservableObject {
         return nil
     }
     
-    func signUpAsOrganizer(email: String, password: String, confimedPassword: String, orgName: String, orgDescription: String, orgLink: String, profilePic: Data) {
+    func signUpAsOrganizer(email: String, password: String, confimedPassword: String, orgName: String, orgDescription: String, orgLink: String, profilePic: Data, coverPic: Data) {
         
-        let error = validateFieldsForOrganizer(email: email, password: password, confirmedPassword: confimedPassword, orgName: orgName, profilePic: profilePic)
+        let error = validateFieldsForOrganizer(email: email, password: password, confirmedPassword: confimedPassword, orgName: orgName, profilePic: profilePic, coverPic: coverPic)
         
         if error != nil {
             return
@@ -196,12 +197,16 @@ final class UserSessionManager: ObservableObject {
                     for _ in querySnapshot!.documents {
                         
                         numOrganizers += 1
-                        
+                    
                     }
                 }
-                
                 let storage = Storage.storage().reference()
                 let userRef = database.collection("Organizers")
+                
+                //Cover pic storage
+               
+                
+                       
                 storage.child("profilepics").child(res!.user.uid).putData(profilePic, metadata: nil) { (_, err) in
                     
                     if err != nil {
@@ -217,8 +222,36 @@ final class UserSessionManager: ObservableObject {
                             self.alert.toggle()
                             return
                         }
+                       
+                        
+                        
                         
                         userRef.document("\(orgName)").setData(["Account Type": "Organizer", "Organization Name": orgName, "Organization Description": orgDescription, "Organization Website Link": orgLink, "Email": email, "UID": res!.user.uid, "Profile Pic URL": "\(url!)", "Organization Location": "Langhorne, PA", "Organizer ID": numOrganizers + 1, "Number of Followers": 0])
+                        self.authState = .session
+                    }
+                }
+                
+                //cover pic
+                storage.child("coverpics").child(res!.user.uid).putData(coverPic, metadata: nil) { (_, err) in
+                    
+                    if err != nil {
+                        self.errorMessage = err!.localizedDescription
+                        self.alert.toggle()
+                        return
+                    }
+                    
+                    storage.child("coverpics").child(res!.user.uid).downloadURL { (coverpicURL, err) in
+                        
+                        if err != nil{
+                            self.errorMessage = err!.localizedDescription
+                            self.alert.toggle()
+                            return
+                        }
+                       
+                        
+                        
+                        
+                        userRef.document("\(orgName)").updateData([ "Cover Pic URL": "\(coverpicURL!)"])
                         self.authState = .session
                     }
                 }
@@ -286,4 +319,5 @@ final class UserSessionManager: ObservableObject {
     }
     
 }
+
 

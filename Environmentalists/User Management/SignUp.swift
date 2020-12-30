@@ -333,12 +333,15 @@ struct OrganizerSignUp: View {
     @State private var orgDescription = ""
     @State private var orgWebsite = ""
     @State private var picker = false
+    @State private var coverpicker = false
     @State var imagedata: Data = .init(count: 0)
+    @State var coverimagedata: Data = .init(count: 0)
     @Binding var newAccountType: String
     
     var body: some View {
         
         ZStack {
+            ScrollView{
             VStack {
                 
                 VStack {
@@ -508,13 +511,39 @@ struct OrganizerSignUp: View {
                     Divider()
                 }.padding([.leading, .trailing], 15)
                 
+                HStack{
+                    
+                    Spacer()
+                    
+                    
+                    Button(action: {
+                        
+                        self.coverpicker.toggle()
+                        
+                    }) {
+                        
+                        if self.coverimagedata.count == 0{
+                            
+                            Image(systemName: "camera.on.rectangle").resizable().frame(width: 90, height: 70).foregroundColor(.gray)
+                        }
+                        else{
+                            
+                            Image(uiImage: UIImage(data: self.coverimagedata)!).resizable().renderingMode(.original).frame(width: 90, height: 90)
+                        }
+                        
+                        
+                    }
+                    
+                    Spacer()
+                }
+                
                
                 
                 VStack {
                     
                     Button(action: {
                         
-                        sessionManager.signUpAsOrganizer(email: self.email, password: self.password, confimedPassword: self.confirmedPassword, orgName: self.orgName, orgDescription: self.orgDescription, orgLink: self.orgWebsite, profilePic: self.imagedata)
+                        sessionManager.signUpAsOrganizer(email: self.email, password: self.password, confimedPassword: self.confirmedPassword, orgName: self.orgName, orgDescription: self.orgDescription, orgLink: self.orgWebsite, profilePic: self.imagedata, coverPic: self.coverimagedata)
                         
                     }) {
                         
@@ -523,14 +552,21 @@ struct OrganizerSignUp: View {
                     }.background(Color(#colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1))).clipShape(Capsule()).padding(.top,50)
                 }
                 
-                Spacer()
+               // Spacer()
                 
-            }
+            }}
             
         }.sheet(isPresented: self.$picker, content: {
             
             ImagePicker(picker: self.$picker, imagedata: self.$imagedata)
+        }
+        
+        )
+        .sheet(isPresented: self.$picker, content: {
+            
+            ImagePicker(picker: self.$picker, imagedata: self.$coverimagedata)
         })
+        
         .alert(isPresented: $sessionManager.alert) {
             Alert(title: Text("Sign-Up Error"), message: Text(sessionManager.errorMessage), dismissButton: .default(Text("OK")))
         }
