@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct OnboardingPageFour: View {
+    
+    @Binding var isPresenting: Bool
+    
     var body: some View {
         
         VStack {
@@ -28,12 +31,20 @@ struct OnboardingPageFour: View {
             }
             Spacer()
             
+            Button(action: {
+                self.isPresenting.toggle()
+            }) {
+                Text("Get Started").font(.title).foregroundColor(.black)
+            }.padding(.bottom, 50)
+            
+            Spacer()
+            
         }.edgesIgnoringSafeArea(.all)
     }
 }
 
 struct OnboardingPageFour_Previews: PreviewProvider {
     static var previews: some View {
-        OnboardingPageFour()
+        OnboardingPageFour(isPresenting: .constant(true))
     }
 }
