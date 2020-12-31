@@ -379,7 +379,12 @@ struct OrganizerSignUp: View {
                         }
                         
                         
+                    }.sheet(isPresented: self.$picker, content: {
+                        
+                        ImagePicker(picker: self.$picker, imagedata: self.$imagedata)
                     }
+                    
+                    )
                     
                     Spacer()
                 }
@@ -532,7 +537,10 @@ struct OrganizerSignUp: View {
                         }
                         
                         
-                    }
+                    }.sheet(isPresented: self.$coverpicker, content: {
+                        
+                        ImagePicker(picker: self.$coverpicker, imagedata: self.$coverimagedata)
+                    })
                     
                     Spacer()
                 }
@@ -545,7 +553,8 @@ struct OrganizerSignUp: View {
                         
                         sessionManager.signUpAsOrganizer(email: self.email, password: self.password, confimedPassword: self.confirmedPassword, orgName: self.orgName, orgDescription: self.orgDescription, orgLink: self.orgWebsite, profilePic: self.imagedata, coverPic: self.coverimagedata)
                         
-                    }) {
+                    })
+                    {
                         
                         Text("Sign Up").foregroundColor(.white).frame(width: UIScreen.main.bounds.width-100).padding().font(.body)
                         
@@ -556,16 +565,8 @@ struct OrganizerSignUp: View {
                 
             }}
             
-        }.sheet(isPresented: self.$picker, content: {
-            
-            ImagePicker(picker: self.$picker, imagedata: self.$imagedata)
         }
         
-        )
-        .sheet(isPresented: self.$picker, content: {
-            
-            ImagePicker(picker: self.$picker, imagedata: self.$coverimagedata)
-        })
         
         .alert(isPresented: $sessionManager.alert) {
             Alert(title: Text("Sign-Up Error"), message: Text(sessionManager.errorMessage), dismissButton: .default(Text("OK")))
