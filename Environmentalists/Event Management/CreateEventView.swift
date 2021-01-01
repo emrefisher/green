@@ -108,6 +108,8 @@ struct CreateEventPage1: View {
 struct CreateEventPage2: View {
     
     @ObservedObject var eventCreationManager: EventCreationManager
+    @State private var coverpicker = false
+    @State var coverimagedata: Data = .init(count: 0)
     
     var body: some View {
         
@@ -132,6 +134,34 @@ struct CreateEventPage2: View {
                             TextField("Enter Date & Time here...", text: self.$eventCreationManager.date)
                             TextField("Enter Time here...", text: self.$eventCreationManager.time)
                             
+                        }
+                        HStack{
+                            
+                            Spacer()
+                            
+                            
+                            Button(action: {
+                                
+                                self.coverpicker.toggle()
+                                
+                            }) {
+                                
+                                if self.eventCreationManager.coverimagedata.count == 0{
+                                    
+                                    Image(systemName: "camera.on.rectangle").resizable().frame(width: 90, height: 70).foregroundColor(.gray)
+                                }
+                                else{
+                                    
+                                    Image(uiImage: UIImage(data: self.eventCreationManager.coverimagedata)!).resizable().renderingMode(.original).frame(width: 90, height: 90)
+                                }
+                                
+                                
+                            }.sheet(isPresented: self.$coverpicker, content: {
+                                
+                                ImagePicker(picker: self.$coverpicker, imagedata: self.$eventCreationManager.coverimagedata)
+                            })
+                            
+                            Spacer()
                         }
                         
                     }
@@ -182,7 +212,7 @@ struct CreateEventPage3: View {
             
             
             VStack() {
-                Image("mountain_landscape")
+                Image("\(self.eventCreationManager.coverimagedata)")
                 .resizable()
                 .scaledToFit()
                 .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height/5)
