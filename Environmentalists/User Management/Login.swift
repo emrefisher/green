@@ -27,41 +27,24 @@ struct Login: View {
                 .padding(.bottom, 25)
             
             VStack {
-                
-                VStack(alignment: .leading){
                     
-                    Text("Email")
-                        .font(.headline)
-                        .fontWeight(.light)
-                        .foregroundColor(.white)
-                        .padding([.leading, .trailing], 20)
-                    
-                    HStack {
+                    HStack(alignment: .center, spacing: 15) {
                         
+                        Image(systemName: "person").opacity(0.5)
                         TextField("Enter Email", text: $email)
                 
                         
-                    }.padding([.leading, .trailing], 20)
-                    Divider()
-                }.padding([.leading, .trailing], 15)
-                
-                VStack(alignment: .leading){
+                    }.padding(.horizontal, 25).frame(width: UIScreen.main.bounds.width - 50, height: UIScreen.main.bounds.height / 20).background(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1))).clipShape(Capsule()).padding(.bottom, 7.5)
                     
-                    Text("Password")
-                        .font(.headline)
-                        .fontWeight(.light)
-                        .foregroundColor(.white)
-                        .padding([.leading, .trailing], 20)
-                    
-                    HStack {
+                    HStack(alignment: .center, spacing: 15) {
+                        
+                        Image(systemName: "lock").opacity(0.5)
                         
                         if self.showPassword {
                             TextField("Enter Password", text: $password)
-                                .padding([.leading, .trailing], 20)
                         }
                         else {
                             SecureField("Enter Password", text: $password)
-                                .padding([.leading, .trailing], 20)
                         }
                         
                         
@@ -72,12 +55,10 @@ struct Login: View {
                         }) {
                             
                             Image(systemName: self.showPassword ? "eye.fill" : "eye.slash.fill")
-                                .padding(.trailing, 17.5)
                         }
-                    }
-                    
-                    Divider()
-                }.padding([.leading, .trailing], 15)
+                        
+                    }.padding(.horizontal, 25).frame(width: UIScreen.main.bounds.width - 50, height: UIScreen.main.bounds.height / 20).background(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1))).clipShape(Capsule())
+
                 
                 HStack {
                     
