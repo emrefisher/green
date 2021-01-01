@@ -494,7 +494,7 @@ struct OrganizerSignUp: View {
                     
                     HStack {
                         
-                        TextEditor(text: $orgDescription).frame(maxHeight: 100)
+                        TextField("Enter Organization Website", text: $orgDescription)
                         
                     }.padding([.leading, .trailing], 20)
                     Divider()
