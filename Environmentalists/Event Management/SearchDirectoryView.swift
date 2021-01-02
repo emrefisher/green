@@ -541,13 +541,18 @@ struct OrgProfile: View {
                        
                     }
                     HStack(spacing: 25) {
-                        
-                        Link(destination: URL(string: "W")!) {
-                            Image(systemName: "dollarsign.circle").resizable().frame(width: 35, height: 35).foregroundColor(.black)
-                                .background(LinearGradient(gradient: .init(colors: [Color(#colorLiteral(red: 0, green: 0.9791811109, blue: 0.6578459144, alpha: 1)), Color(#colorLiteral(red: 0, green: 0.6921610236, blue: 0, alpha: 1))]), startPoint: .leading, endPoint: .trailing))
-                                .cornerRadius(200)
+                        let completeURL = "https://" + self.organizer.organizerInformation.orgWebsite
+                        let url = URL(string:  completeURL)
+                        if url == nil {
+                            Text("Link not yet loaded")
                         }
-                        
+                        else  {
+                            Link(destination: url!) {
+                                Image(systemName: "dollarsign.circle").resizable().frame(width: 35, height: 35).foregroundColor(.black)
+                                    .background(LinearGradient(gradient: .init(colors: [Color(#colorLiteral(red: 0, green: 0.9791811109, blue: 0.6578459144, alpha: 1)), Color(#colorLiteral(red: 0, green: 0.6921610236, blue: 0, alpha: 1))]), startPoint: .leading, endPoint: .trailing))
+                                    .cornerRadius(200)
+                            }
+                        }
                      
                         
 //                        Button(action: {
@@ -561,6 +566,7 @@ struct OrgProfile: View {
 //                        .cornerRadius(25)
                         
                     }
+                
                     HStack(spacing: 325) {
                         VStack(spacing: 100) {
                             HStack(spacing: 5) {
