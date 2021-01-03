@@ -11,6 +11,7 @@ struct CreateEventView: View {
     
     @ObservedObject var eventCreationManager = EventCreationManager()
     @EnvironmentObject var currentUser: CurrentUser
+    @State var completionAlert = false
     
     var body: some View {
         ZStack {
@@ -20,13 +21,17 @@ struct CreateEventView: View {
             case 1:
                 CreateEventPage2(eventCreationManager: self.eventCreationManager)
             case 2:
-                CreateEventPage3(eventCreationManager: self.eventCreationManager)
+                CreateEventPage3(eventCreationManager: self.eventCreationManager, completionAlert: self.$completionAlert)
                     .environmentObject(self.currentUser)
             default:
                 Text("Default")
             }
         }.onAppear() {
             self.eventCreationManager.clearEventData()
+        }
+        .alert(isPresented: self.$completionAlert) {
+            Alert(title: Text(""), message: Text("Event Created Successfully"), dismissButton: .default(Text("OK"), action: { self.eventCreationManager.clearEventData()
+            }))
         }
     }
 }
@@ -190,7 +195,7 @@ struct CreateEventPage2: View {
 struct CreateEventPage3: View {
     
     @ObservedObject var eventCreationManager: EventCreationManager
-    @State var completionAlert = false
+    @Binding var completionAlert: Bool
     @EnvironmentObject var currentUser: CurrentUser
     
     var body: some View {
@@ -225,6 +230,7 @@ struct CreateEventPage3: View {
                     Spacer()
                     Button(action: {
                         self.eventCreationManager.publishNewEvent(currentUser: self.currentUser)
+                        self.completionAlert.toggle()
                     }) {
                         Text("Publish Event").font(.body)
                             .foregroundColor(.white)
@@ -238,10 +244,7 @@ struct CreateEventPage3: View {
             
             
             
-        }.alert(isPresented: self.$eventCreationManager.completionAlert) {
-            Alert(title: Text(""), message: Text("Event Created Successfully"), dismissButton: .default(Text("OK"), action: { self.eventCreationManager.clearEventData()
-            }))
-        }
+        }.padding(.bottom, 50)
         
     }
 }

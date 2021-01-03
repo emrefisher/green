@@ -24,7 +24,6 @@ class EventCreationManager: ObservableObject {
     @Published var coverimagedata: Data = .init(count: 0)
     @Published var errorMessage = ""
     @Published var alert = false
-    @Published var completionAlert = false
     
     func clearEventData() {
         self.creationPageIndex = 0
@@ -79,7 +78,6 @@ class EventCreationManager: ObservableObject {
                 
                 userRef.document("\(self.organizer): \(self.title)").setData(["Name": self.title, "Organizer": currentUser.currentUserInformation.name, "Organizer ID": currentUser.currentUserInformation.orgID!, "Date": self.date, "Time": self.time, "Number Attending": 0, "Description": self.description, "Location": self.location, "Event Photo URL": "\(url!)"])
                 
-                self.completionAlert.toggle()
             }
         }
         
