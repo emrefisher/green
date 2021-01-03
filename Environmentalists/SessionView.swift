@@ -12,7 +12,6 @@ struct SessionView: View {
     @EnvironmentObject var sessionManager: UserSessionManager
     @State private var index = 0
     @ObservedObject var currentUser = CurrentUser()
-    @State var showAuthorizationAlert = false
     
     var body: some View {
         
@@ -44,9 +43,6 @@ struct SessionView: View {
             if self.currentUser.currentUserInformation.name == "" {
                 self.currentUser.getUserInformation()
             }
-        }
-        .alert(isPresented: self.$showAuthorizationAlert) {
-            Alert(title: Text("Authorization Alert"), message: Text("You are not authorized to create events. Please exit this page"), dismissButton: .default(Text("I understand")))
         }
     }
 }

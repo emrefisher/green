@@ -11,8 +11,6 @@ struct CreateEventView: View {
     
     @ObservedObject var eventCreationManager = EventCreationManager()
     @EnvironmentObject var currentUser: CurrentUser
-    @State var showPublishCompletionAlert = false
-    @State var showAuthorizationAlert = false
     
     var body: some View {
         ZStack {
@@ -22,22 +20,13 @@ struct CreateEventView: View {
             case 1:
                 CreateEventPage2(eventCreationManager: self.eventCreationManager)
             case 2:
-                CreateEventPage3(eventCreationManager: self.eventCreationManager, completionAlert: self.$showPublishCompletionAlert)
+                CreateEventPage3(eventCreationManager: self.eventCreationManager)
                     .environmentObject(self.currentUser)
             default:
                 Text("Default")
             }
         }.onAppear() {
             self.eventCreationManager.clearEventData()
-            if self.currentUser.currentUserInformation.accountType != "Organizer" {
-                self.showAuthorizationAlert.toggle()
-            }
-        }
-        .alert(isPresented: self.$showPublishCompletionAlert) {
-            Alert(title: Text(""), message: Text("Event Created Successfully"), dismissButton: .default(Text("OK")))
-        }
-        .alert(isPresented: self.$showAuthorizationAlert) {
-            Alert(title: Text("Authorization Alert"), message: Text("You are not authorized to create events. Please exit this page"), dismissButton: .default(Text("I understand")))
         }
     }
 }
@@ -109,7 +98,6 @@ struct CreateEventPage2: View {
     
     @ObservedObject var eventCreationManager: EventCreationManager
     @State private var coverpicker = false
-    @State var coverimagedata: Data = .init(count: 0)
     
     var body: some View {
         
@@ -159,6 +147,7 @@ struct CreateEventPage2: View {
                             }.sheet(isPresented: self.$coverpicker, content: {
                                 
                                 ImagePicker(picker: self.$coverpicker, imagedata: self.$eventCreationManager.coverimagedata)
+                                
                             })
                             
                             Spacer()
@@ -201,7 +190,7 @@ struct CreateEventPage2: View {
 struct CreateEventPage3: View {
     
     @ObservedObject var eventCreationManager: EventCreationManager
-    @Binding var completionAlert: Bool
+    @State var completionAlert = false
     @EnvironmentObject var currentUser: CurrentUser
     
     var body: some View {
@@ -212,10 +201,10 @@ struct CreateEventPage3: View {
             
             
             VStack() {
-                Image("\(self.eventCreationManager.coverimagedata)")
-                .resizable()
-                .scaledToFit()
-                .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height/5)
+//                Image("\(self.eventCreationManager.coverimagedata)")
+//                .resizable()
+//                .scaledToFit()
+//                .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height/5)
                 Text("Review your submission...").font(.title)
                 Text(self.eventCreationManager.title).font(.body)
                 Text(self.eventCreationManager.description).font(.body)
@@ -235,11 +224,7 @@ struct CreateEventPage3: View {
                     }
                     Spacer()
                     Button(action: {
-                        if self.currentUser.currentUserInformation.accountType == "Organizer" {
-                            self.eventCreationManager.publishNewEvent(currentUser: self.currentUser)
-                            self.eventCreationManager.clearEventData()
-                        }
-                        self.completionAlert.toggle()
+                        self.eventCreationManager.publishNewEvent(currentUser: self.currentUser)
                     }) {
                         Text("Publish Event").font(.body)
                             .foregroundColor(.white)
@@ -253,7 +238,10 @@ struct CreateEventPage3: View {
             
             
             
-        }.padding(.bottom, 50)
+        }.alert(isPresented: self.$eventCreationManager.completionAlert) {
+            Alert(title: Text(""), message: Text("Event Created Successfully"), dismissButton: .default(Text("OK"), action: { self.eventCreationManager.clearEventData()
+            }))
+        }
         
     }
 }
