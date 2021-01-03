@@ -58,7 +58,7 @@ class EventCreationManager: ObservableObject {
             }
         }
         
-        storage.child("EventPhotos").child("\(currentUser.currentUserInformation.name): \(16)").putData(coverimagedata, metadata: nil) { (_, err) in
+        storage.child("EventPhotos").child("161").putData(coverimagedata, metadata: nil) { (_, err) in
             
             if err != nil {
                 self.errorMessage = err!.localizedDescription
@@ -66,7 +66,7 @@ class EventCreationManager: ObservableObject {
                 return
             }
             
-            storage.child("EventPhotos").child("\(currentUser.currentUserInformation.name): \(16)").downloadURL { (url, err) in
+            storage.child("EventPhotos").child("161").downloadURL { (url, err) in
                 
                 if err != nil{
                     self.errorMessage = err!.localizedDescription

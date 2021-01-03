@@ -142,9 +142,9 @@ final class UserSessionManager: ObservableObject {
             password.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
             orgName.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
             profilePic.count == 0 ||
-            coverPic.count == 0{
+            coverPic.count == 0 {
             
-            self.errorMessage = "Please fill in all fields and make sure you have selected a profile picture."
+            self.errorMessage = "Please fill in all fields and make sure you have selected profile / cover photos."
             self.alert.toggle()
             return "Error"
         }
@@ -227,7 +227,6 @@ final class UserSessionManager: ObservableObject {
                         
                         
                         userRef.document("\(orgName)").setData(["Account Type": "Organizer", "Organization Name": orgName, "Organization Description": orgDescription, "Organization Website Link": orgLink, "Email": email, "UID": res!.user.uid, "Profile Pic URL": "\(url!)", "Organization Location": "Langhorne, PA", "Organizer ID": numOrganizers + 1, "Number of Followers": 0])
-                        self.authState = .session
                     }
                 }
                 

@@ -53,7 +53,7 @@ struct EventRow: View {
         
         VStack {
                     HStack {
-                        Image("mountain_landscape")
+                        WebImage(url: URL(string: self.event.eventPhotoURL))
                         .resizable()
                         .scaledToFit()
                         .frame(width: (UIScreen.main.bounds.width/10)*4, height: UIScreen.main.bounds.height/8, alignment: .leading)
@@ -196,7 +196,7 @@ struct EventPage: View {
         VStack(spacing: 0){
             VStack {
                 
-                Image("mountain_landscape")
+                WebImage(url: URL(string: self.event.eventPhotoURL))
                     .resizable()
                     .scaledToFill()
                     .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height/3)

@@ -20,6 +20,7 @@ struct Event: Identifiable {
     var time: String
     var location: String
     var numAttending: Int
+    var eventPhotoURL: String
     
 }
 
@@ -48,7 +49,8 @@ class EventManager: ObservableObject {
                 let time = document.get("Time") as! String
                 let location = document.get("Location") as! String
                 let numAttending = document.get("Number Attending") as! Int
-                self.eventInformation.append(Event(id: id, eventTitle: eventTitle, eventOrganizer: organizer, eventOrganizerID: organizerID, eventDescription: eventDescription, date: date, time: time, location: location, numAttending: numAttending))
+                let eventPhotoURL = document.get("Event Photo URL") as! String
+                self.eventInformation.append(Event(id: id, eventTitle: eventTitle, eventOrganizer: organizer, eventOrganizerID: organizerID, eventDescription: eventDescription, date: date, time: time, location: location, numAttending: numAttending, eventPhotoURL: eventPhotoURL))
                 
             }
 
