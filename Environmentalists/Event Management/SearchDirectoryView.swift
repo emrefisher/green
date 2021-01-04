@@ -201,7 +201,6 @@ struct EventPage: View {
                     .scaledToFill()
                     .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height/3)
                 
-                
             }
             
             VStack(spacing: 6) {
@@ -303,6 +302,7 @@ class SearchBarInformation: ObservableObject {
         }
         }
 }
+
 struct SearchBar: View {
     
     @Binding var text: String

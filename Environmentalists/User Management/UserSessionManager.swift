@@ -251,7 +251,7 @@ final class UserSessionManager: ObservableObject {
                         
                         
                         userRef.document("\(orgName)").updateData([ "Cover Pic URL": "\(coverpicURL!)"])
-                        self.authState = .session
+                        self.signInWithFirebase(email: cleanedEmail, password: cleanedPassword)
                     }
                 }
             }
