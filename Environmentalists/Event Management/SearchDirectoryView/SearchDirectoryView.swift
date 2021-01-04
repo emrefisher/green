@@ -111,7 +111,7 @@ struct EventListView: View {
         NavigationView{
             VStack(spacing: 0) {
                 
-                //                FindEventsViewTopBar(showMapView: $showMapView)
+                FindEventsViewTopBar(showMapView: $showMapView, eventManager: self.eventManager)
                 
                 List(eventManager.eventInformation) {Event in
                     NavigationLink(destination: EventPage(event: Event)) {
@@ -119,7 +119,7 @@ struct EventListView: View {
                     }
                 }
             }
-            .navigationBarTitle("Search/Directory View", displayMode: .inline)
+            .navigationBarTitle("", displayMode: .inline)
             .navigationBarItems(trailing:
                                     Button(action: {
                                         self.eventManager.clearEvents()
