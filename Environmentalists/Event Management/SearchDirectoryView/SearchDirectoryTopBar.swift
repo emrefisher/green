@@ -17,7 +17,6 @@ struct FindEventsViewTopBar: View {
     @State var eventType: [String] = [String]()
     @State var interest: [String] = [String]()
     @ObservedObject var eventManager: EventManager
-    @ObservedObject var searchBarInfo = SearchBarInformation()
     
     var body: some View {
         

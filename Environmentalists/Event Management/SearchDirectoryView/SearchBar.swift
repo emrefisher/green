@@ -72,56 +72,12 @@ struct SearchBar: View {
 
                     List(self.searchData.filter{$0.eventTitle.lowercased().contains(self.text.lowercased())}) {i in
 
-                        HStack {
                             NavigationLink(i.eventTitle, destination: EventPage(event: i))
-                        }
-
+                        
 
                     }.frame(height: UIScreen.main.bounds.height / 5)
                 }
 
-            }
-        }
-    }
-}
-
-class SearchBarInformation: ObservableObject {
-    
-    @Published var data = [String]()
-    
-    init() {
-        
-        let db = Firestore.firestore()
-        
-        db.collection("Organizers").getDocuments { (snap, err) in
-            
-            if err != nil{
-                
-                print((err?.localizedDescription)!)
-                return
-            }
-            
-            for i in snap!.documents{
-                
-                let id = i.documentID
-                
-                self.data.append(id)
-            }
-        }
-        
-        db.collection("Events").getDocuments { (snap, err) in
-            
-            if err != nil{
-                
-                print((err?.localizedDescription)!)
-                return
-            }
-            
-            for i in snap!.documents{
-                
-                let id = i.get("Name") as! String
-                
-                self.data.append(id)
             }
         }
     }
