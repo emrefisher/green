@@ -26,6 +26,10 @@
 		A722BCEF25047B94007C70F1 /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A722BCEE25047B94007C70F1 /* EventManager.swift */; };
 		A722BCF125049228007C70F1 /* SearchDirectoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A722BCF025049228007C70F1 /* SearchDirectoryView.swift */; };
 		A722BCF325049466007C70F1 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A722BCF225049466007C70F1 /* MapView.swift */; };
+		A75BCF6125A2D1E600FFD350 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75BCF6025A2D1E600FFD350 /* SearchBar.swift */; };
+		A75BCF6925A2D39100FFD350 /* EventPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75BCF6825A2D39100FFD350 /* EventPage.swift */; };
+		A75BCF6E25A2D3FA00FFD350 /* SearchDirectoryTopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75BCF6D25A2D3FA00FFD350 /* SearchDirectoryTopBar.swift */; };
+		A75BCF7425A2D46000FFD350 /* OrgProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75BCF7325A2D46000FFD350 /* OrgProfile.swift */; };
 		A75EEA502538F1D10068EF2E /* CurrentUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75EEA4F2538F1D10068EF2E /* CurrentUser.swift */; };
 		A763DD4A250C4B0C0001FA21 /* CreateEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A763DD49250C4B0C0001FA21 /* CreateEventView.swift */; };
 		A763DD4C250C4BCC0001FA21 /* OrganizerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A763DD4B250C4BCC0001FA21 /* OrganizerManager.swift */; };
@@ -89,6 +93,10 @@
 		A722BCEE25047B94007C70F1 /* EventManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventManager.swift; sourceTree = "<group>"; };
 		A722BCF025049228007C70F1 /* SearchDirectoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDirectoryView.swift; sourceTree = "<group>"; };
 		A722BCF225049466007C70F1 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		A75BCF6025A2D1E600FFD350 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
+		A75BCF6825A2D39100FFD350 /* EventPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventPage.swift; sourceTree = "<group>"; };
+		A75BCF6D25A2D3FA00FFD350 /* SearchDirectoryTopBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDirectoryTopBar.swift; sourceTree = "<group>"; };
+		A75BCF7325A2D46000FFD350 /* OrgProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrgProfile.swift; sourceTree = "<group>"; };
 		A75EEA4F2538F1D10068EF2E /* CurrentUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUser.swift; sourceTree = "<group>"; };
 		A763DD49250C4B0C0001FA21 /* CreateEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEventView.swift; sourceTree = "<group>"; };
 		A763DD4B250C4BCC0001FA21 /* OrganizerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizerManager.swift; sourceTree = "<group>"; };
@@ -233,14 +241,34 @@
 		A722BCED25047B75007C70F1 /* Event Management */ = {
 			isa = PBXGroup;
 			children = (
-				A722BCF025049228007C70F1 /* SearchDirectoryView.swift */,
+				A75BCF7225A2D44300FFD350 /* Organizers */,
+				A75BCF5F25A2D1A600FFD350 /* SearchDirectoryView */,
 				A722BCF225049466007C70F1 /* MapView.swift */,
 				A722BCEE25047B94007C70F1 /* EventManager.swift */,
-				A763DD4B250C4BCC0001FA21 /* OrganizerManager.swift */,
 				A763DD49250C4B0C0001FA21 /* CreateEventView.swift */,
 				A763DD4D250C4BFE0001FA21 /* EventCreationManager.swift */,
 			);
 			path = "Event Management";
+			sourceTree = "<group>";
+		};
+		A75BCF5F25A2D1A600FFD350 /* SearchDirectoryView */ = {
+			isa = PBXGroup;
+			children = (
+				A722BCF025049228007C70F1 /* SearchDirectoryView.swift */,
+				A75BCF6025A2D1E600FFD350 /* SearchBar.swift */,
+				A75BCF6825A2D39100FFD350 /* EventPage.swift */,
+				A75BCF6D25A2D3FA00FFD350 /* SearchDirectoryTopBar.swift */,
+			);
+			path = SearchDirectoryView;
+			sourceTree = "<group>";
+		};
+		A75BCF7225A2D44300FFD350 /* Organizers */ = {
+			isa = PBXGroup;
+			children = (
+				A763DD4B250C4BCC0001FA21 /* OrganizerManager.swift */,
+				A75BCF7325A2D46000FFD350 /* OrgProfile.swift */,
+			);
+			path = Organizers;
 			sourceTree = "<group>";
 		};
 		A76FE39825210FE40061EF34 /* Settings */ = {
@@ -519,6 +547,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A75BCF6E25A2D3FA00FFD350 /* SearchDirectoryTopBar.swift in Sources */,
 				A76FE3C12521182B0061EF34 /* PrivacyPolicy.swift in Sources */,
 				A722BCEC2501AC78007C70F1 /* SessionView.swift in Sources */,
 				A76FE3BC252118140061EF34 /* Notifications.swift in Sources */,
@@ -533,6 +562,7 @@
 				A722BCE825017A3D007C70F1 /* Login.swift in Sources */,
 				A763DD4C250C4BCC0001FA21 /* OrganizerManager.swift in Sources */,
 				A722BCF125049228007C70F1 /* SearchDirectoryView.swift in Sources */,
+				A75BCF6125A2D1E600FFD350 /* SearchBar.swift in Sources */,
 				A722BCEA25017A4A007C70F1 /* PasswordReset.swift in Sources */,
 				A722BCE625017A2E007C70F1 /* SignUp.swift in Sources */,
 				A722BCF325049466007C70F1 /* MapView.swift in Sources */,
@@ -543,7 +573,9 @@
 				A795A3F5259C0F2000327F2D /* OnboardingPageTwo.swift in Sources */,
 				A75EEA502538F1D10068EF2E /* CurrentUser.swift in Sources */,
 				A76FE3A2252117890061EF34 /* MyAccount.swift in Sources */,
+				A75BCF6925A2D39100FFD350 /* EventPage.swift in Sources */,
 				A795A3E4259C0ED100327F2D /* OnboardingView.swift in Sources */,
+				A75BCF7425A2D46000FFD350 /* OrgProfile.swift in Sources */,
 				A795A3FF259C0F5D00327F2D /* OnboardingPageFour.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
