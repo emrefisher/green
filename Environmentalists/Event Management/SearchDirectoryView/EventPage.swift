@@ -20,8 +20,9 @@ struct EventPage: View {
                 
                 WebImage(url: URL(string: self.event.eventPhotoURL))
                     .resizable()
-                    .scaledToFill()
+                    .aspectRatio(contentMode: .fill)
                     .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height/3)
+                    .clipped()
                 
             }
             
