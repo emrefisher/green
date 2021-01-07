@@ -21,7 +21,7 @@ class EventCreationManager: ObservableObject {
     @Published var time = ""
     @Published var date = ""
     @Published var location = ""
-    @Published var coverimagedata: Data = .init(count: 0)
+    @Published var eventimagedata: Data = .init(count: 0)
     @Published var errorMessage = ""
     @Published var alert = false
     
@@ -33,11 +33,12 @@ class EventCreationManager: ObservableObject {
         self.organizerID = 0
         self.time = ""
         self.date = ""
-        self.location = ""
-        self.coverimagedata = Data()
+        self.location = "Langhorne, PA"
+        self.eventimagedata = Data()
     }
     
     func publishNewEvent(currentUser: CurrentUser) {
+        
         
         let database = Firestore.firestore()
         
@@ -58,7 +59,7 @@ class EventCreationManager: ObservableObject {
             }
         }
         
-        storage.child("EventPhotos").child("161").putData(coverimagedata, metadata: nil) { (_, err) in
+        storage.child("EventPhotos").child("161").putData(eventimagedata, metadata: nil) { (_, err) in
             
             if err != nil {
                 self.errorMessage = err!.localizedDescription

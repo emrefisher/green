@@ -113,11 +113,20 @@ struct EventListView: View {
                 
                 FindEventsViewTopBar(showMapView: $showMapView, eventManager: self.eventManager)
                 
-                List(eventManager.eventInformation) {Event in
-                    NavigationLink(destination: EventPage(event: Event)) {
-                        EventRow(event: Event)
-                    }
+//                List(eventManager.eventInformation) {Event in
+//                    NavigationLink(destination: EventPage(event: Event)) {
+//                        EventRow(event: Event)
+//                    }
+//                }
+                List {
+                    ForEach(eventManager.eventInformation) { Event in
+                        NavigationLink(destination: EventPage(event: Event)) {
+                            EventRow(event: Event)
+                        }
+                    }.onDelete(perform: delete(at:))
                 }
+                
+                
             }
             .navigationBarTitle("", displayMode: .inline)
             .navigationBarItems(trailing:
@@ -134,6 +143,11 @@ struct EventListView: View {
             }
         }
     }
+    
+    func delete(at offsets: IndexSet) {
+        eventManager.eventInformation.remove(atOffsets: offsets)
+    }
+    
 }
 
 struct SearchDirectoryView_Previews: PreviewProvider {
