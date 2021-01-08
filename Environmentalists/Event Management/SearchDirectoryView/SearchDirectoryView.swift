@@ -145,7 +145,18 @@ struct EventListView: View {
     }
     
     func delete(at offsets: IndexSet) {
+        //print(eventManager.eventInformation[offsets.first!])
+        let removedEvent = eventManager.eventInformation[offsets.first!]
         eventManager.eventInformation.remove(atOffsets: offsets)
+        let database = Firestore.firestore()
+        //database.collection("Events").whereField("Organizer ID", isEqualTo: organizationID).getDocuments()
+        database.collection("Events").document("\(removedEvent.eventOrganizer): \(removedEvent.eventTitle)").delete() { err in
+            if let err = err {
+                print("error")
+            } else {
+                print("success")
+            }
+        }
     }
     
 }

@@ -39,7 +39,7 @@ class EventCreationManager: ObservableObject {
     
     func publishNewEvent(currentUser: CurrentUser) {
         
-        
+        self.organizer = currentUser.currentUserInformation.name
         let database = Firestore.firestore()
         let userRef = database.collection("Events")
         let eventID = UUID().uuidString
@@ -63,7 +63,7 @@ class EventCreationManager: ObservableObject {
                 }
                 
                 
-                userRef.document("\(self.organizer): \(self.title)").setData(["Name": self.title, "Organizer": currentUser.currentUserInformation.name, "Organizer ID": currentUser.currentUserInformation.orgID!, "Event ID": eventID, "Date": self.date, "Time": self.time, "Number Attending": 0, "Description": self.description, "Location": self.location, "Event Photo URL": "\(url!)"])
+                userRef.document("\(self.organizer): \(self.title)").setData(["Name": self.title, "Organizer": currentUser.currentUserInformation.name, "Organizer ID": currentUser.currentUserInformation.orgID!, "Event ID": eventID, "Date": self.date, "Time": self.time, "Number Attending": 0, "Description": self.description, "Location": self.location, "Event Photo URL": "\(url!)", ])
                 
                 
                 
