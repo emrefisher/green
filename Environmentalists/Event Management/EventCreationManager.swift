@@ -41,23 +41,9 @@ class EventCreationManager: ObservableObject {
         
         
         let database = Firestore.firestore()
-        
         let userRef = database.collection("Events")
+        let eventID = UUID().uuidString
         let storage = Storage.storage().reference()
-        
-        var eventCount = 0
-        userRef.getDocuments() { (querySnapshot, err) in
-            
-            if err != nil {
-                print("Error getting documents: \(err!)")
-            }
-            
-            for _ in querySnapshot!.documents {
-                
-                eventCount += 1
-            
-            }
-        }
         
         storage.child("EventPhotos").child("161").putData(eventimagedata, metadata: nil) { (_, err) in
             
@@ -77,7 +63,9 @@ class EventCreationManager: ObservableObject {
                 }
                 
                 
-                userRef.document("\(self.organizer): \(self.title)").setData(["Name": self.title, "Organizer": currentUser.currentUserInformation.name, "Organizer ID": currentUser.currentUserInformation.orgID!, "Date": self.date, "Time": self.time, "Number Attending": 0, "Description": self.description, "Location": self.location, "Event Photo URL": "\(url!)"])
+                userRef.document("\(self.organizer): \(self.title)").setData(["Name": self.title, "Organizer": currentUser.currentUserInformation.name, "Organizer ID": currentUser.currentUserInformation.orgID!, "Event ID": eventID, "Date": self.date, "Time": self.time, "Number Attending": 0, "Description": self.description, "Location": self.location, "Event Photo URL": "\(url!)"])
+                
+                
                 
             }
         }
