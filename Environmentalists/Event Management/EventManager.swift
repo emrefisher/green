@@ -14,7 +14,7 @@ struct Event: Identifiable {
     var id: String
     var eventTitle: String
     var eventOrganizer: String
-    var eventOrganizerID: Int
+    var eventOrganizerID: String
     var eventDescription: String
     var date: String
     var time: String
@@ -50,7 +50,7 @@ class EventManager: ObservableObject {
                 let id = document.documentID
                 let eventTitle = document.get("Name") as! String
                 let organizer = document.get("Organizer") as! String
-                let organizerID = document.get("Organizer ID") as! Int
+                let organizerID = document.get("Organizer ID") as! String
                 let eventDescription = document.get("Description") as! String
                 let date = document.get("Date") as! String
                 let time = document.get("Time") as! String

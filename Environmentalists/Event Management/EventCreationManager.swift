@@ -17,7 +17,7 @@ class EventCreationManager: ObservableObject {
     @Published var title = ""
     @Published var organizer = ""
     @Published var description = ""
-    @Published var organizerID = 0
+    @Published var organizerID = ""
     @Published var time = ""
     @Published var date = ""
     @Published var location = ""
@@ -30,7 +30,7 @@ class EventCreationManager: ObservableObject {
         self.title = ""
         self.organizer = ""
         self.description = ""
-        self.organizerID = 0
+        self.organizerID = ""
         self.time = ""
         self.date = ""
         self.location = "Langhorne, PA"

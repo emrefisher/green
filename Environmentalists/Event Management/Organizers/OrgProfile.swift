@@ -10,7 +10,7 @@ import SDWebImageSwiftUI
 
 struct OrgProfile: View {
     
-    @State var organizerID: Int
+    @State var organizerID: String
     @ObservedObject var organizer = OrganizerInfo()
     
     var body: some View {

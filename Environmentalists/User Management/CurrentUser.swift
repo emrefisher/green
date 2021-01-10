@@ -21,7 +21,7 @@ struct User: Identifiable {
     var description: String?
     var location: String?
     var websiteLink: String?
-    var orgID: Int?
+    var orgID: String?
     var orgEvents: [String]?
     
 }
@@ -35,7 +35,7 @@ class CurrentUser: ObservableObject {
         
         let UID = user!.uid
         let database = Firestore.firestore()
-        database.collection("Organizers").whereField("UID", isEqualTo: UID).getDocuments() { (querySnapshot, err) in
+        database.collection("Organizers").whereField("Organizer ID", isEqualTo: UID).getDocuments() { (querySnapshot, err) in
             
             if err != nil {
                 print("Error getting documents: \(err!)")
@@ -53,7 +53,7 @@ class CurrentUser: ObservableObject {
                 self.currentUserInformation.description = (document.get("Organization Description") as! String)
                 self.currentUserInformation.websiteLink = (document.get("Organization Website Link") as! String)
                 self.currentUserInformation.location = (document.get("Organization Location") as! String)
-                self.currentUserInformation.orgID = (document.get("Organizer ID") as! Int)
+                self.currentUserInformation.orgID = (document.get("Organizer ID") as! String)
                 self.currentUserInformation.orgEvents = (document.get("Events") as! [String])
                 self.currentUserInformation.accountType = "Organizer"
             }

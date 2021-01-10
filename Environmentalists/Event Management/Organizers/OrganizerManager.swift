@@ -11,7 +11,7 @@ import FirebaseFirestore
 
 struct Organizer: Identifiable {
     var id: String
-    var organizerID: Int
+    var organizerID: String
     var organizerName: String
     var orgDescription: String
     var orgFollowers: Int
@@ -24,9 +24,9 @@ struct Organizer: Identifiable {
 
 class OrganizerInfo: ObservableObject {
     
-    @Published var organizerInformation = Organizer(id: "", organizerID: 0, organizerName: "", orgDescription: "", orgFollowers: 0, orgLocation: "", email: "", orgWebsite: "", orgProfilePic: "", orgCoverPic: "")
+    @Published var organizerInformation = Organizer(id: "", organizerID: "", organizerName: "", orgDescription: "", orgFollowers: 0, orgLocation: "", email: "", orgWebsite: "", orgProfilePic: "", orgCoverPic: "")
     
-    func getOrganizerInformation(organizationID: Int) {
+    func getOrganizerInformation(organizationID: String) {
         let database = Firestore.firestore()
         database.collection("Organizers").whereField("Organizer ID", isEqualTo: organizationID).getDocuments() { (querySnapshot, err) in
             

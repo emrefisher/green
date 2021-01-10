@@ -229,7 +229,7 @@ struct MyAccountOrganizerView: View {
                     let id = document.documentID
                     let eventTitle = document.get("Name") as! String
                     let organizer = document.get("Organizer") as! String
-                    let organizerID = document.get("Organizer ID") as! Int
+                    let organizerID = document.get("Organizer ID") as! String
                     let eventDescription = document.get("Description") as! String
                     let date = document.get("Date") as! String
                     let time = document.get("Time") as! String
