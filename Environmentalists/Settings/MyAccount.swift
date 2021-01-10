@@ -32,6 +32,7 @@ struct MyAccountOrganizerView: View {
     @EnvironmentObject var currentOrganizer: CurrentUser
     @State private var isEditingProfile = false
     @State private var editedFields = [String]()
+    @State private var orgEvents = [Event]()
     
     var body: some View {
         
@@ -65,7 +66,7 @@ struct MyAccountOrganizerView: View {
                             .foregroundColor(Color.black)
                     }
                     
-                    HStack(spacing: 25) {
+                    VStack() {
                         let completeURL = "https://" + self.currentOrganizer.currentUserInformation.websiteLink!
                         let url = URL(string:  completeURL)
                         if url == nil {
@@ -106,7 +107,20 @@ struct MyAccountOrganizerView: View {
 
                 }
                 
+                List {
+                    ForEach(self.orgEvents) { Event in
+                        NavigationLink(destination: EventPage(event: Event)) {
+                            EventRow(event: Event)
+                        }
+                    }.onDelete(perform: delete(at:))
+                }
+                
             }.navigationBarTitle("", displayMode: .inline)
+            .onAppear() {
+                if orgEvents.count == 0 {
+                    getOrganizerEvents()
+                }
+            }
 
         }
         
@@ -141,6 +155,45 @@ struct MyAccountOrganizerView: View {
         }
         userRef.updateData(["Organization Name": userInfo.name, "Organization Description": userInfo.description!, "Organization Website Link": userInfo.websiteLink!, "Email": userInfo.email, "Profile Pic URL": userInfo.profPicURL, "Organizer ID": userInfo.orgID!, "Number of Followers": userInfo.numberFollowers ?? 0])
         
+    }
+    
+    private func getOrganizerEvents() {
+        
+        let database = Firestore.firestore()
+        let eventRef = database.collection("Events")
+        for event in currentOrganizer.currentUserInformation.orgEvents! {
+            eventRef.document(event).getDocument() { (document, error) in
+                if let document = document {
+                    let id = document.documentID
+                    let eventTitle = document.get("Name") as! String
+                    let organizer = document.get("Organizer") as! String
+                    let organizerID = document.get("Organizer ID") as! Int
+                    let eventDescription = document.get("Description") as! String
+                    let date = document.get("Date") as! String
+                    let time = document.get("Time") as! String
+                    let location = document.get("Location") as! String
+                    let numAttending = document.get("Number Attending") as! Int
+                    let eventPhotoURL = document.get("Event Photo URL") as! String
+                    self.orgEvents.append(Event(id: id, eventTitle: eventTitle, eventOrganizer: organizer, eventOrganizerID: organizerID, eventDescription: eventDescription, date: date, time: time, location: location, numAttending: numAttending, eventPhotoURL: eventPhotoURL))
+                } else {
+                  print("Document does not exist")
+                }
+              }
+        }
+    }
+    
+    func delete(at offsets: IndexSet) {
+        //print(eventManager.eventInformation[offsets.first!])
+        let removedEvent = orgEvents[offsets.first!]
+        orgEvents.remove(atOffsets: offsets)
+        let database = Firestore.firestore()
+        database.collection("Events").document(removedEvent.id).delete() { err in
+            if let err = err {
+                print("error")
+            } else {
+                print("success")
+            }
+        }
     }
 }
 
