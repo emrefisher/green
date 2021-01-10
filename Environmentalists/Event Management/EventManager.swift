@@ -29,11 +29,12 @@ class EventManager: ObservableObject {
     @Published var eventInformation = [Event]()
     
     init() {
-        print(self.eventInformation.count)
         if self.eventInformation.count == 0 {
-        getEventInformation()
+            getEventInformation()
         }
+        print(eventInformation.count)
     }
+    
     func clearEvents() {
         self.eventInformation = [Event]()
     }
@@ -44,7 +45,6 @@ class EventManager: ObservableObject {
             if err != nil {
                 print("Error getting documents: \(err!)")
             }
-            DispatchQueue.main.async {
 
             for document in querySnapshot!.documents {
                 let id = document.documentID
@@ -58,7 +58,6 @@ class EventManager: ObservableObject {
                 let numAttending = document.get("Number Attending") as! Int
                 let eventPhotoURL = document.get("Event Photo URL") as! String
                 self.eventInformation.append(Event(id: id, eventTitle: eventTitle, eventOrganizer: organizer, eventOrganizerID: organizerID, eventDescription: eventDescription, date: date, time: time, location: location, numAttending: numAttending, eventPhotoURL: eventPhotoURL))
-            }
             }
 
         }

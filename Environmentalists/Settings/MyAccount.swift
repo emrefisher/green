@@ -11,6 +11,25 @@ import Firebase
 import FirebaseFirestore
 import FirebaseAuth
 
+extension Optional where Wrapped == String {
+    var _bound: String? {
+        get {
+            return self
+        }
+        set {
+            self = newValue
+        }
+    }
+    public var bound: String {
+        get {
+            return _bound ?? ""
+        }
+        set {
+            _bound = newValue.isEmpty ? nil : newValue
+        }
+    }
+}
+
 struct MyAccount: View {
     
     @EnvironmentObject var currentUser: CurrentUser
@@ -126,17 +145,60 @@ struct MyAccountOrganizerView: View {
         
         else {
             
-            VStack {
-                TextField("Organization Name", text: self.$currentOrganizer.currentUserInformation.name, onEditingChanged: { _ in
-                    self.editedFields.append("Organization Name")
-                })
+            Form {
                 
-                Button(action: {
-                    print(self.editedFields)
-                    updateOrganizerInFirebase()
-                    self.isEditingProfile.toggle()
-                }) {
-                    Text("Save Changes")
+                Section(header: Text("Organization Name")) {
+                    TextField("", text: self.$currentOrganizer.currentUserInformation.name, onEditingChanged: { _ in
+                        self.editedFields.append("Organization Name")
+                    }
+                    )}
+                Section(header: Text("Profile Description")) {
+                    TextField("", text: self.$currentOrganizer.currentUserInformation.description.bound, onEditingChanged: {_ in
+                        self.editedFields.append("Organization Description")
+                    }
+                    )}
+                Section(header: Text("Organization Location")) {
+                    TextField("", text: self.$currentOrganizer.currentUserInformation.location.bound, onEditingChanged: { _ in
+                        self.editedFields.append("Organization Location")
+                    }
+                    )}
+                //might need to look into https://
+                Section(header: Text("Organization Website")) {
+                    TextField("", text: (self.$currentOrganizer.currentUserInformation.websiteLink.bound), onEditingChanged: { _ in
+                        self.editedFields.append("Organization Website Link")
+                    }
+                    )}
+                
+            }
+            HStack {
+                
+                
+                HStack {
+                    Button(action: {
+                        self.isEditingProfile.toggle()
+                    }) {
+                        Text("Cancel")
+                    }
+                    .padding()
+                    .foregroundColor(.white)
+                    .background(Color.red)
+                    .cornerRadius(40)
+                    .offset(x: 15, y: -5)
+                }
+                Spacer()
+                HStack {
+                    Button(action: {
+                        print(self.editedFields)
+                        updateOrganizerInFirebase()
+                        self.isEditingProfile.toggle()
+                    }) {
+                        Text("Save Changes")
+                    }
+                    .padding()
+                    .foregroundColor(.white)
+                    .background(Color.green)
+                    .cornerRadius(40)
+                    .offset(x: -15, y: -5)
                 }
             }
         }
@@ -182,7 +244,7 @@ struct MyAccountOrganizerView: View {
         }
     }
     
-    func delete(at offsets: IndexSet) {
+    private func delete(at offsets: IndexSet) {
         //print(eventManager.eventInformation[offsets.first!])
         let removedEvent = orgEvents[offsets.first!]
         orgEvents.remove(atOffsets: offsets)
@@ -194,6 +256,8 @@ struct MyAccountOrganizerView: View {
                 print("success")
             }
         }
+        let userRef = database.collection("Organizers").document(currentOrganizer.currentUserInformation.name)
+        userRef.updateData(["Events": FieldValue.arrayRemove([removedEvent.id])])
     }
 }
 

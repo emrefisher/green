@@ -11,16 +11,37 @@ import MapKit
 import SDWebImageSwiftUI
 
 struct SearchDirectoryView: View {
-    @State var filteredItems = [Event]()
     
     @ObservedObject var eventManager = EventManager()
+    @State var filteredItems = [Event]()
+    @State var hasSetFilteredItems = false
     
     var body: some View {
         
-        if filteredItems.count == 0{
+        VStack {
+            
+            if hasSetFilteredItems {
+                SearchDirectoryViewPage(filteredItems: self.$filteredItems, eventManager: self.eventManager)
+            }
+            else {
+                Text("")
+            }
+        }.onAppear {
+            print(eventManager.eventInformation)
             self.filteredItems = eventManager.eventInformation
+            self.hasSetFilteredItems = true
         }
-       return  VStack{
+        
+    }
+}
+struct SearchDirectoryViewPage: View {
+    
+    @Binding var filteredItems: [Event]
+    @ObservedObject var eventManager: EventManager
+    
+    var body: some View {
+        
+        VStack{
             
             CustomNavigationView(view: AnyView(Home(filteredItems: $filteredItems)), largeTitle: true, title: "Search Events",
                                  
@@ -34,14 +55,16 @@ struct SearchDirectoryView: View {
                                         self.filteredItems = eventManager.eventInformation
                                     }
                                     
-                                 }, onCancel: {
+                                 },
+                                 
+                                 onCancel: {
                                     // Do Your Own Code When Search And Canceled....
                                     self.filteredItems = eventManager.eventInformation
                                     
                                  })
                 .ignoresSafeArea()
         
-        }
+        }.onAppear(perform: {self.filteredItems = eventManager.eventInformation})
         
     }
 }
@@ -125,7 +148,7 @@ struct CustomNavigationView: UIViewControllerRepresentable {
     
     // requre closure on Call...
     
-    init(view: AnyView,placeHolder: String? = "Search",largeTitle: Bool? = true,title: String,onSearch: @escaping (String)->(),onCancel: @escaping ()->()) {
+    init(view: AnyView,placeHolder: String? = "Search", largeTitle: Bool? = true, title: String, onSearch: @escaping (String)->(),onCancel: @escaping ()->()) {
         
         self.title = title
         self.largeTitle = largeTitle!
