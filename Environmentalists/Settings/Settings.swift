@@ -21,7 +21,7 @@ struct Settings: View {
             
             List{
                 
-//                link(icon: "leaf", label: "My Account", destination: MyAccount().environmentObject(currentUser))
+                link(icon: "leaf", label: "My Account", destination: MyAccount().environmentObject(currentUser))
                 Button(action: {
                     self.ratingApp.toggle()
                     if let scene = UIApplication.shared.connectedScenes.first(where: {$0.activationState == .foregroundActive}) as? UIWindowScene {

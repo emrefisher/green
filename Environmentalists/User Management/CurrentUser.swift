@@ -22,13 +22,14 @@ struct User: Identifiable {
     var location: String?
     var websiteLink: String?
     var orgID: Int?
+    var orgEvents: [String]?
     
 }
 
 class CurrentUser: ObservableObject {
     
     let user = Auth.auth().currentUser
-    var currentUserInformation = User(id: "", name: "", email: "'", accountType: "", profPicURL: "", coverPhotoURL: "", numberFollowers: nil, description: nil, location: nil, websiteLink: nil, orgID: nil)
+    var currentUserInformation = User(id: "", name: "", email: "'", accountType: "", profPicURL: "", coverPhotoURL: "", numberFollowers: nil, description: nil, location: nil, websiteLink: nil, orgID: nil, orgEvents: [String]())
     
     func getUserInformation() {
         
@@ -47,12 +48,13 @@ class CurrentUser: ObservableObject {
                 self.currentUserInformation.email = document.get("Email") as! String
                 self.currentUserInformation.accountType = document.get("Account Type") as! String
                 self.currentUserInformation.profPicURL = document.get("Profile Pic URL") as! String
-//                self.currentUserInformation.coverPhotoURL = document.get("Cover Photo URL") as! String
+                self.currentUserInformation.coverPhotoURL = document.get("Cover Pic URL") as! String
 //                self.currentUserInformation.numberFollowers = (document.get("Number of Followers") as! Int)
                 self.currentUserInformation.description = (document.get("Organization Description") as! String)
                 self.currentUserInformation.websiteLink = (document.get("Organization Website Link") as! String)
                 self.currentUserInformation.location = (document.get("Organization Location") as! String)
                 self.currentUserInformation.orgID = (document.get("Organizer ID") as! Int)
+                self.currentUserInformation.orgEvents = (document.get("Events") as! [String])
                 self.currentUserInformation.accountType = "Organizer"
             }
             

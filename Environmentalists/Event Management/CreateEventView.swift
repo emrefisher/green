@@ -62,6 +62,10 @@ struct CreateEventView: View {
                     TextEditor(text: self.$eventCreationManager.description)
                 }
 
+                Section(header: Text("Location")) {
+                    TextField("", text: self.$eventCreationManager.location)
+                }
+                
                 Section(header: Text("Date and Time")) {
                     DatePicker("Date", selection: $eventDate, displayedComponents: .date)
                     DatePicker("Time", selection: $eventDate, displayedComponents: .hourAndMinute)
