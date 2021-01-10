@@ -28,12 +28,12 @@ class EventManager: ObservableObject {
     
     @Published var eventInformation = [Event]()
     
-    init() {
-        if self.eventInformation.count == 0 {
-            getEventInformation()
-        }
-        print(eventInformation.count)
-    }
+//    init() {
+//        if self.eventInformation.count == 0 {
+//            getEventInformation()
+//        }
+//        print(eventInformation.count)
+//    }
     
     func clearEvents() {
         self.eventInformation = [Event]()

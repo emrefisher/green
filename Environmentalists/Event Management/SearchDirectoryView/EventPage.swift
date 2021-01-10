@@ -77,7 +77,7 @@ struct EventPage: View {
                     Spacer()
                 }.padding(.horizontal, 30)
 
-            }
+            }.navigationBarTitle("", displayMode: .inline)
             Spacer()
         
         }.edgesIgnoringSafeArea(.all)

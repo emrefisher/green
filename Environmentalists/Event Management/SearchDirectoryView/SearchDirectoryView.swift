@@ -28,6 +28,8 @@ struct SearchDirectoryView: View {
             }
         }.onAppear {
             print(eventManager.eventInformation)
+            eventManager.clearEvents()
+            eventManager.getEventInformation()
             self.filteredItems = eventManager.eventInformation
         }
 

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CreateEventView: View {
     
-    @ObservedObject var eventCreationManager = EventCreationManager()
+    @StateObject var eventCreationManager = EventCreationManager()
     @EnvironmentObject var currentUser: CurrentUser
     @State var eventDate = Date()
     @State private var eventPicker = false
