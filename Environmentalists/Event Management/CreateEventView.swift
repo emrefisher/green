@@ -12,6 +12,9 @@ struct CreateEventView: View {
     @StateObject var eventCreationManager = EventCreationManager()
     @EnvironmentObject var currentUser: CurrentUser
     @State var eventDate = Date()
+    @State var title = ""
+    @State var description = ""
+    @State var location = ""
     @State private var eventPicker = false
     @State private var creationConfirmation = false
     @State private var completionAlert = false
@@ -55,15 +58,15 @@ struct CreateEventView: View {
             Form {
 
                 Section(header: Text("Event Name")) {
-                    TextField("", text: self.$eventCreationManager.title)
+                    TextField("", text: self.$title)
                 }
 
                 Section(header: Text("Event Description")) {
-                    TextEditor(text: self.$eventCreationManager.description)
+                    TextEditor(text: self.$description)
                 }
 
                 Section(header: Text("Location")) {
-                    TextField("", text: self.$eventCreationManager.location)
+                    TextField("", text: self.$location)
                 }
                 
                 Section(header: Text("Date and Time")) {
@@ -77,7 +80,7 @@ struct CreateEventView: View {
                     Text("Create Event")
                 }.alert(isPresented: self.$creationConfirmation) {
                     Alert(title: Text("Confirmation"), message: Text("Are you sure all the information for your event is correct?"), primaryButton: .destructive(Text("Yes"), action: {
-                        self.eventCreationManager.publishNewEvent(currentUser: self.currentUser)
+                        self.eventCreationManager.publishNewEvent(currentUser: self.currentUser, title: self.title, description: self.description, location: self.location, date: self.eventDate)
                         self.completionAlert.toggle()
                     }), secondaryButton: .cancel(Text("No"))
                     )

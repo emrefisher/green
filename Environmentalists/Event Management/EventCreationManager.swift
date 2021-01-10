@@ -37,7 +37,7 @@ class EventCreationManager: ObservableObject {
         self.eventimagedata = Data()
     }
     
-    func publishNewEvent(currentUser: CurrentUser) {
+    func publishNewEvent(currentUser: CurrentUser, title: String, description: String, location: String, date: Date) {
         
         self.organizer = currentUser.currentUserInformation.name
         let database = Firestore.firestore()
@@ -45,7 +45,16 @@ class EventCreationManager: ObservableObject {
         let userRefO = database.collection("Organizers")
         let eventID = UUID().uuidString
         let storage = Storage.storage().reference()
-        
+        let formatter = DateFormatter()
+        let formatter1 = DateFormatter()
+        formatter.dateFormat = "MMM d, y"
+        formatter1.pmSymbol = "PM"
+        formatter1.dateFormat = "h:mm a"
+        let formattedDate = formatter.string(from: date)
+        let formattedTime = formatter1.string(from: date)
+        print(title)
+        print(formattedDate)
+        print(formattedTime)
         storage.child("EventPhotos").child(eventID).putData(eventimagedata, metadata: nil) { (_, err) in
             
             if err != nil {
@@ -64,7 +73,7 @@ class EventCreationManager: ObservableObject {
                 }
                 
                 
-                userRef.document(eventID).setData(["Name": self.title, "Organizer": currentUser.currentUserInformation.name, "Organizer ID": currentUser.currentUserInformation.orgID!, "Event ID": eventID, "Date": self.date, "Time": self.time, "Number Attending": 0, "Description": self.description, "Location": self.location, "Event Photo URL": "\(url!)", ])
+                userRef.document(eventID).setData(["Name": title, "Organizer": currentUser.currentUserInformation.name, "Organizer ID": currentUser.currentUserInformation.orgID!, "Event ID": eventID, "Date": formattedDate, "Time": formattedTime, "Number Attending": 0, "Description": description, "Location": location, "Event Photo URL": "\(url!)", ])
                 userRefO.document(currentUser.currentUserInformation.id).updateData(["Events": FieldValue.arrayUnion([eventID])])
                 
                 
