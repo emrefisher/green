@@ -20,11 +20,18 @@ struct OrgProfile: View {
         }
         return VStack(spacing: 0){
             VStack {
-
+                if (self.organizer.organizerInformation.orgCoverPic != "") {
                 WebImage(url: URL(string: "\(self.organizer.organizerInformation.orgCoverPic)"))
                     .resizable()
                     .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height/5)
                     .aspectRatio(contentMode: .fit)
+                }
+                else {
+                    Image("mountain_landscape")
+                        .resizable()
+                        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height/5)
+                        .aspectRatio(contentMode: .fit)
+                }
 
             }
             

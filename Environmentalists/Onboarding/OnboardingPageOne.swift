@@ -14,7 +14,9 @@ struct OnboardingPageOne: View {
         VStack {
             Image("First")
                 .resizable()
+                .aspectRatio(contentMode: .fill)
                 .frame(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height/2)
+                .clipped()
             Group {
                 Text("Welcome to Environmend!")
                     .font(.title)
