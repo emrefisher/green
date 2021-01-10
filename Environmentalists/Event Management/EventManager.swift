@@ -28,17 +28,24 @@ class EventManager: ObservableObject {
     
     @Published var eventInformation = [Event]()
     
+    init() {
+        print(self.eventInformation.count)
+        if self.eventInformation.count == 0 {
+        getEventInformation()
+        }
+    }
     func clearEvents() {
         self.eventInformation = [Event]()
     }
     
-    func getEventInformation() -> Array<Event> {
+    func getEventInformation() {
         let database = Firestore.firestore()
         database.collection("Events").getDocuments { (querySnapshot, err) in
             if err != nil {
                 print("Error getting documents: \(err!)")
             }
-            
+            DispatchQueue.main.async {
+
             for document in querySnapshot!.documents {
                 let id = document.documentID
                 let eventTitle = document.get("Name") as! String
@@ -51,11 +58,10 @@ class EventManager: ObservableObject {
                 let numAttending = document.get("Number Attending") as! Int
                 let eventPhotoURL = document.get("Event Photo URL") as! String
                 self.eventInformation.append(Event(id: id, eventTitle: eventTitle, eventOrganizer: organizer, eventOrganizerID: organizerID, eventDescription: eventDescription, date: date, time: time, location: location, numAttending: numAttending, eventPhotoURL: eventPhotoURL))
-                
+            }
             }
 
         }
-        return eventInformation
     }
 }
 

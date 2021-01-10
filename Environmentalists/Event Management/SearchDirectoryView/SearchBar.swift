@@ -19,10 +19,10 @@ struct SearchBar: View {
         VStack {
             HStack {
                 TextField("Search...", text: $text)
-                    .padding(7)
-                    .padding(.horizontal, 25)
+                    .padding(7.0)
+                    .padding(.horizontal, 25.0)
                     .background(Color(.systemGray6))
-                    .cornerRadius(10)
+                    .cornerRadius(6)
                     .overlay(
                         HStack {
                             Image(systemName: "magnifyingglass")
@@ -36,12 +36,12 @@ struct SearchBar: View {
                                 }) {
                                     Image(systemName: "multiply.circle.fill")
                                         .foregroundColor(.gray)
-                                        .padding(.trailing, 8)
+                                        .padding(.trailing, 7.0)
                                 }
                             }
                         }
                     )
-                    .padding(.horizontal, 10)
+                    .padding(.horizontal, 15)
                     .onTapGesture {
                         self.isSearching = true
                     }
