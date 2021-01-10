@@ -33,7 +33,7 @@ class EventCreationManager: ObservableObject {
         self.organizerID = ""
         self.time = ""
         self.date = ""
-        self.location = "Langhorne, PA"
+        self.location = ""
         self.eventimagedata = Data()
     }
     

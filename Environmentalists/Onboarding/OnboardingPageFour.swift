@@ -16,7 +16,9 @@ struct OnboardingPageFour: View {
         VStack {
             Image("Fourth")
                 .resizable()
+                .aspectRatio(contentMode: .fill)
                 .frame(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height/2)
+                .clipped()
             Group {
                 Text("Let's Save the World")
                     .font(.title)

@@ -58,34 +58,35 @@ struct MyAccountOrganizerView: View {
         if isEditingProfile == false {
             VStack(spacing: 0){
                 VStack {
+                   
                     
+                    if ( self.currentOrganizer.currentUserInformation.coverPhotoURL != "") {
                     WebImage(url: URL(string: "\(self.currentOrganizer.currentUserInformation.coverPhotoURL)"))
                         .resizable()
                         .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height/5)
                         .aspectRatio(contentMode: .fit)
+                    }
+                    else {
+                        Image("mountain_landscape")
+                            .resizable()
+                            .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height/5)
+                            .aspectRatio(contentMode: .fit)
+                    }
                     
                 }
                 
                 VStack(spacing: 5) {
                     
+                    HStack {
                     WebImage(url: URL(string: "\(self.currentOrganizer.currentUserInformation.profPicURL)"))
                         .resizable()
                         .clipShape(Circle())
                         .shadow(radius: 10)
                         .overlay(Circle().stroke(Color.gray, lineWidth: 5))
-                        .frame(width: UIScreen.main.bounds.height/8, height: UIScreen.main.bounds.height/8)
-                    
-                    Text(self.currentOrganizer.currentUserInformation.name)
-                        .font(.headline)
-                    
-                    HStack(spacing: 25) {
-                        Text(self.currentOrganizer.currentUserInformation.description!)
-                            .font(.system(size: 10))
-                            .fontWeight(.light)
-                            .foregroundColor(Color.black)
-                    }
-                    
-                    VStack() {
+                        .frame(width: UIScreen.main.bounds.height/8, height: UIScreen.main.bounds.height/8, alignment: .leading)
+                        .padding()
+                        
+                        Spacer()
                         let completeURL = "https://" + self.currentOrganizer.currentUserInformation.websiteLink!
                         let url = URL(string:  completeURL)
                         if url == nil {
@@ -96,8 +97,43 @@ struct MyAccountOrganizerView: View {
                                 Image(systemName: "dollarsign.circle").resizable().frame(width: 35, height: 35).foregroundColor(.black)
                                     .background(LinearGradient(gradient: .init(colors: [Color(#colorLiteral(red: 0, green: 0.9791811109, blue: 0.6578459144, alpha: 1)), Color(#colorLiteral(red: 0, green: 0.6921610236, blue: 0, alpha: 1))]), startPoint: .leading, endPoint: .trailing))
                                     .cornerRadius(200)
+                                    .offset(x: -30 , y: 15)
                             }
                         }
+                        
+                        Button(action: {
+                            self.isEditingProfile.toggle()
+                            //print(currentOrganizer.currentUserInformation)
+                        }) {
+                            Text("Edit Profile")
+
+                        }
+                        .padding()
+                        .foregroundColor(.white)
+                        .background(Color.blue)
+                        .cornerRadius(60)
+                        .frame(width: UIScreen.main.bounds.height/6, height: UIScreen.main.bounds.height/24)
+                        .offset(x: -5 , y: 15)
+                
+                        //.offset(x: 15, y: -5)
+                    }
+                    HStack {
+                    Text(self.currentOrganizer.currentUserInformation.name)
+                        .font(.headline)
+                        Spacer()
+                        
+                    }.offset(x: UIScreen.main.bounds.width/32)
+                    
+                    HStack(spacing: 25) {
+                        Text(self.currentOrganizer.currentUserInformation.description!)
+                            .font(.system(size: 10))
+                            .fontWeight(.light)
+                            .foregroundColor(Color.black)
+                        Spacer()
+                    }.offset(x: UIScreen.main.bounds.width/32)
+                    
+                    VStack() {
+                       
                         
                         HStack(spacing: 325) {
                             VStack(spacing: 100) {
@@ -108,23 +144,20 @@ struct MyAccountOrganizerView: View {
                                     Text(self.currentOrganizer.currentUserInformation.location!).font(.system(size: 10))
                                 }
                             }
-                            
-                        }
+                            Spacer()
+                        }.offset(x: UIScreen.main.bounds.width/32)
                         
+                        HStack {
                         Text("\(self.currentOrganizer.currentUserInformation.numberFollowers ?? 0) Followers") .font(.system(size: 12)).bold()
+                            Spacer()
+                        }.offset(x: UIScreen.main.bounds.width/32)
                         
                     }
                 }.offset(y: -UIScreen.main.bounds.height/16)
                 
                 Spacer()
                 
-                Button(action: {
-                    self.isEditingProfile.toggle()
-                    print(currentOrganizer.currentUserInformation)
-                }) {
-                    Text("Edit Profile")
-
-                }
+                
                 
                 List {
                     ForEach(self.orgEvents) { Event in
