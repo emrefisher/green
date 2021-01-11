@@ -135,15 +135,13 @@ struct MyAccountOrganizerView: View {
                     VStack() {
                        
                         
-                        HStack(spacing: 325) {
-                            VStack(spacing: 100) {
+                        HStack {
                                 HStack(spacing: 5) {
                                     Image(systemName:"mappin.and.ellipse")
                                         .resizable()
                                         .frame(width: 15, height: 15)
                                     Text(self.currentOrganizer.currentUserInformation.location!).font(.system(size: 10))
                                 }
-                            }
                             Spacer()
                         }.offset(x: UIScreen.main.bounds.width/32)
                         

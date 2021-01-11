@@ -17,8 +17,9 @@ struct OnboardingPageFour: View {
             Image("Fourth")
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-                .frame(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height/2)
+                .frame(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height*2/5)
                 .clipped()
+                .padding(.top, UIScreen.main.bounds.size.height/10)
             Group {
                 Text("Let's Save the World")
                     .font(.title)

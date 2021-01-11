@@ -92,7 +92,12 @@ struct CreateEventView: View {
             self.eventCreationManager.clearEventData()
         }
         .alert(isPresented: self.$completionAlert) {
-            Alert(title: Text(""), message: Text("Event Created Successfully"), dismissButton: .default(Text("OK"), action: { self.eventCreationManager.clearEventData()
+            Alert(title: Text(""), message: Text("Event Created Successfully"), dismissButton: .default(Text("OK"), action: {
+                self.title = ""
+                self.description = ""
+                self.location = ""
+                self.eventDate = Date()
+                self.eventCreationManager.clearEventData()
             }))
         }
         

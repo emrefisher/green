@@ -87,7 +87,7 @@ struct Login: View {
                 
             }
             
-        }.padding([.top, .bottom], 50).background(LinearGradient(gradient: .init(colors: [Color(#colorLiteral(red: 0, green: 0.1157108322, blue: 0.5436113477, alpha: 1)), Color(#colorLiteral(red: 0, green: 0.50462991, blue: 0, alpha: 1))]), startPoint: .top, endPoint: .bottom).edgesIgnoringSafeArea(.all))
+        }.padding(.top, UIScreen.main.bounds.size.height/6).background(LinearGradient(gradient: .init(colors: [Color(#colorLiteral(red: 0, green: 0.1157108322, blue: 0.5436113477, alpha: 1)), Color(#colorLiteral(red: 0, green: 0.50462991, blue: 0, alpha: 1))]), startPoint: .top, endPoint: .bottom).edgesIgnoringSafeArea(.all))
         .alert(isPresented: self.$sessionManager.alert) {
             Alert(title: Text("Sign In Error"), message: Text(self.sessionManager.errorMessage), dismissButton: .destructive(Text("OK")))
         }
