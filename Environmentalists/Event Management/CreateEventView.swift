@@ -9,12 +9,9 @@ import SwiftUI
 
 struct CreateEventView: View {
     
-    @StateObject var eventCreationManager = EventCreationManager()
+    @StateObject var eventCreationManager = EventCreationManager(titleLimit: 30, descriptionLimit: 500)
     @EnvironmentObject var currentUser: CurrentUser
     @State var eventDate = Date()
-    @State var title = ""
-    @State var description = ""
-    @State var location = ""
     @State private var eventPicker = false
     @State private var creationConfirmation = false
     @State private var completionAlert = false
@@ -57,20 +54,20 @@ struct CreateEventView: View {
 
             Form {
 
-                Section(header: Text("Event Name")) {
-                    TextField("", text: self.$title)
+                Section(header: Text("Event Name (Max Characters: 30)")) {
+                    TextField("", text: self.$eventCreationManager.title)
                 }
 
-                Section(header: Text("Event Description")) {
-                    TextEditor(text: self.$description)
+                Section(header: Text("Event Description (Max Characters: 500)")) {
+                    TextEditor(text: self.$eventCreationManager.description)
                 }
 
                 Section(header: Text("Location")) {
-                    TextField("", text: self.$location)
+                    TextField("", text: self.$eventCreationManager.location).disableAutocorrection(true)
                 }
                 
                 Section(header: Text("Date and Time")) {
-                    DatePicker("Date", selection: $eventDate, displayedComponents: .date)
+                    DatePicker("Date", selection: $eventDate, in: Date()..., displayedComponents: .date)
                     DatePicker("Time", selection: $eventDate, displayedComponents: .hourAndMinute)
                 }
 
@@ -80,7 +77,7 @@ struct CreateEventView: View {
                     Text("Create Event")
                 }.alert(isPresented: self.$creationConfirmation) {
                     Alert(title: Text("Confirmation"), message: Text("Are you sure all the information for your event is correct?"), primaryButton: .destructive(Text("Yes"), action: {
-                        self.eventCreationManager.publishNewEvent(currentUser: self.currentUser, title: self.title, description: self.description, location: self.location, date: self.eventDate)
+                        self.eventCreationManager.publishNewEvent(currentUser: self.currentUser, date: self.eventDate)
                         self.completionAlert.toggle()
                     }), secondaryButton: .cancel(Text("No"))
                     )
@@ -93,9 +90,6 @@ struct CreateEventView: View {
         }
         .alert(isPresented: self.$completionAlert) {
             Alert(title: Text(""), message: Text("Event Created Successfully"), dismissButton: .default(Text("OK"), action: {
-                self.title = ""
-                self.description = ""
-                self.location = ""
                 self.eventDate = Date()
                 self.eventCreationManager.clearEventData()
             }))

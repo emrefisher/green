@@ -14,9 +14,7 @@ import FirebaseAuth
 class EventCreationManager: ObservableObject {
     
     @Published var creationPageIndex = 0
-    @Published var title = ""
     @Published var organizer = ""
-    @Published var description = ""
     @Published var organizerID = ""
     @Published var time = ""
     @Published var date = ""
@@ -24,6 +22,30 @@ class EventCreationManager: ObservableObject {
     @Published var eventimagedata: Data = .init(count: 0)
     @Published var errorMessage = ""
     @Published var alert = false
+    let titleCharLimit: Int
+    let descriptionCharLimit: Int
+    
+    @Published var title = "" {
+        didSet {
+            if title.count > titleCharLimit && oldValue.count <= titleCharLimit {
+                title = oldValue
+            }
+        }
+    }
+    
+    
+    @Published var description = "" {
+        didSet {
+            if description.count > descriptionCharLimit && oldValue.count <= descriptionCharLimit {
+                description = oldValue
+            }
+        }
+    }
+    
+    init(titleLimit: Int, descriptionLimit: Int) {
+        titleCharLimit = titleLimit
+        descriptionCharLimit = descriptionLimit
+    }
     
     func clearEventData() {
         self.creationPageIndex = 0
@@ -37,7 +59,7 @@ class EventCreationManager: ObservableObject {
         self.eventimagedata = Data()
     }
     
-    func publishNewEvent(currentUser: CurrentUser, title: String, description: String, location: String, date: Date) {
+    func publishNewEvent(currentUser: CurrentUser, date: Date) {
         
         self.organizer = currentUser.currentUserInformation.name
         let database = Firestore.firestore()
@@ -73,7 +95,7 @@ class EventCreationManager: ObservableObject {
                 }
                 
                 
-                userRef.document(eventID).setData(["Name": title, "Organizer": currentUser.currentUserInformation.name, "Organizer ID": currentUser.currentUserInformation.orgID!, "Event ID": eventID, "Date": formattedDate, "Time": formattedTime, "Number Attending": 0, "Description": description, "Location": location, "Event Photo URL": "\(url!)", ])
+                userRef.document(eventID).setData(["Name": self.title, "Organizer": currentUser.currentUserInformation.name, "Organizer ID": currentUser.currentUserInformation.orgID!, "Event ID": eventID, "Date": formattedDate, "Time": formattedTime, "Number Attending": 0, "Description": self.description, "Location": self.location, "Event Photo URL": "\(url!)"])
                 userRefO.document(currentUser.currentUserInformation.id).updateData(["Events": FieldValue.arrayUnion([eventID])])
                 
                 
