@@ -7,14 +7,18 @@
 
 import SwiftUI
 
+enum AlertState {
+    case validation, confirmation
+}
+
 struct CreateEventView: View {
     
     @StateObject var eventCreationManager = EventCreationManager(titleLimit: 30, descriptionLimit: 500)
     @EnvironmentObject var currentUser: CurrentUser
     @State var eventDate = Date()
+    @State private var alertState: AlertState = .confirmation
     @State private var eventPicker = false
-    @State private var creationConfirmation = false
-    @State private var eventCreationError = false
+    @State private var createEventClicked = false
     @State private var completionAlert = false
     
     
@@ -73,24 +77,26 @@ struct CreateEventView: View {
                     }
                     
                     Button(action: {
-                        if self.eventCreationManager.validateEventFields(date: self.eventDate) == nil {
-                            self.creationConfirmation.toggle()
+                        if self.eventCreationManager.validateEventFields(date: self.eventDate) != nil {
+                            self.alertState = .validation
                         }
-                        else {
-                            self.eventCreationError.toggle()
-                        }
+                        self.createEventClicked.toggle()
                     }) {
                         Text("Create Event")
-                    }.alert(isPresented: self.$eventCreationError) {
-                        Alert(title: Text("Event Creation Error"), message: Text(self.eventCreationManager.errorMessage), dismissButton: .default(Text("OK")))
+                    }.alert(isPresented: self.$createEventClicked) {
+                        switch alertState {
+                        case .validation:
+                            return Alert(title: Text("Event Creation Error"), message: Text(self.eventCreationManager.errorMessage), dismissButton: .default(Text("OK")))
+                        case .confirmation:
+                            return Alert(title: Text("Confirmation"), message: Text("Are you sure all the information for your event is correct?"), primaryButton: .destructive(Text("Yes"), action: {
+                                self.eventCreationManager.publishNewEvent(currentUser: self.currentUser, date: self.eventDate)
+                                self.completionAlert.toggle()
+                            }), secondaryButton: .cancel(Text("No"))
+                            )
+                        }
+                        
                     }
                     
-                }.alert(isPresented: self.$creationConfirmation) {
-                    Alert(title: Text("Confirmation"), message: Text("Are you sure all the information for your event is correct?"), primaryButton: .destructive(Text("Yes"), action: {
-                        self.eventCreationManager.publishNewEvent(currentUser: self.currentUser, date: self.eventDate)
-                        self.completionAlert.toggle()
-                    }), secondaryButton: .cancel(Text("No"))
-                    )
                 }
         }.edgesIgnoringSafeArea(.all)
         .onAppear() {
