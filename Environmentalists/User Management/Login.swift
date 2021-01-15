@@ -31,7 +31,7 @@ struct Login: View {
                     HStack(alignment: .center, spacing: 15) {
                         
                         Image(systemName: "person").opacity(0.5)
-                        TextField("Enter Email", text: $email)
+                        TextField("Enter Email", text: $email).disableAutocorrection(true)
                 
                         
                     }.padding(.horizontal, 25).frame(width: UIScreen.main.bounds.width - 50, height: UIScreen.main.bounds.height / 20).background(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1))).clipShape(Capsule()).padding(.bottom, 7.5)
@@ -41,10 +41,10 @@ struct Login: View {
                         Image(systemName: "lock").opacity(0.5)
                         
                         if self.showPassword {
-                            TextField("Enter Password", text: $password)
+                            TextField("Enter Password", text: $password).disableAutocorrection(true)
                         }
                         else {
-                            SecureField("Enter Password", text: $password)
+                            SecureField("Enter Password", text: $password).disableAutocorrection(true)
                         }
                         
                         

@@ -16,8 +16,6 @@ class EventCreationManager: ObservableObject {
     @Published var creationPageIndex = 0
     @Published var organizer = ""
     @Published var organizerID = ""
-    @Published var time = ""
-    @Published var date = ""
     @Published var location = ""
     @Published var eventimagedata: Data = .init(count: 0)
     @Published var errorMessage = ""
@@ -53,10 +51,29 @@ class EventCreationManager: ObservableObject {
         self.organizer = ""
         self.description = ""
         self.organizerID = ""
-        self.time = ""
-        self.date = ""
         self.location = ""
         self.eventimagedata = Data()
+    }
+    
+    func validateEventFields(date: Date) -> String? {
+        
+        if self.title.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+            self.description.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+            self.location.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
+            
+            self.errorMessage = "Please make sure all fields are filled in."
+            self.alert.toggle()
+            return "Error"
+        }
+        
+        let tempDate = Date()
+        if date == tempDate {
+            self.errorMessage = "Please choose a date and time."
+            self.alert.toggle()
+            return "Error"
+        }
+        
+        return nil
     }
     
     func publishNewEvent(currentUser: CurrentUser, date: Date) {

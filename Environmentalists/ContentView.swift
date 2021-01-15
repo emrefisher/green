@@ -15,6 +15,9 @@ struct ContentView: View {
     
     init() {
         userSessionManager.getCurrentAuthUser()
+        if hasOnboarded == false && userSessionManager.authState == .session {
+            userSessionManager.signOut()
+        }
     }
     
     var body: some View {

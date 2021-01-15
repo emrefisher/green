@@ -14,12 +14,13 @@ struct CreateEventView: View {
     @State var eventDate = Date()
     @State private var eventPicker = false
     @State private var creationConfirmation = false
+    @State private var eventCreationError = false
     @State private var completionAlert = false
     
     
     var body: some View {
         
-        VStack(spacing: 0) {
+            VStack(spacing: 0) {
                 
                 Button(action: {
                     
@@ -51,30 +52,39 @@ struct CreateEventView: View {
                     ImagePicker(picker: self.$eventPicker, imagedata: self.$eventCreationManager.eventimagedata)
                     
                 })
-
-            Form {
-
-                Section(header: Text("Event Name (Max Characters: 30)")) {
-                    TextField("", text: self.$eventCreationManager.title)
-                }
-
-                Section(header: Text("Event Description (Max Characters: 500)")) {
-                    TextEditor(text: self.$eventCreationManager.description)
-                }
-
-                Section(header: Text("Location")) {
-                    TextField("", text: self.$eventCreationManager.location).disableAutocorrection(true)
-                }
                 
-                Section(header: Text("Date and Time")) {
-                    DatePicker("Date", selection: $eventDate, in: Date()..., displayedComponents: .date)
-                    DatePicker("Time", selection: $eventDate, displayedComponents: .hourAndMinute)
-                }
-
-                Button(action: {
-                    self.creationConfirmation.toggle()
-                }) {
-                    Text("Create Event")
+                Form {
+                    
+                    Section(header: Text("Event Name (Max Characters: 30)")) {
+                        TextField("", text: self.$eventCreationManager.title)
+                    }
+                    
+                    Section(header: Text("Event Description (Max Characters: 500)")) {
+                        TextEditor(text: self.$eventCreationManager.description)
+                    }
+                    
+                    Section(header: Text("Location")) {
+                        TextField("", text: self.$eventCreationManager.location).disableAutocorrection(true)
+                    }
+                    
+                    Section(header: Text("Date and Time")) {
+                        DatePicker("Date", selection: $eventDate, in: Date()..., displayedComponents: .date)
+                        DatePicker("Time", selection: $eventDate, displayedComponents: .hourAndMinute)
+                    }
+                    
+                    Button(action: {
+                        if self.eventCreationManager.validateEventFields(date: self.eventDate) == nil {
+                            self.creationConfirmation.toggle()
+                        }
+                        else {
+                            self.eventCreationError.toggle()
+                        }
+                    }) {
+                        Text("Create Event")
+                    }.alert(isPresented: self.$eventCreationError) {
+                        Alert(title: Text("Event Creation Error"), message: Text(self.eventCreationManager.errorMessage), dismissButton: .default(Text("OK")))
+                    }
+                    
                 }.alert(isPresented: self.$creationConfirmation) {
                     Alert(title: Text("Confirmation"), message: Text("Are you sure all the information for your event is correct?"), primaryButton: .destructive(Text("Yes"), action: {
                         self.eventCreationManager.publishNewEvent(currentUser: self.currentUser, date: self.eventDate)
@@ -82,8 +92,6 @@ struct CreateEventView: View {
                     }), secondaryButton: .cancel(Text("No"))
                     )
                 }
-                
-            }
         }.edgesIgnoringSafeArea(.all)
         .onAppear() {
             self.eventCreationManager.clearEventData()
