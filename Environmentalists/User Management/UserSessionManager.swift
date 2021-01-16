@@ -137,14 +137,15 @@ final class UserSessionManager: ObservableObject {
         }
     }
     
-    func validateFieldsForOrganizer(email: String, password: String, confirmedPassword: String, orgName: String, profilePic: Data, coverPic: Data) -> String?{
+    func validateFieldsForOrganizer(email: String, password: String, confirmedPassword: String, orgName: String, profilePic: Data, coverPic: Data, orgLink: String) -> String?{
         if email.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
             password.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
             orgName.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
             profilePic.count == 0 ||
-            coverPic.count == 0 {
+            coverPic.count == 0  ||
+            verifyUrl(urlString: orgLink) {
             
-            self.errorMessage = "Please fill in all fields and make sure you have selected profile / cover photos."
+            self.errorMessage = "Please fill in all fields, confirm your website is a valid link, and you have selected profile / cover photos."
             self.alert.toggle()
             return "Error"
         }
@@ -169,7 +170,7 @@ final class UserSessionManager: ObservableObject {
     
     func signUpAsOrganizer(email: String, password: String, confimedPassword: String, orgName: String, orgDescription: String, orgLink: String, profilePic: Data, coverPic: Data) {
         
-        let error = validateFieldsForOrganizer(email: email, password: password, confirmedPassword: confimedPassword, orgName: orgName, profilePic: profilePic, coverPic: coverPic)
+        let error = validateFieldsForOrganizer(email: email, password: password, confirmedPassword: confimedPassword, orgName: orgName, profilePic: profilePic, coverPic: coverPic, orgLink: orgLink)
         
         if error != nil {
             return
@@ -237,6 +238,15 @@ final class UserSessionManager: ObservableObject {
         }
     }
     
+    func verifyUrl (urlString: String?) -> Bool {
+        if let urlString = urlString {
+            let protocolurl = "https://" + urlString
+            if let url = NSURL(string: protocolurl) {
+                return UIApplication.shared.canOpenURL(url as URL)
+            }
+        }
+        return false
+            }
     func resetPassword(email:String) {
         
         if email != ""{

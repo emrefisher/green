@@ -59,16 +59,19 @@ struct CreateEventView: View {
                 
                 Form {
                     
-                    Section(header: Text("Event Name (Max Characters: 30)")) {
+                    Section(header: Text("Event Name")) {
                         TextField("", text: self.$eventCreationManager.title)
+                        
                     }
                     
-                    Section(header: Text("Event Description (Max Characters: 500)")) {
+                    Section(header: Text("Event Description")) {
                         TextEditor(text: self.$eventCreationManager.description)
+                            .keyboardType(.asciiCapable)
                     }
                     
                     Section(header: Text("Location")) {
                         TextField("", text: self.$eventCreationManager.location).disableAutocorrection(true)
+                            .keyboardType(.asciiCapable)
                     }
                     
                     Section(header: Text("Date and Time")) {

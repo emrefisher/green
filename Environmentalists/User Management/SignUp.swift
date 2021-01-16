@@ -146,6 +146,7 @@ struct ActivistSignUp: View {
                         
                         TextField("First Name", text: $firstName)
                             .padding([.leading, .trailing], 20)
+                            .keyboardType(.asciiCapable)
                         Divider()
                     }.padding([.leading, .trailing], 15)
                     
@@ -159,6 +160,7 @@ struct ActivistSignUp: View {
                         
                         TextField("Last Name", text: $lastName)
                             .padding([.leading, .trailing], 20)
+                            .keyboardType(.asciiCapable)
                         Divider()
                     }.padding([.leading, .trailing], 15)
                 }
@@ -192,6 +194,7 @@ struct ActivistSignUp: View {
                         if self.showPassword {
                             TextField("Enter Password", text: $password)
                             .padding([.leading, .trailing], 20)
+                                .keyboardType(.asciiCapable)
                         }
                         else {
                             SecureField("Enter Password", text: $password)
@@ -225,6 +228,7 @@ struct ActivistSignUp: View {
                         if self.showConfirmedPassword {
                             TextField("Enter Password", text: $confirmedPassword)
                             .padding([.leading, .trailing], 20)
+                                .keyboardType(.asciiCapable)
                         }
                         else {
                             SecureField("Enter Password", text: $confirmedPassword)
@@ -399,6 +403,7 @@ struct OrganizerSignUp: View {
                     
                     TextField("Organization Name", text: $orgName)
                         .padding([.leading, .trailing], 20)
+                        .keyboardType(.asciiCapable)
                     Divider()
                 }.padding([.leading, .trailing], 15)
                 
@@ -413,6 +418,7 @@ struct OrganizerSignUp: View {
                     HStack {
                         
                         TextField("Enter Email Address", text: $email)
+                            .keyboardType(.asciiCapable)
                         
                     }.padding([.leading, .trailing], 20)
                     Divider()
@@ -424,6 +430,7 @@ struct OrganizerSignUp: View {
                         .font(.headline)
                         .fontWeight(.light)
                         .foregroundColor(.white)
+                        .keyboardType(.asciiCapable)
                         .padding([.leading, .trailing], 20)
                     
                     HStack {
@@ -431,6 +438,7 @@ struct OrganizerSignUp: View {
                         if self.showPassword {
                             TextField("Enter Password", text: $password)
                                 .padding([.leading, .trailing], 20)
+                                .keyboardType(.asciiCapable)
                         }
                         else {
                             SecureField("Enter Password", text: $password)
@@ -464,10 +472,12 @@ struct OrganizerSignUp: View {
                         if self.showConfirmedPassword {
                             TextField("Enter Password", text: $confirmedPassword)
                                 .padding([.leading, .trailing], 20)
+                                .keyboardType(.asciiCapable)
                         }
                         else {
                             SecureField("Enter Password", text: $confirmedPassword)
                                 .padding([.leading, .trailing], 20)
+                            
                         }
                         
                         
@@ -495,6 +505,7 @@ struct OrganizerSignUp: View {
                     HStack {
                         
                         TextField("Enter Organization Website", text: $orgDescription)
+                            .keyboardType(.asciiCapable)
                         
                     }.padding([.leading, .trailing], 20)
                     Divider()
@@ -510,7 +521,7 @@ struct OrganizerSignUp: View {
                     
                     HStack {
                         
-                        TextField("Enter Organization Website", text: $orgWebsite)
+                        TextField("(i.e. www.xyz.com)", text: $orgWebsite)
                         
                     }.padding([.leading, .trailing], 20)
                     Divider()

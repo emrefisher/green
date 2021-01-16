@@ -30,8 +30,8 @@
             filePath = "Environmentalists/User Management/UserSessionManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "210"
-            endingLineNumber = "210"
+            startingLineNumber = "211"
+            endingLineNumber = "211"
             landmarkName = "signUpAsOrganizer(email:password:confimedPassword:orgName:orgDescription:orgLink:profilePic:coverPic:)"
             landmarkType = "7">
             <Locations>
