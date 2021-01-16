@@ -22,14 +22,25 @@ struct SignUp: View {
             
             if self.newAccountType == "" {
                 VStack {
-                    
+                    HStack{
+                        
+                        Button(action: {
+                            sessionManager.showLogin()
+                        }) {
+                            Image(systemName: "arrow.left").font(.system(size: 40)).foregroundColor(.black)
+                        }
+                        .frame(width: UIScreen.main.bounds.width/10, height: UIScreen.main.bounds.height/8)
+                        Spacer()
+                        
+                    }.padding(.leading, 10)
+                    Spacer()
                     Text("Welcome to Environmend!")
                         .font(.largeTitle)
                         .foregroundColor(Color.white)
                         .fontWeight(.medium)
                         .padding(.top, 20)
                         .padding(.bottom, 25)
-                    
+                    Spacer()
                     Button(action: {
                         self.newAccountType = "Activist"
                     }) {
@@ -45,12 +56,10 @@ struct SignUp: View {
                         Text("Organizer").foregroundColor(.white).frame(width: UIScreen.main.bounds.width-100).padding().font(.body)
                         
                     }.background(Color(#colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1))).clipShape(Capsule()).padding(.top,50)
-                    
-                    Button("Already have an account? Sign in.", action: {
-                        sessionManager.showLogin()
-                    })
-                    
-                }.padding([.top, .bottom], 50)
+                    Spacer()
+                }//.padding([.top, .bottom], 50)
+                Spacer()
+                
             }
             
             else if self.newAccountType == "Activist" {

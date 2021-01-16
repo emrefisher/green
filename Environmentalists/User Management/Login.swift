@@ -74,11 +74,11 @@ struct Login: View {
                     
                     Button("Login", action: {
                         sessionManager.signInWithFirebase(email: email, password: password)
-                    }).foregroundColor(.white).frame(width: UIScreen.main.bounds.size.width - 150, height: UIScreen.main.bounds.size.height / 15).background(Color(#colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1))).clipShape(Capsule()).padding(.top,50)
+                    }).foregroundColor(.white).frame(width: UIScreen.main.bounds.size.width - 100, height: UIScreen.main.bounds.size.height / 15).background(Color(#colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1))).clipShape(Capsule()).padding(.top,50)
                     
-                    HStack(spacing: 10) {
+                    HStack {
                         
-                        Button("Don't have an account? Sign up.", action: {sessionManager.showSignUp()})
+                        Button("Sign Up", action: {sessionManager.showSignUp()}).foregroundColor(.white).frame(width: UIScreen.main.bounds.size.width - 100, height: UIScreen.main.bounds.size.height / 15).background(Color(#colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1))).clipShape(Capsule())
                         
                     }.padding(.top, 25)
                     
