@@ -12,11 +12,13 @@ struct OrganizerSignUpPageTwo: View {
     @ObservedObject var organizerSignUpManager: OrganizerSignUpManager
     @State private var showPassword = false
     @State private var showConfirmedPassword = false
+    @State private var errorMessage = ""
+    @State private var alert = false
     
     var body: some View {
             VStack(alignment: .leading){
                 
-                Text("Password")
+                Text("Choose Password")
                     .font(.headline)
                     .fontWeight(.light)
                     .foregroundColor(.white)
@@ -25,12 +27,10 @@ struct OrganizerSignUpPageTwo: View {
                 HStack {
                     
                     if self.showPassword {
-                        TextField("Enter Password", text: self.$organizerSignUpManager.password)
-                        .padding([.leading, .trailing], 20)
+                        TextField("Enter Password", text: self.$organizerSignUpManager.password).textFieldStyle(RoundedBorderTextFieldStyle()).disableAutocorrection(true)
                     }
                     else {
-                        SecureField("Enter Password", text: self.$organizerSignUpManager.password)
-                        .padding([.leading, .trailing], 20)
+                        SecureField("Enter Password", text: self.$organizerSignUpManager.password).textFieldStyle(RoundedBorderTextFieldStyle()).disableAutocorrection(true)
                     }
 
                     
@@ -45,17 +45,17 @@ struct OrganizerSignUpPageTwo: View {
                     }
                 }
                 
-                Text("Password must be at least 8 total characters long and must include at least one capital letter and one number.")
+                Text("Password must be at least 8 total characters long and must include at least one capital letter and one number.").font(.caption).foregroundColor(.white)
                 
+                
+                Text("Confirm Password")
                 HStack {
                     
                     if self.showConfirmedPassword {
-                        TextField("Enter Password", text: self.$organizerSignUpManager.confirmedPassword)
-                        .padding([.leading, .trailing], 20)
+                        TextField("Confirm Password", text: self.$organizerSignUpManager.confirmedPassword).textFieldStyle(RoundedBorderTextFieldStyle()).disableAutocorrection(true)
                     }
                     else {
-                        SecureField("Enter Password", text: self.$organizerSignUpManager.confirmedPassword)
-                        .padding([.leading, .trailing], 20)
+                        SecureField("Confirm Password", text: self.$organizerSignUpManager.confirmedPassword).textFieldStyle(RoundedBorderTextFieldStyle()).disableAutocorrection(true)
                     }
 
                     

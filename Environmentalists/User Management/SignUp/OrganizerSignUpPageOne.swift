@@ -19,7 +19,7 @@ struct OrganizerSignUpPageOne: View {
                 self.accountType = ""
             })
             Text("Enter Email")
-            TextField("Example: abc123@xyz.com", text: self.$organizerSignUpManager.email).textFieldStyle(RoundedBorderTextFieldStyle())
+            TextField("Example: abc123@xyz.com", text: self.$organizerSignUpManager.email).textFieldStyle(RoundedBorderTextFieldStyle()).disableAutocorrection(true)
             Button("Next Page", action: {
                 if self.textFieldValidatorEmail() {
                     self.organizerSignUpManager.pageNumber += 1
