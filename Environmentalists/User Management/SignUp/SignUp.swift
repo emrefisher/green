@@ -71,7 +71,7 @@ struct SignUp: View {
             
             else if self.newAccountType == "Organizer" {
                 
-                OrganizerSignUp(newAccountType: $newAccountType)
+                OrganizerSignUpView(accountType: $newAccountType)
                     .environmentObject(sessionManager)
                 
             }

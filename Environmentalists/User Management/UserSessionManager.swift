@@ -168,6 +168,8 @@ final class UserSessionManager: ObservableObject {
         return nil
     }
     
+    
+    
     func signUpAsOrganizer(email: String, password: String, confimedPassword: String, orgName: String, orgDescription: String, orgLink: String, profilePic: Data, coverPic: Data) {
         
         let error = validateFieldsForOrganizer(email: email, password: password, confirmedPassword: confimedPassword, orgName: orgName, profilePic: profilePic, coverPic: coverPic, orgLink: orgLink)
@@ -247,6 +249,7 @@ final class UserSessionManager: ObservableObject {
         }
         return false
             }
+    
     func resetPassword(email:String) {
         
         if email != ""{
