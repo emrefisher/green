@@ -20,6 +20,7 @@ class EventCreationManager: ObservableObject {
     @Published var eventimagedata: Data = .init(count: 0)
     @Published var errorMessage = ""
     @Published var alert = false
+    @Published var numAttending = 0
     let titleCharLimit: Int
     let descriptionCharLimit: Int
     
@@ -112,7 +113,7 @@ class EventCreationManager: ObservableObject {
                 }
                 
                 
-                userRef.document(eventID).setData(["Name": self.title, "Organizer": currentUser.currentUserInformation.name, "Organizer ID": currentUser.currentUserInformation.orgID!, "Event ID": eventID, "Date": formattedDate, "Time": formattedTime, "Number Attending": 0, "Description": self.description, "Location": self.location, "Event Photo URL": "\(url!)"])
+                userRef.document(eventID).setData(["Name": self.title, "Organizer": currentUser.currentUserInformation.name, "Organizer ID": currentUser.currentUserInformation.orgID!, "Event ID": eventID, "Date": formattedDate, "Time": formattedTime, "Number Attending": self.numAttending, "Description": self.description, "Location": self.location, "Event Photo URL": "\(url!)"])
                 userRefO.document(currentUser.currentUserInformation.id).updateData(["Events": FieldValue.arrayUnion([eventID])])
                 
                 

@@ -129,7 +129,7 @@ final class UserSessionManager: ObservableObject {
                             return
                         }
                         
-                        userRef.document("\(lastName), \(firstName)").setData(["Account Type": "Activist", "First Name": cleanedFirstName, "Last Name": cleanedLastName, "Email": cleanedEmail, "Date of Birth": Timestamp(date: dateOfBirth), "UID": res!.user.uid, "Profile Pic": "\(url!)"])
+                        userRef.document("\(lastName), \(firstName)").setData(["Account Type": "Activist", "First Name": cleanedFirstName, "Last Name": cleanedLastName,  "Events": [String](), "Email": cleanedEmail, "Date of Birth": Timestamp(date: dateOfBirth), "UID": res!.user.uid, "Profile Pic": "\(url!)"])
                         self.authState = .session
                     }
                 }

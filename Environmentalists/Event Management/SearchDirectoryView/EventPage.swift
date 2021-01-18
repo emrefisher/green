@@ -11,6 +11,7 @@ import SDWebImageSwiftUI
 struct EventPage: View {
     
     @State var event: Event
+    @State private var rsvpEventClicked = false
     
     var body: some View {
         
@@ -33,11 +34,25 @@ struct EventPage: View {
                     
                     HStack {
                         VStack(alignment: .leading) {
+                            HStack {
                             NavigationLink(destination: OrgProfile(organizerID: self.event.eventOrganizerID)) {
                                 Text("@\(self.event.eventOrganizer)")
                                     .font(.headline)
                                     .fontWeight(.regular)
                                     .foregroundColor(Color.black.opacity(0.5))
+                            }
+                            
+                               /* Button(action: {
+                                    print("Delete tapped!")
+                                }) {
+                                    HStack {
+                                        Image(systemName: "trash")
+                                            .font(.title)
+                                        Text("Delete")
+                                            .fontWeight(.semibold)
+                                            .font(.title)
+                                    }
+                                }*/
                             }
                             
                             Link(destination: URL(string: "https://maps.apple.com/?address=\(self.event.location.replacingOccurrences(of: " ", with: "%20"))")!) {
@@ -82,5 +97,9 @@ struct EventPage: View {
             }
         }.edgesIgnoringSafeArea(.all)
     }
+}
+
+func rsvpToggle() {
+    print("toggled")
 }
 
