@@ -72,10 +72,12 @@ struct Login: View {
                 
                 VStack {
                     
-                    Button("Login", action: {
+                    Button(action: {
                         sessionManager.signInWithFirebase(email: email, password: password)
-                    }).foregroundColor(.white).frame(width: UIScreen.main.bounds.size.width - 100, height: UIScreen.main.bounds.size.height / 15).background(Color(#colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1))).clipShape(Capsule()).padding(.top,50)
-                    
+                    }) {
+                        Text("Login").foregroundColor(.white).frame(width: UIScreen.main.bounds.size.width - 100, height: UIScreen.main.bounds.size.height / 15).background(Color(#colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1))).clipShape(Capsule())
+                    }.padding(.top,50)
+        
                     HStack {
                         
                         Button("Sign Up", action: {sessionManager.showSignUp()}).foregroundColor(.white).frame(width: UIScreen.main.bounds.size.width - 100, height: UIScreen.main.bounds.size.height / 15).background(Color(#colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1))).clipShape(Capsule())
