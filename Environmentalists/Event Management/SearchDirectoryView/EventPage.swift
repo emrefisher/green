@@ -7,11 +7,16 @@
 
 import SwiftUI
 import SDWebImageSwiftUI
+import FirebaseFirestore
+import FirebaseStorage
+import FirebaseAuth
 
 struct EventPage: View {
     
     @State var event: Event
-    @State private var rsvpEventClicked = false
+    @State var rsvpEventClicked : Bool = false
+    @EnvironmentObject var currentActivist: CurrentUser
+    @State private var actEvents = [Event]()
     
     var body: some View {
         
@@ -41,18 +46,23 @@ struct EventPage: View {
                                     .fontWeight(.regular)
                                     .foregroundColor(Color.black.opacity(0.5))
                             }
-                            
-                               /* Button(action: {
-                                    print("Delete tapped!")
-                                }) {
-                                    HStack {
-                                        Image(systemName: "trash")
-                                            .font(.title)
-                                        Text("Delete")
-                                            .fontWeight(.semibold)
-                                            .font(.title)
-                                    }
-                                }*/
+                            Spacer()
+                                //Open to RSVP State
+                                if (rsvpEventClicked == false) {
+                                    Button("RSVP", action: {rsvpToggle(event: event, currentUser: self.currentActivist, rsvpEventClicked: &rsvpEventClicked)}).buttonStyle(openRSVP())
+                                    
+                                }
+                                else {//Going State
+                                    Button(action: {
+                                        rsvpToggle(event: event, currentUser: self.currentActivist, rsvpEventClicked: &rsvpEventClicked)
+                                    }) {
+                                        HStack {
+                                            Image(systemName: "checkmark")
+                                            Text("Going")
+                                                .font(.body)
+                                        }
+                                    }.buttonStyle(closedRSVP())
+                                }
                             }
                             
                             Link(destination: URL(string: "https://maps.apple.com/?address=\(self.event.location.replacingOccurrences(of: " ", with: "%20"))")!) {
@@ -99,7 +109,43 @@ struct EventPage: View {
     }
 }
 
-func rsvpToggle() {
-    print("toggled")
+func rsvpToggle(event: Event, currentUser: CurrentUser, rsvpEventClicked: inout Bool) {
+    
+    let activist = currentUser.currentUserInformation.id
+    let database = Firestore.firestore()
+    let userRefA = database.collection("Activists")
+    rsvpEventClicked.toggle()
+    if (rsvpEventClicked == true) {
+        userRefA.document(activist).updateData(["Events": FieldValue.arrayUnion([event.id])])
+    }
+    else {
+        userRefA.document(activist).updateData(["Events": FieldValue.arrayRemove([event.id])])
+    }
+}
+struct openRSVP: ButtonStyle {
+    func makeBody(configuration: Self.Configuration) -> some View {
+        configuration.label
+            .foregroundColor(Color.white)
+            .padding()
+            .frame(width: UIScreen.main.bounds.size.width/5, height: UIScreen.main.bounds.size.height / 20)
+            //.background(configuration.isPressed ? Color.orange : Color.green)
+            .background(LinearGradient(gradient: Gradient(colors: [Color.red, Color.orange]), startPoint: .leading, endPoint: .trailing))
+            .scaleEffect(configuration.isPressed ? 1.3 : 1.0)
+            .clipShape(Capsule())
+    }
+}
+
+struct closedRSVP: ButtonStyle {
+    func makeBody(configuration: Self.Configuration) -> some View {
+        configuration.label
+            .foregroundColor(Color.white)
+            .padding()
+            .frame(width: UIScreen.main.bounds.size.width/3.5, height: UIScreen.main.bounds.size.height / 20)
+            //.background(configuration.isPressed ? Color.orange : Color.green)
+            //.background(LinearGradient(gradient: Gradient(colors: [Color.red, Color.orange]), startPoint: .leading, endPoint: .trailing))
+            .background(Color.green)
+            .scaleEffect(configuration.isPressed ? 1.3 : 1.0)
+            .clipShape(Capsule())
+    }
 }
 
