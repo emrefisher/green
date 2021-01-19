@@ -34,7 +34,7 @@ struct Login: View {
                         TextField("Enter Email", text: $email).disableAutocorrection(true)
                 
                         
-                    }.padding(.horizontal).frame(width: self.frameWidth * 0.85, height: self.frameHeight / 12.5).background(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1))).clipShape(Capsule())
+                    }.padding(.horizontal).frame(width: self.frameWidth * 0.85, height: self.frameHeight / 12.5).background(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1))).clipShape(Capsule()).shadow(color: Color.black.opacity(0.5), radius: 5, x: 5, y: 5)
                     
                     HStack(alignment: .center, spacing: 15) {
                         
@@ -57,7 +57,7 @@ struct Login: View {
                             Image(systemName: self.showPassword ? "eye.fill" : "eye.slash.fill")
                         }
                         
-                    }.padding(.horizontal).frame(width: self.frameWidth * 0.85, height: self.frameHeight / 12.5).background(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1))).clipShape(Capsule())
+                    }.padding(.horizontal).frame(width: self.frameWidth * 0.85, height: self.frameHeight / 12.5).background(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1))).clipShape(Capsule()).shadow(color: Color.black.opacity(0.5), radius: 5, x: 5, y: 5)
 
                 
                 HStack {
@@ -75,7 +75,7 @@ struct Login: View {
                     Button(action: {
                         sessionManager.signInWithFirebase(email: self.email, password: self.password)
                     }) {
-                        Text("Login").foregroundColor(.white).frame(width: self.frameWidth * 0.6, height: self.frameHeight / 10).background(Color(#colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1))).clipShape(Capsule())
+                        Text("Login").foregroundColor(.white).frame(width: self.frameWidth * 0.6, height: self.frameHeight / 10).background(Color(#colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1))).clipShape(Capsule()).shadow(color: Color.black.opacity(0.5), radius: 5, x: 5, y: 5)
                     }
                         
                         Button("Don't have an account? Sign Up", action: {
