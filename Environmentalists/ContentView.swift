@@ -30,8 +30,14 @@ struct ContentView: View {
                     SessionView()
                         .environmentObject(userSessionManager)
                 case .login:
-                    Login()
-                        .environmentObject(userSessionManager)
+                    ZStack {
+                        Rectangle()
+                            .fill(Color(#colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)))
+                            .edgesIgnoringSafeArea(.all)
+                        Login()
+                            .frame(width: UIScreen.main.bounds.width * 0.85, height: UIScreen.main.bounds.height / 2)
+                            .environmentObject(userSessionManager)
+                    }
                 case .signUp:
                     SignUp()
                         .environmentObject(userSessionManager)
