@@ -18,16 +18,11 @@ struct SearchDirectoryView: View {
 
     var body: some View {
 
-        VStack {
+        ZStack {
 
-            if hasSetFilteredItems {
-                SearchDirectoryViewPage(filteredItems: self.$filteredItems, eventManager: self.eventManager)
-            }
-            else {
-                Text("")
-            }
+            SearchDirectoryViewPage(filteredItems: self.$filteredItems, eventManager: self.eventManager)
+
         }.onAppear {
-            print(eventManager.eventInformation)
             eventManager.clearEvents()
             eventManager.getEventInformation()
             self.filteredItems = eventManager.eventInformation
@@ -46,7 +41,7 @@ struct SearchDirectoryViewPage: View {
             self.filteredItems = eventManager.eventInformation
         }
         
-        return VStack{
+        return VStack {
 
             CustomNavigationView(view: AnyView(Home(filteredItems: $filteredItems)), largeTitle: true, title: "Search Events",
 
@@ -99,9 +94,15 @@ struct Home: View {
         //                    }
         //                }
         List(filteredItems) {Event in
+            ZStack {
+                
+                EventRow(event: Event)
+
                 NavigationLink(destination: EventPage(event: Event)) {
-                    EventRow(event: Event)
-                }
+                    EmptyView()
+                }.frame(width: 0)
+                .opacity(0)
+            }
         }
         //                        }
         //
@@ -253,58 +254,56 @@ struct EventRow: View {
     
     var body: some View {
         
-        HStack {
-            WebImage(url: URL(string: self.event.eventPhotoURL))
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(width: (UIScreen.main.bounds.width/10)*4, height: UIScreen.main.bounds.height/8, alignment: .leading)
-                .clipped()
-            
-            Spacer()
+        VStack(alignment: .center) {
+                WebImage(url: URL(string: self.event.eventPhotoURL))
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: UIScreen.main.bounds.width*0.91, height: UIScreen.main.bounds.height/4, alignment: .center)
+                    .clipped()
+                    .cornerRadius(10)
             
             VStack(alignment: .leading) {
-                HStack{
                     
                     Text(self.event.eventTitle)
                         .font(.headline)
                         .fontWeight(.semibold)
                         .foregroundColor(Color.black)
-                    
-                    Spacer()
-                }
+
                 HStack{
+                    
+                    Image(systemName: "calendar.badge.clock")
                     
                     Text("\(self.event.date), \(self.event.time)")
                         .font(.subheadline)
-                        .fontWeight(.bold)
-                        .foregroundColor(Color(#colorLiteral(red: 0.847653091, green: 0.4177049398, blue: 1, alpha: 1)))
-                        .opacity(0.75)
-                    
-                    Spacer()
+                        
+
                 }
+                
                 HStack{
+                    
+                    Image(systemName: "mappin.and.ellipse")
                     
                     Text(self.event.location)
                         .font(.subheadline)
                         .fontWeight(.light)
-                        .foregroundColor(Color.black)
+                        
                     
-                    Spacer()
                 }
                 HStack{
+                    
+                    Image(systemName: "person.fill")
                     
                     Text(self.event.eventOrganizer)
                         .font(.caption)
                         .fontWeight(.semibold)
                         .foregroundColor(Color.black)
                     
-                    Spacer()
                 }
                 Spacer()
                 
                 
             }
-            .frame(width: (UIScreen.main.bounds.width/10)*5.5, height: UIScreen.main.bounds.height/8, alignment: .center)
+            .frame(width: UIScreen.main.bounds.width*0.91)
         }
     }
 }
