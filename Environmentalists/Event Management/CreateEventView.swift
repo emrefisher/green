@@ -86,6 +86,10 @@ struct CreateEventView: View {
                         self.createEventClicked.toggle()
                     }) {
                         Text("Create Event")
+                            .multilineTextAlignment(.center)
+                            .padding()
+                            .foregroundColor(.white)
+                            .background(Color(#colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1)))
                     }.alert(isPresented: self.$createEventClicked) {
                         switch alertState {
                         case .validation:

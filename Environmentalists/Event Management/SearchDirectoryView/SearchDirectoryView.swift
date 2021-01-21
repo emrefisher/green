@@ -43,7 +43,7 @@ struct SearchDirectoryViewPage: View {
         
         return VStack {
 
-            CustomNavigationView(view: AnyView(Home(filteredItems: $filteredItems)), largeTitle: true, title: "Search Events",
+            CustomNavigationView(view: AnyView(Home(filteredItems: $filteredItems)), largeTitle: false, title: "",
 
                                  onSearch: { (txt) in
 
