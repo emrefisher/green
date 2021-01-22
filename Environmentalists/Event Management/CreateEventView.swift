@@ -13,6 +13,10 @@ enum AlertState {
 
 struct CreateEventView: View {
     
+    init() {
+        UITableView.appearance().backgroundColor = .clear
+    }
+    
     @StateObject var eventCreationManager = EventCreationManager(titleLimit: 30, descriptionLimit: 500)
     @EnvironmentObject var currentUser: CurrentUser
     @State var eventDate = Date()
@@ -79,17 +83,21 @@ struct CreateEventView: View {
                         DatePicker("Time", selection: $eventDate, displayedComponents: .hourAndMinute)
                     }
                     
-                    Button(action: {
-                        if self.eventCreationManager.validateEventFields(date: self.eventDate) != nil {
-                            self.alertState = .validation
-                        }
-                        self.createEventClicked.toggle()
-                    }) {
-                        Text("Create Event")
-                            .multilineTextAlignment(.center)
-                            .padding()
-                            .foregroundColor(.white)
-                            .background(Color(#colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1)))
+                    Section(footer:
+                                HStack {
+                                    Spacer()
+                                    Button(action: {
+                                        if self.eventCreationManager.validateEventFields(date: self.eventDate) != nil {
+                                            self.alertState = .validation
+                                        }
+                                        self.createEventClicked.toggle()
+                                    }) {
+                                        Text("Create Event")
+                                            .foregroundColor(.white).frame(width: UIScreen.main.bounds.width * 0.6, height: UIScreen.main.bounds.width / 9).background(Color(#colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1))).clipShape(Capsule())
+                                    }
+                                    Spacer()
+                                }) {
+                        
                     }.alert(isPresented: self.$createEventClicked) {
                         switch alertState {
                         case .validation:
@@ -104,8 +112,10 @@ struct CreateEventView: View {
                         
                     }
                     
-                }
+                }.frame(height: UIScreen.main.bounds.height/1.75)
+                
         }.edgesIgnoringSafeArea(.all)
+            .background(Color(#colorLiteral(red: 0, green: 1, blue: 0.2352705896, alpha: 0.5)))
         .onAppear() {
             self.eventCreationManager.clearEventData()
         }
