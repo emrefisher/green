@@ -12,8 +12,6 @@ struct ContentView: View {
     @ObservedObject var userSessionManager = UserSessionManager()
     @State private var showOnboarding = false
     @AppStorage("OnboardViewed") var hasOnboarded = false
-    @State var offset: CGFloat = 450
-    @State var timer: Timer?
     
     init() {
         userSessionManager.getCurrentAuthUser()
@@ -32,27 +30,8 @@ struct ContentView: View {
                     SessionView()
                         .environmentObject(userSessionManager)
                 case .login:
-                    ZStack {
-                        Image("TestBackground")
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .edgesIgnoringSafeArea(.all)
-                            .offset(x: self.offset)
-                        Login()
-                            .frame(width: UIScreen.main.bounds.width * 0.85, height: UIScreen.main.bounds.height / 2)
-                            .environmentObject(userSessionManager)
-                    }.onAppear() {
-                        self.timer = Timer.scheduledTimer(withTimeInterval: 0.0001, repeats: true) { timer in
-                            self.offset -= 0.005
-                            if self.offset <= -575 {
-                                self.offset = 450
-                            }
-                            
-                        }
-                    }
-                    .onDisappear() {
-                        self.timer?.invalidate()
-                    }
+                    Login()
+                        .environmentObject(userSessionManager)
                 case .signUp:
                     SignUp()
                         .environmentObject(userSessionManager)

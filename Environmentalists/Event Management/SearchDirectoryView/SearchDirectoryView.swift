@@ -255,28 +255,31 @@ struct EventRow: View {
     var body: some View {
         
         VStack(alignment: .center) {
-                WebImage(url: URL(string: self.event.eventPhotoURL))
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: UIScreen.main.bounds.width*0.91, height: UIScreen.main.bounds.height/4, alignment: .center)
-                    .clipped()
-                    .cornerRadius(10)
+            WebImage(url: URL(string: self.event.eventPhotoURL))
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(width: UIScreen.main.bounds.width*0.91, height: UIScreen.main.bounds.height/4, alignment: .center)
+                .clipped()
+                .cornerRadius(10)
             
-            VStack(alignment: .leading) {
-                    
+            VStack {
+                
+                HStack {
                     Text(self.event.eventTitle)
                         .font(.headline)
                         .fontWeight(.semibold)
                         .foregroundColor(Color.black)
-
+                    Spacer()
+                }
+                
                 HStack{
                     
                     Image(systemName: "calendar.badge.clock")
                     
                     Text("\(self.event.date), \(self.event.time)")
                         .font(.subheadline)
-                        
-
+                    
+                    Spacer()
                 }
                 
                 HStack{
@@ -286,7 +289,7 @@ struct EventRow: View {
                     Text(self.event.location)
                         .font(.subheadline)
                         .fontWeight(.light)
-                        
+                    Spacer()
                     
                 }
                 HStack{
@@ -297,12 +300,12 @@ struct EventRow: View {
                         .font(.caption)
                         .fontWeight(.semibold)
                         .foregroundColor(Color.black)
-                    
+                    Spacer()
                 }
                 Spacer()
                 
                 
-            }
+            }.padding(.leading, UIScreen.main.bounds.width / 30)
             .frame(width: UIScreen.main.bounds.width*0.91)
         }
     }

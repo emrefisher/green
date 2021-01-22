@@ -18,13 +18,15 @@ struct OrgProfile: View {
         if self.organizer.organizerInformation.orgWebsite == "" {
             self.organizer.getOrganizerInformation(organizationID: self.organizerID)
         }
+        
         return VStack(spacing: 0){
             VStack {
                 if (self.organizer.organizerInformation.orgCoverPic != "") {
                 WebImage(url: URL(string: "\(self.organizer.organizerInformation.orgCoverPic)"))
                     .resizable()
+                    .aspectRatio(contentMode: .fill)
                     .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height/5)
-                    .aspectRatio(contentMode: .fit)
+                    .clipped()
                 }
                 else {
                     Image("mountain_landscape")

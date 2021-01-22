@@ -16,8 +16,17 @@ struct Login: View {
     @State private var showPassword = false
     @State private var frameWidth = UIScreen.main.bounds.width * 0.85
     @State private var frameHeight = UIScreen.main.bounds.height / 2
+    @State var offset: CGFloat = 450
+    @State var timer: Timer?
     
     var body: some View {
+        
+        ZStack {
+            Image("TestBackground")
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .edgesIgnoringSafeArea(.all)
+                .offset(x: self.offset)
         VStack {
             
             Text("Sign In")
@@ -85,13 +94,25 @@ struct Login: View {
                 }.padding(.bottom, self.frameHeight / 5)
             }
             
-        }.background(RoundedRectangle(cornerRadius: 25.0)
+        }.frame(width: self.frameWidth, height: self.frameHeight)
+        .background(RoundedRectangle(cornerRadius: 25.0)
             .fill(Color.white.opacity(0.8))
             .shadow(color: .black, radius: 10, x: 20, y: 20))
         .alert(isPresented: self.$sessionManager.alert) {
             Alert(title: Text("Sign In Error"), message: Text(self.sessionManager.errorMessage), dismissButton: .destructive(Text("OK")))
         }
-
+        }.onAppear() {
+            self.timer = Timer.scheduledTimer(withTimeInterval: 0.0001, repeats: true) { timer in
+                self.offset -= 0.005
+                if self.offset <= -575 {
+                    self.offset = 450
+                }
+                
+            }
+        }
+        .onDisappear() {
+            self.timer?.invalidate()
+        }
     }
 }
 
