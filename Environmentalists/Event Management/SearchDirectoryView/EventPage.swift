@@ -111,7 +111,7 @@ struct EventPage: View {
 
 func rsvpToggle(event: Event, currentUser: CurrentUser, rsvpEventClicked: inout Bool) {
     
-    let activist = currentUser.currentUserInformation.id
+    let activist = currentUser.currentActivistInformation.id
     let database = Firestore.firestore()
     let userRefA = database.collection("Activists")
     rsvpEventClicked.toggle()

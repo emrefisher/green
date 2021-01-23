@@ -26,10 +26,25 @@ struct User: Identifiable {
     
 }
 
+struct Activist: Identifiable {
+    
+    var id: String
+    var firstName: String
+    var lastName: String
+    var email: String
+    var accountType: String
+    var profPicURL: String
+    var actID: String?
+    var actEvents: [String]?
+    
+}
+
 class CurrentUser: ObservableObject {
     
     let user = Auth.auth().currentUser
     var currentUserInformation = User(id: "", name: "", email: "'", accountType: "", profPicURL: "", coverPhotoURL: "", numberFollowers: nil, description: nil, location: nil, websiteLink: nil, orgID: nil, orgEvents: [String]())
+    
+    var currentActivistInformation = Activist(id: "", firstName: "", lastName: "", email: "", accountType: "", profPicURL: "", actID: nil, actEvents: [String]())
     
     func getUserInformation() {
         
@@ -70,14 +85,13 @@ class CurrentUser: ObservableObject {
                 
                 for document in querySnapshot!.documents {
                     
-                    self.currentUserInformation.id = document.documentID
-                    let firstName = document.get("First Name") as! String
-                    let lastName = document.get("Last Name") as! String
-                    self.currentUserInformation.name = "\(firstName) \(lastName)"
-                    self.currentUserInformation.email = document.get("Email") as! String
-                    self.currentUserInformation.accountType = "Activist"
-                    self.currentUserInformation.profPicURL = document.get("Profile Pic") as! String
-                    self.currentUserInformation.coverPhotoURL = document.get("Cover Photo URL") as? String ?? ""
+                    self.currentActivistInformation.id = document.documentID
+                    self.currentActivistInformation.firstName = document.get("First Name") as! String
+                    self.currentActivistInformation.lastName = document.get("Last Name") as! String
+                    self.currentActivistInformation.email = document.get("Email") as! String
+                    self.currentActivistInformation.accountType = "Activist"
+                    self.currentActivistInformation.profPicURL = document.get("Profile Pic") as! String
+                    self.currentActivistInformation.actEvents = (document.get("Events") as! [String])
                     
                 }
                 

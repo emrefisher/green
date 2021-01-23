@@ -35,11 +35,11 @@ struct MyAccount: View {
     @EnvironmentObject var currentUser: CurrentUser
     
     var body: some View {
-
         if currentUser.currentUserInformation.accountType == "Organizer" {
             MyAccountOrganizerView().environmentObject(currentUser)
         }
-        else if currentUser.currentUserInformation.accountType == "Activist" {
+        else //if currentUser.currentActivistInformation.accountType == "Activist"
+        {
             MyAccountActivistView().environmentObject(currentUser)
         }
     }
@@ -81,7 +81,7 @@ struct MyAccountOrganizerView: View {
                     WebImage(url: URL(string: "\(self.currentOrganizer.currentUserInformation.profPicURL)"))
                         .resizable()
                         .clipShape(Circle())
-                        .shadow(radius: 10)
+                        .shadow(color: Color.green, radius: 10)
                         .overlay(Circle().stroke(Color.gray, lineWidth: 5))
                         .frame(width: UIScreen.main.bounds.height/8, height: UIScreen.main.bounds.height/8, alignment: .leading)
                         .padding()
@@ -296,11 +296,220 @@ struct MyAccountOrganizerView: View {
 struct MyAccountActivistView: View {
     
     @EnvironmentObject var currentActivist: CurrentUser
+    @State private var isEditingProfile = false
+    @State private var editedFields = [String]()
+    @State private var actEvents = [Event]()
     
     var body: some View {
         
-        Text(self.currentActivist.currentUserInformation.name)
+        if isEditingProfile == false {
+            VStack(spacing: 0){
+                VStack {
+                    let nationalParks = ["deathValley", "gatesArctic", "olympic", "redwood", "yosemite", "zion"]
+                    let rand = Int.random(in: 0..<5)
+                        Image(nationalParks[rand])
+                            .resizable()
+                            .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height/5)
+                            .aspectRatio(contentMode: .fit)
+                    
+                }
+                
+                VStack(spacing: 0) {
+                    
+                    HStack {
+                    WebImage(url: URL(string: "\(self.currentActivist.currentActivistInformation.profPicURL)"))
+                        .resizable()
+                        .shadow(color: Color.green, radius: 10)
+                        .overlay(Circle().stroke(Color.gray, lineWidth: 5))
+                        .frame(width: UIScreen.main.bounds.height/8, height: UIScreen.main.bounds.height/8, alignment: .leading)
+                        .clipShape(Circle())
+                        .offset(y: -UIScreen.main.bounds.height/12)
+                        .padding()
+                        
+                        Spacer()
+                        /*let completeURL = "https://" + self.currentActivist.currentUserInformation.websiteLink!
+                        let url = URL(string:  completeURL)
+                        if url == nil {
+                            Text("Link not yet loaded")
+                        }
+                        else  {
+                            Link(destination: url!) {
+                                Image(systemName: "dollarsign.circle").resizable().frame(width: 35, height: 35).foregroundColor(.black)
+                                    .background(LinearGradient(gradient: .init(colors: [Color(#colorLiteral(red: 0, green: 0.9791811109, blue: 0.6578459144, alpha: 1)), Color(#colorLiteral(red: 0, green: 0.6921610236, blue: 0, alpha: 1))]), startPoint: .leading, endPoint: .trailing))
+                                    .cornerRadius(200)
+                                    .offset(x: -30 , y: 15)
+                            }
+                        }
+                        
+                        Button(action: {
+                            self.isEditingProfile.toggle()
+                        }) {
+                            Text("Edit Profile")
+
+                        }
+                        .padding()
+                        .foregroundColor(.white)
+                        .background(Color.blue)
+                        .cornerRadius(60)
+                        .frame(width: UIScreen.main.bounds.height/6, height: UIScreen.main.bounds.height/24)
+                        .offset(x: -5 , y: 15)
+                
+                        //.offset(x: 15, y: -5)*/
+                    }
+                    HStack {
+                        let full_name = ("Welcome Back " + "\(self.currentActivist.currentActivistInformation.firstName)" + "!")
+                    Text("\(full_name)")
+                        .font(.headline)
+                        Spacer()
+                        
+                    }.offset(x: UIScreen.main.bounds.width/32)
+                    
+                   /* HStack(spacing: 25) {
+                        Text(self.currentActivist.currentUserInformation.description!)
+                            .font(.system(size: 10))
+                            .fontWeight(.light)
+                            .foregroundColor(Color.black)
+                        Spacer()
+                    }.offset(x: UIScreen.main.bounds.width/32)
+                    
+                    VStack() {
+                       
+                        
+                        HStack {
+                                HStack(spacing: 5) {
+                                    Image(systemName:"mappin.and.ellipse")
+                                        .resizable()
+                                        .frame(width: 15, height: 15)
+                                    Text(self.currentActivist.currentUserInformation.location!).font(.system(size: 10))
+                                }
+                            Spacer()
+                        }.offset(x: UIScreen.main.bounds.width/32)
+                        
+                        
+                    }
+                }.offset(y: -UIScreen.main.bounds.height/16)
+                */
+                Spacer()
+                
+                
+                
+                List {
+                    ForEach(self.actEvents) { Event in
+                        NavigationLink(destination: EventPage(event: Event)) {
+                            EventRow(event: Event)
+                        }
+                    }//.onDelete(perform: delete(at:))
+                }
+                
+            }.navigationBarTitle("", displayMode: .inline)
+            .onAppear() {
+                if actEvents.count == 0 {
+                    getActivistEvents()
+                }
+            }
+
+        }
+        }
+        else {
+            
+            Form {
+                
+                Section(header: Text("Activist Name")) {
+                    TextField("", text: self.$currentActivist.currentActivistInformation.firstName, onEditingChanged: { _ in
+                        self.editedFields.append("Organization Name")
+                    }
+                    )}
+                
+            }
+            HStack {
+                
+                
+                HStack {
+                    Button(action: {
+                        self.isEditingProfile.toggle()
+                    }) {
+                        Text("Cancel")
+                    }
+                    .padding()
+                    .foregroundColor(.white)
+                    .background(Color.red)
+                    .cornerRadius(40)
+                    .offset(x: 15, y: -5)
+                }
+                Spacer()
+                HStack {
+                    Button(action: {
+                        print(self.editedFields)
+                        //updateActivistInFirebase()
+                        self.isEditingProfile.toggle()
+                    }) {
+                        Text("Save Changes")
+                    }
+                    .padding()
+                    .foregroundColor(.white)
+                    .background(Color.green)
+                    .cornerRadius(40)
+                    .offset(x: -15, y: -5)
+                }
+            }
+        }
     }
+    
+   /* private func updateActivistInFirebase() {
+        
+        let database = Firestore.firestore()
+        let userInfo = currentActivist.currentUserInformation
+        let eventRef = database.collection("Events")
+        let userRef = database.collection("Activists").document(userInfo.id)
+        if self.editedFields.contains("First Name") && ((self.currentOrganizer.currentUserInformation.orgEvents!.count) != 0) {
+            for event in currentOrganizer.currentUserInformation.orgEvents! {
+                eventRef.document(event).updateData(["Organizer": self.currentOrganizer.currentUserInformation.name])
+            }
+        }
+        userRef.updateData(["Organization Name": userInfo.name, "Organization Description": userInfo.description!, "Organization Website Link": userInfo.websiteLink!, "Email": userInfo.email, "Profile Pic URL": userInfo.profPicURL, "Organizer ID": userInfo.orgID!, "Number of Followers": userInfo.numberFollowers ?? 0])
+        
+    }*/
+    
+    private func getActivistEvents() {
+        
+        let database = Firestore.firestore()
+        let eventRef = database.collection("Events")
+        for event in currentActivist.currentActivistInformation.actEvents! {
+            eventRef.document(event).getDocument() { (document, error) in
+                if let document = document {
+                    let id = document.documentID
+                    let eventTitle = document.get("Name") as! String
+                    let organizer = document.get("Organizer") as! String
+                    let organizerID = document.get("Organizer ID") as! String
+                    let eventDescription = document.get("Description") as! String
+                    let date = document.get("Date") as! String
+                    let time = document.get("Time") as! String
+                    let location = document.get("Location") as! String
+                    let numAttending = document.get("Number Attending") as! Int
+                    let eventPhotoURL = document.get("Event Photo URL") as! String
+                    self.actEvents.append(Event(id: id, eventTitle: eventTitle, eventOrganizer: organizer, eventOrganizerID: organizerID, eventDescription: eventDescription, date: date, time: time, location: location, numAttending: numAttending, eventPhotoURL: eventPhotoURL))
+                } else {
+                  print("Document does not exist")
+                }
+              }
+        }
+    }
+    
+    /*private func delete(at offsets: IndexSet) {
+        //print(eventManager.eventInformation[offsets.first!])
+        let removedEvent = orgEvents[offsets.first!]
+        orgEvents.remove(atOffsets: offsets)
+        let database = Firestore.firestore()
+        database.collection("Events").document(removedEvent.id).delete() { err in
+            if let err = err {
+                print("error")
+            } else {
+                print("success")
+            }
+        }
+        let userRef = database.collection("Organizers").document(currentOrganizer.currentUserInformation.name)
+        userRef.updateData(["Events": FieldValue.arrayRemove([removedEvent.id])])
+    }*/
 }
     
 struct MyAccount_Previews: PreviewProvider {
