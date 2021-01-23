@@ -82,9 +82,20 @@ struct Login: View {
                 VStack(spacing: self.frameWidth / 20) {
                     
                     Button(action: {
+                        self.timer?.invalidate()
                         sessionManager.signInWithFirebase(email: self.email, password: self.password)
                     }) {
                         Text("Login").foregroundColor(.white).frame(width: self.frameWidth * 0.6, height: self.frameHeight / 10).background(Color(#colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1))).clipShape(Capsule()).shadow(color: Color.black.opacity(0.5), radius: 5, x: 5, y: 5)
+                    }.alert(isPresented: self.$sessionManager.alert) {
+                        Alert(title: Text("Sign In Error"), message: Text(self.sessionManager.errorMessage), dismissButton: .default(Text("OK")) {
+                            self.timer = Timer.scheduledTimer(withTimeInterval: 0.0001, repeats: true) { timer in
+                                self.offset -= 0.005
+                                if self.offset <= -575 {
+                                    self.offset = 450
+                                }
+                                
+                            }
+                        })
                     }
                         
                         Button("Don't have an account? Sign Up", action: {
@@ -98,9 +109,6 @@ struct Login: View {
         .background(RoundedRectangle(cornerRadius: 25.0)
             .fill(Color.white.opacity(0.8))
             .shadow(color: .black, radius: 10, x: 20, y: 20))
-        .alert(isPresented: self.$sessionManager.alert) {
-            Alert(title: Text("Sign In Error"), message: Text(self.sessionManager.errorMessage), dismissButton: .destructive(Text("OK")))
-        }
         }.onAppear() {
             self.timer = Timer.scheduledTimer(withTimeInterval: 0.0001, repeats: true) { timer in
                 self.offset -= 0.005
