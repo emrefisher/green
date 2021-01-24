@@ -61,7 +61,7 @@ struct Settings: View {
                         }
                     }
 
-            }.navigationTitle("Settings")
+            }
             
         }.alert(isPresented: self.$confirmSignOut) {
             Alert(title: Text("Confirm Sign Out"), message: Text("Are you sure you want to sign out?"), primaryButton: .default(Text("Yes"), action: {
