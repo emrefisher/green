@@ -311,9 +311,10 @@ struct MyAccountActivistView: View {
     @State private var beforeToday = [Event]()
     @State private var afterToday = [Event]()
     @State private var result = [[Event]]()
+    @State var pastEvents = [Event]()
+    @State var futureEvents = MyAccountActivistView.getSortedEvent(actEvents: [Event]())["Upcoming"]
     
     var body: some View {
-        
        // beforeToday = result.beforeToday
        // afterToday = result.afterToday
         if isEditingProfile == false {
@@ -428,7 +429,7 @@ struct MyAccountActivistView: View {
                     }
                     if self.isUpcomingEvents == true {
                     List {
-                    ForEach(actEvents) { Event in
+                    ForEach(futureEvents!) { Event in
                         NavigationLink(destination: EventPage(event: Event)) {
                             EventRow(event: Event)
                         }
@@ -437,7 +438,7 @@ struct MyAccountActivistView: View {
                     }
                     else {
                         List {
-                        ForEach(actEvents) { Event in
+                        ForEach(pastEvents) { Event in
                             NavigationLink(destination: EventPage(event: Event)) {
                                 EventRow(event: Event)
                             }
@@ -448,6 +449,8 @@ struct MyAccountActivistView: View {
             }.navigationBarTitle("", displayMode: .inline)
             .onAppear() {
                     getActivistEvents()
+                pastEvents = MyAccountActivistView.getSortedEvent(actEvents: actEvents)["Past"]!
+                futureEvents = MyAccountActivistView.getSortedEvent(actEvents: actEvents)["Upcoming"]!
                 
             }
 
@@ -512,6 +515,32 @@ struct MyAccountActivistView: View {
         userRef.updateData(["Organization Name": userInfo.name, "Organization Description": userInfo.description!, "Organization Website Link": userInfo.websiteLink!, "Email": userInfo.email, "Profile Pic URL": userInfo.profPicURL, "Organizer ID": userInfo.orgID!, "Number of Followers": userInfo.numberFollowers ?? 0])
         
     }*/
+    private static func getSortedEvent(actEvents: [Event]) -> [String: [Event]] {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "MM dd, yyyy"
+            let events = actEvents
+            var pastEvents = [Event]()
+            var futureEvents = [Event]()
+            let now = Date()
+            for event in events {
+                print("in loop")
+                let date = formatter.date(from: event.date)
+                if date! < now {
+                    pastEvents.append(event)
+                }
+                else {
+                    futureEvents.append(event)
+                }
+            }
+            let sortedPastEvents = pastEvents.sorted(by: {
+                $0.date.compare($1.date) == .orderedDescending
+            })
+            let sortedFutureEvents = futureEvents.sorted(by: {
+                $0.date.compare($1.date) == .orderedAscending
+            })
+            
+            return ["Past": sortedPastEvents, "Upcoming": sortedFutureEvents]
+        }
     private static func orderEvents(actEvents: inout [Event], beforeToday: inout [Event], afterToday: inout [Event])-> [[Event]]  {
         //date sorting
         let today = Date()
