@@ -38,7 +38,7 @@ struct MyAccount: View {
         if currentUser.currentUserInformation.accountType == "Organizer" {
             MyAccountOrganizerView().environmentObject(currentUser)
         }
-        else //if currentUser.currentActivistInformation.accountType == "Activist"
+        else
         {
             MyAccountActivistView().environmentObject(currentUser)
         }
@@ -81,7 +81,6 @@ struct MyAccountOrganizerView: View {
                     WebImage(url: URL(string: "\(self.currentOrganizer.currentUserInformation.profPicURL)"))
                         .resizable()
                         .clipShape(Circle())
-                        //.shadow(color: Color.green, radius: 10)
                         .overlay(Circle().stroke(Color.green, lineWidth: 5))
                         .frame(width: UIScreen.main.bounds.height/8, height: UIScreen.main.bounds.height/8, alignment: .leading)
                         .padding()
@@ -95,8 +94,6 @@ struct MyAccountOrganizerView: View {
                         else  {
                                 Button(action: {
                                     UIApplication.shared.open(url!)
-                                    //self.isEditingProfile.toggle()
-                                    //print(currentOrganizer.currentUserInformation)
                                 }) {
                                     Text("Donate")
                                         .frame(width: UIScreen.main.bounds.width/4, height: UIScreen.main.bounds.height/60)
@@ -105,23 +102,18 @@ struct MyAccountOrganizerView: View {
                                 .padding(UIScreen.main.bounds.width/50)
                                 .background(Color(#colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1))).clipShape(Capsule())
                                 .offset(x: -UIScreen.main.bounds.width/50 )
-                                //.offset(x: -30 , y: 15)
                                     
                             
                         }
                         
                         Button(action: {
                             self.isEditingProfile.toggle()
-                            //print(currentOrganizer.currentUserInformation)
                         }) {
                             Text("Edit Profile")
                                 .frame(width: UIScreen.main.bounds.width/4, height: UIScreen.main.bounds.height/60)
                                 .foregroundColor(Color.white)
                         }
                         .padding(UIScreen.main.bounds.width/50)
-                       // .foregroundColor(.white)
-                       // .background(Color.blue)
-                        //.cornerRadius(20)
                         .background(Color(#colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1))).clipShape(Capsule())
                         .offset(x: -UIScreen.main.bounds.width/50 )
                     }
@@ -201,7 +193,6 @@ struct MyAccountOrganizerView: View {
                         self.editedFields.append("Organization Location")
                     }
                     )}
-                //might need to look into https://
                 Section(header: Text("Organization Website")) {
                     TextField("", text: (self.$currentOrganizer.currentUserInformation.websiteLink.bound), onEditingChanged: { _ in
                         self.editedFields.append("Organization Website Link")
@@ -284,13 +275,12 @@ struct MyAccountOrganizerView: View {
     }
     
     private func delete(at offsets: IndexSet) {
-        //print(eventManager.eventInformation[offsets.first!])
         let removedEvent = orgEvents[offsets.first!]
         orgEvents.remove(atOffsets: offsets)
         let database = Firestore.firestore()
         database.collection("Events").document(removedEvent.id).delete() { err in
             if let err = err {
-                print("error")
+                print(err)
             } else {
                 print("success")
             }
@@ -308,21 +298,11 @@ struct MyAccountActivistView: View {
     @State private var isUpcomingEvents = true
     @State private var editedFields = [String]()
     @State private var actEvents = [Event]()
-    @State private var beforeToday = [Event]()
-    @State private var afterToday = [Event]()
-    @State private var result = [[Event]]()
     @State var pastEvents = [Event]()
-    @State var futureEvents = MyAccountActivistView.getSortedEvent(actEvents: [Event]())["Upcoming"]
+    @State var futureEvents = [Event]()
     
     var body: some View {
-       // beforeToday = result.beforeToday
-       // afterToday = result.afterToday
         if isEditingProfile == false {
-            
-            //LOOK HERE
-           /* result = MyAccountActivistView.orderEvents(actEvents: &actEvents, beforeToday: &beforeToday, afterToday: &afterToday)
-            beforeToday = result[0]
-            afterToday = result[1]*/
             VStack(spacing: 0){
                 VStack {
                     let nationalParks = ["deathValley", "gatesArctic", "olympic", "redwood", "yosemite", "zion"]
@@ -347,34 +327,7 @@ struct MyAccountActivistView: View {
                         .padding()
                         
                         Spacer()
-                        /*let completeURL = "https://" + self.currentActivist.currentUserInformation.websiteLink!
-                        let url = URL(string:  completeURL)
-                        if url == nil {
-                            Text("Link not yet loaded")
-                        }
-                        else  {
-                            Link(destination: url!) {
-                                Image(systemName: "dollarsign.circle").resizable().frame(width: 35, height: 35).foregroundColor(.black)
-                                    .background(LinearGradient(gradient: .init(colors: [Color(#colorLiteral(red: 0, green: 0.9791811109, blue: 0.6578459144, alpha: 1)), Color(#colorLiteral(red: 0, green: 0.6921610236, blue: 0, alpha: 1))]), startPoint: .leading, endPoint: .trailing))
-                                    .cornerRadius(200)
-                                    .offset(x: -30 , y: 15)
-                            }
-                        }
-                        
-                        Button(action: {
-                            self.isEditingProfile.toggle()
-                        }) {
-                            Text("Edit Profile")
-
-                        }
-                        .padding()
-                        .foregroundColor(.white)
-                        .background(Color.blue)
-                        .cornerRadius(60)
-                        .frame(width: UIScreen.main.bounds.height/6, height: UIScreen.main.bounds.height/24)
-                        .offset(x: -5 , y: 15)
-                
-                        //.offset(x: 15, y: -5)*/
+                       
                     }
                     HStack {
                         let full_name = ("Welcome Back " + "\(self.currentActivist.currentActivistInformation.firstName)" + "!")
@@ -383,32 +336,6 @@ struct MyAccountActivistView: View {
                         Spacer()
                         
                     }.offset(x: UIScreen.main.bounds.width/32)
-                    
-                   /* HStack(spacing: 25) {
-                        Text(self.currentActivist.currentUserInformation.description!)
-                            .font(.system(size: 10))
-                            .fontWeight(.light)
-                            .foregroundColor(Color.black)
-                        Spacer()
-                    }.offset(x: UIScreen.main.bounds.width/32)
-                    
-                    VStack() {
-                       
-                        
-                        HStack {
-                                HStack(spacing: 5) {
-                                    Image(systemName:"mappin.and.ellipse")
-                                        .resizable()
-                                        .frame(width: 15, height: 15)
-                                    Text(self.currentActivist.currentUserInformation.location!).font(.system(size: 10))
-                                }
-                            Spacer()
-                        }.offset(x: UIScreen.main.bounds.width/32)
-                        
-                        
-                    }
-                }.offset(y: -UIScreen.main.bounds.height/16)
-                */
                 Spacer()
                 
                     
@@ -429,11 +356,11 @@ struct MyAccountActivistView: View {
                     }
                     if self.isUpcomingEvents == true {
                     List {
-                    ForEach(futureEvents!) { Event in
+                    ForEach(futureEvents) { Event in
                         NavigationLink(destination: EventPage(event: Event)) {
                             EventRow(event: Event)
                         }
-                    }//.onDelete(perform: delete(at:))
+                    }
                 }
                     }
                     else {
@@ -442,7 +369,7 @@ struct MyAccountActivistView: View {
                             NavigationLink(destination: EventPage(event: Event)) {
                                 EventRow(event: Event)
                             }
-                        }//.onDelete(perform: delete(at:))
+                        }
                     }
                     }
                 
@@ -544,7 +471,7 @@ struct MyAccountActivistView: View {
     private static func orderEvents(actEvents: inout [Event], beforeToday: inout [Event], afterToday: inout [Event])-> [[Event]]  {
         //date sorting
         let today = Date()
-        var dateFormatter = DateFormatter()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM dd, yyyy"
         print("check")
         for orgEvent in actEvents {
@@ -584,22 +511,6 @@ struct MyAccountActivistView: View {
               }
         }
     }
-    
-    /*private func delete(at offsets: IndexSet) {
-        //print(eventManager.eventInformation[offsets.first!])
-        let removedEvent = orgEvents[offsets.first!]
-        orgEvents.remove(atOffsets: offsets)
-        let database = Firestore.firestore()
-        database.collection("Events").document(removedEvent.id).delete() { err in
-            if let err = err {
-                print("error")
-            } else {
-                print("success")
-            }
-        }
-        let userRef = database.collection("Organizers").document(currentOrganizer.currentUserInformation.name)
-        userRef.updateData(["Events": FieldValue.arrayRemove([removedEvent.id])])
-    }*/
 }
     
 struct MyAccount_Previews: PreviewProvider {

@@ -17,9 +17,9 @@ struct EventPage: View {
     @State var rsvpEventClicked : Bool = false
     @EnvironmentObject var currentActivist: CurrentUser
     @State private var actEvents = [Event]()
+    //@ObservedObject var num = monitorAttendees()
     
     var body: some View {
-        
         ScrollView {
             VStack(spacing: 0){
                 VStack {
@@ -39,6 +39,7 @@ struct EventPage: View {
                     
                     HStack {
                         VStack(alignment: .leading) {
+                            
                             HStack {
                             NavigationLink(destination: OrgProfile(organizerID: self.event.eventOrganizerID)) {
                                 Text("@\(self.event.eventOrganizer)")
@@ -47,6 +48,7 @@ struct EventPage: View {
                                     .foregroundColor(Color.black.opacity(0.5))
                             }
                             Spacer()
+                                
                                 //Open to RSVP State
                                 if (rsvpEventClicked == false) {
                                     Button("RSVP", action: {rsvpToggle(event: event, currentUser: self.currentActivist, rsvpEventClicked: &rsvpEventClicked)}).buttonStyle(openRSVP())
@@ -95,8 +97,8 @@ struct EventPage: View {
                             //                .background(LinearGradient(gradient: .init(colors: [Color(#colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)), Color(#colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1))]), startPoint: .leading, endPoint: .trailing))
                             //                .cornerRadius(25)
                             
-                            Text("\(self.event.eventDescription)")
-                                .font(.system(size: 12.5))
+                           /* Text("\(self.event.eventDescription)")
+                                .font(.system(size: 12.5))*/
                             
                         }
                         Spacer()
@@ -104,22 +106,40 @@ struct EventPage: View {
                     
                 }.navigationBarTitle("", displayMode: .inline)
                 Spacer()
-            }
+            }.onAppear(perform: {isEventRSVP(event: event, currentUser: self.currentActivist, rsvpEventClicked: &rsvpEventClicked)})
         }.edgesIgnoringSafeArea(.all)
+        
+    }
+    
+}
+/*class monitorAttendees: ObservableObject {
+    @Published var numAttending = 0
+}*/
+func isEventRSVP(event: Event, currentUser: CurrentUser, rsvpEventClicked: inout Bool) {
+    currentUser.getUserInformation()
+    for actEvent in currentUser.currentActivistInformation.actEvents! {
+        if actEvent == event.id {
+            rsvpEventClicked = true
+        }
     }
 }
-
 func rsvpToggle(event: Event, currentUser: CurrentUser, rsvpEventClicked: inout Bool) {
     
     let activist = currentUser.currentActivistInformation.id
+    //let eventId = event.id
     let database = Firestore.firestore()
     let userRefA = database.collection("Activists")
+    //let eventRef = database.collection("Events")
     rsvpEventClicked.toggle()
     if (rsvpEventClicked == true) {
+        //let num = event.numAttending + 1
         userRefA.document(activist).updateData(["Events": FieldValue.arrayUnion([event.id])])
+       // eventRef.document(eventId).updateData(["Number Attending": num])
     }
     else {
+        //let num = event.numAttending - 1
         userRefA.document(activist).updateData(["Events": FieldValue.arrayRemove([event.id])])
+        //eventRef.document(eventId).updateData(["Number Attending": num])
     }
 }
 struct openRSVP: ButtonStyle {
@@ -128,7 +148,6 @@ struct openRSVP: ButtonStyle {
             .foregroundColor(Color.white)
             .padding()
             .frame(width: UIScreen.main.bounds.size.width/5, height: UIScreen.main.bounds.size.height / 20)
-            //.background(configuration.isPressed ? Color.orange : Color.green)
             .background(LinearGradient(gradient: Gradient(colors: [Color.red, Color.orange]), startPoint: .leading, endPoint: .trailing))
             .scaleEffect(configuration.isPressed ? 1.3 : 1.0)
             .clipShape(Capsule())
