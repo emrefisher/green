@@ -57,6 +57,7 @@ struct MyAccountOrganizerView: View {
         
         if isEditingProfile == false {
             VStack(spacing: 0){
+                
                 VStack {
                    
                     
@@ -304,15 +305,8 @@ struct MyAccountActivistView: View {
     var body: some View {
         if isEditingProfile == false {
             VStack(spacing: 0){
-                VStack {
-                    let nationalParks = ["deathValley", "gatesArctic", "olympic", "redwood", "yosemite", "zion"]
-                    let rand = Int.random(in: 0..<5)
-                        Image(nationalParks[rand])
-                            .resizable()
-                            .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height/5)
-                            .aspectRatio(contentMode: .fit)
-                    
-                }
+                
+                RandomCoverPhoto()
                 
                 VStack(spacing: 0) {
                     
@@ -426,6 +420,22 @@ struct MyAccountActivistView: View {
                 }
             }
         }
+    }
+    
+    struct RandomCoverPhoto: View {
+        
+        @State var randomCoverPhoto = Int.random(in: 0..<5)
+        @State private var nationalParks = ["deathValley", "gatesArctic", "olympic", "redwood", "yosemite", "zion"]
+        
+        var body: some View {
+            
+            Image(nationalParks[randomCoverPhoto])
+                .resizable()
+                .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height/5)
+                .aspectRatio(contentMode: .fit)
+            
+        }
+        
     }
     
    /* private func updateActivistInFirebase() {
