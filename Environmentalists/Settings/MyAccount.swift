@@ -241,8 +241,8 @@ struct MyAccountOrganizerView: View {
         let userInfo = currentOrganizer.currentUserInformation
         let eventRef = database.collection("Events")
         let userRef = database.collection("Organizers").document(userInfo.id)
-        if self.editedFields.contains("Organization Name") && ((self.currentOrganizer.currentUserInformation.orgEvents!.count) != 0) {
-            for event in currentOrganizer.currentUserInformation.orgEvents! {
+        if self.editedFields.contains("Organization Name") && ((self.currentOrganizer.currentUserInformation.userEvents.count) != 0) {
+            for event in currentOrganizer.currentUserInformation.userEvents {
                 eventRef.document(event).updateData(["Organizer": self.currentOrganizer.currentUserInformation.name])
             }
         }
@@ -254,7 +254,7 @@ struct MyAccountOrganizerView: View {
         
         let database = Firestore.firestore()
         let eventRef = database.collection("Events")
-        for event in currentOrganizer.currentUserInformation.orgEvents! {
+        for event in currentOrganizer.currentUserInformation.userEvents {
             eventRef.document(event).getDocument() { (document, error) in
                 if let document = document {
                     let id = document.documentID
@@ -311,7 +311,7 @@ struct MyAccountActivistView: View {
                 VStack(spacing: 0) {
                     
                     HStack {
-                    WebImage(url: URL(string: "\(self.currentActivist.currentActivistInformation.profPicURL)"))
+                    WebImage(url: URL(string: "\(self.currentActivist.currentUserInformation.profPicURL)"))
                         .resizable()
                         .shadow(color: Color.green, radius: 10)
                         .overlay(Circle().stroke(Color.gray, lineWidth: 5))
@@ -324,8 +324,8 @@ struct MyAccountActivistView: View {
                        
                     }
                     HStack {
-                        let full_name = ("Welcome Back " + "\(self.currentActivist.currentActivistInformation.firstName)" + "!")
-                    Text("\(full_name)")
+        
+                        Text("Welcome back \(self.currentActivist.currentUserInformation.name)!")
                         .font(.headline)
                         Spacer()
                         
@@ -382,7 +382,7 @@ struct MyAccountActivistView: View {
             Form {
                 
                 Section(header: Text("Activist Name")) {
-                    TextField("", text: self.$currentActivist.currentActivistInformation.firstName, onEditingChanged: { _ in
+                    TextField("", text: self.$currentActivist.currentUserInformation.name, onEditingChanged: { _ in
                         self.editedFields.append("Organization Name")
                     }
                     )}
@@ -452,6 +452,7 @@ struct MyAccountActivistView: View {
         userRef.updateData(["Organization Name": userInfo.name, "Organization Description": userInfo.description!, "Organization Website Link": userInfo.websiteLink!, "Email": userInfo.email, "Profile Pic URL": userInfo.profPicURL, "Organizer ID": userInfo.orgID!, "Number of Followers": userInfo.numberFollowers ?? 0])
         
     }*/
+    
     private static func getSortedEvent(actEvents: [Event]) -> [String: [Event]] {
             let formatter = DateFormatter()
             formatter.dateFormat = "MM dd, yyyy"
@@ -460,7 +461,6 @@ struct MyAccountActivistView: View {
             var futureEvents = [Event]()
             let now = Date()
             for event in events {
-                print("in loop")
                 let date = formatter.date(from: event.date)
                 if date! < now {
                     pastEvents.append(event)
@@ -501,7 +501,7 @@ struct MyAccountActivistView: View {
         
         let database = Firestore.firestore()
         let eventRef = database.collection("Events")
-        for event in currentActivist.currentActivistInformation.actEvents! {
+        for event in currentActivist.currentUserInformation.userEvents {
             eventRef.document(event).getDocument() { (document, error) in
                 if let document = document {
                     let id = document.documentID

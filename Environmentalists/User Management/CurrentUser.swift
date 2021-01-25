@@ -22,29 +22,14 @@ struct User: Identifiable {
     var location: String?
     var websiteLink: String?
     var orgID: String?
-    var orgEvents: [String]?
-    
-}
-
-struct Activist: Identifiable {
-    
-    var id: String
-    var firstName: String
-    var lastName: String
-    var email: String
-    var accountType: String
-    var profPicURL: String
-    var actID: String?
-    var actEvents: [String]?
+    var userEvents: [String]
     
 }
 
 class CurrentUser: ObservableObject {
     
     let user = Auth.auth().currentUser
-    var currentUserInformation = User(id: "", name: "", email: "'", accountType: "", profPicURL: "", coverPhotoURL: "", numberFollowers: nil, description: nil, location: nil, websiteLink: nil, orgID: nil, orgEvents: [String]())
-    
-    var currentActivistInformation = Activist(id: "", firstName: "", lastName: "", email: "", accountType: "", profPicURL: "", actID: nil, actEvents: [String]())
+    var currentUserInformation = User(id: "", name: "", email: "'", accountType: "", profPicURL: "", coverPhotoURL: "", numberFollowers: nil, description: nil, location: nil, websiteLink: nil, orgID: nil, userEvents: [String]())
     
     func getUserInformation() {
         
@@ -69,7 +54,7 @@ class CurrentUser: ObservableObject {
                 self.currentUserInformation.websiteLink = (document.get("Organization Website Link") as! String)
                 self.currentUserInformation.location = (document.get("Organization Location") as! String)
                 self.currentUserInformation.orgID = (document.get("Organizer ID") as! String)
-                self.currentUserInformation.orgEvents = (document.get("Events") as! [String])
+                self.currentUserInformation.userEvents = (document.get("Events") as! [String])
                 self.currentUserInformation.accountType = "Organizer"
             }
             
@@ -85,13 +70,14 @@ class CurrentUser: ObservableObject {
                 
                 for document in querySnapshot!.documents {
                     
-                    self.currentActivistInformation.id = document.documentID
-                    self.currentActivistInformation.firstName = document.get("First Name") as! String
-                    self.currentActivistInformation.lastName = document.get("Last Name") as! String
-                    self.currentActivistInformation.email = document.get("Email") as! String
-                    self.currentActivistInformation.accountType = "Activist"
-                    self.currentActivistInformation.profPicURL = document.get("Profile Pic") as! String
-                    self.currentActivistInformation.actEvents = (document.get("Events") as! [String])
+                    self.currentUserInformation.id = document.documentID
+                    let firstName = document.get("First Name") as! String
+                    let lastName = document.get("Last Name") as! String
+                    self.currentUserInformation.name = "\(firstName) \(lastName)"
+                    self.currentUserInformation.email = document.get("Email") as! String
+                    self.currentUserInformation.accountType = "Activist"
+                    self.currentUserInformation.profPicURL = document.get("Profile Pic") as! String
+                    self.currentUserInformation.userEvents = (document.get("Events") as! [String])
                     
                 }
                 
