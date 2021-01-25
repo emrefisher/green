@@ -26,6 +26,10 @@
 		A722BCEF25047B94007C70F1 /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A722BCEE25047B94007C70F1 /* EventManager.swift */; };
 		A722BCF125049228007C70F1 /* SearchDirectoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A722BCF025049228007C70F1 /* SearchDirectoryView.swift */; };
 		A722BCF325049466007C70F1 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A722BCF225049466007C70F1 /* MapView.swift */; };
+		A72DF10A25BE89E500D460A9 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72DF10925BE89E500D460A9 /* ImagePicker.swift */; };
+		A72DF11225BE8D5500D460A9 /* OrganizerSignUpPageThree.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72DF11125BE8D5500D460A9 /* OrganizerSignUpPageThree.swift */; };
+		A72DF11725BE918C00D460A9 /* OrganizerSignUpPageFour.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72DF11625BE918C00D460A9 /* OrganizerSignUpPageFour.swift */; };
+		A72DF11D25BE920200D460A9 /* OrganizerSignUpPageFive.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72DF11C25BE920200D460A9 /* OrganizerSignUpPageFive.swift */; };
 		A75BCF6125A2D1E600FFD350 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75BCF6025A2D1E600FFD350 /* SearchBar.swift */; };
 		A75BCF6925A2D39100FFD350 /* EventPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75BCF6825A2D39100FFD350 /* EventPage.swift */; };
 		A75BCF6E25A2D3FA00FFD350 /* SearchDirectoryTopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75BCF6D25A2D3FA00FFD350 /* SearchDirectoryTopBar.swift */; };
@@ -96,6 +100,10 @@
 		A722BCEE25047B94007C70F1 /* EventManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventManager.swift; sourceTree = "<group>"; };
 		A722BCF025049228007C70F1 /* SearchDirectoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDirectoryView.swift; sourceTree = "<group>"; };
 		A722BCF225049466007C70F1 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		A72DF10925BE89E500D460A9 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		A72DF11125BE8D5500D460A9 /* OrganizerSignUpPageThree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizerSignUpPageThree.swift; sourceTree = "<group>"; };
+		A72DF11625BE918C00D460A9 /* OrganizerSignUpPageFour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizerSignUpPageFour.swift; sourceTree = "<group>"; };
+		A72DF11C25BE920200D460A9 /* OrganizerSignUpPageFive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizerSignUpPageFive.swift; sourceTree = "<group>"; };
 		A75BCF6025A2D1E600FFD350 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		A75BCF6825A2D39100FFD350 /* EventPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventPage.swift; sourceTree = "<group>"; };
 		A75BCF6D25A2D3FA00FFD350 /* SearchDirectoryTopBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDirectoryTopBar.swift; sourceTree = "<group>"; };
@@ -198,6 +206,7 @@
 				A722BCE225008AE9007C70F1 /* User Management */,
 				A76FE39825210FE40061EF34 /* Settings */,
 				A795A3E2259C0EA000327F2D /* Onboarding */,
+				A72DF10825BE89C900D460A9 /* Utilities */,
 				A722BCB725008462007C70F1 /* Assets.xcassets */,
 				A722BCBC25008462007C70F1 /* Info.plist */,
 				A722BCDE250084DB007C70F1 /* GoogleService-Info.plist */,
@@ -257,6 +266,27 @@
 			path = "Event Management";
 			sourceTree = "<group>";
 		};
+		A72DF10825BE89C900D460A9 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				A72DF10925BE89E500D460A9 /* ImagePicker.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		A72DF11B25BE91CB00D460A9 /* OrganizerSignUp */ = {
+			isa = PBXGroup;
+			children = (
+				A7FA07DA25B3C85100A2BA10 /* OrganizerSignUpView.swift */,
+				A7FA07E225B3C87C00A2BA10 /* OrganizerSignUpPageOne.swift */,
+				A7FA07E725B3C8AD00A2BA10 /* OrganizerSignUpPageTwo.swift */,
+				A72DF11125BE8D5500D460A9 /* OrganizerSignUpPageThree.swift */,
+				A72DF11625BE918C00D460A9 /* OrganizerSignUpPageFour.swift */,
+				A72DF11C25BE920200D460A9 /* OrganizerSignUpPageFive.swift */,
+			);
+			path = OrganizerSignUp;
+			sourceTree = "<group>";
+		};
 		A75BCF5F25A2D1A600FFD350 /* SearchDirectoryView */ = {
 			isa = PBXGroup;
 			children = (
@@ -307,9 +337,7 @@
 			isa = PBXGroup;
 			children = (
 				A722BCE525017A2E007C70F1 /* SignUp.swift */,
-				A7FA07DA25B3C85100A2BA10 /* OrganizerSignUpView.swift */,
-				A7FA07E225B3C87C00A2BA10 /* OrganizerSignUpPageOne.swift */,
-				A7FA07E725B3C8AD00A2BA10 /* OrganizerSignUpPageTwo.swift */,
+				A72DF11B25BE91CB00D460A9 /* OrganizerSignUp */,
 			);
 			path = SignUp;
 			sourceTree = "<group>";
@@ -567,6 +595,7 @@
 				A75BCF6E25A2D3FA00FFD350 /* SearchDirectoryTopBar.swift in Sources */,
 				A76FE3C12521182B0061EF34 /* PrivacyPolicy.swift in Sources */,
 				A722BCEC2501AC78007C70F1 /* SessionView.swift in Sources */,
+				A72DF10A25BE89E500D460A9 /* ImagePicker.swift in Sources */,
 				A76FE3BC252118140061EF34 /* Notifications.swift in Sources */,
 				A722BCB625008460007C70F1 /* ContentView.swift in Sources */,
 				A795A3ED259C0F1500327F2D /* OnboardingPageOne.swift in Sources */,
@@ -592,8 +621,11 @@
 				A795A3F5259C0F2000327F2D /* OnboardingPageTwo.swift in Sources */,
 				A75EEA502538F1D10068EF2E /* CurrentUser.swift in Sources */,
 				A76FE3A2252117890061EF34 /* MyAccount.swift in Sources */,
+				A72DF11D25BE920200D460A9 /* OrganizerSignUpPageFive.swift in Sources */,
+				A72DF11225BE8D5500D460A9 /* OrganizerSignUpPageThree.swift in Sources */,
 				A75BCF6925A2D39100FFD350 /* EventPage.swift in Sources */,
 				A795A3E4259C0ED100327F2D /* OnboardingView.swift in Sources */,
+				A72DF11725BE918C00D460A9 /* OrganizerSignUpPageFour.swift in Sources */,
 				A7FA07E325B3C87C00A2BA10 /* OrganizerSignUpPageOne.swift in Sources */,
 				A75BCF7425A2D46000FFD350 /* OrgProfile.swift in Sources */,
 				A795A3FF259C0F5D00327F2D /* OnboardingPageFour.swift in Sources */,

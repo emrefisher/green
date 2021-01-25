@@ -19,6 +19,12 @@ struct OrganizerSignUpView: View {
             OrganizerSignUpPageOne(organizerSignUpManager: self.organizerSignUpManager, accountType: self.$accountType)
         case 2:
             OrganizerSignUpPageTwo(organizerSignUpManager: self.organizerSignUpManager)
+        case 3:
+            OrganizerSignUpPageThree(organizerSignUpManager: self.organizerSignUpManager)
+        case 4:
+            OrganizerSignUpPageFour(organizerSignUpManager: self.organizerSignUpManager)
+        case 5:
+            OrganizerSignUpPageFive(organizerSignUpManager: self.organizerSignUpManager)
         default:
             Text("")
         }
@@ -40,5 +46,8 @@ class OrganizerSignUpManager: ObservableObject {
     @Published var orgDescription = ""
     @Published var orgLocation = ""
     @Published var pageNumber = 1
+    @Published var profilePic: Image?
+    @Published var pickedImage: Image?
+    @Published var imageData: Data = Data()
     
 }

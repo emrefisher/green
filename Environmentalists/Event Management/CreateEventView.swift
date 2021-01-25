@@ -21,9 +21,11 @@ struct CreateEventView: View {
     @EnvironmentObject var currentUser: CurrentUser
     @State var eventDate = Date()
     @State private var alertState: AlertState = .confirmation
-    @State private var eventPicker = false
+    @State private var showEventPicker = false
+    @State private var showActionSheet = false
     @State private var createEventClicked = false
     @State private var completionAlert = false
+    @State private var sourceType: UIImagePickerController.SourceType = .photoLibrary
     
     
     var body: some View {
@@ -32,7 +34,7 @@ struct CreateEventView: View {
                 
                 Button(action: {
                     
-                    self.eventPicker.toggle()
+                    self.showActionSheet.toggle()
                     
                 }) {
                     
@@ -55,11 +57,24 @@ struct CreateEventView: View {
                             .clipped()
                     }
                     
-                }.sheet(isPresented: self.$eventPicker, content: {
+                }.sheet(isPresented: self.$showEventPicker, content: {
                     
-                    ImagePicker(picker: self.$eventPicker, imagedata: self.$eventCreationManager.eventimagedata)
+                    ImagePicker(pickedImage: self.$eventCreationManager.pickedImage, showImagePicker: self.$showEventPicker, imageData: self.$eventCreationManager.eventimagedata, sourceType: self.$sourceType)
                     
                 })
+                .actionSheet(isPresented: self.$showActionSheet) {
+                    ActionSheet(title: Text(""), buttons: [
+                                    .default(Text("Choose a Photo")) {
+                                        self.sourceType = .photoLibrary
+                                        self.showEventPicker = true
+                                    },
+                                    .default(Text("Take a Photo")) {
+                                        self.sourceType = .camera
+                                        self.showEventPicker = true
+                                    },
+                        .cancel()
+                    ])
+                }
                 
                 Form {
                     
@@ -127,6 +142,12 @@ struct CreateEventView: View {
         }
         
     }
+    
+    func loadImage() {
+        guard let inputImage = self.eventCreationManager.pickedImage else {return}
+        self.eventCreationManager.eventPic = inputImage
+    }
+    
 }
 
 //struct CreateEventView: View {

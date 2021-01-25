@@ -17,7 +17,9 @@ class EventCreationManager: ObservableObject {
     @Published var organizer = ""
     @Published var organizerID = ""
     @Published var location = ""
-    @Published var eventimagedata: Data = .init(count: 0)
+    @Published var pickedImage: Image?
+    @Published var eventPic: Image?
+    @Published var eventimagedata: Data = Data()
     @Published var errorMessage = ""
     @Published var alert = false
     @Published var numAttending = 0
@@ -92,9 +94,6 @@ class EventCreationManager: ObservableObject {
         formatter1.dateFormat = "h:mm a"
         let formattedDate = formatter.string(from: date)
         let formattedTime = formatter1.string(from: date)
-        print(title)
-        print(formattedDate)
-        print(formattedTime)
         storage.child("EventPhotos").child(eventID).putData(eventimagedata, metadata: nil) { (_, err) in
             
             if err != nil {
