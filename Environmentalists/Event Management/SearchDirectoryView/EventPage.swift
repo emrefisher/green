@@ -49,12 +49,14 @@ struct EventPage: View {
                             }
                             Spacer()
                                 
+                                if self.currentActivist.currentActivistInformation.accountType == "Activist" {
                                 //Open to RSVP State
                                 if (rsvpEventClicked == false) {
                                     Button("RSVP", action: {rsvpToggle(event: event, currentUser: self.currentActivist, rsvpEventClicked: &rsvpEventClicked)}).buttonStyle(openRSVP())
                                     
                                 }
-                                else {//Going State
+                                else {
+                                    //Going State
                                     Button(action: {
                                         rsvpToggle(event: event, currentUser: self.currentActivist, rsvpEventClicked: &rsvpEventClicked)
                                     }) {
@@ -65,6 +67,7 @@ struct EventPage: View {
                                         }
                                     }.buttonStyle(closedRSVP())
                                 }
+                            }
                             }
                             
                             Link(destination: URL(string: "https://maps.apple.com/?address=\(self.event.location.replacingOccurrences(of: " ", with: "%20"))")!) {
