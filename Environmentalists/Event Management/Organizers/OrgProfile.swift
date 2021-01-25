@@ -74,9 +74,17 @@ struct OrgProfile: View {
                         }
                         else  {
                             Link(destination: url!) {
-                                Image(systemName: "dollarsign.circle").resizable().frame(width: 35, height: 35).foregroundColor(.black)
-                                    .background(LinearGradient(gradient: .init(colors: [Color(#colorLiteral(red: 0, green: 0.9791811109, blue: 0.6578459144, alpha: 1)), Color(#colorLiteral(red: 0, green: 0.6921610236, blue: 0, alpha: 1))]), startPoint: .leading, endPoint: .trailing))
-                                    .cornerRadius(200)
+                                Button(action: {
+                                    print("Button action")
+                                }) {
+                                    Text("Button label")
+                                        .padding(10.0)
+                                        .overlay(
+                                            RoundedRectangle(cornerRadius: 10.0)
+                                                .stroke(lineWidth: 2.0)
+                                                .shadow(color: .blue, radius: 10.0)
+                                        )
+                                }
                             }
                         }
                      
