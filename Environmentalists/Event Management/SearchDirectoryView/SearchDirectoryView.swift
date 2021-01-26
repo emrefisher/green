@@ -23,8 +23,6 @@ struct SearchDirectoryView: View {
             SearchDirectoryViewPage(filteredItems: self.$filteredItems, eventManager: self.eventManager)
 
         }.onAppear {
-            eventManager.clearEvents()
-            eventManager.getEventInformation()
             self.filteredItems = eventManager.eventInformation
         }
 
