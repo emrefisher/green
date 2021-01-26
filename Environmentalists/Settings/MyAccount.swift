@@ -310,10 +310,26 @@ struct MyAccountActivistView: View {
                     }
                 }*/
             
+            
+            NavigationView {
             VStack(spacing: 0){
+               // VStack {
+                   // Spacer()
+                
+                HStack{
+                    Spacer()
                 NavigationLink(destination: Settings()) {
-                    Image(systemName: "gear")
+                    Image(systemName: "gear").font(.largeTitle).foregroundColor(.black)
+                        
+                        //
                 }
+                }
+                   // Spacer()
+                    //.frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height/10)
+                                   // .offset
+                //.frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height/5)
+               // .offset(x: UIScreen.main.bounds.width/2.5)
+                   
                 
                 RandomCoverPhoto()
                 
@@ -385,6 +401,7 @@ struct MyAccountActivistView: View {
             }
 
         }
+            }
         }
         else {
             
