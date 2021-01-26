@@ -51,7 +51,7 @@ struct EventPage: View {
                                 
                                 if self.currentUser.currentUserInformation.accountType == "Activist" {
                                 //Open to RSVP State
-                                if (rsvpEventClicked == false) {
+                                    if !self.currentUser.currentUserInformation.userEventIDs.contains(self.event.id) {
                                     Button("RSVP", action: {rsvpToggle()}).buttonStyle(openRSVP())
                                     
                                 }
@@ -109,7 +109,7 @@ struct EventPage: View {
                     
                 }.navigationBarTitle("", displayMode: .inline)
                 Spacer()
-            }.onAppear(perform: {isEventRSVP(event: event, currentUser: self.currentUser, rsvpEventClicked: &rsvpEventClicked)})
+            }
         }.edgesIgnoringSafeArea(.all)
         
     }
@@ -132,7 +132,7 @@ struct EventPage: View {
             //let num = event.numAttending - 1
             userRefA.document(activist).updateData(["Events": FieldValue.arrayRemove([event.id])])
             if let index = currentUser.currentUserInformation.userEventIDs.firstIndex(of: event.id) {
-                currentUser.currentUserInformation.userEvents.remove(at: index)
+                currentUser.currentUserInformation.userEventIDs.remove(at: index)
             }
             //eventRef.document(eventId).updateData(["Number Attending": num])
         }
@@ -142,14 +142,14 @@ struct EventPage: View {
 /*class monitorAttendees: ObservableObject {
     @Published var numAttending = 0
 }*/
-func isEventRSVP(event: Event, currentUser: CurrentUser, rsvpEventClicked: inout Bool) {
-    currentUser.getUserInformation()
-    for actEvent in currentUser.currentUserInformation.userEventIDs {
-        if actEvent == event.id {
-            rsvpEventClicked = true
-        }
-    }
-}
+//func isEventRSVP(event: Event, currentUser: CurrentUser, rsvpEventClicked: inout Bool) {
+//    currentUser.getUserInformation()
+//    for actEvent in currentUser.currentUserInformation.userEventIDs {
+//        if actEvent == event.id {
+//            rsvpEventClicked = true
+//        }
+//    }
+//}
 
 struct openRSVP: ButtonStyle {
     func makeBody(configuration: Self.Configuration) -> some View {
