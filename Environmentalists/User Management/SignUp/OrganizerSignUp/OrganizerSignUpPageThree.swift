@@ -15,14 +15,16 @@ struct OrganizerSignUpPageThree: View {
     var body: some View {
         
         VStack {
-            ProgressView(value: CGFloat(self.organizerSignUpManager.pageNumber), total: 5) {
+            ProgressView(value: CGFloat(self.organizerSignUpManager.pageNumber), total: 6) {
                 HStack(alignment: .center) {
-                    Text("Progress: (\(self.organizerSignUpManager.pageNumber)/5)")
+                    Text("Progress: (\(self.organizerSignUpManager.pageNumber)/6)")
                 }
             }
             Spacer()
             Text("Enter Organization Name")
             TextField("Organization Name", text: self.$organizerSignUpManager.orgName).textFieldStyle(RoundedBorderTextFieldStyle())
+            Text("Enter Organization Website")
+            TextField("Organization Website", text: self.$organizerSignUpManager.orgWebsite).textFieldStyle(RoundedBorderTextFieldStyle())
             Button(action: {
                 self.organizerSignUpManager.pageNumber -= 1
             }) {

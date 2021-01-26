@@ -13,6 +13,7 @@ import SDWebImageSwiftUI
 struct SearchDirectoryView: View {
 
     @ObservedObject var eventManager = EventManager()
+    @EnvironmentObject var currentUser: CurrentUser
     @State var filteredItems = [Event]()
     @State var hasSetFilteredItems = true
 
@@ -23,6 +24,7 @@ struct SearchDirectoryView: View {
             SearchDirectoryViewPage(filteredItems: self.$filteredItems, eventManager: self.eventManager)
 
         }.onAppear {
+            currentUser.getUserInformation()
             self.filteredItems = eventManager.eventInformation
         }
 

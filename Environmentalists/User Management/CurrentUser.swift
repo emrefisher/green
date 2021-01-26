@@ -88,35 +88,35 @@ class CurrentUser: ObservableObject {
     }
     
     func getUserEvents() {
-        
-        let database = Firestore.firestore()
-        let eventRef = database.collection("Events")
-        for eventID in self.currentUserInformation.userEventIDs {
-            for event in self.currentUserInformation.userEvents {
-                if event.id == eventID {
-                    break
+            
+            let database = Firestore.firestore()
+            let eventRef = database.collection("Events")
+            for eventID in self.currentUserInformation.userEventIDs {
+                for event in self.currentUserInformation.userEvents {
+                    if event.id == eventID {
+                        break
+                    }
                 }
+                eventRef.document(eventID).getDocument() { (document, error) in
+                    if let document = document {
+                        let id = document.documentID
+                        let eventTitle = document.get("Name") as! String
+                        let organizer = document.get("Organizer") as! String
+                        let organizerID = document.get("Organizer ID") as! String
+                        let eventDescription = document.get("Description") as! String
+                        let date = document.get("Date") as! String
+                        let time = document.get("Time") as! String
+                        let location = document.get("Location") as! String
+                        let numAttending = document.get("Number Attending") as! Int
+                        let eventPhotoURL = document.get("Event Photo URL") as! String
+                        self.currentUserInformation.userEvents.append(Event(id: id, eventTitle: eventTitle, eventOrganizer: organizer, eventOrganizerID: organizerID, eventDescription: eventDescription, date: date, time: time, location: location, numAttending: numAttending, eventPhotoURL: eventPhotoURL))
+                    } else {
+                      print("Document does not exist")
+                    }
+                  }
             }
-            eventRef.document(eventID).getDocument() { (document, error) in
-                if let document = document {
-                    let id = document.documentID
-                    let eventTitle = document.get("Name") as! String
-                    let organizer = document.get("Organizer") as! String
-                    let organizerID = document.get("Organizer ID") as! String
-                    let eventDescription = document.get("Description") as! String
-                    let date = document.get("Date") as! String
-                    let time = document.get("Time") as! String
-                    let location = document.get("Location") as! String
-                    let numAttending = document.get("Number Attending") as! Int
-                    let eventPhotoURL = document.get("Event Photo URL") as! String
-                    self.currentUserInformation.userEvents.append(Event(id: id, eventTitle: eventTitle, eventOrganizer: organizer, eventOrganizerID: organizerID, eventDescription: eventDescription, date: date, time: time, location: location, numAttending: numAttending, eventPhotoURL: eventPhotoURL))
-                } else {
-                  print("Document does not exist")
-                }
-              }
+            
         }
-        
-    }
     
 }
 

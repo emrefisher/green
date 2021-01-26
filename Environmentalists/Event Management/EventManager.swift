@@ -38,29 +38,25 @@ class EventManager: ObservableObject {
     
     func getEventInformation() {
         let database = Firestore.firestore()
-        database.collection("Events").addSnapshotListener { (snap, err) in
+        database.collection("Events").getDocuments() { (snap, err) in
             if err != nil {
                 print("Error getting documents: \(err!)")
             }
             
-            guard let docs = snap else {return}
-            docs.documentChanges.forEach { (doc) in
-                if doc.type == .added {
-                    let id = doc.document.documentID
-                    let eventTitle = doc.document.data()["Name"] as! String
-                    let organizer = doc.document.data()["Organizer"] as! String
-                    let organizerID = doc.document.data()["Organizer ID"] as! String
-                    let eventDescription = doc.document.data()["Description"] as! String
-                    let date = doc.document.data()["Date"] as! String
-                    let time = doc.document.data()["Time"] as! String
-                    let location = doc.document.data()["Location"] as! String
-                    let numAttending = doc.document.data()["Number Attending"] as! Int
-                    let eventPhotoURL = doc.document.data()["Event Photo URL"] as! String
-                    self.eventInformation.append(Event(id: id, eventTitle: eventTitle, eventOrganizer: organizer, eventOrganizerID: organizerID, eventDescription: eventDescription, date: date, time: time, location: location, numAttending: numAttending, eventPhotoURL: eventPhotoURL))
-                }
+            for document in snap!.documents {
+                let id = document.documentID
+                let eventTitle = document.get("Name") as! String
+                let organizer = document.get("Organizer") as! String
+                let organizerID = document.get("Organizer ID") as! String
+                let eventDescription = document.get("Description") as! String
+                let date = document.get("Date") as! String
+                let time = document.get("Time") as! String
+                let location = document.get("Location") as! String
+                let numAttending = document.get("Number Attending") as! Int
+                let eventPhotoURL = document.get("Event Photo URL") as! String
+                self.eventInformation.append(Event(id: id, eventTitle: eventTitle, eventOrganizer: organizer, eventOrganizerID: organizerID, eventDescription: eventDescription, date: date, time: time, location: location, numAttending: numAttending, eventPhotoURL: eventPhotoURL))
             }
-
-
+            
         }
     }
 }

@@ -15,16 +15,20 @@ struct OrganizerSignUpView: View {
     
     var body: some View {
         switch self.organizerSignUpManager.pageNumber {
-        case 1:
+        case 0:
             OrganizerSignUpPageOne(organizerSignUpManager: self.organizerSignUpManager, accountType: self.$accountType)
-        case 2:
+        case 1:
             OrganizerSignUpPageTwo(organizerSignUpManager: self.organizerSignUpManager)
-        case 3:
+        case 2:
             OrganizerSignUpPageThree(organizerSignUpManager: self.organizerSignUpManager)
-        case 4:
+        case 3:
             OrganizerSignUpPageFour(organizerSignUpManager: self.organizerSignUpManager)
-        case 5:
+        case 4:
             OrganizerSignUpPageFive(organizerSignUpManager: self.organizerSignUpManager)
+        case 5:
+            OrganizerSignUpPageSix(organizerSignUpManager: self.organizerSignUpManager)
+        case 6:
+            OrganizerSignUpReviewSubmission(organizerSignUpManager: self.organizerSignUpManager).environmentObject(sessionManager)
         default:
             Text("")
         }
@@ -45,9 +49,13 @@ class OrganizerSignUpManager: ObservableObject {
     @Published var orgName = ""
     @Published var orgDescription = ""
     @Published var orgLocation = ""
-    @Published var pageNumber = 1
+    @Published var orgWebsite = ""
+    @Published var pageNumber = 0
     @Published var profilePic: Image?
-    @Published var pickedImage: Image?
-    @Published var imageData: Data = Data()
+    @Published var pickedProfileImage: Image?
+    @Published var profilePicData: Data = Data()
+    @Published var coverPhoto: Image?
+    @Published var pickedCoverPhoto: Image?
+    @Published var coverPhotoData: Data = Data()
     
 }

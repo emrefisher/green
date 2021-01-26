@@ -35,6 +35,8 @@
 		A75BCF6E25A2D3FA00FFD350 /* SearchDirectoryTopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75BCF6D25A2D3FA00FFD350 /* SearchDirectoryTopBar.swift */; };
 		A75BCF7425A2D46000FFD350 /* OrgProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75BCF7325A2D46000FFD350 /* OrgProfile.swift */; };
 		A75EEA502538F1D10068EF2E /* CurrentUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75EEA4F2538F1D10068EF2E /* CurrentUser.swift */; };
+		A762945F25BFF840001A0927 /* OrganizerSignUpPageSix.swift in Sources */ = {isa = PBXBuildFile; fileRef = A762945E25BFF840001A0927 /* OrganizerSignUpPageSix.swift */; };
+		A762946425BFF9D8001A0927 /* OrganizerSignUpReviewSubmission.swift in Sources */ = {isa = PBXBuildFile; fileRef = A762946325BFF9D8001A0927 /* OrganizerSignUpReviewSubmission.swift */; };
 		A763DD4A250C4B0C0001FA21 /* CreateEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A763DD49250C4B0C0001FA21 /* CreateEventView.swift */; };
 		A763DD4C250C4BCC0001FA21 /* OrganizerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A763DD4B250C4BCC0001FA21 /* OrganizerManager.swift */; };
 		A763DD4E250C4BFE0001FA21 /* EventCreationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A763DD4D250C4BFE0001FA21 /* EventCreationManager.swift */; };
@@ -110,6 +112,8 @@
 		A75BCF6D25A2D3FA00FFD350 /* SearchDirectoryTopBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDirectoryTopBar.swift; sourceTree = "<group>"; };
 		A75BCF7325A2D46000FFD350 /* OrgProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrgProfile.swift; sourceTree = "<group>"; };
 		A75EEA4F2538F1D10068EF2E /* CurrentUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUser.swift; sourceTree = "<group>"; };
+		A762945E25BFF840001A0927 /* OrganizerSignUpPageSix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizerSignUpPageSix.swift; sourceTree = "<group>"; };
+		A762946325BFF9D8001A0927 /* OrganizerSignUpReviewSubmission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizerSignUpReviewSubmission.swift; sourceTree = "<group>"; };
 		A763DD49250C4B0C0001FA21 /* CreateEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEventView.swift; sourceTree = "<group>"; };
 		A763DD4B250C4BCC0001FA21 /* OrganizerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizerManager.swift; sourceTree = "<group>"; };
 		A763DD4D250C4BFE0001FA21 /* EventCreationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCreationManager.swift; sourceTree = "<group>"; };
@@ -286,6 +290,8 @@
 				A72DF11125BE8D5500D460A9 /* OrganizerSignUpPageThree.swift */,
 				A72DF11625BE918C00D460A9 /* OrganizerSignUpPageFour.swift */,
 				A72DF11C25BE920200D460A9 /* OrganizerSignUpPageFive.swift */,
+				A762945E25BFF840001A0927 /* OrganizerSignUpPageSix.swift */,
+				A762946325BFF9D8001A0927 /* OrganizerSignUpReviewSubmission.swift */,
 			);
 			path = OrganizerSignUp;
 			sourceTree = "<group>";
@@ -607,6 +613,7 @@
 				A795A3FA259C0F5100327F2D /* OnboardingPageThree.swift in Sources */,
 				A76FE3B1252117E20061EF34 /* AboutUs.swift in Sources */,
 				A763DD4A250C4B0C0001FA21 /* CreateEventView.swift in Sources */,
+				A762945F25BFF840001A0927 /* OrganizerSignUpPageSix.swift in Sources */,
 				A7FA07DB25B3C85100A2BA10 /* OrganizerSignUpView.swift in Sources */,
 				A76FE39A252111330061EF34 /* Settings.swift in Sources */,
 				A763DD4E250C4BFE0001FA21 /* EventCreationManager.swift in Sources */,
@@ -619,6 +626,7 @@
 				A722BCE625017A2E007C70F1 /* SignUp.swift in Sources */,
 				A722BCF325049466007C70F1 /* MapView.swift in Sources */,
 				A722BCE425008B36007C70F1 /* UserSessionManager.swift in Sources */,
+				A762946425BFF9D8001A0927 /* OrganizerSignUpReviewSubmission.swift in Sources */,
 				A76FE3AC252117CD0061EF34 /* RateThisApp.swift in Sources */,
 				A76FE3A7252117A00061EF34 /* TermsAndConditions.swift in Sources */,
 				A722BCB425008460007C70F1 /* EnvironmentalistsApp.swift in Sources */,

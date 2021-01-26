@@ -1,13 +1,13 @@
 //
-//  OrganizerSignUpPageFive.swift
+//  OrganizerSignUpPageSix.swift
 //  Environmentalists
 //
-//  Created by Ian Campbell on 1/25/21.
+//  Created by Ian Campbell on 1/26/21.
 //
 
 import SwiftUI
 
-struct OrganizerSignUpPageFive: View {
+struct OrganizerSignUpPageSix: View {
     @ObservedObject var organizerSignUpManager: OrganizerSignUpManager
     @State private var showImagePicker = false
     @State private var showActionSheet = false
@@ -22,21 +22,21 @@ struct OrganizerSignUpPageFive: View {
                 }
             }
             Spacer()
-            Text("Choose Profile Pic").font(.largeTitle)
-            if self.organizerSignUpManager.profilePic != nil {
-                self.organizerSignUpManager.profilePic!
+            Text("Choose Cover Photo").font(.largeTitle)
+            if self.organizerSignUpManager.coverPhoto != nil {
+                self.organizerSignUpManager.coverPhoto!
                     .resizable()
-                    .clipShape(Circle())
-                    .frame(width: 200, height: 200, alignment: .center)
+                    .clipShape(Rectangle())
+                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height/5, alignment: .center)
                     .onTapGesture {
                         self.showActionSheet.toggle()
                     }
             }
             else {
-                Image(systemName: "person.fill")
+                Image(systemName: "camera.on.rectangle")
                     .resizable()
-                    .clipShape(Circle())
-                    .frame(width: 200, height: 200, alignment: .center)
+                    .clipShape(Rectangle())
+                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height/5, alignment: .center)
                     .onTapGesture {
                         self.showActionSheet.toggle()
                     }
@@ -45,13 +45,13 @@ struct OrganizerSignUpPageFive: View {
                 Button("Back", action: {
                     self.organizerSignUpManager.pageNumber -= 1
                 })
-                Button("Next", action: {
+                Button("Prepare to Submit", action: {
                     self.organizerSignUpManager.pageNumber += 1
                 })
             }
             Spacer()
         }.sheet(isPresented: $showImagePicker, onDismiss: loadImage) {
-            ImagePicker(pickedImage: self.$organizerSignUpManager.pickedProfileImage, showImagePicker: self.$showImagePicker, imageData: self.$organizerSignUpManager.profilePicData, sourceType: self.$sourceType)
+            ImagePicker(pickedImage: self.$organizerSignUpManager.pickedCoverPhoto, showImagePicker: self.$showImagePicker, imageData: self.$organizerSignUpManager.coverPhotoData, sourceType: self.$sourceType)
         }.actionSheet(isPresented: self.$showActionSheet) {
             ActionSheet(title: Text(""), buttons: [
                             .default(Text("Choose a Photo")) {
@@ -70,9 +70,8 @@ struct OrganizerSignUpPageFive: View {
     }
     
     private func loadImage() {
-        guard let inputImage = self.organizerSignUpManager.pickedProfileImage else {return}
-        self.organizerSignUpManager.profilePic = inputImage
+        guard let inputImage = self.organizerSignUpManager.pickedCoverPhoto else {return}
+        self.organizerSignUpManager.coverPhoto = inputImage
     }
 }
-
 

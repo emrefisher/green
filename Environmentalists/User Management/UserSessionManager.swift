@@ -143,7 +143,7 @@ final class UserSessionManager: ObservableObject {
             orgName.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
             profilePic.count == 0 ||
             coverPic.count == 0  ||
-            verifyUrl(urlString: orgLink) {
+            !verifyUrl(urlString: orgLink) {
             
             self.errorMessage = "Please fill in all fields, confirm your website is a valid link, and you have selected profile / cover photos."
             self.alert.toggle()
@@ -171,7 +171,7 @@ final class UserSessionManager: ObservableObject {
     
     
     func signUpAsOrganizer(email: String, password: String, confimedPassword: String, orgName: String, orgDescription: String, orgLink: String, profilePic: Data, coverPic: Data) {
-        
+
         let error = validateFieldsForOrganizer(email: email, password: password, confirmedPassword: confimedPassword, orgName: orgName, profilePic: profilePic, coverPic: coverPic, orgLink: orgLink)
         
         if error != nil {
@@ -182,7 +182,6 @@ final class UserSessionManager: ObservableObject {
             
             let cleanedEmail = email.trimmingCharacters(in: .whitespacesAndNewlines)
             let cleanedPassword = password.trimmingCharacters(in: .whitespacesAndNewlines)
-            var coverPicURL = ""
             
             Auth.auth().createUser(withEmail: cleanedEmail, password: cleanedPassword){ (res, err) in
                 if err != nil {
@@ -194,6 +193,7 @@ final class UserSessionManager: ObservableObject {
                 
                 let storage = Storage.storage().reference()
                 let userRef = database.collection("Organizers")
+                var coverPicURL = ""
                 
                 storage.child("coverpics").child(res!.user.uid).putData(coverPic, metadata: nil) { (_, err) in
                     
@@ -210,30 +210,31 @@ final class UserSessionManager: ObservableObject {
                             self.alert.toggle()
                             return
                         }
+                        DispatchQueue.main.async {
+                            coverPicURL = "\(coverpicURL!)"
+                        }
                         
-                        coverPicURL = "\(coverpicURL!)"
-
-                    }
-                }
-                
-                storage.child("profilepics").child(res!.user.uid).putData(profilePic, metadata: nil) { (_, err) in
-                    
-                    if err != nil {
-                        self.errorMessage = err!.localizedDescription
-                        self.alert.toggle()
-                        return
                     }
                     
-                    storage.child("profilepics").child(res!.user.uid).downloadURL { (url, err) in
+                    storage.child("profilepics").child(res!.user.uid).putData(profilePic, metadata: nil) { (_, err) in
                         
-                        if err != nil{
+                        if err != nil {
                             self.errorMessage = err!.localizedDescription
                             self.alert.toggle()
                             return
                         }
-                       
-                        userRef.document("\(orgName)").setData(["Account Type": "Organizer", "Organization Name": orgName, "Organization Description": orgDescription, "Organization Website Link": orgLink, "Email": email, "Organizer ID": res!.user.uid, "Profile Pic URL": "\(url!)", "Organization Location": "Langhorne, PA", "Number of Followers": 0, "Cover Pic URL": coverPicURL, "Events": [String]()])
-                        self.signInWithFirebase(email: cleanedEmail, password: cleanedPassword)
+                        
+                        storage.child("profilepics").child(res!.user.uid).downloadURL { (url, err) in
+                            
+                            if err != nil{
+                                self.errorMessage = err!.localizedDescription
+                                self.alert.toggle()
+                                return
+                            }
+                            
+                            userRef.document("\(orgName)").setData(["Account Type": "Organizer", "Organization Name": orgName, "Organization Description": orgDescription, "Organization Website Link": orgLink, "Email": email, "Organizer ID": res!.user.uid, "Profile Pic URL": "\(url!)", "Organization Location": "Langhorne, PA", "Number of Followers": 0, "Cover Pic URL": coverPicURL, "Events": [String]()])
+                            self.signInWithFirebase(email: cleanedEmail, password: cleanedPassword)
+                        }
                     }
                 }
             }
