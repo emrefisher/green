@@ -29,7 +29,7 @@ struct User: Identifiable {
 class CurrentUser: ObservableObject {
     
     let user = Auth.auth().currentUser
-    var currentUserInformation = User(id: "", name: "", email: "'", accountType: "", profPicURL: "", coverPhotoURL: "", numberFollowers: nil, description: nil, location: nil, websiteLink: nil, orgID: nil, userEvents: [String]())
+    @Published var currentUserInformation = User(id: "", name: "", email: "'", accountType: "", profPicURL: "", coverPhotoURL: "", numberFollowers: nil, description: nil, location: nil, websiteLink: nil, orgID: nil, userEvents: [String]())
     
     func getUserInformation() {
         
