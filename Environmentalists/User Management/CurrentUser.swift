@@ -32,6 +32,10 @@ class CurrentUser: ObservableObject {
     let user = Auth.auth().currentUser
     @Published var currentUserInformation = User(id: "", name: "", email: "'", accountType: "", profPicURL: "", coverPhotoURL: "", numberFollowers: nil, description: nil, location: nil, websiteLink: nil, orgID: nil, userEventIDs: [String](), userEvents: [Event]())
     
+    init() {
+        getUserInformation()
+    }
+    
     func getUserInformation() {
         
         let UID = user!.uid
