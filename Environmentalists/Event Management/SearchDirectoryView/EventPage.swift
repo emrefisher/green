@@ -125,13 +125,13 @@ struct EventPage: View {
         if (rsvpEventClicked == true) {
             //let num = event.numAttending + 1
             userRefA.document(activist).updateData(["Events": FieldValue.arrayUnion([event.id])])
-            self.currentUser.currentUserInformation.userEvents.append(event.id)
+            self.currentUser.currentUserInformation.userEventIDs.append(event.id)
            // eventRef.document(eventId).updateData(["Number Attending": num])
         }
         else {
             //let num = event.numAttending - 1
             userRefA.document(activist).updateData(["Events": FieldValue.arrayRemove([event.id])])
-            if let index = currentUser.currentUserInformation.userEvents.firstIndex(of: event.id) {
+            if let index = currentUser.currentUserInformation.userEventIDs.firstIndex(of: event.id) {
                 currentUser.currentUserInformation.userEvents.remove(at: index)
             }
             //eventRef.document(eventId).updateData(["Number Attending": num])
@@ -144,7 +144,7 @@ struct EventPage: View {
 }*/
 func isEventRSVP(event: Event, currentUser: CurrentUser, rsvpEventClicked: inout Bool) {
     currentUser.getUserInformation()
-    for actEvent in currentUser.currentUserInformation.userEvents {
+    for actEvent in currentUser.currentUserInformation.userEventIDs {
         if actEvent == event.id {
             rsvpEventClicked = true
         }

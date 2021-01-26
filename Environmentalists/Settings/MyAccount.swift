@@ -168,8 +168,8 @@ struct MyAccountOrganizerView: View {
                 
             }.navigationBarTitle("", displayMode: .inline)
             .onAppear() {
-                if orgEvents.count == 0 {
-                    getOrganizerEvents()
+                if currentOrganizer.currentUserInformation.userEvents.count != currentOrganizer.currentUserInformation.userEventIDs.count {
+                    currentOrganizer.getUserEvents()
                 }
             }
 
@@ -241,8 +241,8 @@ struct MyAccountOrganizerView: View {
         let userInfo = currentOrganizer.currentUserInformation
         let eventRef = database.collection("Events")
         let userRef = database.collection("Organizers").document(userInfo.id)
-        if self.editedFields.contains("Organization Name") && ((self.currentOrganizer.currentUserInformation.userEvents.count) != 0) {
-            for event in currentOrganizer.currentUserInformation.userEvents {
+        if self.editedFields.contains("Organization Name") && ((self.currentOrganizer.currentUserInformation.userEventIDs.count) != 0) {
+            for event in currentOrganizer.currentUserInformation.userEventIDs {
                 eventRef.document(event).updateData(["Organizer": self.currentOrganizer.currentUserInformation.name])
             }
         }
@@ -254,7 +254,7 @@ struct MyAccountOrganizerView: View {
         
         let database = Firestore.firestore()
         let eventRef = database.collection("Events")
-        for event in currentOrganizer.currentUserInformation.userEvents {
+        for event in currentOrganizer.currentUserInformation.userEventIDs {
             eventRef.document(event).getDocument() { (document, error) in
                 if let document = document {
                     let id = document.documentID
@@ -299,108 +299,91 @@ struct MyAccountActivistView: View {
     @State private var isUpcomingEvents = true
     @State private var editedFields = [String]()
     @State private var actEvents = [Event]()
-    @State var pastEvents = [Event]()
-    @State var futureEvents = [Event]()
+    @State private var pastEvents = [Event]()
+    @State private var futureEvents = [Event]()
     
     var body: some View {
         if isEditingProfile == false {
-               /* HStack {
-                    NavigationLink(destination: Settings()) {
-                        Image(systemName: "gear")
-                    }
-                }*/
-            
             
             NavigationView {
-            VStack(spacing: 0){
-               // VStack {
-                   // Spacer()
-                
-                HStack{
-                    Spacer()
-                NavigationLink(destination: Settings()) {
-                    Image(systemName: "gear").font(.largeTitle).foregroundColor(.black)
-                        
-                        //
-                }
-                }
-                   // Spacer()
-                    //.frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height/10)
-                                   // .offset
-                //.frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height/5)
-               // .offset(x: UIScreen.main.bounds.width/2.5)
-                   
-                
-                RandomCoverPhoto()
-                
-                VStack(spacing: 0) {
+                VStack(spacing: 0){
                     
-                    HStack {
-                    WebImage(url: URL(string: "\(self.currentActivist.currentUserInformation.profPicURL)"))
-                        .resizable()
-                        .shadow(color: Color.green, radius: 10)
-                        .overlay(Circle().stroke(Color.gray, lineWidth: 5))
-                        .frame(width: UIScreen.main.bounds.height/8, height: UIScreen.main.bounds.height/8, alignment: .leading)
-                        .clipShape(Circle())
-                        .offset(y: -UIScreen.main.bounds.height/12)
-                        .padding()
+                    RandomCoverPhoto()
+                    
+                    VStack(spacing: 0) {
                         
-                        Spacer()
-                       
-                    }
-                    HStack {
-        
-                        Text("Welcome back \(self.currentActivist.currentUserInformation.name)!")
-                        .font(.headline)
+                        HStack {
+                            WebImage(url: URL(string: "\(self.currentActivist.currentUserInformation.profPicURL)"))
+                                .resizable()
+                                .shadow(color: Color.green, radius: 10)
+                                .overlay(Circle().stroke(Color.gray, lineWidth: 5))
+                                .frame(width: UIScreen.main.bounds.height/8, height: UIScreen.main.bounds.height/8, alignment: .leading)
+                                .clipShape(Circle())
+                                .offset(y: -UIScreen.main.bounds.height/12)
+                                .padding()
+                            
+                            Spacer()
+                            
+                        }
+                        HStack {
+                            
+                            Text("Welcome back \(self.currentActivist.currentUserInformation.name)!")
+                                .font(.headline)
+                            Spacer()
+                            
+                        }.offset(x: UIScreen.main.bounds.width/32)
                         Spacer()
                         
-                    }.offset(x: UIScreen.main.bounds.width/32)
-                Spacer()
-                
-                    
-                    HStack {
-                        Button(action: {
-                            self.isUpcomingEvents = true
-                        }) {
-                            Text("Upcoming Events")
-                        }
-                        .padding()
                         
-                        Button(action: {
-                            self.isUpcomingEvents = false
-                        }) {
-                            Text("Past Events")
+                        HStack {
+                            Button(action: {
+                                self.isUpcomingEvents = true
+                            }) {
+                                Text("Upcoming Events")
+                            }
+                            .padding()
+                            
+                            Button(action: {
+                                self.isUpcomingEvents = false
+                            }) {
+                                Text("Past Events")
+                            }
+                            .padding()
                         }
-                        .padding()
-                    }
-                    if self.isUpcomingEvents == true {
-                    List {
-                    ForEach(futureEvents) { Event in
-                        NavigationLink(destination: EventPage(event: Event)) {
-                            EventRow(event: Event)
-                        }
-                    }
-                }
-                    }
-                    else {
-                        List {
-                        ForEach(pastEvents) { Event in
-                            NavigationLink(destination: EventPage(event: Event)) {
-                                EventRow(event: Event)
+                        if self.isUpcomingEvents == true {
+                            List {
+                                ForEach(futureEvents) { Event in
+                                    NavigationLink(destination: EventPage(event: Event)) {
+                                        EventRow(event: Event)
+                                    }
+                                }
                             }
                         }
+                        else {
+                            List {
+                                ForEach(pastEvents) { Event in
+                                    NavigationLink(destination: EventPage(event: Event)) {
+                                        EventRow(event: Event)
+                                    }
+                                }
+                            }
+                        }
+                        
+                    }.navigationBarTitle("", displayMode: .inline)
+                    .navigationBarItems(trailing: NavigationLink(destination: Settings()) {
+                        Image(systemName: "gear").font(.largeTitle).foregroundColor(.black)
+                    })
+                    .onAppear() {
+                        if currentActivist.currentUserInformation.userEvents.count != currentActivist.currentUserInformation.userEventIDs.count {
+                            currentActivist.getUserEvents()
+                            print("Getting user events")
+                        }
+                        pastEvents = MyAccountActivistView.getSortedEvent(actEvents: currentActivist.currentUserInformation.userEvents)["Past"]!
+                        futureEvents = MyAccountActivistView.getSortedEvent(actEvents: currentActivist.currentUserInformation.userEvents)["Upcoming"]!
+                        
                     }
-                    }
-                
-            }.navigationBarTitle("", displayMode: .inline)
-            .onAppear() {
-                    getActivistEvents()
-                pastEvents = MyAccountActivistView.getSortedEvent(actEvents: actEvents)["Past"]!
-                futureEvents = MyAccountActivistView.getSortedEvent(actEvents: actEvents)["Upcoming"]!
-                
-            }
-
-        }
+                    
+                }
             }
         }
         else {
@@ -464,46 +447,46 @@ struct MyAccountActivistView: View {
         
     }
     
-   /* private func updateActivistInFirebase() {
-        
-        let database = Firestore.firestore()
-        let userInfo = currentActivist.currentUserInformation
-        let eventRef = database.collection("Events")
-        let userRef = database.collection("Activists").document(userInfo.id)
-        if self.editedFields.contains("First Name") && ((self.currentOrganizer.currentUserInformation.orgEvents!.count) != 0) {
-            for event in currentOrganizer.currentUserInformation.orgEvents! {
-                eventRef.document(event).updateData(["Organizer": self.currentOrganizer.currentUserInformation.name])
-            }
-        }
-        userRef.updateData(["Organization Name": userInfo.name, "Organization Description": userInfo.description!, "Organization Website Link": userInfo.websiteLink!, "Email": userInfo.email, "Profile Pic URL": userInfo.profPicURL, "Organizer ID": userInfo.orgID!, "Number of Followers": userInfo.numberFollowers ?? 0])
-        
-    }*/
+    /* private func updateActivistInFirebase() {
+     
+     let database = Firestore.firestore()
+     let userInfo = currentActivist.currentUserInformation
+     let eventRef = database.collection("Events")
+     let userRef = database.collection("Activists").document(userInfo.id)
+     if self.editedFields.contains("First Name") && ((self.currentOrganizer.currentUserInformation.orgEvents!.count) != 0) {
+     for event in currentOrganizer.currentUserInformation.orgEvents! {
+     eventRef.document(event).updateData(["Organizer": self.currentOrganizer.currentUserInformation.name])
+     }
+     }
+     userRef.updateData(["Organization Name": userInfo.name, "Organization Description": userInfo.description!, "Organization Website Link": userInfo.websiteLink!, "Email": userInfo.email, "Profile Pic URL": userInfo.profPicURL, "Organizer ID": userInfo.orgID!, "Number of Followers": userInfo.numberFollowers ?? 0])
+     
+     }*/
     
     private static func getSortedEvent(actEvents: [Event]) -> [String: [Event]] {
-            let formatter = DateFormatter()
-            formatter.dateFormat = "MM dd, yyyy"
-            let events = actEvents
-            var pastEvents = [Event]()
-            var futureEvents = [Event]()
-            let now = Date()
-            for event in events {
-                let date = formatter.date(from: event.date)
-                if date! < now {
-                    pastEvents.append(event)
-                }
-                else {
-                    futureEvents.append(event)
-                }
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MM dd, yyyy"
+        let events = actEvents
+        var pastEvents = [Event]()
+        var futureEvents = [Event]()
+        let now = Date()
+        for event in events {
+            let date = formatter.date(from: event.date)
+            if date! < now {
+                pastEvents.append(event)
             }
-            let sortedPastEvents = pastEvents.sorted(by: {
-                $0.date.compare($1.date) == .orderedDescending
-            })
-            let sortedFutureEvents = futureEvents.sorted(by: {
-                $0.date.compare($1.date) == .orderedAscending
-            })
-            
-            return ["Past": sortedPastEvents, "Upcoming": sortedFutureEvents]
+            else {
+                futureEvents.append(event)
+            }
         }
+        let sortedPastEvents = pastEvents.sorted(by: {
+            $0.date.compare($1.date) == .orderedDescending
+        })
+        let sortedFutureEvents = futureEvents.sorted(by: {
+            $0.date.compare($1.date) == .orderedAscending
+        })
+        
+        return ["Past": sortedPastEvents, "Upcoming": sortedFutureEvents]
+    }
     private static func orderEvents(actEvents: inout [Event], beforeToday: inout [Event], afterToday: inout [Event])-> [[Event]]  {
         //date sorting
         let today = Date()
@@ -527,7 +510,7 @@ struct MyAccountActivistView: View {
         
         let database = Firestore.firestore()
         let eventRef = database.collection("Events")
-        for event in currentActivist.currentUserInformation.userEvents {
+        for event in currentActivist.currentUserInformation.userEventIDs {
             eventRef.document(event).getDocument() { (document, error) in
                 if let document = document {
                     let id = document.documentID
@@ -542,9 +525,9 @@ struct MyAccountActivistView: View {
                     let eventPhotoURL = document.get("Event Photo URL") as! String
                     self.actEvents.append(Event(id: id, eventTitle: eventTitle, eventOrganizer: organizer, eventOrganizerID: organizerID, eventDescription: eventDescription, date: date, time: time, location: location, numAttending: numAttending, eventPhotoURL: eventPhotoURL))
                 } else {
-                  print("Document does not exist")
+                    print("Document does not exist")
                 }
-              }
+            }
         }
     }
 }
