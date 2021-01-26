@@ -31,12 +31,12 @@ struct SessionView: View {
                     Text("Create Event")
                 }
                 .tag(1)
-            Settings()
+            MyAccount()
                 .environmentObject(sessionManager)
                 .environmentObject(currentUser)
                 .tabItem {
-                    Image(systemName: "gear")
-                    Text("Settings")
+                    Image(systemName: "person")
+                    Text("My Account")
                 }
                 .tag(2)
         }.onAppear() {

@@ -304,7 +304,16 @@ struct MyAccountActivistView: View {
     
     var body: some View {
         if isEditingProfile == false {
+               /* HStack {
+                    NavigationLink(destination: Settings()) {
+                        Image(systemName: "gear")
+                    }
+                }*/
+            
             VStack(spacing: 0){
+                NavigationLink(destination: Settings()) {
+                    Image(systemName: "gear")
+                }
                 
                 RandomCoverPhoto()
                 
