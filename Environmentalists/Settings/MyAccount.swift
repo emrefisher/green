@@ -377,6 +377,8 @@ struct MyAccountActivistView: View {
                         if currentActivist.currentUserInformation.userEvents.count != currentActivist.currentUserInformation.userEventIDs.count {
                             currentActivist.getUserEvents()
                             print("Getting user events")
+                            print(currentActivist.currentUserInformation.userEventIDs)
+                            print(currentActivist.currentUserInformation.userEvents)
                         }
                         pastEvents = MyAccountActivistView.getSortedEvent(actEvents: currentActivist.currentUserInformation.userEvents)["Past"]!
                         futureEvents = MyAccountActivistView.getSortedEvent(actEvents: currentActivist.currentUserInformation.userEvents)["Upcoming"]!

@@ -13,6 +13,8 @@ target 'Environmentalists' do
 	pod 'Firebase/Firestore'
 	pod 'Firebase/Storage'
 	pod 'SDWebImageSwiftUI'
+	pod 'FirebaseFirestoreSwift'
+
 
   target 'EnvironmentalistsTests' do
     inherit! :search_paths
