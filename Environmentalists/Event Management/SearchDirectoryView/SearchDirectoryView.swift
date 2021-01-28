@@ -11,46 +11,44 @@ import MapKit
 import SDWebImageSwiftUI
 
 struct SearchDirectoryView: View {
-
+    
     @ObservedObject var eventManager = EventManager()
     @EnvironmentObject var currentUser: CurrentUser
     @State var filteredItems = [Event]()
     @State var hasSetFilteredItems = true
-
+    
     var body: some View {
-
+        
         ZStack {
-
+            
             SearchDirectoryViewPage(currentUser: self._currentUser, filteredItems: self.$filteredItems, eventManager: self.eventManager)
-
+            
         }.onAppear {
             print(self.eventManager.eventInformation)
             self.filteredItems = eventManager.eventInformation
         }
-
+        
     }
 }
 struct SearchDirectoryViewPage: View {
-
+    
     @EnvironmentObject var currentUser: CurrentUser
     @Binding var filteredItems: [Event]
     @ObservedObject var eventManager: EventManager
-
+    @State private var isCreatingEvent = false
+    
     var body: some View {
-
+        
         if self.filteredItems.count == 0 {
             self.filteredItems = eventManager.eventInformation
         }
         
-        return
-            NavigationView {
-                if currentUser.currentUserInformation.accountType == "Organizer" {
-            VStack {
-
+        return ZStack {
+            
             CustomNavigationView(view: AnyView(Home(filteredItems: $filteredItems)), largeTitle: false, title: "",
-
+                                 
                                  onSearch: { (txt) in
-
+                                    
                                     // filterting Data...
                                     if txt != ""{
                                         self.filteredItems = eventManager.eventInformation.filter{$0.eventTitle.lowercased().contains(txt.lowercased())}
@@ -58,65 +56,46 @@ struct SearchDirectoryViewPage: View {
                                     else{
                                         self.filteredItems = eventManager.eventInformation
                                     }
-
+                                    
                                  },
-
+                                 
                                  onCancel: {
                                     // Do Your Own Code When Search And Canceled....
                                     self.filteredItems = eventManager.eventInformation
-
+                                    
                                  })
                 .ignoresSafeArea()
                 
-                    .navigationBarItems(trailing: NavigationLink(destination: CreateEventView()) {
-                        Image(systemName: "plus.circle.fill").font(.largeTitle).foregroundColor(Color(#colorLiteral(red: 0.2666666667, green: 0.937254902, blue: 0.1607843137, alpha: 1)))
-                    })
-                }
-                }
-                else {
-                    VStack {
-
-                    CustomNavigationView(view: AnyView(Home(filteredItems: $filteredItems)), largeTitle: false, title: "",
-
-                                         onSearch: { (txt) in
-
-                                            // filterting Data...
-                                            if txt != ""{
-                                                self.filteredItems = eventManager.eventInformation.filter{$0.eventTitle.lowercased().contains(txt.lowercased())}
-                                            }
-                                            else{
-                                                self.filteredItems = eventManager.eventInformation
-                                            }
-
-                                         },
-
-                                         onCancel: {
-                                            // Do Your Own Code When Search And Canceled....
-                                            self.filteredItems = eventManager.eventInformation
-
-                                         })
-                        .ignoresSafeArea()
+            
+            if self.currentUser.currentUserInformation.accountType == "Organizer" {
+                
+                VStack {
+                    
+                    Spacer()
+                    HStack {
                         
-                        }
+                        Spacer()
+                        Button(action: {
+                            self.isCreatingEvent.toggle()
+                        }) {
+                            Image(systemName: "plus.circle.fill").foregroundColor(Color(#colorLiteral(red: 0.2666666667, green: 0.937254902, blue: 0.1607843137, alpha: 1))).font(.system(size: 75))
+                                .shadow(color: .black, radius: 10, x: 5, y: 5)
+                        }.padding(.trailing, UIScreen.main.bounds.width/15)
+                        
+                    }.padding(.bottom, UIScreen.main.bounds.height/10)
+                    
                 }
                 
-             /*   .overlay(
-                    NavigationView {
-                        VStack {
-                            NavigationLink(destination: CreateEventView()) {
-                                Image(systemName: "plus.circle.fill")
-                            }
-                        }
-                    }.frame(width:  UIScreen.main.bounds.width/4, height:  UIScreen.main.bounds.width/4)//.foregroundColor(Color.clear)
-                )*/
-
+            }
+            
         }.onAppear(perform: {self.filteredItems = eventManager.eventInformation})
-
-                }
         
-        
-
     }
+}
+
+
+
+
 
 
 struct SearchDirectoryView_Previews: PreviewProvider {
