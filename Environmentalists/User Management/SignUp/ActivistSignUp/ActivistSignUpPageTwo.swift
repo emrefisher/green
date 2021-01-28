@@ -1,15 +1,15 @@
 //
-//  OrganizerSignUpPageTwo.swift
+//  ActivistSignUpPageTwo.swift
 //  Environmentalists
 //
-//  Created by Ian Campbell on 1/16/21.
+//  Created by Ian Campbell on 1/28/21.
 //
 
 import SwiftUI
 
-struct OrganizerSignUpPageTwo: View {
+struct ActivistSignUpPageTwo: View {
     
-    @ObservedObject var organizerSignUpManager: OrganizerSignUpManager
+    @ObservedObject var activistSignUpManager: ActivistSignUpManager
     @State private var showPassword = false
     @State private var showConfirmedPassword = false
     @State private var errorMessage = ""
@@ -27,10 +27,10 @@ struct OrganizerSignUpPageTwo: View {
                 HStack {
                     
                     if self.showPassword {
-                        TextField("Enter Password", text: self.$organizerSignUpManager.password).textFieldStyle(RoundedBorderTextFieldStyle()).disableAutocorrection(true)
+                        TextField("Enter Password", text: self.$activistSignUpManager.password).textFieldStyle(RoundedBorderTextFieldStyle()).disableAutocorrection(true)
                     }
                     else {
-                        SecureField("Enter Password", text: self.$organizerSignUpManager.password).textFieldStyle(RoundedBorderTextFieldStyle()).disableAutocorrection(true)
+                        SecureField("Enter Password", text: self.$activistSignUpManager.password).textFieldStyle(RoundedBorderTextFieldStyle()).disableAutocorrection(true)
                     }
 
                     
@@ -57,10 +57,10 @@ struct OrganizerSignUpPageTwo: View {
                 HStack {
                     
                     if self.showConfirmedPassword {
-                        TextField("Confirm Password", text: self.$organizerSignUpManager.confirmedPassword).textFieldStyle(RoundedBorderTextFieldStyle()).disableAutocorrection(true)
+                        TextField("Confirm Password", text: self.$activistSignUpManager.confirmedPassword).textFieldStyle(RoundedBorderTextFieldStyle()).disableAutocorrection(true)
                     }
                     else {
-                        SecureField("Confirm Password", text: self.$organizerSignUpManager.confirmedPassword).textFieldStyle(RoundedBorderTextFieldStyle()).disableAutocorrection(true)
+                        SecureField("Confirm Password", text: self.$activistSignUpManager.confirmedPassword).textFieldStyle(RoundedBorderTextFieldStyle()).disableAutocorrection(true)
                     }
 
                     
@@ -76,12 +76,12 @@ struct OrganizerSignUpPageTwo: View {
                 }
                 HStack {
                     Button("Back", action: {
-                        self.organizerSignUpManager.pageNumber -= 1
+                        self.activistSignUpManager.pageNumber -= 1
                     })
                     
                     Button("Next", action: {
                         if validatePasswords() == nil {
-                            self.organizerSignUpManager.pageNumber += 1
+                            self.activistSignUpManager.pageNumber += 1
                         }
                     }).alert(isPresented: self.$alert) {
                         Alert(title: Text("Password Error"), message: Text(self.errorMessage), dismissButton: .default(Text("OK")))
@@ -107,8 +107,8 @@ struct OrganizerSignUpPageTwo: View {
     }
     
     private func validatePasswords() -> String? {
-        let cleanedPassword = self.organizerSignUpManager.password.trimmingCharacters(in: .whitespacesAndNewlines)
-        let cleanedConfirmedPassword = self.organizerSignUpManager.confirmedPassword.trimmingCharacters(in: .whitespacesAndNewlines)
+        let cleanedPassword = self.activistSignUpManager.password.trimmingCharacters(in: .whitespacesAndNewlines)
+        let cleanedConfirmedPassword = self.activistSignUpManager.confirmedPassword.trimmingCharacters(in: .whitespacesAndNewlines)
         
         if cleanedPassword == "" || cleanedConfirmedPassword == "" {
             self.errorMessage = "Please fill in both fields."
@@ -132,3 +132,5 @@ struct OrganizerSignUpPageTwo: View {
         
     }
 }
+
+

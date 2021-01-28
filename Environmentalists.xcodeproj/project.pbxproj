@@ -35,6 +35,9 @@
 		A75BCF6E25A2D3FA00FFD350 /* SearchDirectoryTopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75BCF6D25A2D3FA00FFD350 /* SearchDirectoryTopBar.swift */; };
 		A75BCF7425A2D46000FFD350 /* OrgProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75BCF7325A2D46000FFD350 /* OrgProfile.swift */; };
 		A75EEA502538F1D10068EF2E /* CurrentUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75EEA4F2538F1D10068EF2E /* CurrentUser.swift */; };
+		A7610AC525C3691F00140E2B /* ActivistSignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7610AC425C3691F00140E2B /* ActivistSignUpView.swift */; };
+		A7610AD025C3741A00140E2B /* ActivistSignUpPageOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7610ACF25C3741A00140E2B /* ActivistSignUpPageOne.swift */; };
+		A7610AD525C3747C00140E2B /* ActivistSignUpPageTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7610AD425C3747C00140E2B /* ActivistSignUpPageTwo.swift */; };
 		A762945F25BFF840001A0927 /* OrganizerSignUpPageSix.swift in Sources */ = {isa = PBXBuildFile; fileRef = A762945E25BFF840001A0927 /* OrganizerSignUpPageSix.swift */; };
 		A762946425BFF9D8001A0927 /* OrganizerSignUpReviewSubmission.swift in Sources */ = {isa = PBXBuildFile; fileRef = A762946325BFF9D8001A0927 /* OrganizerSignUpReviewSubmission.swift */; };
 		A763DD4A250C4B0C0001FA21 /* CreateEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A763DD49250C4B0C0001FA21 /* CreateEventView.swift */; };
@@ -112,6 +115,9 @@
 		A75BCF6D25A2D3FA00FFD350 /* SearchDirectoryTopBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDirectoryTopBar.swift; sourceTree = "<group>"; };
 		A75BCF7325A2D46000FFD350 /* OrgProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrgProfile.swift; sourceTree = "<group>"; };
 		A75EEA4F2538F1D10068EF2E /* CurrentUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUser.swift; sourceTree = "<group>"; };
+		A7610AC425C3691F00140E2B /* ActivistSignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivistSignUpView.swift; sourceTree = "<group>"; };
+		A7610ACF25C3741A00140E2B /* ActivistSignUpPageOne.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivistSignUpPageOne.swift; sourceTree = "<group>"; };
+		A7610AD425C3747C00140E2B /* ActivistSignUpPageTwo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivistSignUpPageTwo.swift; sourceTree = "<group>"; };
 		A762945E25BFF840001A0927 /* OrganizerSignUpPageSix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizerSignUpPageSix.swift; sourceTree = "<group>"; };
 		A762946325BFF9D8001A0927 /* OrganizerSignUpReviewSubmission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizerSignUpReviewSubmission.swift; sourceTree = "<group>"; };
 		A763DD49250C4B0C0001FA21 /* CreateEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEventView.swift; sourceTree = "<group>"; };
@@ -316,6 +322,16 @@
 			path = Organizers;
 			sourceTree = "<group>";
 		};
+		A7610AC325C368E300140E2B /* ActivistSignUp */ = {
+			isa = PBXGroup;
+			children = (
+				A7610AC425C3691F00140E2B /* ActivistSignUpView.swift */,
+				A7610ACF25C3741A00140E2B /* ActivistSignUpPageOne.swift */,
+				A7610AD425C3747C00140E2B /* ActivistSignUpPageTwo.swift */,
+			);
+			path = ActivistSignUp;
+			sourceTree = "<group>";
+		};
 		A76FE39825210FE40061EF34 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -346,6 +362,7 @@
 			isa = PBXGroup;
 			children = (
 				A722BCE525017A2E007C70F1 /* SignUp.swift */,
+				A7610AC325C368E300140E2B /* ActivistSignUp */,
 				A72DF11B25BE91CB00D460A9 /* OrganizerSignUp */,
 			);
 			path = SignUp;
@@ -614,6 +631,7 @@
 				A76FE3B1252117E20061EF34 /* AboutUs.swift in Sources */,
 				A763DD4A250C4B0C0001FA21 /* CreateEventView.swift in Sources */,
 				A762945F25BFF840001A0927 /* OrganizerSignUpPageSix.swift in Sources */,
+				A7610AD025C3741A00140E2B /* ActivistSignUpPageOne.swift in Sources */,
 				A7FA07DB25B3C85100A2BA10 /* OrganizerSignUpView.swift in Sources */,
 				A76FE39A252111330061EF34 /* Settings.swift in Sources */,
 				A763DD4E250C4BFE0001FA21 /* EventCreationManager.swift in Sources */,
@@ -637,7 +655,9 @@
 				A72DF11225BE8D5500D460A9 /* OrganizerSignUpPageThree.swift in Sources */,
 				A75BCF6925A2D39100FFD350 /* EventPage.swift in Sources */,
 				A795A3E4259C0ED100327F2D /* OnboardingView.swift in Sources */,
+				A7610AC525C3691F00140E2B /* ActivistSignUpView.swift in Sources */,
 				A72DF11725BE918C00D460A9 /* OrganizerSignUpPageFour.swift in Sources */,
+				A7610AD525C3747C00140E2B /* ActivistSignUpPageTwo.swift in Sources */,
 				A7FA07E325B3C87C00A2BA10 /* OrganizerSignUpPageOne.swift in Sources */,
 				A75BCF7425A2D46000FFD350 /* OrgProfile.swift in Sources */,
 				A795A3FF259C0F5D00327F2D /* OnboardingPageFour.swift in Sources */,
