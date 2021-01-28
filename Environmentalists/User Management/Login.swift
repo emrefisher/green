@@ -85,7 +85,7 @@ struct Login: View {
                         self.timer?.invalidate()
                         sessionManager.signInWithFirebase(email: self.email, password: self.password)
                     }) {
-                        Text("Login").foregroundColor(.white).frame(width: self.frameWidth * 0.6, height: self.frameHeight / 10).background(Color(#colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1))).clipShape(Capsule()).shadow(color: Color.black.opacity(0.5), radius: 5, x: 5, y: 5)
+                        Text("Login").foregroundColor(.white).frame(width: self.frameWidth * 0.6, height: self.frameHeight / 10).background(Color(#colorLiteral(red: 1, green: 0.3176470588, blue: 0, alpha: 1))).clipShape(Capsule()).shadow(color: Color.black.opacity(0.5), radius: 5, x: 5, y: 5)
                     }.alert(isPresented: self.$sessionManager.alert) {
                         Alert(title: Text("Sign In Error"), message: Text(self.sessionManager.errorMessage), dismissButton: .default(Text("OK")) {
                             self.timer = Timer.scheduledTimer(withTimeInterval: 0.0001, repeats: true) { timer in
@@ -100,7 +100,7 @@ struct Login: View {
                         
                         Button("Don't have an account? Sign Up", action: {
                             sessionManager.authState = .signUp
-                        })
+                        }) 
                     
                 }.padding(.bottom, self.frameHeight / 5)
             }

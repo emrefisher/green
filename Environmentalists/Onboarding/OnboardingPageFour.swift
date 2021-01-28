@@ -37,7 +37,7 @@ struct OnboardingPageFour: View {
             Button(action: {
                 self.isPresenting.toggle()
             }) {
-                Text("Get Started").font(.title).foregroundColor(.black)
+                Text("Enter Here").foregroundColor(.white).frame(width: UIScreen.main.bounds.size.width*3/5, height: UIScreen.main.bounds.size.height / 10).background(Color(#colorLiteral(red: 0.3803921569, green: 0.768627451, blue: 0.1607843137, alpha: 1))).clipShape(Capsule())
             }.padding(.bottom, 50)
             
             Spacer()
