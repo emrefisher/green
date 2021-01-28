@@ -17,6 +17,7 @@ struct EventPage: View {
     @State var rsvpEventClicked : Bool = false
     @EnvironmentObject var currentUser: CurrentUser
     @State private var actEvents = [Event]()
+    @State private var isAttending = false
     //@ObservedObject var num = monitorAttendees()
     
     var body: some View {
@@ -51,14 +52,14 @@ struct EventPage: View {
                                 
                                 if self.currentUser.currentUserInformation.accountType == "Activist" {
                                 //Open to RSVP State
-                                    if !self.currentUser.currentUserInformation.userEventIDs.contains(self.event.id) {
-                                    Button("RSVP", action: {rsvpToggle()}).buttonStyle(openRSVP())
+                                    if self.isAttending == false {
+                                        Button("RSVP", action: {rsvpToggle(isAttending: &self.isAttending)}).buttonStyle(openRSVP())
                                     
                                 }
                                 else {
                                     //Going State
                                     Button(action: {
-                                        rsvpToggle()
+                                        rsvpToggle(isAttending: &self.isAttending)
                                     }) {
                                         HStack {
                                             Image(systemName: "checkmark")
@@ -111,18 +112,23 @@ struct EventPage: View {
                 Spacer()
             }
         }.edgesIgnoringSafeArea(.all)
+        .onAppear() {
+            if self.currentUser.currentUserInformation.userEventIDs.contains(self.event.id) {
+                self.isAttending = true
+            }
+        }
         
     }
     
-    private func rsvpToggle() {
+    private func rsvpToggle(isAttending: inout Bool) {
         
         let activist = self.currentUser.currentUserInformation.id
         //let eventId = event.id
         let database = Firestore.firestore()
         let userRefA = database.collection("Activists")
         //let eventRef = database.collection("Events")
-        rsvpEventClicked.toggle()
-        if (rsvpEventClicked == true) {
+        isAttending.toggle()
+        if (isAttending == true) {
             //let num = event.numAttending + 1
             userRefA.document(activist).updateData(["Events": FieldValue.arrayUnion([event.id])])
             self.currentUser.currentUserInformation.userEventIDs.append(event.id)
