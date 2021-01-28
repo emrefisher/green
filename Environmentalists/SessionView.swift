@@ -24,13 +24,6 @@ struct SessionView: View {
                     Text("Event Directory")
                 }
                 .tag(0)
-            CreateEventView()
-                .environmentObject(currentUser)
-                .tabItem {
-                    Image(systemName: "plus")
-                    Text("Create Event")
-                }
-                .tag(1)
             MyAccount()
                 .environmentObject(sessionManager)
                 .environmentObject(currentUser)
@@ -38,7 +31,7 @@ struct SessionView: View {
                     Image(systemName: "person")
                     Text("My Account")
                 }
-                .tag(2)
+                .tag(1)
         }.onAppear() {
             if self.currentUser.currentUserInformation.name == "" {
                 self.currentUser.getUserInformation()

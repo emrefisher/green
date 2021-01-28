@@ -21,7 +21,7 @@ struct SearchDirectoryView: View {
 
         ZStack {
 
-            SearchDirectoryViewPage(filteredItems: self.$filteredItems, eventManager: self.eventManager)
+            SearchDirectoryViewPage(currentUser: self._currentUser, filteredItems: self.$filteredItems, eventManager: self.eventManager)
 
         }.onAppear {
             print(self.eventManager.eventInformation)
@@ -32,6 +32,7 @@ struct SearchDirectoryView: View {
 }
 struct SearchDirectoryViewPage: View {
 
+    @EnvironmentObject var currentUser: CurrentUser
     @Binding var filteredItems: [Event]
     @ObservedObject var eventManager: EventManager
 
@@ -41,7 +42,10 @@ struct SearchDirectoryViewPage: View {
             self.filteredItems = eventManager.eventInformation
         }
         
-        return VStack {
+        return
+            NavigationView {
+                if currentUser.currentUserInformation.accountType == "Organizer" {
+            VStack {
 
             CustomNavigationView(view: AnyView(Home(filteredItems: $filteredItems)), largeTitle: false, title: "",
 
@@ -63,11 +67,57 @@ struct SearchDirectoryViewPage: View {
 
                                  })
                 .ignoresSafeArea()
+                
+                    .navigationBarItems(trailing: NavigationLink(destination: CreateEventView()) {
+                        Image(systemName: "plus.circle.fill").font(.largeTitle).foregroundColor(Color(#colorLiteral(red: 0.2666666667, green: 0.937254902, blue: 0.1607843137, alpha: 1)))
+                    })
+                }
+                }
+                else {
+                    VStack {
+
+                    CustomNavigationView(view: AnyView(Home(filteredItems: $filteredItems)), largeTitle: false, title: "",
+
+                                         onSearch: { (txt) in
+
+                                            // filterting Data...
+                                            if txt != ""{
+                                                self.filteredItems = eventManager.eventInformation.filter{$0.eventTitle.lowercased().contains(txt.lowercased())}
+                                            }
+                                            else{
+                                                self.filteredItems = eventManager.eventInformation
+                                            }
+
+                                         },
+
+                                         onCancel: {
+                                            // Do Your Own Code When Search And Canceled....
+                                            self.filteredItems = eventManager.eventInformation
+
+                                         })
+                        .ignoresSafeArea()
+                        
+                        }
+                }
+                
+             /*   .overlay(
+                    NavigationView {
+                        VStack {
+                            NavigationLink(destination: CreateEventView()) {
+                                Image(systemName: "plus.circle.fill")
+                            }
+                        }
+                    }.frame(width:  UIScreen.main.bounds.width/4, height:  UIScreen.main.bounds.width/4)//.foregroundColor(Color.clear)
+                )*/
 
         }.onAppear(perform: {self.filteredItems = eventManager.eventInformation})
 
+                }
+        
+        
+
     }
-}
+
 
 struct SearchDirectoryView_Previews: PreviewProvider {
     static var previews: some View {
