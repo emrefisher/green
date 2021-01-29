@@ -80,7 +80,7 @@ struct SearchDirectoryViewPage: View {
                         }) {
                             Image(systemName: "plus.circle.fill").foregroundColor(Color(#colorLiteral(red: 0.2666666667, green: 0.937254902, blue: 0.1607843137, alpha: 1))).font(.system(size: 75))
                                 .shadow(color: .black, radius: 10, x: 5, y: 5)
-                        }.padding(.trailing, UIScreen.main.bounds.width/15)
+                        }.padding(.trailing, UIScreen.main.bounds.width/15).sheet(isPresented: $isCreatingEvent, content: CreateEventView.init)
                         
                     }.padding(.bottom, UIScreen.main.bounds.height/10)
                     
@@ -88,7 +88,7 @@ struct SearchDirectoryViewPage: View {
                 
             }
             
-        }.onAppear(perform: {self.filteredItems = eventManager.eventInformation})
+        }.onAppear(perform: {self.filteredItems = eventManager.eventInformation})//.fullScreenCover(isPresented: $isCreatingEvent, content: CreateEventView.init)
         
     }
 }

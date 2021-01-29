@@ -29,7 +29,6 @@ struct CreateEventView: View {
     
     
     var body: some View {
-        
             VStack(spacing: 0) {
                 
                 Button(action: {
@@ -131,6 +130,7 @@ struct CreateEventView: View {
                 
         }.edgesIgnoringSafeArea(.all)
             .background(Color(#colorLiteral(red: 0, green: 1, blue: 0.2352705896, alpha: 0.5)))
+            .navigationBarItems(leading: SearchDirectoryView())
         .onAppear() {
             self.eventCreationManager.clearEventData()
         }
@@ -140,6 +140,9 @@ struct CreateEventView: View {
                 self.eventCreationManager.clearEventData()
             }))
         }
+            .navigationBarItems(trailing: NavigationLink(destination: SearchDirectoryView()) {
+        Image(systemName: "arrow.left").font(.largeTitle).foregroundColor(.black)
+    })
         
     }
     
