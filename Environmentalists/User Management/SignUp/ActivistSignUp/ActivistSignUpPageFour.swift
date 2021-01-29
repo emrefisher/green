@@ -22,7 +22,15 @@ struct ActivistSignUpPageFour: View {
                     Text(genderArray[$0])
                 }
             }
-
+            HStack {
+                Button("Back", action: {
+                    self.activistSignUpManager.pageNumber -= 1
+                })
+                
+                Button("Next", action: {
+                    self.activistSignUpManager.pageNumber += 1
+                })
+            }
         }
     }
 }

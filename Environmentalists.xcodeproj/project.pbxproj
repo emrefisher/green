@@ -30,6 +30,8 @@
 		A72DF11225BE8D5500D460A9 /* OrganizerSignUpPageThree.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72DF11125BE8D5500D460A9 /* OrganizerSignUpPageThree.swift */; };
 		A72DF11725BE918C00D460A9 /* OrganizerSignUpPageFour.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72DF11625BE918C00D460A9 /* OrganizerSignUpPageFour.swift */; };
 		A72DF11D25BE920200D460A9 /* OrganizerSignUpPageFive.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72DF11C25BE920200D460A9 /* OrganizerSignUpPageFive.swift */; };
+		A73AED2D25C40C6D00C19E81 /* ActivistSignUpPageFive.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73AED2C25C40C6D00C19E81 /* ActivistSignUpPageFive.swift */; };
+		A73AED3225C40D0B00C19E81 /* ActivistSignUpReviewSubmission.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73AED3125C40D0B00C19E81 /* ActivistSignUpReviewSubmission.swift */; };
 		A75BCF6125A2D1E600FFD350 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75BCF6025A2D1E600FFD350 /* SearchBar.swift */; };
 		A75BCF6925A2D39100FFD350 /* EventPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75BCF6825A2D39100FFD350 /* EventPage.swift */; };
 		A75BCF6E25A2D3FA00FFD350 /* SearchDirectoryTopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75BCF6D25A2D3FA00FFD350 /* SearchDirectoryTopBar.swift */; };
@@ -112,6 +114,8 @@
 		A72DF11125BE8D5500D460A9 /* OrganizerSignUpPageThree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizerSignUpPageThree.swift; sourceTree = "<group>"; };
 		A72DF11625BE918C00D460A9 /* OrganizerSignUpPageFour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizerSignUpPageFour.swift; sourceTree = "<group>"; };
 		A72DF11C25BE920200D460A9 /* OrganizerSignUpPageFive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizerSignUpPageFive.swift; sourceTree = "<group>"; };
+		A73AED2C25C40C6D00C19E81 /* ActivistSignUpPageFive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivistSignUpPageFive.swift; sourceTree = "<group>"; };
+		A73AED3125C40D0B00C19E81 /* ActivistSignUpReviewSubmission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivistSignUpReviewSubmission.swift; sourceTree = "<group>"; };
 		A75BCF6025A2D1E600FFD350 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		A75BCF6825A2D39100FFD350 /* EventPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventPage.swift; sourceTree = "<group>"; };
 		A75BCF6D25A2D3FA00FFD350 /* SearchDirectoryTopBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDirectoryTopBar.swift; sourceTree = "<group>"; };
@@ -334,6 +338,8 @@
 				A7610AD425C3747C00140E2B /* ActivistSignUpPageTwo.swift */,
 				A7610AD925C3CF8E00140E2B /* ActivistSignUpPageThree.swift */,
 				A7610ADE25C3D36500140E2B /* ActivistSignUpPageFour.swift */,
+				A73AED2C25C40C6D00C19E81 /* ActivistSignUpPageFive.swift */,
+				A73AED3125C40D0B00C19E81 /* ActivistSignUpReviewSubmission.swift */,
 			);
 			path = ActivistSignUp;
 			sourceTree = "<group>";
@@ -649,6 +655,7 @@
 				A7610ADF25C3D36500140E2B /* ActivistSignUpPageFour.swift in Sources */,
 				A722BCEA25017A4A007C70F1 /* PasswordReset.swift in Sources */,
 				A722BCE625017A2E007C70F1 /* SignUp.swift in Sources */,
+				A73AED3225C40D0B00C19E81 /* ActivistSignUpReviewSubmission.swift in Sources */,
 				A722BCF325049466007C70F1 /* MapView.swift in Sources */,
 				A722BCE425008B36007C70F1 /* UserSessionManager.swift in Sources */,
 				A762946425BFF9D8001A0927 /* OrganizerSignUpReviewSubmission.swift in Sources */,
@@ -666,6 +673,7 @@
 				A7610AC525C3691F00140E2B /* ActivistSignUpView.swift in Sources */,
 				A72DF11725BE918C00D460A9 /* OrganizerSignUpPageFour.swift in Sources */,
 				A7610AD525C3747C00140E2B /* ActivistSignUpPageTwo.swift in Sources */,
+				A73AED2D25C40C6D00C19E81 /* ActivistSignUpPageFive.swift in Sources */,
 				A7FA07E325B3C87C00A2BA10 /* OrganizerSignUpPageOne.swift in Sources */,
 				A75BCF7425A2D46000FFD350 /* OrgProfile.swift in Sources */,
 				A795A3FF259C0F5D00327F2D /* OnboardingPageFour.swift in Sources */,

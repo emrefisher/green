@@ -23,6 +23,10 @@ struct ActivistSignUpView: View {
             ActivistSignUpPageThree(activistSignUpManager: self.activistSignUpManager)
         case 3:
             ActivistSignUpPageFour(activistSignUpManager: self.activistSignUpManager)
+        case 4:
+            ActivistSignUpPageFive(activistSignUpManager: self.activistSignUpManager)
+        case 5:
+            ActivistSignUpReviewSubmission(activistSignUpManager: self.activistSignUpManager).environmentObject(sessionManager)
         default:
             Text("")
         }
