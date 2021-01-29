@@ -38,6 +38,8 @@
 		A7610AC525C3691F00140E2B /* ActivistSignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7610AC425C3691F00140E2B /* ActivistSignUpView.swift */; };
 		A7610AD025C3741A00140E2B /* ActivistSignUpPageOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7610ACF25C3741A00140E2B /* ActivistSignUpPageOne.swift */; };
 		A7610AD525C3747C00140E2B /* ActivistSignUpPageTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7610AD425C3747C00140E2B /* ActivistSignUpPageTwo.swift */; };
+		A7610ADA25C3CF8E00140E2B /* ActivistSignUpPageThree.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7610AD925C3CF8E00140E2B /* ActivistSignUpPageThree.swift */; };
+		A7610ADF25C3D36500140E2B /* ActivistSignUpPageFour.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7610ADE25C3D36500140E2B /* ActivistSignUpPageFour.swift */; };
 		A762945F25BFF840001A0927 /* OrganizerSignUpPageSix.swift in Sources */ = {isa = PBXBuildFile; fileRef = A762945E25BFF840001A0927 /* OrganizerSignUpPageSix.swift */; };
 		A762946425BFF9D8001A0927 /* OrganizerSignUpReviewSubmission.swift in Sources */ = {isa = PBXBuildFile; fileRef = A762946325BFF9D8001A0927 /* OrganizerSignUpReviewSubmission.swift */; };
 		A763DD4A250C4B0C0001FA21 /* CreateEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A763DD49250C4B0C0001FA21 /* CreateEventView.swift */; };
@@ -118,6 +120,8 @@
 		A7610AC425C3691F00140E2B /* ActivistSignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivistSignUpView.swift; sourceTree = "<group>"; };
 		A7610ACF25C3741A00140E2B /* ActivistSignUpPageOne.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivistSignUpPageOne.swift; sourceTree = "<group>"; };
 		A7610AD425C3747C00140E2B /* ActivistSignUpPageTwo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivistSignUpPageTwo.swift; sourceTree = "<group>"; };
+		A7610AD925C3CF8E00140E2B /* ActivistSignUpPageThree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivistSignUpPageThree.swift; sourceTree = "<group>"; };
+		A7610ADE25C3D36500140E2B /* ActivistSignUpPageFour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivistSignUpPageFour.swift; sourceTree = "<group>"; };
 		A762945E25BFF840001A0927 /* OrganizerSignUpPageSix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizerSignUpPageSix.swift; sourceTree = "<group>"; };
 		A762946325BFF9D8001A0927 /* OrganizerSignUpReviewSubmission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizerSignUpReviewSubmission.swift; sourceTree = "<group>"; };
 		A763DD49250C4B0C0001FA21 /* CreateEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEventView.swift; sourceTree = "<group>"; };
@@ -328,6 +332,8 @@
 				A7610AC425C3691F00140E2B /* ActivistSignUpView.swift */,
 				A7610ACF25C3741A00140E2B /* ActivistSignUpPageOne.swift */,
 				A7610AD425C3747C00140E2B /* ActivistSignUpPageTwo.swift */,
+				A7610AD925C3CF8E00140E2B /* ActivistSignUpPageThree.swift */,
+				A7610ADE25C3D36500140E2B /* ActivistSignUpPageFour.swift */,
 			);
 			path = ActivistSignUp;
 			sourceTree = "<group>";
@@ -640,12 +646,14 @@
 				A722BCF125049228007C70F1 /* SearchDirectoryView.swift in Sources */,
 				A7FA07E825B3C8AD00A2BA10 /* OrganizerSignUpPageTwo.swift in Sources */,
 				A75BCF6125A2D1E600FFD350 /* SearchBar.swift in Sources */,
+				A7610ADF25C3D36500140E2B /* ActivistSignUpPageFour.swift in Sources */,
 				A722BCEA25017A4A007C70F1 /* PasswordReset.swift in Sources */,
 				A722BCE625017A2E007C70F1 /* SignUp.swift in Sources */,
 				A722BCF325049466007C70F1 /* MapView.swift in Sources */,
 				A722BCE425008B36007C70F1 /* UserSessionManager.swift in Sources */,
 				A762946425BFF9D8001A0927 /* OrganizerSignUpReviewSubmission.swift in Sources */,
 				A76FE3AC252117CD0061EF34 /* RateThisApp.swift in Sources */,
+				A7610ADA25C3CF8E00140E2B /* ActivistSignUpPageThree.swift in Sources */,
 				A76FE3A7252117A00061EF34 /* TermsAndConditions.swift in Sources */,
 				A722BCB425008460007C70F1 /* EnvironmentalistsApp.swift in Sources */,
 				A795A3F5259C0F2000327F2D /* OnboardingPageTwo.swift in Sources */,

@@ -19,25 +19,13 @@ struct ActivistSignUpView: View {
             ActivistSignUpPageOne(activistSignUpManager: self.activistSignUpManager, accountType: self.$accountType)
         case 1:
             ActivistSignUpPageTwo(activistSignUpManager: self.activistSignUpManager)
-//        case 2:
-//            ActivistSignUpPageThree(activistSignUpManager: self.activistSignUpManager)
-//        case 3:
-//            ActivistSignUpPageFour(activistSignUpManager: self.activistSignUpManager)
-//        case 4:
-//            ActivistSignUpPageFive(activistSignUpManager: self.activistSignUpManager)
-//        case 5:
-//            ActivistSignUpPageSix(activistSignUpManager: self.activistSignUpManager)
-//        case 6:
-//            ActivistSignUpReviewSubmission(activistSignUpManager: self.activistSignUpManager).environmentObject(sessionManager)
+        case 2:
+            ActivistSignUpPageThree(activistSignUpManager: self.activistSignUpManager)
+        case 3:
+            ActivistSignUpPageFour(activistSignUpManager: self.activistSignUpManager)
         default:
             Text("")
         }
-    }
-}
-
-struct ActivistSignUpView_Previews: PreviewProvider {
-    static var previews: some View {
-        ActivistSignUpView(accountType: .constant(""))
     }
 }
 
@@ -47,10 +35,12 @@ class ActivistSignUpManager: ObservableObject {
     @Published var password = ""
     @Published var confirmedPassword = ""
     @Published var firstName = ""
+    @Published var lastName = ""
     @Published var pageNumber = 0
     @Published var profilePic: Image?
     @Published var pickedProfileImage: Image?
     @Published var profilePicData: Data = Data()
     @Published var dateOfBirth = Date()
+    @Published var gender = ""
     
 }

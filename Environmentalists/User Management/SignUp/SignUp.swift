@@ -65,7 +65,7 @@ struct SignUp: View {
     
             else if self.newAccountType == "Activist" {
                 
-                ActivistSignUp(newAccountType: $newAccountType)
+                ActivistSignUpView(accountType: $newAccountType)
                     .environmentObject(sessionManager)
                 
             }
@@ -102,7 +102,7 @@ struct ActivistSignUp: View {
     @State var dateFormat = DateFormatter()
     @State var pickedImage: Image?
     @State var imagedata: Data = .init(count: 0)
-    @Binding var newAccountType: String
+    @Binding var accountType: String
     
     var body: some View {
         
@@ -113,7 +113,7 @@ struct ActivistSignUp: View {
                 
                 HStack {
                     Button(action: {
-                        self.newAccountType = ""
+                        self.accountType = ""
                     }) {
                         Text("Back")
                     }
