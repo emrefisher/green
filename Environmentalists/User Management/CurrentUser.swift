@@ -92,16 +92,18 @@ class CurrentUser: ObservableObject {
         }
     }
     
-    func getUserEvents() {
+    func getUserEvents(completion: @escaping(([Event]) -> ())) {
             
             let database = Firestore.firestore()
             let eventRef = database.collection("Events")
+            let g = DispatchGroup()
             for eventID in self.currentUserInformation.userEventIDs {
                 for event in self.currentUserInformation.userEvents {
                     if event.id == eventID {
                         break
                     }
                 }
+                g.enter()
                 eventRef.document(eventID).getDocument() { (document, error) in
                     let result = Result {
                         try document?.data(as: Event.self)
@@ -110,12 +112,15 @@ class CurrentUser: ObservableObject {
                     case .success(let nextEvent):
                         if let nextEvent = nextEvent {
                             self.currentUserInformation.userEvents.append(nextEvent)
+                            g.leave()
                         }
                         else {
                             print("Document does not exist.")
+                            g.leave()
                         }
                     case .failure(let error):
                         print("Error decoding event: \(error)")
+                        g.leave()
                     }
 //                    if let document = document {
 //                        let id = document.documentID
@@ -134,6 +139,10 @@ class CurrentUser: ObservableObject {
 //                    }
                   }
             }
+        
+        g.notify(queue: .main) {
+            completion(self.currentUserInformation.userEvents)
+        }
             
         }
     

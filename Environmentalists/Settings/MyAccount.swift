@@ -168,9 +168,9 @@ struct MyAccountOrganizerView: View {
                 
             }.navigationBarTitle("", displayMode: .inline)
             .onAppear() {
-                if currentOrganizer.currentUserInformation.userEvents.count != currentOrganizer.currentUserInformation.userEventIDs.count {
-                    currentOrganizer.getUserEvents()
-                }
+//                if currentOrganizer.currentUserInformation.userEvents.count != currentOrganizer.currentUserInformation.userEventIDs.count {
+//                    currentOrganizer.getUserEvents()
+//                }
             }
 
         }
@@ -301,6 +301,7 @@ struct MyAccountActivistView: View {
     @State private var actEvents = [Event]()
     @State private var pastEvents = [Event]()
     @State private var futureEvents = [Event]()
+    @State private var refreshedPage = false
     
     var body: some View {
         if isEditingProfile == false {
@@ -375,14 +376,16 @@ struct MyAccountActivistView: View {
                     })
                     .onAppear() {
                         if currentActivist.currentUserInformation.userEvents.count != currentActivist.currentUserInformation.userEventIDs.count {
-                            currentActivist.getUserEvents()
+                            currentActivist.getUserEvents() { _ in
+                                pastEvents = getSortedEvent(actEvents: currentActivist.currentUserInformation.userEvents)["Past"]!
+                                futureEvents = getSortedEvent(actEvents: currentActivist.currentUserInformation.userEvents)["Upcoming"]!
+                            }
                             print("Getting user events")
                             print(currentActivist.currentUserInformation.userEventIDs)
                             print(currentActivist.currentUserInformation.userEvents)
                         }
-                        pastEvents = MyAccountActivistView.getSortedEvent(actEvents: currentActivist.currentUserInformation.userEvents)["Past"]!
-                        futureEvents = MyAccountActivistView.getSortedEvent(actEvents: currentActivist.currentUserInformation.userEvents)["Upcoming"]!
-                        
+
+                        self.refreshedPage.toggle()
                     }
                     
                 }
@@ -464,7 +467,7 @@ struct MyAccountActivistView: View {
      
      }*/
     
-    private static func getSortedEvent(actEvents: [Event]) -> [String: [Event]] {
+    private func getSortedEvent(actEvents: [Event]) -> [String: [Event]] {
         let formatter = DateFormatter()
         formatter.dateFormat = "MM dd, yyyy"
         let events = actEvents
