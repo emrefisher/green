@@ -8,6 +8,7 @@
 import Foundation
 import FirebaseAuth
 import FirebaseFirestore
+import FirebaseFirestoreSwift
 
 struct User: Identifiable {
     
@@ -102,21 +103,35 @@ class CurrentUser: ObservableObject {
                     }
                 }
                 eventRef.document(eventID).getDocument() { (document, error) in
-                    if let document = document {
-                        let id = document.documentID
-                        let eventTitle = document.get("Name") as! String
-                        let organizer = document.get("Organizer") as! String
-                        let organizerID = document.get("Organizer ID") as! String
-                        let eventDescription = document.get("Description") as! String
-                        let date = document.get("Date") as! String
-                        let time = document.get("Time") as! String
-                        let location = document.get("Location") as! String
-                        let numAttending = document.get("Number Attending") as! Int
-                        let eventPhotoURL = document.get("Event Photo URL") as! String
-                        self.currentUserInformation.userEvents.append(Event(id: id, eventTitle: eventTitle, eventOrganizer: organizer, eventOrganizerID: organizerID, eventDescription: eventDescription, date: date, time: time, location: location, numAttending: numAttending, eventPhotoURL: eventPhotoURL))
-                    } else {
-                      print("Document does not exist")
+                    let result = Result {
+                        try document?.data(as: Event.self)
                     }
+                    switch result {
+                    case .success(let nextEvent):
+                        if let nextEvent = nextEvent {
+                            self.currentUserInformation.userEvents.append(nextEvent)
+                        }
+                        else {
+                            print("Document does not exist.")
+                        }
+                    case .failure(let error):
+                        print("Error decoding event: \(error)")
+                    }
+//                    if let document = document {
+//                        let id = document.documentID
+//                        let eventTitle = document.get("Name") as! String
+//                        let organizer = document.get("Organizer") as! String
+//                        let organizerID = document.get("Organizer ID") as! String
+//                        let eventDescription = document.get("Description") as! String
+//                        let date = document.get("Date") as! String
+//                        let time = document.get("Time") as! String
+//                        let location = document.get("Location") as! String
+//                        let numAttending = document.get("Number Attending") as! Int
+//                        let eventPhotoURL = document.get("Event Photo URL") as! String
+//                        self.currentUserInformation.userEvents.append(Event(id: id, eventTitle: eventTitle, eventOrganizer: organizer, eventOrganizerID: organizerID, eventDescription: eventDescription, date: date, time: time, location: location, numAttending: numAttending, eventPhotoURL: eventPhotoURL))
+//                    } else {
+//                      print("Document does not exist")
+//                    }
                   }
             }
             
