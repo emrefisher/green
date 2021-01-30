@@ -132,6 +132,7 @@ struct EventPage: View {
             //let num = event.numAttending + 1
             userRefA.document(activist).updateData(["Events": FieldValue.arrayUnion([event.id])])
             self.currentUser.currentUserInformation.userEventIDs.append(event.id)
+            self.currentUser.currentUserInformation.userEvents.append(event)
            // eventRef.document(eventId).updateData(["Number Attending": num])
         }
         else {

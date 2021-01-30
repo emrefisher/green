@@ -304,6 +304,15 @@ struct MyAccountActivistView: View {
     @State private var refreshedPage = false
     
     var body: some View {
+        
+        if currentActivist.currentUserInformation.userEvents.count != currentActivist.currentUserInformation.userEventIDs.count {
+            currentActivist.getUserEvents() { _ in
+                pastEvents = getSortedEvent(actEvents: currentActivist.currentUserInformation.userEvents)["Past"]!
+                futureEvents = getSortedEvent(actEvents: currentActivist.currentUserInformation.userEvents)["Upcoming"]!
+            }
+        }
+        
+        return VStack {
         if isEditingProfile == false {
             
             NavigationView {
@@ -374,19 +383,15 @@ struct MyAccountActivistView: View {
                     .navigationBarItems(trailing: NavigationLink(destination: Settings()) {
                         Image(systemName: "gear").font(.largeTitle).foregroundColor(.black)
                     })
-                    .onAppear() {
-                        if currentActivist.currentUserInformation.userEvents.count != currentActivist.currentUserInformation.userEventIDs.count {
-                            currentActivist.getUserEvents() { _ in
-                                pastEvents = getSortedEvent(actEvents: currentActivist.currentUserInformation.userEvents)["Past"]!
-                                futureEvents = getSortedEvent(actEvents: currentActivist.currentUserInformation.userEvents)["Upcoming"]!
-                            }
-                            print("Getting user events")
-                            print(currentActivist.currentUserInformation.userEventIDs)
-                            print(currentActivist.currentUserInformation.userEvents)
-                        }
-
-                        self.refreshedPage.toggle()
-                    }
+//                    .onAppear() {
+//                        if currentActivist.currentUserInformation.userEvents.count != currentActivist.currentUserInformation.userEventIDs.count {
+//                            currentActivist.getUserEvents() { _ in
+//                                pastEvents = getSortedEvent(actEvents: currentActivist.currentUserInformation.userEvents)["Past"]!
+//                                futureEvents = getSortedEvent(actEvents: currentActivist.currentUserInformation.userEvents)["Upcoming"]!
+//                            }
+//                        }
+//
+//                    }
                     
                 }
             }
@@ -433,6 +438,7 @@ struct MyAccountActivistView: View {
                     .offset(x: -15, y: -5)
                 }
             }
+        }
         }
     }
     
