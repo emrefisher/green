@@ -32,6 +32,10 @@ class CurrentUser: ObservableObject {
     
     let user = Auth.auth().currentUser
     @Published var currentUserInformation = User(id: "", name: "", email: "'", accountType: "", profPicURL: "", coverPhotoURL: "", numberFollowers: nil, description: nil, location: nil, websiteLink: nil, orgID: nil, userEventIDs: [String](), userEvents: [Event]())
+//    @Published var eventListChanged = false
+    @Published var pastEvents = [Event]()
+    @Published var upcomingEvents = [Event]()
+    
     
     init() {
         getUserInformation()
@@ -145,6 +149,33 @@ class CurrentUser: ObservableObject {
         }
             
         }
+    
+    
+    func getSortedEvents() {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MM dd, yyyy"
+        var pastEvents = [Event]()
+        var futureEvents = [Event]()
+        let now = Date()
+        for event in self.currentUserInformation.userEvents {
+            let date = formatter.date(from: event.date)
+            if date! < now {
+                pastEvents.append(event)
+            }
+            else {
+                futureEvents.append(event)
+            }
+        }
+        let sortedPastEvents = pastEvents.sorted(by: {
+            $0.date.compare($1.date) == .orderedDescending
+        })
+        let sortedUpcomingEvents = futureEvents.sorted(by: {
+            $0.date.compare($1.date) == .orderedAscending
+        })
+        
+        self.pastEvents = sortedPastEvents
+        self.upcomingEvents = sortedUpcomingEvents
+    }
     
 }
 

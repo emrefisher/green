@@ -72,7 +72,7 @@ struct SearchBar: View {
 
                     List(self.searchData.filter{$0.eventTitle.lowercased().contains(self.text.lowercased())}) {i in
 
-                            NavigationLink(i.eventTitle, destination: EventPage(event: i))
+                        NavigationLink(i.eventTitle, destination: EventPage(event: i, navigatingThroughMyAccount: false))
                         
 
                     }.frame(height: UIScreen.main.bounds.height / 5)

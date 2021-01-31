@@ -160,7 +160,7 @@ struct MyAccountOrganizerView: View {
                 
                 List {
                     ForEach(self.orgEvents) { Event in
-                        NavigationLink(destination: EventPage(event: Event)) {
+                        NavigationLink(destination: EventPage(event: Event, navigatingThroughMyAccount: true)) {
                             EventRow(event: Event)
                         }
                     }.onDelete(perform: delete(at:))
@@ -219,7 +219,6 @@ struct MyAccountOrganizerView: View {
                 Spacer()
                 HStack {
                     Button(action: {
-                        print(self.editedFields)
                         updateOrganizerInFirebase()
                         self.isEditingProfile.toggle()
                     }) {
@@ -307,8 +306,8 @@ struct MyAccountActivistView: View {
         
         if currentActivist.currentUserInformation.userEvents.count != currentActivist.currentUserInformation.userEventIDs.count {
             currentActivist.getUserEvents() { _ in
-                pastEvents = getSortedEvent(actEvents: currentActivist.currentUserInformation.userEvents)["Past"]!
-                futureEvents = getSortedEvent(actEvents: currentActivist.currentUserInformation.userEvents)["Upcoming"]!
+                currentActivist.pastEvents = getSortedEvent(actEvents: currentActivist.currentUserInformation.userEvents)["Past"]!
+                currentActivist.upcomingEvents = getSortedEvent(actEvents: currentActivist.currentUserInformation.userEvents)["Upcoming"]!
             }
         }
         
@@ -362,8 +361,8 @@ struct MyAccountActivistView: View {
                         }
                         if self.isUpcomingEvents == true {
                             List {
-                                ForEach(futureEvents) { Event in
-                                    NavigationLink(destination: EventPage(event: Event)) {
+                                ForEach(currentActivist.upcomingEvents) { Event in
+                                    NavigationLink(destination: EventPage(event: Event, navigatingThroughMyAccount: true)) {
                                         EventRow(event: Event)
                                     }
                                 }
@@ -371,8 +370,8 @@ struct MyAccountActivistView: View {
                         }
                         else {
                             List {
-                                ForEach(pastEvents) { Event in
-                                    NavigationLink(destination: EventPage(event: Event)) {
+                                ForEach(currentActivist.pastEvents) { Event in
+                                    NavigationLink(destination: EventPage(event: Event, navigatingThroughMyAccount: true)) {
                                         EventRow(event: Event)
                                     }
                                 }
@@ -383,15 +382,6 @@ struct MyAccountActivistView: View {
                     .navigationBarItems(trailing: NavigationLink(destination: Settings()) {
                         Image(systemName: "gear").font(.largeTitle).foregroundColor(.black)
                     })
-//                    .onAppear() {
-//                        if currentActivist.currentUserInformation.userEvents.count != currentActivist.currentUserInformation.userEventIDs.count {
-//                            currentActivist.getUserEvents() { _ in
-//                                pastEvents = getSortedEvent(actEvents: currentActivist.currentUserInformation.userEvents)["Past"]!
-//                                futureEvents = getSortedEvent(actEvents: currentActivist.currentUserInformation.userEvents)["Upcoming"]!
-//                            }
-//                        }
-//
-//                    }
                     
                 }
             }
@@ -425,7 +415,6 @@ struct MyAccountActivistView: View {
                 Spacer()
                 HStack {
                     Button(action: {
-                        print(self.editedFields)
                         //updateActivistInFirebase()
                         self.isEditingProfile.toggle()
                     }) {
@@ -440,6 +429,16 @@ struct MyAccountActivistView: View {
             }
         }
         }
+//        .onAppear() {
+//            print(refreshedPage)
+//            if !self.refreshedPage {
+//                if self.pastEvents.count + self.futureEvents.count != self.currentActivist.currentUserInformation.userEvents.count {
+//            pastEvents = getSortedEvent(actEvents: currentActivist.currentUserInformation.userEvents)["Past"]!
+//            futureEvents = getSortedEvent(actEvents: currentActivist.currentUserInformation.userEvents)["Upcoming"]!
+//
+//        }
+//        }
+//        }
     }
     
     struct RandomCoverPhoto: View {
@@ -503,7 +502,6 @@ struct MyAccountActivistView: View {
         let today = Date()
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM dd, yyyy"
-        print("check")
         for orgEvent in actEvents {
             let date = dateFormatter.date(from: orgEvent.date)
             if (date! < today)

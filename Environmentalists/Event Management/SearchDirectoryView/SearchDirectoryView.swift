@@ -24,7 +24,6 @@ struct SearchDirectoryView: View {
             SearchDirectoryViewPage(currentUser: self._currentUser, filteredItems: self.$filteredItems, eventManager: self.eventManager)
             
         }.onAppear {
-            print(self.eventManager.eventInformation)
             self.filteredItems = eventManager.eventInformation
         }
         
@@ -127,7 +126,7 @@ struct Home: View {
                 
                 EventRow(event: Event)
 
-                NavigationLink(destination: EventPage(event: Event)) {
+                NavigationLink(destination: EventPage(event: Event, navigatingThroughMyAccount: false)) {
                     EmptyView()
                 }.frame(width: 0)
                 .opacity(0)

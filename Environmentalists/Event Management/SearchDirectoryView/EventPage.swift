@@ -15,6 +15,7 @@ struct EventPage: View {
     
     @State var event: Event
     @State var rsvpEventClicked : Bool = false
+    @State var navigatingThroughMyAccount: Bool
     @EnvironmentObject var currentUser: CurrentUser
     @State private var actEvents = [Event]()
     @State private var isAttending = false
@@ -133,6 +134,10 @@ struct EventPage: View {
             userRefA.document(activist).updateData(["Events": FieldValue.arrayUnion([event.id])])
             self.currentUser.currentUserInformation.userEventIDs.append(event.id)
             self.currentUser.currentUserInformation.userEvents.append(event)
+            currentUser.getSortedEvents()
+//            if self.navigatingThroughMyAccount == true {
+//                self.currentUser.eventListChanged = true
+//            }
            // eventRef.document(eventId).updateData(["Number Attending": num])
         }
         else {
@@ -140,7 +145,9 @@ struct EventPage: View {
             userRefA.document(activist).updateData(["Events": FieldValue.arrayRemove([event.id])])
             if let index = currentUser.currentUserInformation.userEventIDs.firstIndex(of: event.id) {
                 currentUser.currentUserInformation.userEventIDs.remove(at: index)
+                currentUser.currentUserInformation.userEvents.remove(at: index)
             }
+            currentUser.getSortedEvents()
             //eventRef.document(eventId).updateData(["Number Attending": num])
         }
     }
