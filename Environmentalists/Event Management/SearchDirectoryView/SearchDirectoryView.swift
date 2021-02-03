@@ -36,6 +36,7 @@ struct SearchDirectoryViewPage: View {
     @ObservedObject var eventManager: EventManager
     @State private var isCreatingEvent = false
     
+    
     var body: some View {
         
         if self.filteredItems.count == 0 {
@@ -88,7 +89,6 @@ struct SearchDirectoryViewPage: View {
             }
             
         }.onAppear(perform: {self.filteredItems = eventManager.eventInformation})//.fullScreenCover(isPresented: $isCreatingEvent, content: CreateEventView.init)
-        
     }
 }
 
@@ -108,7 +108,7 @@ struct SearchDirectoryView_Previews: PreviewProvider {
 struct Home: View {
     // for search Bar...
     @Binding var filteredItems : [Event]
-
+    
     var body: some View {
 
         //        NavigationView{
@@ -277,7 +277,7 @@ struct CustomNavigationView: UIViewControllerRepresentable {
 
 
 struct EventRow: View {
-    
+
     @State var event: Event
     
     var body: some View {
@@ -290,52 +290,62 @@ struct EventRow: View {
                 .clipped()
                 .cornerRadius(10)
             
-            VStack {
-                
+            VStack() {
                 HStack {
                     Text(self.event.eventTitle)
                         .font(.headline)
                         .fontWeight(.semibold)
-                        .foregroundColor(Color.black)
+                        .foregroundColor(Color.white)
+                        .frame(width: UIScreen.main.bounds.width*0.91, height: 30)
+                        .background(Color.dearthGreen)
+                        .padding(EdgeInsets(top: -35, leading: 8, bottom: 0, trailing: 0))
                     Spacer()
                 }
-                
+                VStack() {
                 HStack{
-                    
-                    Image(systemName: "calendar.badge.clock")
+                    Image(systemName: "calendar.badge.clock").foregroundColor(Color.dirtBrown)
                     
                     Text("\(self.event.date), \(self.event.time)")
                         .font(.subheadline)
-                    
                     Spacer()
-                }
-                
+                }.padding(EdgeInsets(top: -10, leading: 0, bottom: 0.5, trailing: 0))
                 HStack{
                     
-                    Image(systemName: "mappin.and.ellipse")
+                    Image(systemName: "mappin.and.ellipse").foregroundColor(.dirtBrown)
                     
                     Text(self.event.location)
                         .font(.subheadline)
-                        .fontWeight(.light)
                     Spacer()
-                    
-                }
+                }.padding(EdgeInsets(top: 0, leading: 0, bottom: 0.5, trailing: 0))
                 HStack{
                     
-                    Image(systemName: "person.fill")
+                    Image(systemName: "person.fill").foregroundColor(Color.dirtBrown)
                     
                     Text(self.event.eventOrganizer)
-                        .font(.caption)
-                        .fontWeight(.semibold)
+                        .font(.subheadline)
                         .foregroundColor(Color.black)
                     Spacer()
                 }
-                Spacer()
+                }.padding(EdgeInsets(top: 5, leading: 15, bottom: 6, trailing: 0))
                 
-                
-            }.padding(.leading, UIScreen.main.bounds.width / 30)
-            .frame(width: UIScreen.main.bounds.width*0.91)
+            }
+            .frame(width: UIScreen.main.bounds.width*0.91, height: 90)
         }
+        .overlay(
+            RoundedRectangle(cornerRadius: 10)
+                .stroke(Color.dearthGreen, lineWidth: 1.2)
+        ).background(
+            RoundedRectangle(
+              cornerRadius: 10
+            )
+            .foregroundColor(Color.white)
+            .shadow(
+              color: Color.gray,
+              radius: 10,
+              x: 0,
+              y: 0
+            )
+         )
     }
 }
 

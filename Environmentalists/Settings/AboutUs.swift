@@ -12,7 +12,7 @@ import MessageUI
 struct ColorManager {
     // create static variables for custom colors
     static let earthGreen = Color("Earth Green")
-
+    static let fireOrange = Color("Fire Orange")
     //... add the rest of your colors here
 }
 
@@ -20,7 +20,10 @@ struct ColorManager {
 // this will allow you to just type .spotifyGreen and you wont have to use ColorManager.spotifyGreen
 extension Color {
     static let earthGreen = Color("Earth Green")
- 
+    static let fireOrange = Color("Fire Orange")
+    static let waterBlue = Color("Water Blue")
+    static let dirtBrown = Color("Dirt Brown")
+    static let dearthGreen = Color("Dark Earth Green")
     // ... add the rest of your colors here
 }
 
