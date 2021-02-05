@@ -18,7 +18,7 @@ struct SignUp: View {
         
         ZStack {
             
-            LinearGradient(gradient: .init(colors: [Color(#colorLiteral(red: 0, green: 0.1157108322, blue: 0.5436113477, alpha: 1)), Color(#colorLiteral(red: 0, green: 0.50462991, blue: 0, alpha: 1))]), startPoint: .top, endPoint: .bottom).edgesIgnoringSafeArea(.all)
+          
             
             if self.newAccountType == "" {
                 VStack {
@@ -31,36 +31,46 @@ struct SignUp: View {
                         }
                         .frame(width: UIScreen.main.bounds.width/10, height: UIScreen.main.bounds.height/8)
                         Spacer()
-                        
-                    }.padding(.leading, 10)
-                    Text("Choose Your Role")
+                    
+                    
+                    }.padding(.leading, 15)
+                    
+                    
+                    Text("Activist Sign Up")
                         .font(.largeTitle)
-                        .foregroundColor(Color.white)
+                        .foregroundColor(Color.black)
                         .fontWeight(.medium)
                         .multilineTextAlignment(.center)
                         .padding(.top, 20)
-                        .padding(.bottom, 25)
+                    
+                Spacer()
+                    
                     Button(action: {
                         self.newAccountType = "Activist"
                     }) {
                         
-                        Text("Activist").foregroundColor(.white).frame(width: UIScreen.main.bounds.width-100).padding().font(.body)
+                        Text("Continue").foregroundColor(.white).frame(width: UIScreen.main.bounds.width-100).padding().font(.body)
                         
-                    }.background(Color(#colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1))).clipShape(Capsule()).padding(.top,25)
+                    }.background(Color(#colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1))).clipShape(Capsule())
+                
+                    
+                    Image("Third")
+                        .resizable()
+                        .frame(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height/2.10)
                     
                     Button(action: {
                         self.newAccountType = "Organizer"
                     }) {
                         
-                        Text("Organizer").foregroundColor(.white).frame(width: UIScreen.main.bounds.width-100).padding().font(.body)
-                        
-                    }.background(Color(#colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1))).clipShape(Capsule()).padding(.top,50)
-                    Spacer()
+                        Text("Verified Organizer? Click Here")
+
+                    }
                 }//.padding([.top, .bottom], 50)
                 Spacer()
             
                 
             }
+            
             
     
             else if self.newAccountType == "Activist" {

@@ -77,7 +77,7 @@ struct OrgProfile: View {
                                 Button(action: {
                                     print("Button action")
                                 }) {
-                                    Text("Button label")
+                                    Text("Donate")
                                         .padding(10.0)
                                         .overlay(
                                             RoundedRectangle(cornerRadius: 10.0)
