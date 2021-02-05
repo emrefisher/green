@@ -64,6 +64,7 @@
 		A7FA07E825B3C8AD00A2BA10 /* OrganizerSignUpPageTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FA07E725B3C8AD00A2BA10 /* OrganizerSignUpPageTwo.swift */; };
 		BEDE18BA25BE8F4800BB83DD /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BEDE18B925BE8F4800BB83DD /* Colors.xcassets */; };
 		C2DE5DEA551576E28B09FE35 /* Pods_Environmentalists.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C51DB3FB339C181A291954 /* Pods_Environmentalists.framework */; };
+		D3D8D04325CDD25E00D0A3E8 /* UpdateEmailPass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D8D04225CDD25E00D0A3E8 /* UpdateEmailPass.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -147,6 +148,7 @@
 		A7FA07E225B3C87C00A2BA10 /* OrganizerSignUpPageOne.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizerSignUpPageOne.swift; sourceTree = "<group>"; };
 		A7FA07E725B3C8AD00A2BA10 /* OrganizerSignUpPageTwo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizerSignUpPageTwo.swift; sourceTree = "<group>"; };
 		BEDE18B925BE8F4800BB83DD /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		D3D8D04225CDD25E00D0A3E8 /* UpdateEmailPass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateEmailPass.swift; sourceTree = "<group>"; };
 		D5C51DB3FB339C181A291954 /* Pods_Environmentalists.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Environmentalists.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8E78CCD6CE226025120FD75 /* Pods-Environmentalists.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Environmentalists.debug.xcconfig"; path = "Target Support Files/Pods-Environmentalists/Pods-Environmentalists.debug.xcconfig"; sourceTree = "<group>"; };
 		EB8375C0007B95D2AAE90A18 /* Pods-EnvironmentalistsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EnvironmentalistsTests.debug.xcconfig"; path = "Target Support Files/Pods-EnvironmentalistsTests/Pods-EnvironmentalistsTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -354,6 +356,7 @@
 				A76FE3B0252117E20061EF34 /* AboutUs.swift */,
 				A76FE3BB252118140061EF34 /* Notifications.swift */,
 				A76FE3C02521182B0061EF34 /* PrivacyPolicy.swift */,
+				D3D8D04225CDD25E00D0A3E8 /* UpdateEmailPass.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -676,6 +679,7 @@
 				A73AED2D25C40C6D00C19E81 /* ActivistSignUpPageFive.swift in Sources */,
 				A7FA07E325B3C87C00A2BA10 /* OrganizerSignUpPageOne.swift in Sources */,
 				A75BCF7425A2D46000FFD350 /* OrgProfile.swift in Sources */,
+				D3D8D04325CDD25E00D0A3E8 /* UpdateEmailPass.swift in Sources */,
 				A795A3FF259C0F5D00327F2D /* OnboardingPageFour.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
