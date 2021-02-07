@@ -146,10 +146,10 @@ struct MyAccountOrganizerView: View {
                             Spacer()
                         }.offset(x: UIScreen.main.bounds.width/32)
                         
-                        HStack {
+                       /* HStack {
                         Text("\(self.currentOrganizer.currentUserInformation.numberFollowers ?? 0) Followers") .font(.system(size: 12)).bold()
                             Spacer()
-                        }.offset(x: UIScreen.main.bounds.width/32)
+                        }.offset(x: UIScreen.main.bounds.width/32)*/
                         
                     }
                 }.offset(y: -UIScreen.main.bounds.height/16)
@@ -315,6 +315,7 @@ struct MyAccountActivistView: View {
         if isEditingProfile == false {
             
             NavigationView {
+                    
                 VStack(spacing: 0){
                     
                     RandomCoverPhoto()
@@ -363,7 +364,9 @@ struct MyAccountActivistView: View {
                             List {
                                 ForEach(currentActivist.upcomingEvents) { Event in
                                     NavigationLink(destination: EventPage(event: Event, navigatingThroughMyAccount: true)) {
+                                      
                                         EventRow(event: Event)
+                                        
                                     }
                                 }
                             }
@@ -372,7 +375,9 @@ struct MyAccountActivistView: View {
                             List {
                                 ForEach(currentActivist.pastEvents) { Event in
                                     NavigationLink(destination: EventPage(event: Event, navigatingThroughMyAccount: true)) {
+                                        
                                         EventRow(event: Event)
+                                        
                                     }
                                 }
                             }
@@ -384,7 +389,9 @@ struct MyAccountActivistView: View {
                     })
                     
                 }
-            }
+                
+                
+            }.padding(.trailing)
         }
         else {
             
