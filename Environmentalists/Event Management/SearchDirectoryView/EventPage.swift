@@ -28,6 +28,7 @@ struct EventPage: View {
     @State private var isAttending = false
     @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 51.507222, longitude: -0.1275), span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
     @State private var coordinates: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
+    @State var markers: [Marker]?
     //@ObservedObject var num = monitorAttendees()
     
     var body: some View {
@@ -101,10 +102,9 @@ struct EventPage: View {
                             }
                             
                             VStack {
-                                let markers = [Marker(location: MapMarker(coordinate: CLLocationCoordinate2D(latitude: self.region.center.latitude, longitude: self.region.center.longitude), tint: .red))]
                                 
                                 Map(coordinateRegion: $region,
-                                         annotationItems: markers) { marker in
+                                    annotationItems: markers ?? []) { marker in
                                            marker.location
                                 }
                                 }.frame(width: UIScreen.main.bounds.width*7/8, height: UIScreen.main.bounds.height/4)
@@ -137,12 +137,17 @@ struct EventPage: View {
             if self.currentUser.currentUserInformation.userEventIDs.contains(self.event.id) {
                 self.isAttending = true
             }
-            var geocoder = CLGeocoder()
+            
+            let geocoder = CLGeocoder()
                        geocoder.geocodeAddressString(self.event.location) {
                            placemarks, error in
                            let placemark = placemarks?.first
-                           self.region.center.latitude = placemark?.location?.coordinate.latitude ?? 0.0
-                           self.region.center.longitude = placemark?.location?.coordinate.longitude ?? 0.0
+                        let locationLatitude = placemark?.location?.coordinate.latitude ?? 0.0
+                        let locationLongitude = placemark?.location?.coordinate.longitude ?? 0.0
+                           self.region.center.latitude = locationLatitude
+                           self.region.center.longitude = locationLongitude
+                        self.coordinates = CLLocationCoordinate2D(latitude: locationLatitude, longitude: locationLongitude)
+                        self.markers = [Marker(location: MapMarker(coordinate: self.coordinates, tint: .red))]
                    }
          
         }
