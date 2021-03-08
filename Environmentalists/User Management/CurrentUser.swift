@@ -45,6 +45,8 @@ class CurrentUser: ObservableObject {
         
         let UID = user!.uid
         let database = Firestore.firestore()
+        
+        if self.currentUserInformation.id == "" {
         database.collection("Organizers").whereField("Organizer ID", isEqualTo: UID).getDocuments() { (querySnapshot, err) in
             
             if err != nil {
@@ -68,6 +70,7 @@ class CurrentUser: ObservableObject {
                 self.currentUserInformation.accountType = "Organizer"
             }
             
+        }
         }
         
         if self.currentUserInformation.id == "" {

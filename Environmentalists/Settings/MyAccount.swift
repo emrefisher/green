@@ -38,8 +38,7 @@ struct MyAccount: View {
         if currentUser.currentUserInformation.accountType == "Organizer" {
             MyAccountOrganizerView().environmentObject(currentUser)
         }
-        else
-        {
+        else if currentUser.currentUserInformation.accountType == "Activist" {
             MyAccountActivistView().environmentObject(currentUser)
         }
     }
@@ -52,15 +51,24 @@ struct MyAccountOrganizerView: View {
     @State private var isEditingProfile = false
     @State private var editedFields = [String]()
     @State private var orgEvents = [Event]()
+    @State private var eventIndex = 0
+    private let dateRange = ["Upcoming", "Past"]
     
     var body: some View {
-        
+
+        if currentOrganizer.currentUserInformation.userEvents.count != currentOrganizer.currentUserInformation.userEventIDs.count {
+            currentOrganizer.getUserEvents() { _ in
+                currentOrganizer.getSortedEvents()
+            }
+        }
+        return ZStack {
         if isEditingProfile == false {
+            NavigationView {
             VStack(spacing: 0){
-                
+
                 VStack {
-                   
-                    
+
+
                     if ( self.currentOrganizer.currentUserInformation.coverPhotoURL != "") {
                     WebImage(url: URL(string: "\(self.currentOrganizer.currentUserInformation.coverPhotoURL)"))
                         .resizable()
@@ -73,11 +81,11 @@ struct MyAccountOrganizerView: View {
                             .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height/5)
                             .aspectRatio(contentMode: .fit)
                     }
-                    
+
                 }
-                
+
                 VStack(spacing: 5) {
-                    
+
                     HStack {
                     WebImage(url: URL(string: "\(self.currentOrganizer.currentUserInformation.profPicURL)"))
                         .resizable()
@@ -85,7 +93,7 @@ struct MyAccountOrganizerView: View {
                         .overlay(Circle().stroke(Color.green, lineWidth: 5))
                         .frame(width: UIScreen.main.bounds.height/8, height: UIScreen.main.bounds.height/8, alignment: .leading)
                         .padding()
-                        
+
                         Spacer()
                         let completeURL = "https://" + self.currentOrganizer.currentUserInformation.websiteLink!
                         let url = URL(string:  completeURL)
@@ -103,10 +111,10 @@ struct MyAccountOrganizerView: View {
                                 .padding(UIScreen.main.bounds.width/50)
                                 .background(Color(#colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1))).clipShape(Capsule())
                                 .offset(x: -UIScreen.main.bounds.width/50 )
-                                    
-                            
+
+
                         }
-                        
+
                         Button(action: {
                             self.isEditingProfile.toggle()
                         }) {
@@ -122,9 +130,9 @@ struct MyAccountOrganizerView: View {
                     Text(self.currentOrganizer.currentUserInformation.name)
                         .font(.headline)
                         Spacer()
-                        
+
                     }.offset(x: UIScreen.main.bounds.width/32)
-                    
+
                     HStack(spacing: 25) {
                         Text(self.currentOrganizer.currentUserInformation.description!)
                             .font(.system(size: 10))
@@ -132,10 +140,10 @@ struct MyAccountOrganizerView: View {
                             .foregroundColor(Color.black)
                         Spacer()
                     }.offset(x: UIScreen.main.bounds.width/32)
-                    
+
                     VStack() {
-                       
-                        
+
+
                         HStack {
                                 HStack(spacing: 5) {
                                     Image(systemName:"mappin.and.ellipse")
@@ -145,28 +153,39 @@ struct MyAccountOrganizerView: View {
                                 }
                             Spacer()
                         }.offset(x: UIScreen.main.bounds.width/32)
-                        
+
                        /* HStack {
                         Text("\(self.currentOrganizer.currentUserInformation.numberFollowers ?? 0) Followers") .font(.system(size: 12)).bold()
                             Spacer()
                         }.offset(x: UIScreen.main.bounds.width/32)*/
-                        
+
                     }
                 }.offset(y: -UIScreen.main.bounds.height/16)
-                
+
                 Spacer()
-                
+
+                Picker("", selection: $eventIndex) {
+                    ForEach(0..<2) {
+                        Text(dateRange[$0])
+                    }
+                }.pickerStyle(SegmentedPickerStyle())
                 
                 
                 List {
-                    ForEach(self.orgEvents) { Event in
+                    ForEach((eventIndex == 0) ? currentOrganizer.upcomingEvents : currentOrganizer.pastEvents) { Event in
                         NavigationLink(destination: EventPage(event: Event, navigatingThroughMyAccount: true)) {
+                            
                             EventRow(event: Event)
+                            
                         }
-                    }.onDelete(perform: delete(at:))
-                }
-                
+                    }
+                }.listStyle(PlainListStyle())
+
             }.navigationBarTitle("", displayMode: .inline)
+            .navigationBarItems(trailing: NavigationLink(destination: Settings()) {
+                Image(systemName: "gear").font(.largeTitle).foregroundColor(.black)
+            })
+            }
             .onAppear() {
 //                if currentOrganizer.currentUserInformation.userEvents.count != currentOrganizer.currentUserInformation.userEventIDs.count {
 //                    currentOrganizer.getUserEvents()
@@ -174,11 +193,11 @@ struct MyAccountOrganizerView: View {
             }
 
         }
-        
+
         else {
-            
+
             Form {
-                
+
                 Section(header: Text("Organization Name")) {
                     TextField("", text: self.$currentOrganizer.currentUserInformation.name, onEditingChanged: { _ in
                         self.editedFields.append("Organization Name")
@@ -199,11 +218,11 @@ struct MyAccountOrganizerView: View {
                         self.editedFields.append("Organization Website Link")
                     }
                     )}
-                
+
             }
             HStack {
-                
-                
+
+
                 HStack {
                     Button(action: {
                         self.isEditingProfile.toggle()
@@ -232,6 +251,7 @@ struct MyAccountOrganizerView: View {
                 }
             }
         }
+    }
     }
     
     private func updateOrganizerInFirebase() {
@@ -296,18 +316,16 @@ struct MyAccountActivistView: View {
     @EnvironmentObject var currentActivist: CurrentUser
     @State private var isEditingProfile = false
     @State private var isUpcomingEvents = true
+    @State private var eventIndex = 0
+    private let dateRange = ["Upcoming", "Past"]
     @State private var editedFields = [String]()
-    @State private var actEvents = [Event]()
-    @State private var pastEvents = [Event]()
-    @State private var futureEvents = [Event]()
     @State private var refreshedPage = false
     
     var body: some View {
         
         if currentActivist.currentUserInformation.userEvents.count != currentActivist.currentUserInformation.userEventIDs.count {
             currentActivist.getUserEvents() { _ in
-                currentActivist.pastEvents = getSortedEvent(actEvents: currentActivist.currentUserInformation.userEvents)["Past"]!
-                currentActivist.upcomingEvents = getSortedEvent(actEvents: currentActivist.currentUserInformation.userEvents)["Upcoming"]!
+                currentActivist.getSortedEvents()
             }
         }
         
@@ -345,43 +363,23 @@ struct MyAccountActivistView: View {
                         Spacer()
                         
                         
-                        HStack {
-                            Button(action: {
-                                self.isUpcomingEvents = true
-                            }) {
-                                Text("Upcoming Events")
+                        Picker("", selection: $eventIndex) {
+                            ForEach(0..<2) {
+                                Text(dateRange[$0])
                             }
-                            .padding()
-                            
-                            Button(action: {
-                                self.isUpcomingEvents = false
-                            }) {
-                                Text("Past Events")
-                            }
-                            .padding()
-                        }
-                        if self.isUpcomingEvents == true {
-                            List {
-                                ForEach(currentActivist.upcomingEvents) { Event in
-                                    NavigationLink(destination: EventPage(event: Event, navigatingThroughMyAccount: true)) {
-                                      
-                                        EventRow(event: Event)
-                                        
-                                    }
+                        }.pickerStyle(SegmentedPickerStyle())
+                        
+                        
+                        List {
+                            ForEach((eventIndex == 0) ? currentActivist.upcomingEvents : currentActivist.pastEvents) { Event in
+                                NavigationLink(destination: EventPage(event: Event, navigatingThroughMyAccount: true)) {
+                                    
+                                    EventRow(event: Event)
+                                    
                                 }
                             }
-                        }
-                        else {
-                            List {
-                                ForEach(currentActivist.pastEvents) { Event in
-                                    NavigationLink(destination: EventPage(event: Event, navigatingThroughMyAccount: true)) {
-                                        
-                                        EventRow(event: Event)
-                                        
-                                    }
-                                }
-                            }
-                        }
+                        }.listStyle(PlainListStyle())
+                        
                         
                     }.navigationBarTitle("", displayMode: .inline)
                     .navigationBarItems(trailing: NavigationLink(destination: Settings()) {
@@ -435,17 +433,11 @@ struct MyAccountActivistView: View {
                 }
             }
         }
+        }.onAppear() {
+            if currentActivist.currentUserInformation.userEvents.count != currentActivist.currentUserInformation.userEventIDs.count {
+                refreshedPage.toggle()
+            }
         }
-//        .onAppear() {
-//            print(refreshedPage)
-//            if !self.refreshedPage {
-//                if self.pastEvents.count + self.futureEvents.count != self.currentActivist.currentUserInformation.userEvents.count {
-//            pastEvents = getSortedEvent(actEvents: currentActivist.currentUserInformation.userEvents)["Past"]!
-//            futureEvents = getSortedEvent(actEvents: currentActivist.currentUserInformation.userEvents)["Upcoming"]!
-//
-//        }
-//        }
-//        }
     }
     
     struct RandomCoverPhoto: View {
@@ -504,48 +496,7 @@ struct MyAccountActivistView: View {
         
         return ["Past": sortedPastEvents, "Upcoming": sortedFutureEvents]
     }
-    private static func orderEvents(actEvents: inout [Event], beforeToday: inout [Event], afterToday: inout [Event])-> [[Event]]  {
-        //date sorting
-        let today = Date()
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MM dd, yyyy"
-        for orgEvent in actEvents {
-            let date = dateFormatter.date(from: orgEvent.date)
-            if (date! < today)
-            {
-                beforeToday.append(orgEvent)
-            }
-            else {
-                afterToday.append(orgEvent)
-            }
-        }
-        return [beforeToday, afterToday]
-    }
-    
-    private func getActivistEvents() {
-        
-        let database = Firestore.firestore()
-        let eventRef = database.collection("Events")
-        for event in currentActivist.currentUserInformation.userEventIDs {
-            eventRef.document(event).getDocument() { (document, error) in
-                if let document = document {
-                    let id = document.documentID
-                    let eventTitle = document.get("Name") as! String
-                    let organizer = document.get("Organizer") as! String
-                    let organizerID = document.get("Organizer ID") as! String
-                    let eventDescription = document.get("Description") as! String
-                    let date = document.get("Date") as! String
-                    let time = document.get("Time") as! String
-                    let location = document.get("Location") as! String
-                    let numAttending = document.get("Number Attending") as! Int
-                    let eventPhotoURL = document.get("Event Photo URL") as! String
-                    self.actEvents.append(Event(id: id, eventTitle: eventTitle, eventOrganizer: organizer, eventOrganizerID: organizerID, eventDescription: eventDescription, date: date, time: time, location: location, numAttending: numAttending, eventPhotoURL: eventPhotoURL))
-                } else {
-                    print("Document does not exist")
-                }
-            }
-        }
-    }
+
 }
     
 struct MyAccount_Previews: PreviewProvider {
