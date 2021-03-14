@@ -220,6 +220,9 @@ struct MyAccountOrganizerView: View {
                     )}
 
             }
+            
+            VStack {
+                Spacer()
             HStack {
 
 
@@ -249,6 +252,7 @@ struct MyAccountOrganizerView: View {
                     .cornerRadius(40)
                     .offset(x: -15, y: -5)
                 }
+            }
             }
         }
     }
