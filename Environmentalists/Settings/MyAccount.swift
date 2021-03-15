@@ -506,5 +506,6 @@ struct MyAccountActivistView: View {
 struct MyAccount_Previews: PreviewProvider {
     static var previews: some View {
         MyAccount()
+            
     }
 }

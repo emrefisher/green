@@ -18,6 +18,7 @@ struct ActivistSignUpPageTwo: View {
     var body: some View {
             VStack(alignment: .leading){
                 
+                
                 Text("Choose Password")
                     .font(.headline)
                     .fontWeight(.light)

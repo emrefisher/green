@@ -16,14 +16,7 @@ struct UpdateEmailPass: View {
         VStack {
             
             HStack {
-                Button(action: {
-                    sessionManager.authState = .login
-                }) {
-                    HStack(spacing: 5) {
-                        Image(systemName: "arrow.left")
-                        Text("Back")
-                    }
-                }
+                
                 Spacer()
             }.padding(.leading, 25.0)
             Text("Update Email and Password")

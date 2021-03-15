@@ -21,12 +21,14 @@ struct Settings: View {
             
             List{
                 
+            
                 link(icon: "leaf.fill", label: "My Account", destination: MyAccount().environmentObject(currentUser))
                 Button(action: {
                     self.ratingApp.toggle()
                     if let scene = UIApplication.shared.connectedScenes.first(where: {$0.activationState == .foregroundActive}) as? UIWindowScene {
                         SKStoreReviewController.requestReview(in: scene)
                     }
+                    
                 }) {
                     HStack {
                         Image(systemName: "leaf.fill").foregroundColor(.green)
@@ -35,6 +37,7 @@ struct Settings: View {
                     }
                 }
                 link(icon: "leaf.fill", label: "About Us", destination: AboutUs())
+                link(icon: "leaf.fill", label: "Update Email & Password", destination: UpdateEmailPass())
 //                link(icon: "leaf", label: "Notifications", destination: Notifications())
                 Link(destination: URL(string: "https://firebasestorage.googleapis.com/v0/b/environmentalists-c25cd.appspot.com/o/Privacy_App_11.26.pdf?alt=media&token=f501812b-545e-4667-a954-3dd6919206b4")!) {
                     HStack {

@@ -15,6 +15,10 @@ struct ActivistSignUpPageOne: View {
     
     var body: some View {
         VStack {
+    
+            
+    
+            
             Button("Back", action: {
                 self.accountType = ""
             })
@@ -46,4 +50,3 @@ struct ActivistSignUpPageOne: View {
         return emailPredicate.evaluate(with: cleanedEmail)
     }
 }
-
