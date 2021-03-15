@@ -437,11 +437,12 @@ struct MyAccountActivistView: View {
                 }
             }
         }
-        }.onAppear() {
-            if currentActivist.currentUserInformation.userEvents.count != currentActivist.currentUserInformation.userEventIDs.count {
-                refreshedPage.toggle()
-            }
         }
+//        }.onAppear() {
+//            if currentActivist.currentUserInformation.userEvents.count != currentActivist.currentUserInformation.userEventIDs.count {
+//                refreshedPage.toggle()
+//            }
+//        }
     }
     
     struct RandomCoverPhoto: View {

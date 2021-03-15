@@ -16,7 +16,7 @@ struct Login: View {
     @State private var showPassword = false
     @State private var frameWidth = UIScreen.main.bounds.width * 0.85
     @State private var frameHeight = UIScreen.main.bounds.height / 2
-    @State var offset: CGFloat = 450
+    @State var offset: CGFloat = 200
     @State var timer: Timer?
     
     var body: some View {
