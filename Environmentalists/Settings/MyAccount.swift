@@ -144,7 +144,7 @@ struct MyAccountOrganizerView: View {
                     VStack() {
 
 
-                        HStack {
+                      /*  HStack {
                                 HStack(spacing: 5) {
                                     Image(systemName:"mappin.and.ellipse")
                                         .resizable()
@@ -152,7 +152,7 @@ struct MyAccountOrganizerView: View {
                                     Text(self.currentOrganizer.currentUserInformation.location!).font(.system(size: 10))
                                 }
                             Spacer()
-                        }.offset(x: UIScreen.main.bounds.width/32)
+                        }.offset(x: UIScreen.main.bounds.width/32)*/
 
                        /* HStack {
                         Text("\(self.currentOrganizer.currentUserInformation.numberFollowers ?? 0) Followers") .font(.system(size: 12)).bold()
