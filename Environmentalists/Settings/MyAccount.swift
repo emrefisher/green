@@ -169,11 +169,12 @@ struct MyAccountOrganizerView: View {
                         Text(dateRange[$0])
                     }
                 }.pickerStyle(SegmentedPickerStyle())
+                .padding(.horizontal, 25)
                 
                 
                 List {
                     ForEach((eventIndex == 0) ? currentOrganizer.upcomingEvents : currentOrganizer.pastEvents) { Event in
-                        NavigationLink(destination: EventPage(event: Event, navigatingThroughMyAccount: true)) {
+                        NavigationLink(destination: EventPage(event: Event, navigatingThroughMyAccount: true, eventClicked: .constant(false))) {
                             
                             EventRow(event: Event)
                             
@@ -372,11 +373,12 @@ struct MyAccountActivistView: View {
                                 Text(dateRange[$0])
                             }
                         }.pickerStyle(SegmentedPickerStyle())
+                        .padding(.horizontal, 25)
                         
                         
                         List {
                             ForEach((eventIndex == 0) ? currentActivist.upcomingEvents : currentActivist.pastEvents) { Event in
-                                NavigationLink(destination: EventPage(event: Event, navigatingThroughMyAccount: true)) {
+                                NavigationLink(destination: EventPage(event: Event, navigatingThroughMyAccount: true, eventClicked: .constant(false))) {
                                     
                                     EventRow(event: Event)
                                     
@@ -393,7 +395,7 @@ struct MyAccountActivistView: View {
                 }
                 
                 
-            }.padding(.trailing)
+            }
         }
         else {
             

@@ -35,7 +35,7 @@ struct SearchDirectoryViewPage: View {
     @Binding var filteredItems: [Event]
     @ObservedObject var eventManager: EventManager
     @State private var isCreatingEvent = false
-    
+    @State private var eventClicked = false
     
     var body: some View {
         
@@ -45,7 +45,7 @@ struct SearchDirectoryViewPage: View {
         
         return ZStack {
             
-            CustomNavigationView(view: AnyView(Home(filteredItems: $filteredItems)), largeTitle: false, title: "",
+            CustomNavigationView(view: AnyView(Home(filteredItems: $filteredItems, eventClicked: $eventClicked)), largeTitle: false, title: "",
                                  
                                  onSearch: { (txt) in
                                     
@@ -67,7 +67,7 @@ struct SearchDirectoryViewPage: View {
                 .ignoresSafeArea()
                 
             
-            if self.currentUser.currentUserInformation.accountType == "Organizer" {
+            if self.currentUser.currentUserInformation.accountType == "Organizer" && eventClicked == false{
                 Spacer()
                 VStack {
                     
@@ -108,6 +108,7 @@ struct SearchDirectoryView_Previews: PreviewProvider {
 struct Home: View {
     // for search Bar...
     @Binding var filteredItems : [Event]
+    @Binding var eventClicked: Bool
     
     var body: some View {
 
@@ -126,7 +127,7 @@ struct Home: View {
                 
                 EventRow(event: Event)
 
-                NavigationLink(destination: EventPage(event: Event, navigatingThroughMyAccount: false)) {
+                NavigationLink(destination: EventPage(event: Event, navigatingThroughMyAccount: false, eventClicked: $eventClicked)) {
                     EmptyView()
                 }.frame(width: 0)
                 .opacity(0)

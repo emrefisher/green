@@ -43,8 +43,8 @@ struct CreateEventView: View {
                                 .fill(Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)))
                                 .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height / 4, alignment: .center)
                             VStack {
-                                Image(systemName: "camera.on.rectangle").resizable().frame(width: 90, height: 70).foregroundColor(.gray)
-                                Text("Add Photo").foregroundColor(.gray)
+                                Image(systemName: "camera.on.rectangle").resizable().frame(width: 90, height: 70).foregroundColor(.black)
+                                Text("Add Photo").foregroundColor(.black)
                             }
                         }
                     }
@@ -129,7 +129,7 @@ struct CreateEventView: View {
                 }.frame(height: UIScreen.main.bounds.height/1.75)
                 
         }.edgesIgnoringSafeArea(.all)
-            .background(Color(#colorLiteral(red: 0, green: 1, blue: 0.2352705896, alpha: 0.5)))
+            .background(Color.gray.opacity(0.5))
             .navigationBarItems(leading: SearchDirectoryView())
         .onAppear() {
             self.eventCreationManager.clearEventData()

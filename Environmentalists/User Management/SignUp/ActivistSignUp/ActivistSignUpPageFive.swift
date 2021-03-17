@@ -17,11 +17,7 @@ struct ActivistSignUpPageFive: View {
     var body: some View {
         
         VStack {
-            ProgressView(value: CGFloat(self.activistSignUpManager.pageNumber), total: 6) {
-                HStack(alignment: .center) {
-                    Text("Progress: (\(self.activistSignUpManager.pageNumber)/6)")
-                }
-            }
+
             Spacer()
             Text("Choose Profile Pic").font(.largeTitle)
             if self.activistSignUpManager.profilePic != nil {

@@ -12,6 +12,7 @@ struct OrgProfile: View {
     
     @State var organizerID: String
     @ObservedObject var organizer = OrganizerInfo()
+    @Binding var pressed: Bool
     
     var body: some View {
         
@@ -122,7 +123,11 @@ struct OrgProfile: View {
             
         }
         .onAppear() {
+            pressed = true
             self.organizer.getOrganizerInformation(organizationID: self.organizerID)
+        }
+        .onDisappear() {
+            pressed = false
         }
     }
 }

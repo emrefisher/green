@@ -13,6 +13,13 @@ struct OrganizerSignUpReviewSubmission: View {
     
     var body: some View {
         VStack {
+            HStack {
+                Button("Back", action: {
+                    self.organizerSignUpManager.pageNumber -= 1
+                })
+                Spacer()
+            }.padding()
+            Spacer()
             if self.organizerSignUpManager.pickedCoverPhoto != nil {
                 self.organizerSignUpManager.pickedCoverPhoto!
                     .resizable()
@@ -31,6 +38,7 @@ struct OrganizerSignUpReviewSubmission: View {
             Button("Create Profile", action: {
                 sessionManager.signUpAsOrganizer(email: self.organizerSignUpManager.email, password: self.organizerSignUpManager.password, confimedPassword: self.organizerSignUpManager.confirmedPassword, orgName: self.organizerSignUpManager.orgName, orgDescription: self.organizerSignUpManager.orgDescription, orgLink: self.organizerSignUpManager.orgWebsite, profilePic: self.organizerSignUpManager.profilePicData, coverPic: self.organizerSignUpManager.coverPhotoData)
             })
+            Spacer()
         }.alert(isPresented: $sessionManager.alert) {
             Alert(title: Text("Sign-Up Error"), message: Text(sessionManager.errorMessage), dismissButton: .default(Text("OK")))
         }

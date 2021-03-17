@@ -21,7 +21,7 @@ struct FindEventsViewTopBar: View {
     var body: some View {
         
         ZStack() {
-            SearchBar(text: self.$searchText, searchData: self.$eventManager.eventInformation)
+//            SearchBar(text: self.$searchText, searchData: self.$eventManager.eventInformation)
             
 //            HStack(spacing: 20) {
 //                Picker(selection: $showMapView, label: Text(""), content: {

@@ -18,11 +18,11 @@ struct ActivistSignUpPageTwo: View {
     var body: some View {
             VStack(alignment: .leading){
                 
-                
+                Spacer()
                 Text("Choose Password")
                     .font(.headline)
                     .fontWeight(.light)
-                    .foregroundColor(.white)
+                    .foregroundColor(.black)
                     .padding([.leading, .trailing], 20)
                 
                 HStack {
@@ -46,13 +46,13 @@ struct ActivistSignUpPageTwo: View {
                     }
                 }
                 
-                Text("Password must be at least 8 total characters long and must include at least one capital letter and one number.").font(.caption).foregroundColor(.white)
+                Text("Password must be at least 8 total characters long and must include at least one capital letter and one number.").font(.caption).foregroundColor(.black)
                 
-                
+                Spacer()
                 Text("Confirm Password")
                     .font(.headline)
                     .fontWeight(.light)
-                    .foregroundColor(.white)
+                    .foregroundColor(.black)
                     .padding([.leading, .trailing], 20)
                 
                 HStack {
@@ -88,6 +88,7 @@ struct ActivistSignUpPageTwo: View {
                         Alert(title: Text("Password Error"), message: Text(self.errorMessage), dismissButton: .default(Text("OK")))
                     }
                 }
+                Spacer()
                 
             }.padding(.horizontal, UIScreen.main.bounds.width/20)
     }

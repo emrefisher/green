@@ -27,6 +27,8 @@ struct EventPage: View {
     @State private var actEvents = [Event]()
     @State private var isAttending = false
     @ObservedObject var mapManager = MapManager()
+    @Binding var eventClicked: Bool
+    @State var orgPressed = false
     //@ObservedObject var num = monitorAttendees()
     
     var body: some View {
@@ -51,7 +53,7 @@ struct EventPage: View {
                         VStack(alignment: .leading) {
                             
                             HStack {
-                            NavigationLink(destination: OrgProfile(organizerID: self.event.eventOrganizerID)) {
+                                NavigationLink(destination: OrgProfile(organizerID: self.event.eventOrganizerID, pressed: $orgPressed)) {
                                 Text("@\(self.event.eventOrganizer)")
                                     .font(.headline)
                                     .fontWeight(.regular)
@@ -99,6 +101,15 @@ struct EventPage: View {
                                     .font(.system(size: 12.5))
                             }
                             
+                            Text("\(self.event.eventDescription)")
+                                .padding(EdgeInsets(top: 10, leading: 30, bottom: 10, trailing: 30))
+                                .font(.subheadline)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .stroke(Color.dearthGreen, lineWidth: 1.2)
+                                )
+
+                            
                             VStack {
                                 
                                 Map(coordinateRegion: $mapManager.region,
@@ -132,12 +143,19 @@ struct EventPage: View {
             }
         }.edgesIgnoringSafeArea(.all)
         .onAppear() {
+            eventClicked = true
+            
             if self.currentUser.currentUserInformation.userEventIDs.contains(self.event.id) {
                 self.isAttending = true
             }
             
             mapManager.getGeoLocation(event: event)
          
+        }
+        .onDisappear() {
+            if orgPressed == false {
+                eventClicked = false
+            }
         }
         
     }

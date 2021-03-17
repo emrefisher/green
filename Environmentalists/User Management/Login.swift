@@ -29,11 +29,16 @@ struct Login: View {
                 .offset(x: self.offset)
         VStack {
             
+            Text("Environmend")
+                .font(.largeTitle)
+                .italic()
+
+                .padding(.top, self.frameHeight / 7)
+            
             Text("Sign In")
                 .font(.largeTitle)
                 .italic()
                 .padding(.bottom, self.frameHeight / 20)
-                .padding(.top, self.frameHeight / 7)
             
             VStack(spacing: self.frameWidth / 30) {
                     

@@ -17,9 +17,18 @@ struct OrganizerSignUpPageOne: View {
     
     var body: some View {
         VStack {
-            Button("Back", action: {
-                self.accountType = ""
-            })
+            HStack {
+                Button("Back", action: {
+                    self.accountType = ""
+                })
+                Spacer()
+            }.padding()
+            ProgressView(value: CGFloat(self.organizerSignUpManager.pageNumber), total: 6) {
+                HStack(alignment: .center) {
+                    Text("Progress: (\(self.organizerSignUpManager.pageNumber)/6)")
+                }
+            }
+            Spacer()
             Text("Enter Email")
             TextField("Example: abc123@xyz.com", text: self.$organizerSignUpManager.email).textFieldStyle(RoundedBorderTextFieldStyle()).disableAutocorrection(true)
             Button("Next Page", action: {
@@ -32,6 +41,7 @@ struct OrganizerSignUpPageOne: View {
             }).alert(isPresented: $alert) {
                 Alert(title: Text("Sign-Up Error"), message: Text("Please enter a valid email."), dismissButton: .default(Text("OK")))
             }
+            Spacer()
         }.padding(.horizontal, UIScreen.main.bounds.width/20)
     }
     
