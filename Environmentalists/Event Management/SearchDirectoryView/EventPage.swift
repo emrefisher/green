@@ -104,10 +104,6 @@ struct EventPage: View {
                             Text("\(self.event.eventDescription)")
                                 .padding(EdgeInsets(top: 10, leading: 30, bottom: 10, trailing: 30))
                                 .font(.subheadline)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 10)
-                                        .stroke(Color.dearthGreen, lineWidth: 1.2)
-                                )
 
                             
                             VStack {
