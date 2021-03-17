@@ -129,7 +129,7 @@ struct CreateEventView: View {
                 }.frame(height: UIScreen.main.bounds.height/1.75)
                 
         }.edgesIgnoringSafeArea(.all)
-            .background(Color.gray.opacity(0.5))
+            .background(Color.gray.opacity(0.25))
             .navigationBarItems(leading: SearchDirectoryView())
         .onAppear() {
             self.eventCreationManager.clearEventData()

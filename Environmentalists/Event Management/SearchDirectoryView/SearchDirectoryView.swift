@@ -80,7 +80,8 @@ struct SearchDirectoryViewPage: View {
                         }) {
                             Image(systemName: "plus.circle.fill").foregroundColor(Color(#colorLiteral(red: 0.2666666667, green: 0.937254902, blue: 0.1607843137, alpha: 1))).background(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1))).font(.system(size: 50)).clipShape(Circle())
                                 //.shadow(color: .black, radius: 10, x: 5, y: 5)
-                        }.padding(.trailing, UIScreen.main.bounds.width/15).sheet(isPresented: $isCreatingEvent, content: CreateEventView.init)
+                        }.shadow(radius: 5)
+                        .padding(.trailing, UIScreen.main.bounds.width/15).sheet(isPresented: $isCreatingEvent, content: CreateEventView.init)
                         
                     }.padding(.bottom, UIScreen.main.bounds.height/30)
                     

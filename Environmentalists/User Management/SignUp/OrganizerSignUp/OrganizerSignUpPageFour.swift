@@ -20,7 +20,7 @@ struct OrganizerSignUpPageFour: View {
             }
             Spacer()
             Text("Enter Organization Description")
-            TextEditor(text: self.$organizerSignUpManager.orgDescription).textFieldStyle(RoundedBorderTextFieldStyle()).frame(width: UIScreen.main.bounds.width - 100, height: UIScreen.main.bounds.height/3)
+            TextEditor(text: self.$organizerSignUpManager.orgDescription).textFieldStyle(RoundedBorderTextFieldStyle()).frame(width: UIScreen.main.bounds.width - 100, height: UIScreen.main.bounds.height/3).border(Color.black, width: 2)
             Button(action: {
                 self.organizerSignUpManager.pageNumber -= 1
             }) {
