@@ -25,6 +25,7 @@ struct EventPage: View {
     @State var navigatingThroughMyAccount: Bool
     @EnvironmentObject var currentUser: CurrentUser
     @State private var actEvents = [Event]()
+    @State private var orgEvents = [String]()
     @State private var isAttending = false
     @ObservedObject var mapManager = MapManager()
     @Binding var eventClicked: Bool
@@ -32,6 +33,7 @@ struct EventPage: View {
     //@ObservedObject var num = monitorAttendees()
     
     var body: some View {
+        
         ScrollView {
             VStack(spacing: 0){
                 VStack {
@@ -45,9 +47,31 @@ struct EventPage: View {
                 }
                 
                 VStack(spacing: 6) {
-                    
+                    if self.currentUser.currentUserInformation.name == self.event.eventOrganizer {
                     Text("\(self.event.eventTitle)")
                         .font(.title)
+                        .toolbar {
+                                        ToolbarItem(placement: .primaryAction) {
+                                            
+                                            Menu {
+                                                Button(action: {}) {
+                                                    Label("Edit Event", systemImage: "pencil")
+                                                }
+
+                                                Button(action: {delete(currentUser: self.currentUser, event: self.event)}) {
+                                                    Label("Delete Event", systemImage: "trash")
+                                                }
+                                            }
+                                            label: {
+                                                Label("Options", systemImage: "ellipsis")
+                                            }
+                                        }
+                                    }
+                    }
+                    else {
+                        Text("\(self.event.eventTitle)")
+                            .font(.title)
+                    }
                     
                     HStack {
                         VStack(alignment: .leading) {
@@ -187,6 +211,18 @@ struct EventPage: View {
         }
     }
     
+}
+func delete(currentUser: CurrentUser, event: Event) {
+    let database = Firestore.firestore()
+    database.collection("Events").document(event.id).delete() { err in
+        if let err = err {
+            print(err)
+        } else {
+            print("success")
+        }
+    }
+    let userRef = database.collection("Organizers").document(currentUser.currentUserInformation.name)
+    userRef.updateData(["Events": FieldValue.arrayRemove([event.id])])
 }
 /*class monitorAttendees: ObservableObject {
     @Published var numAttending = 0

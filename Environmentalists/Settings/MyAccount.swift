@@ -50,7 +50,7 @@ struct MyAccountOrganizerView: View {
     @EnvironmentObject var currentOrganizer: CurrentUser
     @State private var isEditingProfile = false
     @State private var editedFields = [String]()
-    @State private var orgEvents = [Event]()
+    @State var orgEvents = [Event]()
     @State private var eventIndex = 0
     private let dateRange = ["Upcoming", "Past"]
     
@@ -162,7 +162,7 @@ struct MyAccountOrganizerView: View {
                     }
                 }.offset(y: -UIScreen.main.bounds.height/16)
 
-                Spacer()
+                //Spacer()
 
                 Picker("", selection: $eventIndex) {
                     ForEach(0..<2) {
@@ -170,6 +170,7 @@ struct MyAccountOrganizerView: View {
                     }
                 }.pickerStyle(SegmentedPickerStyle())
                 .padding(.horizontal, 25)
+                Spacer()
                 
                 
                 List {
@@ -177,6 +178,7 @@ struct MyAccountOrganizerView: View {
                         NavigationLink(destination: EventPage(event: Event, navigatingThroughMyAccount: true, eventClicked: .constant(false))) {
                             
                             EventRow(event: Event)
+                            
                             
                         }
                     }
