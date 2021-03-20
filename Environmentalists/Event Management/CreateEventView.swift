@@ -17,6 +17,7 @@ struct CreateEventView: View {
         UITableView.appearance().backgroundColor = .clear
     }
     
+    @Environment(\.presentationMode) var presentationMode
     @StateObject var eventCreationManager = EventCreationManager(titleLimit: 30, descriptionLimit: 500)
     @EnvironmentObject var currentUser: CurrentUser
     @State var eventDate = Date()
@@ -30,6 +31,15 @@ struct CreateEventView: View {
     
     var body: some View {
             VStack(spacing: 0) {
+                
+                HStack {
+                    Spacer()
+                    Button(action: {
+                        presentationMode.wrappedValue.dismiss()
+                    }) {
+                        Image(systemName: "xmark.circle").font(.system(size: 25))
+                    }
+                }.padding(.trailing, 25)
                 
                 Button(action: {
                     
@@ -138,6 +148,7 @@ struct CreateEventView: View {
             Alert(title: Text(""), message: Text("Event Created Successfully"), dismissButton: .default(Text("OK"), action: {
                 self.eventDate = Date()
                 self.eventCreationManager.clearEventData()
+                presentationMode.wrappedValue.dismiss()
             }))
         }
             .navigationBarItems(trailing: NavigationLink(destination: SearchDirectoryView()) {
