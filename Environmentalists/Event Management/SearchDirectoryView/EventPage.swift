@@ -30,10 +30,12 @@ struct EventPage: View {
     @ObservedObject var mapManager = MapManager()
     @Binding var eventClicked: Bool
     @State var orgPressed = false
+    @State private var isEditingEvent = false
+    @State private var editedFields = [String]()
     //@ObservedObject var num = monitorAttendees()
     
     var body: some View {
-        
+        if isEditingEvent == false {
         ScrollView {
             VStack(spacing: 0){
                 VStack {
@@ -54,7 +56,7 @@ struct EventPage: View {
                                         ToolbarItem(placement: .primaryAction) {
                                             
                                             Menu {
-                                                Button(action: {}) {
+                                                Button(action: {self.isEditingEvent.toggle()}) {
                                                     Label("Edit Event", systemImage: "pencil")
                                                 }
 
@@ -177,6 +179,81 @@ struct EventPage: View {
                 eventClicked = false
             }
         }
+        }
+        else {
+            Form {
+
+                Section(header: Text("Event Name")) {
+                    TextField("", text: self.$event.eventTitle, onEditingChanged: { _ in
+                        self.editedFields.append("Organization Name")
+                    }
+                    )}
+                Section(header: Text("Event Description")) {
+                    TextField("", text: self.$event.eventDescription, onEditingChanged: {_ in
+                        self.editedFields.append("Organization Description")
+                    }
+                    )}
+                Section(header: Text("Location")) {
+                    TextField("", text: self.$event.location, onEditingChanged: { _ in
+                        self.editedFields.append("Organization Location")
+                    }
+                    )}
+                //Section(header: Text("Date and Time")) {
+                    //DatePicker("Date", selection: self.$event.date, in: Date()..., displayedComponents: .date)
+                   // DatePicker("Time", selection: self.$event.time, displayedComponents: .hourAndMinute)
+                   // )}
+
+            }
+            
+            VStack {
+                Spacer()
+            HStack {
+
+
+                HStack {
+                    Button(action: {
+                        self.isEditingEvent.toggle()
+                    }) {
+                        Text("Cancel")
+                    }
+                    .padding()
+                    .foregroundColor(.white)
+                    .background(Color.red)
+                    .cornerRadius(40)
+                    .offset(x: 15, y: -5)
+                }
+                Spacer()
+                HStack {
+                    Button(action: {
+                        updateEventInFirebase(event: event)
+                        self.isEditingEvent.toggle()
+                    }) {
+                        Text("Save Changes")
+                    }
+                    .padding()
+                    .foregroundColor(.white)
+                    .background(Color.green)
+                    .cornerRadius(40)
+                    .offset(x: -15, y: -5)
+                }
+            }
+            }
+        }
+        
+    }
+    
+    private func updateEventInFirebase(event: Event) {
+        
+        let database = Firestore.firestore()
+        let eventInfo = self.event
+        let eventRef = database.collection("Events").document(event.id)
+        //let userRef = database.collection("Organizers").document(userInfo.id)
+        /*if self.editedFields.contains("Organization Name") && ((self.currentOrganizer.currentUserInformation.userEventIDs.count) != 0) {
+            for event in currentOrganizer.currentUserInformation.userEventIDs {
+                eventRef.document(event).updateData(["Organizer": self.currentOrganizer.currentUserInformation.name])
+            }
+        }*/
+        eventRef.updateData(["Name": eventInfo.eventTitle, "Description": eventInfo.eventDescription, "Location": eventInfo.location])
         
     }
     
