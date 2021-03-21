@@ -2,7 +2,7 @@
 //  Update Email and Password.swift
 //  Environmentalists
 //
-//  Created by Jess Hanf on 2/5/21.
+//  Created by Matthew Hanf on 2/5/21.
 //
 
 import SwiftUI

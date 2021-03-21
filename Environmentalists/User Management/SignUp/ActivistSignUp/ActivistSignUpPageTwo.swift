@@ -18,7 +18,15 @@ struct ActivistSignUpPageTwo: View {
     var body: some View {
             VStack(alignment: .leading){
                 
-                Spacer()
+                Button("Back", action: {
+                    self.activistSignUpManager.pageNumber -= 1
+                })
+                
+                Text("Password Information")
+                    .font(/*@START_MENU_TOKEN@*/.headline/*@END_MENU_TOKEN@*/)
+                    .padding(.leading,100)
+                    .padding(.bottom, 10)
+                
                 Text("Choose Password")
                     .font(.headline)
                     .fontWeight(.light)
@@ -46,9 +54,9 @@ struct ActivistSignUpPageTwo: View {
                     }
                 }
                 
-                Text("Password must be at least 8 total characters long and must include at least one capital letter and one number.").font(.caption).foregroundColor(.black)
+                Text("Password must be at least 8 total characters long and must include at least one capital letter and one number.").font(.caption).foregroundColor(.black).padding(.bottom)
                 
-                Spacer()
+                
                 Text("Confirm Password")
                     .font(.headline)
                     .fontWeight(.light)
@@ -72,19 +80,19 @@ struct ActivistSignUpPageTwo: View {
                     }) {
                         
                         Image(systemName: self.showConfirmedPassword ? "eye.fill" : "eye.slash.fill")
-                            .padding(.trailing, 17.5)
+                            .padding([.bottom, .trailing], 17.5)
                     }
                 }
+            
                 HStack {
-                    Button("Back", action: {
-                        self.activistSignUpManager.pageNumber -= 1
-                    })
+                    
                     
                     Button("Next", action: {
                         if validatePasswords() == nil {
                             self.activistSignUpManager.pageNumber += 1
                         }
-                    }).alert(isPresented: self.$alert) {
+                    }).frame(width: UIScreen.main.bounds.width - 50, height: UIScreen.main.bounds.height / 20).background(Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1))).clipShape(Capsule()).padding(.vertical, 7.5)
+                    .alert(isPresented: self.$alert) {
                         Alert(title: Text("Password Error"), message: Text(self.errorMessage), dismissButton: .default(Text("OK")))
                     }
                 }

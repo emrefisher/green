@@ -1,0 +1,34 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "HotReloading",
+        "repositoryURL": "https://github.com/johnno1962/HotReloading.git",
+        "state": {
+          "branch": null,
+          "revision": "0e975a54b644f072131a8611e32351fe29dfb7fd",
+          "version": "1.4.3"
+        }
+      },
+      {
+        "package": "SwiftRegex",
+        "repositoryURL": "https://github.com/johnno1962/SwiftRegex5",
+        "state": {
+          "branch": null,
+          "revision": "bc9b22e4b4521075057ae98826def52cea5226f0",
+          "version": "5.2.1"
+        }
+      },
+      {
+        "package": "SwiftTrace",
+        "repositoryURL": "https://github.com/johnno1962/SwiftTrace",
+        "state": {
+          "branch": null,
+          "revision": "b6b9a0a6f0efb134cae2f3e3bb55f382393036d8",
+          "version": "7.1.1"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

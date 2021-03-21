@@ -17,9 +17,14 @@ struct ActivistSignUpPageFive: View {
     var body: some View {
         
         VStack {
+            
+            Button("Back", action: {
+                self.activistSignUpManager.pageNumber -= 1
+            }).padding(.trailing, 330.0)
 
-            Spacer()
-            Text("Choose Profile Pic").font(.largeTitle)
+            Text("Choose Profile Pic")
+                .font(.headline)
+                .padding(.bottom, 10.0)
             if self.activistSignUpManager.profilePic != nil {
                 self.activistSignUpManager.profilePic!
                     .resizable()
@@ -39,12 +44,10 @@ struct ActivistSignUpPageFive: View {
                     }
             }
             HStack {
-                Button("Back", action: {
-                    self.activistSignUpManager.pageNumber -= 1
-                })
+               
                 Button("Next", action: {
                     self.activistSignUpManager.pageNumber += 1
-                })
+                }).frame(width: UIScreen.main.bounds.width - 50, height: UIScreen.main.bounds.height / 20).background(Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1))).clipShape(Capsule()).padding(.vertical, 7.5)
             }
             Spacer()
         }.sheet(isPresented: $showImagePicker, onDismiss: loadImage) {

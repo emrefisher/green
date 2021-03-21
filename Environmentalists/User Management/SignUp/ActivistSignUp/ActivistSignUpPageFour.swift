@@ -16,6 +16,17 @@ struct ActivistSignUpPageFour: View {
     
     var body: some View {
         VStack {
+            
+            Button("Back", action: {
+                self.activistSignUpManager.pageNumber -= 1
+            }).padding(.trailing, 330.0)
+            
+            
+            Text("Personal Information")
+                .font(/*@START_MENU_TOKEN@*/.headline/*@END_MENU_TOKEN@*/)
+                .padding(.bottom, 10.0)
+
+            
             DatePicker("Date of Birth", selection: self.$activistSignUpManager.dateOfBirth, in: ...minAgeBirthday, displayedComponents: .date)
             Picker(selection: self.$genderSelectionIndex, label: Text("Choose a Gender")) {
                 ForEach(0..<genderArray.count) {
@@ -23,14 +34,14 @@ struct ActivistSignUpPageFour: View {
                 }
             }
             HStack {
-                Button("Back", action: {
-                    self.activistSignUpManager.pageNumber -= 1
-                })
                 
                 Button("Next", action: {
                     self.activistSignUpManager.pageNumber += 1
-                })
+                }).frame(width: UIScreen.main.bounds.width - 50, height: UIScreen.main.bounds.height / 20).background(Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1))).clipShape(Capsule()).padding(.vertical, 7.5)
+                
+                
             }
+            Spacer()
         }
     }
 }
