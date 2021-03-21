@@ -64,27 +64,30 @@ struct MyAccountOrganizerView: View {
         return ZStack {
         if isEditingProfile == false {
             NavigationView {
-            VStack(spacing: 0){
+                
+                    
+                
+            VStack{
 
                 VStack {
 
-
+Spacer()
                     if ( self.currentOrganizer.currentUserInformation.coverPhotoURL != "") {
                     WebImage(url: URL(string: "\(self.currentOrganizer.currentUserInformation.coverPhotoURL)"))
                         .resizable()
-                        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height/5)
+                        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width*3/4)
+                        //.frame(maxWidth: UIScreen.main.bounds.width, maxHeight: UIScreen.main.bounds.width*3/4)
                         .aspectRatio(contentMode: .fit)
+                        .offset(y: UIScreen.main.bounds.width/4)
                     }
                     else {
                         Image("mountain_landscape")
                             .resizable()
-                            .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height/5)
+                            .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width*3/4)
                             .aspectRatio(contentMode: .fit)
                     }
-
                 }
-
-                VStack(spacing: 5) {
+                VStack() {
 
                     HStack {
                     WebImage(url: URL(string: "\(self.currentOrganizer.currentUserInformation.profPicURL)"))
@@ -93,6 +96,7 @@ struct MyAccountOrganizerView: View {
                         .overlay(Circle().stroke(Color.green, lineWidth: 5))
                         .frame(width: UIScreen.main.bounds.height/8, height: UIScreen.main.bounds.height/8, alignment: .leading)
                         .padding()
+                        .offset(y: UIScreen.main.bounds.width/4)
 
                         Spacer()
                         let completeURL = "https://" + self.currentOrganizer.currentUserInformation.websiteLink!
@@ -110,7 +114,7 @@ struct MyAccountOrganizerView: View {
                                 }
                                 .padding(UIScreen.main.bounds.width/50)
                                 .background(Color(#colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1))).clipShape(Capsule())
-                                .offset(x: -UIScreen.main.bounds.width/50 )
+                                .offset(x: -UIScreen.main.bounds.width/50, y: UIScreen.main.bounds.width/4)
 
 
                         }
@@ -124,22 +128,32 @@ struct MyAccountOrganizerView: View {
                         }
                         .padding(UIScreen.main.bounds.width/50)
                         .background(Color(#colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1))).clipShape(Capsule())
-                        .offset(x: -UIScreen.main.bounds.width/50 )
+                        .offset(x: -UIScreen.main.bounds.width/50, y: UIScreen.main.bounds.width/4 )
                     }
+                    HStack{
+                        Spacer()
+                            NavigationLink(destination: Settings()) {
+                                Image(systemName: "gear").font(.largeTitle).foregroundColor(.black)
+                            }.offset(x: -UIScreen.main.bounds.width/32, y: UIScreen.main.bounds.width/6)
+                        
+                    }
+                    VStack {
                     HStack {
                     Text(self.currentOrganizer.currentUserInformation.name)
                         .font(.headline)
                         Spacer()
 
-                    }.offset(x: UIScreen.main.bounds.width/32)
+                    }.offset(x: UIScreen.main.bounds.width/32, y: UIScreen.main.bounds.width/9)
 
-                    HStack(spacing: 25) {
+                    HStack() {
                         Text(self.currentOrganizer.currentUserInformation.description!)
                             .font(.system(size: 10))
                             .fontWeight(.light)
                             .foregroundColor(Color.black)
                         Spacer()
-                    }.offset(x: UIScreen.main.bounds.width/32)
+                    }.offset(x: UIScreen.main.bounds.width/32, y: UIScreen.main.bounds.width/9)
+                    
+                    }
 
                     VStack() {
 
@@ -182,13 +196,16 @@ struct MyAccountOrganizerView: View {
                             
                         }
                     }
-                }.listStyle(PlainListStyle())
+                }.listStyle(PlainListStyle()).frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width*3/2, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
 
-            }.navigationBarTitle("", displayMode: .inline)
+            }/*.navigationBarTitle("", displayMode: .inline)
             .navigationBarItems(trailing: NavigationLink(destination: Settings()) {
                 Image(systemName: "gear").font(.largeTitle).foregroundColor(.black)
-            })
+            })*/
+            .navigationBarTitle("")
+            .navigationBarHidden(true)
             }
+            
             .onAppear() {
 //                if currentOrganizer.currentUserInformation.userEvents.count != currentOrganizer.currentUserInformation.userEventIDs.count {
 //                    currentOrganizer.getUserEvents()
@@ -256,8 +273,11 @@ struct MyAccountOrganizerView: View {
                     .offset(x: -15, y: -5)
                 }
             }
+                
             }
+            
         }
+            
     }
     }
     
