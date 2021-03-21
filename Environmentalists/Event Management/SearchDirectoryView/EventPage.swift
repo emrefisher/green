@@ -32,6 +32,7 @@ struct EventPage: View {
     @State var orgPressed = false
     @State private var isEditingEvent = false
     @State private var editedFields = [String]()
+    @State var date = Date()
     //@ObservedObject var num = monitorAttendees()
     
     var body: some View {
@@ -198,10 +199,17 @@ struct EventPage: View {
                         self.editedFields.append("Organization Location")
                     }
                     )}
-                //Section(header: Text("Date and Time")) {
-                    //DatePicker("Date", selection: self.$event.date, in: Date()..., displayedComponents: .date)
-                   // DatePicker("Time", selection: self.$event.time, displayedComponents: .hourAndMinute)
-                   // )}
+                /*Section(header: Text("Date and Time")) {
+                    DatePicker("Date", selection: $date, in: Date()..., displayedComponents: .date)
+                    DatePicker("Time", selection: $date, displayedComponents: .hourAndMinute)
+                    )}
+                let formatter = DateFormatter()
+                let formatter1 = DateFormatter()
+                formatter.dateFormat = "MMM d, y"
+                formatter1.pmSymbol = "PM"
+                formatter1.dateFormat = "h:mm a"
+                let formattedDate = formatter.string(from: date)
+                let formattedTime = formatter1.string(from: date)*/
 
             }
             

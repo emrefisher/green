@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -64,6 +64,8 @@
 		A7FA07E825B3C8AD00A2BA10 /* OrganizerSignUpPageTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FA07E725B3C8AD00A2BA10 /* OrganizerSignUpPageTwo.swift */; };
 		BEDE18BA25BE8F4800BB83DD /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BEDE18B925BE8F4800BB83DD /* Colors.xcassets */; };
 		C2DE5DEA551576E28B09FE35 /* Pods_Environmentalists.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C51DB3FB339C181A291954 /* Pods_Environmentalists.framework */; };
+		C3D3E41A26079D4C0007EB31 /* HotReloading in Frameworks */ = {isa = PBXBuildFile; productRef = C3D3E41926079D4C0007EB31 /* HotReloading */; };
+		C3D3E41B26079D4C0007EB31 /* HotReloading in Embed Frameworks */ = {isa = PBXBuildFile; productRef = C3D3E41926079D4C0007EB31 /* HotReloading */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		D3D8D04325CDD25E00D0A3E8 /* UpdateEmailPass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D8D04225CDD25E00D0A3E8 /* UpdateEmailPass.swift */; };
 /* End PBXBuildFile section */
 
@@ -83,6 +85,20 @@
 			remoteInfo = Environmentalists;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		C3D3E41C26079D4C0007EB31 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				C3D3E41B26079D4C0007EB31 /* HotReloading in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		141B42C798305B9037E4EB43 /* Pods_EnvironmentalistsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EnvironmentalistsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -160,6 +176,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3D3E41A26079D4C0007EB31 /* HotReloading in Frameworks */,
 				C2DE5DEA551576E28B09FE35 /* Pods_Environmentalists.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -405,12 +422,17 @@
 				A722BCAD25008460007C70F1 /* Frameworks */,
 				A722BCAE25008460007C70F1 /* Resources */,
 				F39AE022160466722BE4032F /* [CP] Embed Pods Frameworks */,
+				C3D3E41C26079D4C0007EB31 /* Embed Frameworks */,
+				C3D3E41F26079EC30007EB31 /* ShellScript */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = Environmentalists;
+			packageProductDependencies = (
+				C3D3E41926079D4C0007EB31 /* HotReloading */,
+			);
 			productName = Environmentalists;
 			productReference = A722BCB025008460007C70F1 /* Environmentalists.app */;
 			productType = "com.apple.product-type.application";
@@ -485,6 +507,9 @@
 				Base,
 			);
 			mainGroup = A722BCA725008460007C70F1;
+			packageReferences = (
+				C3D3E41826079D4C0007EB31 /* XCRemoteSwiftPackageReference "HotReloading" */,
+			);
 			productRefGroup = A722BCB125008460007C70F1 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -570,6 +595,23 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
+		};
+		C3D3E41F26079EC30007EB31 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif [ -d $SYMROOT/../../SourcePackages ]; then\n    $SYMROOT/../../SourcePackages/checkouts/HotReloading/start_daemon.sh\nelif [ -d \"$SYMROOT\"/../../../../../SourcePackages ]; then\n    \"$SYMROOT\"/../../../../../SourcePackages/checkouts/HotReloading/fix_previews.sh\nfi\n";
 		};
 		D9A2047CEC7B0BC7FB5BC6CF /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -850,6 +892,81 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.3;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"c++\"",
+					"-l\"sqlite3\"",
+					"-l\"z\"",
+					"-framework",
+					"\"CoreTelephony\"",
+					"-framework",
+					"\"FBLPromises\"",
+					"-framework",
+					"\"FIRAnalyticsConnector\"",
+					"-framework",
+					"\"FirebaseAnalytics\"",
+					"-framework",
+					"\"FirebaseAuth\"",
+					"-framework",
+					"\"FirebaseCore\"",
+					"-framework",
+					"\"FirebaseCoreDiagnostics\"",
+					"-framework",
+					"\"FirebaseFirestore\"",
+					"-framework",
+					"\"FirebaseFirestoreSwift\"",
+					"-framework",
+					"\"FirebaseInstallations\"",
+					"-framework",
+					"\"FirebaseStorage\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"GTMSessionFetcher\"",
+					"-framework",
+					"\"GoogleAppMeasurement\"",
+					"-framework",
+					"\"GoogleDataTransport\"",
+					"-framework",
+					"\"GoogleUtilities\"",
+					"-framework",
+					"\"ImageIO\"",
+					"-framework",
+					"\"MobileCoreServices\"",
+					"-framework",
+					"\"SDWebImage\"",
+					"-framework",
+					"\"SDWebImageSwiftUI\"",
+					"-framework",
+					"\"SafariServices\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"StoreKit\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"UIKit\"",
+					"-framework",
+					"\"absl\"",
+					"-framework",
+					"\"grpc\"",
+					"-framework",
+					"\"grpcpp\"",
+					"-framework",
+					"\"leveldb\"",
+					"-framework",
+					"\"nanopb\"",
+					"-framework",
+					"\"openssl_grpc\"",
+					"-weak_framework",
+					"\"Combine\"",
+					"-weak_framework",
+					"\"SwiftUI\"",
+					"-Xlinker",
+					"-interposable",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.campbell23567.Environmentalists;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -875,6 +992,81 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.3;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"c++\"",
+					"-l\"sqlite3\"",
+					"-l\"z\"",
+					"-framework",
+					"\"CoreTelephony\"",
+					"-framework",
+					"\"FBLPromises\"",
+					"-framework",
+					"\"FIRAnalyticsConnector\"",
+					"-framework",
+					"\"FirebaseAnalytics\"",
+					"-framework",
+					"\"FirebaseAuth\"",
+					"-framework",
+					"\"FirebaseCore\"",
+					"-framework",
+					"\"FirebaseCoreDiagnostics\"",
+					"-framework",
+					"\"FirebaseFirestore\"",
+					"-framework",
+					"\"FirebaseFirestoreSwift\"",
+					"-framework",
+					"\"FirebaseInstallations\"",
+					"-framework",
+					"\"FirebaseStorage\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"GTMSessionFetcher\"",
+					"-framework",
+					"\"GoogleAppMeasurement\"",
+					"-framework",
+					"\"GoogleDataTransport\"",
+					"-framework",
+					"\"GoogleUtilities\"",
+					"-framework",
+					"\"ImageIO\"",
+					"-framework",
+					"\"MobileCoreServices\"",
+					"-framework",
+					"\"SDWebImage\"",
+					"-framework",
+					"\"SDWebImageSwiftUI\"",
+					"-framework",
+					"\"SafariServices\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"StoreKit\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"UIKit\"",
+					"-framework",
+					"\"absl\"",
+					"-framework",
+					"\"grpc\"",
+					"-framework",
+					"\"grpcpp\"",
+					"-framework",
+					"\"leveldb\"",
+					"-framework",
+					"\"nanopb\"",
+					"-framework",
+					"\"openssl_grpc\"",
+					"-weak_framework",
+					"\"Combine\"",
+					"-weak_framework",
+					"\"SwiftUI\"",
+					"-Xlinker",
+					"-interposable",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.campbell23567.Environmentalists;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1010,6 +1202,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C3D3E41826079D4C0007EB31 /* XCRemoteSwiftPackageReference "HotReloading" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/johnno1962/HotReloading.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.4.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C3D3E41926079D4C0007EB31 /* HotReloading */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C3D3E41826079D4C0007EB31 /* XCRemoteSwiftPackageReference "HotReloading" */;
+			productName = HotReloading;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = A722BCA825008460007C70F1 /* Project object */;
 }
