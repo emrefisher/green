@@ -13,6 +13,7 @@ struct OrgProfile: View {
     @State var organizerID: String
     @ObservedObject var organizer = OrganizerInfo()
     @Binding var pressed: Bool
+    @Environment(\.openURL) var openURL
     
     var body: some View {
         
@@ -68,6 +69,16 @@ struct OrgProfile: View {
                        
                     }
                     HStack(spacing: 25) {
+                        
+                               Button(action: {
+                                   openURL(URL(string: "www.google.com")!) // <- Add your link here
+                               }, label: {
+                                  Image(systemName: "link.circle.fill") // <- Change icon to your preferred one
+                                   .resizable()
+                                   .frame(width: 50, height: 50)
+                                   .foregroundColor(.blue)
+                               })
+                        
                         let completeURL = "https://" + self.organizer.organizerInformation.orgWebsite
                         let url = URL(string:  completeURL)
                         if url == nil {
