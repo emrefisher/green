@@ -186,7 +186,7 @@ Spacer()
                 .padding(.horizontal, 25)
                 Spacer()
                 
-                
+                VStack {
                 List {
                     ForEach((eventIndex == 0) ? currentOrganizer.upcomingEvents : currentOrganizer.pastEvents) { Event in
                         NavigationLink(destination: EventPage(event: Event, navigatingThroughMyAccount: true, eventClicked: .constant(false))) {
@@ -196,8 +196,9 @@ Spacer()
                             
                         }
                     }
-                }.listStyle(PlainListStyle()).frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width*3/2, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-
+                }.listStyle(PlainListStyle()).frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width*2, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/).offset(y: UIScreen.main.bounds.width*2)
+                Spacer()
+                }
             }/*.navigationBarTitle("", displayMode: .inline)
             .navigationBarItems(trailing: NavigationLink(destination: Settings()) {
                 Image(systemName: "gear").font(.largeTitle).foregroundColor(.black)
@@ -360,63 +361,93 @@ struct MyAccountActivistView: View {
         if isEditingProfile == false {
             
             NavigationView {
+                
                     
-                VStack(spacing: 0){
-                    
+                
+            VStack{
+
                     RandomCoverPhoto()
-                    
-                    VStack(spacing: 0) {
+                VStack() {
+
+                    HStack {
+                    WebImage(url: URL(string: "\(self.currentActivist.currentUserInformation.profPicURL)"))
+                        .resizable()
+                        .clipShape(Circle())
+                        .overlay(Circle().stroke(Color.green, lineWidth: 5))
+                        .frame(width: UIScreen.main.bounds.height/8, height: UIScreen.main.bounds.height/8, alignment: .leading)
+                        .padding()
+                        .offset(y: UIScreen.main.bounds.width/4)
+
+                        Spacer()
+
+                    }
+                    HStack{
+                        Spacer()
+                            NavigationLink(destination: Settings()) {
+                                Image(systemName: "gear").font(.largeTitle).foregroundColor(.black)
+                            }.offset(x: -UIScreen.main.bounds.width/32, y: UIScreen.main.bounds.width/6)
                         
-                        HStack {
-                            WebImage(url: URL(string: "\(self.currentActivist.currentUserInformation.profPicURL)"))
-                                .resizable()
-                                .shadow(color: Color.green, radius: 10)
-                                .overlay(Circle().stroke(Color.gray, lineWidth: 5))
-                                .frame(width: UIScreen.main.bounds.height/8, height: UIScreen.main.bounds.height/8, alignment: .leading)
-                                .clipShape(Circle())
-                                .offset(y: -UIScreen.main.bounds.height/12)
-                                .padding()
-                            
+                    }
+                    VStack {
+                    HStack {
+                    Text("Hello \(self.currentActivist.currentUserInformation.name)!")
+                        .font(.headline)
+                        Spacer()
+
+                    }.offset(x: UIScreen.main.bounds.width/32, y: UIScreen.main.bounds.width/9)
+
+                    
+                    }
+
+                    VStack() {
+
+
+                      /*  HStack {
+                                HStack(spacing: 5) {
+                                    Image(systemName:"mappin.and.ellipse")
+                                        .resizable()
+                                        .frame(width: 15, height: 15)
+                                    Text(self.currentOrganizer.currentUserInformation.location!).font(.system(size: 10))
+                                }
                             Spacer()
+                        }.offset(x: UIScreen.main.bounds.width/32)*/
+
+                       /* HStack {
+                        Text("\(self.currentOrganizer.currentUserInformation.numberFollowers ?? 0) Followers") .font(.system(size: 12)).bold()
+                            Spacer()
+                        }.offset(x: UIScreen.main.bounds.width/32)*/
+
+                    }
+                }.offset(y: -UIScreen.main.bounds.height/16)
+
+                //Spacer()
+
+                Picker("", selection: $eventIndex) {
+                    ForEach(0..<2) {
+                        Text(dateRange[$0])
+                    }
+                }.pickerStyle(SegmentedPickerStyle())
+                .padding(.horizontal, 25)
+                Spacer()
+                
+                
+                List {
+                    ForEach((eventIndex == 0) ? currentActivist.upcomingEvents : currentActivist.pastEvents) { Event in
+                        NavigationLink(destination: EventPage(event: Event, navigatingThroughMyAccount: true, eventClicked: .constant(false))) {
+                            
+                            EventRow(event: Event)
+                            
                             
                         }
-                        HStack {
-                            
-                            Text("Welcome back \(self.currentActivist.currentUserInformation.name)!")
-                                .font(.headline)
-                            Spacer()
-                            
-                        }.offset(x: UIScreen.main.bounds.width/32)
-                        Spacer()
-                        
-                        
-                        Picker("", selection: $eventIndex) {
-                            ForEach(0..<2) {
-                                Text(dateRange[$0])
-                            }
-                        }.pickerStyle(SegmentedPickerStyle())
-                        .padding(.horizontal, 25)
-                        
-                        
-                        List {
-                            ForEach((eventIndex == 0) ? currentActivist.upcomingEvents : currentActivist.pastEvents) { Event in
-                                NavigationLink(destination: EventPage(event: Event, navigatingThroughMyAccount: true, eventClicked: .constant(false))) {
-                                    
-                                    EventRow(event: Event)
-                                    
-                                }
-                            }
-                        }.listStyle(PlainListStyle())
-                        
-                        
-                    }.navigationBarTitle("", displayMode: .inline)
-                    .navigationBarItems(trailing: NavigationLink(destination: Settings()) {
-                        Image(systemName: "gear").font(.largeTitle).foregroundColor(.black)
-                    })
-                    
-                }
-                
-                
+                    }
+                }.listStyle(PlainListStyle()).frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width*3/2, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+
+            }/*.navigationBarTitle("", displayMode: .inline)
+            .navigationBarItems(trailing: NavigationLink(destination: Settings()) {
+                Image(systemName: "gear").font(.largeTitle).foregroundColor(.black)
+            })*/
+            .navigationBarTitle("")
+            .navigationBarHidden(true)
             }
         }
         else {
@@ -478,8 +509,9 @@ struct MyAccountActivistView: View {
             
             Image(nationalParks[randomCoverPhoto])
                 .resizable()
-                .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height/5)
+                .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width*3/4)
                 .aspectRatio(contentMode: .fit)
+                .offset(y: UIScreen.main.bounds.width/4)
             
         }
         
