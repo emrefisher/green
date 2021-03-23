@@ -15,7 +15,7 @@ struct OrganizerSignUpPageSix: View {
     
     var body: some View {
         
-        VStack {
+        VStack (spacing: 30) {
             ProgressView(value: CGFloat(self.organizerSignUpManager.pageNumber), total: 6) {
                 HStack(alignment: .center) {
                     Text("Progress: (\(self.organizerSignUpManager.pageNumber)/6)")
@@ -27,7 +27,8 @@ struct OrganizerSignUpPageSix: View {
                 self.organizerSignUpManager.coverPhoto!
                     .resizable()
                     .clipShape(Rectangle())
-                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height/5, alignment: .center)
+                    .frame(width: (UIScreen.main.bounds.width - UIScreen.main.bounds.width/10), height: UIScreen.main.bounds.height/5, alignment: .center)
+                    .aspectRatio(contentMode: .fit)
                     .onTapGesture {
                         self.showActionSheet.toggle()
                     }
@@ -36,18 +37,20 @@ struct OrganizerSignUpPageSix: View {
                 Image(systemName: "camera.on.rectangle")
                     .resizable()
                     .clipShape(Rectangle())
-                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height/5, alignment: .center)
+                    .frame(width: UIScreen.main.bounds.width/2, height: UIScreen.main.bounds.height/5, alignment: .center)
+                    .aspectRatio(contentMode: .fit)
                     .onTapGesture {
                         self.showActionSheet.toggle()
                     }
             }
             HStack {
-                Button("Back", action: {
+                Button("← Back", action: {
                     self.organizerSignUpManager.pageNumber -= 1
-                })
-                Button("Prepare to Submit", action: {
+                }).foregroundColor(.white).frame(width: UIScreen.main.bounds.size.width*0.35, height: UIScreen.main.bounds.size.height*0.05 ).background(Color.fireOrange).clipShape(Capsule()).shadow(color: Color.black.opacity(0.5), radius: 5, x: 5, y: 5)
+                
+                Button("Next →", action: {
                     self.organizerSignUpManager.pageNumber += 1
-                })
+                }).foregroundColor(.white).frame(width: UIScreen.main.bounds.size.width*0.35, height: UIScreen.main.bounds.size.height*0.05 ).background(Color.earthGreen).clipShape(Capsule()).shadow(color: Color.black.opacity(0.5), radius: 5, x: 5, y: 5)
             }
             Spacer()
         }.sheet(isPresented: $showImagePicker, onDismiss: loadImage) {
@@ -65,7 +68,7 @@ struct OrganizerSignUpPageSix: View {
                 .cancel()
             ])
         }
-        .padding(.horizontal, UIScreen.main.bounds.width/20)
+        .padding(.horizontal, UIScreen.main.bounds.width/20).padding(.vertical, UIScreen.main.bounds.height/10)
         
     }
     

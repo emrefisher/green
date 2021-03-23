@@ -29,16 +29,12 @@ struct Login: View {
                 .offset(x: self.offset)
         VStack {
             
-            Text("Environmend")
-                .font(.largeTitle)
-                .italic()
-
-                .padding(.top, self.frameHeight / 7)
-            
             Text("Sign In")
                 .font(.largeTitle)
+                .foregroundColor(.white)
                 .italic()
                 .padding(.bottom, self.frameHeight / 20)
+                .padding(.top, self.frameHeight / 7)
             
             VStack(spacing: self.frameWidth / 30) {
                     
@@ -76,11 +72,9 @@ struct Login: View {
                 
                 HStack {
                     
-                    Spacer()
-                    
                     Button("Forgot Password?", action: {
                         sessionManager.authState = .forgotPassword
-                    })
+                    }).foregroundColor(Color(#colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)))
                     
                 }.padding(.trailing, self.frameWidth * 0.05)
                 Spacer()
@@ -90,7 +84,7 @@ struct Login: View {
                         self.timer?.invalidate()
                         sessionManager.signInWithFirebase(email: self.email, password: self.password)
                     }) {
-                        Text("Login").foregroundColor(.white).frame(width: self.frameWidth * 0.6, height: self.frameHeight / 10).background(Color(#colorLiteral(red: 1, green: 0.3176470588, blue: 0, alpha: 1))).clipShape(Capsule()).shadow(color: Color.black.opacity(0.5), radius: 5, x: 5, y: 5)
+                        Text("Login").foregroundColor(.white).frame(width: self.frameWidth * 0.6, height: self.frameHeight / 10).background(Color(#colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1))).clipShape(Capsule()).shadow(color: Color.black.opacity(0.5), radius: 5, x: 5, y: 5)
                     }.alert(isPresented: self.$sessionManager.alert) {
                         Alert(title: Text("Sign In Error"), message: Text(self.sessionManager.errorMessage), dismissButton: .default(Text("OK")) {
                             self.timer = Timer.scheduledTimer(withTimeInterval: 0.0001, repeats: true) { timer in
@@ -105,14 +99,14 @@ struct Login: View {
                         
                         Button("Don't have an account? Sign Up", action: {
                             sessionManager.authState = .signUp
-                        }) 
+                        }).foregroundColor(Color(#colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)))
                     
                 }.padding(.bottom, self.frameHeight / 5)
             }
             
         }.frame(width: self.frameWidth, height: self.frameHeight)
         .background(RoundedRectangle(cornerRadius: 25.0)
-            .fill(Color.white.opacity(0.8))
+                        .fill(Color.black.opacity(0.42))
             .shadow(color: .black, radius: 10, x: 20, y: 20))
         }.onAppear() {
             self.timer = Timer.scheduledTimer(withTimeInterval: 0.0001, repeats: true) { timer in

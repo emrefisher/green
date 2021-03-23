@@ -16,27 +16,28 @@ struct OrganizerSignUpPageTwo: View {
     @State private var alert = false
     
     var body: some View {
-            VStack(alignment: .leading){
+        VStack(spacing: 30){
+                
                 ProgressView(value: CGFloat(self.organizerSignUpManager.pageNumber), total: 6) {
                     HStack(alignment: .center) {
                         Text("Progress: (\(self.organizerSignUpManager.pageNumber)/6)")
                     }
+
                 }
-                
                 Spacer()
                 Text("Choose Password")
-                    .font(.headline)
-                    .fontWeight(.light)
+                    .font(.largeTitle)
                     .foregroundColor(.black)
-                    .padding([.leading, .trailing], 20)
-                
+                Text("Password must be at least 8 total characters long and must include at least one capital letter and one number.").font(.caption).foregroundColor(.black).padding(.horizontal, 15)
                 HStack {
                     
                     if self.showPassword {
                         TextField("Enter Password", text: self.$organizerSignUpManager.password).textFieldStyle(RoundedBorderTextFieldStyle()).disableAutocorrection(true)
+                            .padding(.horizontal, 15)
                     }
                     else {
                         SecureField("Enter Password", text: self.$organizerSignUpManager.password).textFieldStyle(RoundedBorderTextFieldStyle()).disableAutocorrection(true)
+                            .padding(.horizontal, 15)
                     }
 
                     
@@ -47,27 +48,19 @@ struct OrganizerSignUpPageTwo: View {
                     }) {
                         
                         Image(systemName: self.showPassword ? "eye.fill" : "eye.slash.fill")
-                            .padding(.trailing, 17.5)
+                            .padding(.trailing, 10)
                     }
                 }
-                
-                Text("Password must be at least 8 total characters long and must include at least one capital letter and one number.").font(.caption).foregroundColor(.black)
-                
-                Spacer()
-                
-                Text("Confirm Password")
-                    .font(.headline)
-                    .fontWeight(.light)
-                    .foregroundColor(.black)
-                    .padding([.leading, .trailing], 20)
                 
                 HStack {
                     
                     if self.showConfirmedPassword {
                         TextField("Confirm Password", text: self.$organizerSignUpManager.confirmedPassword).textFieldStyle(RoundedBorderTextFieldStyle()).disableAutocorrection(true)
+                            .padding(.horizontal, 15)
                     }
                     else {
                         SecureField("Confirm Password", text: self.$organizerSignUpManager.confirmedPassword).textFieldStyle(RoundedBorderTextFieldStyle()).disableAutocorrection(true)
+                            .padding(.horizontal, 15)
                     }
 
                     
@@ -78,24 +71,25 @@ struct OrganizerSignUpPageTwo: View {
                     }) {
                         
                         Image(systemName: self.showConfirmedPassword ? "eye.fill" : "eye.slash.fill")
-                            .padding(.trailing, 17.5)
+                            .padding(.trailing, 10)
                     }
                 }
                 HStack {
-                    Button("Back", action: {
+                    Button("← Back", action: {
                         self.organizerSignUpManager.pageNumber -= 1
-                    })
+                    }).foregroundColor(.white).frame(width: UIScreen.main.bounds.size.width*0.35, height: UIScreen.main.bounds.size.height*0.05 ).background(Color.fireOrange).clipShape(Capsule()).shadow(color: Color.black.opacity(0.5), radius: 5, x: 5, y: 5)
                     
-                    Button("Next", action: {
+                    Button("Next →", action: {
                         if validatePasswords() == nil {
                             self.organizerSignUpManager.pageNumber += 1
                         }
                     }).alert(isPresented: self.$alert) {
                         Alert(title: Text("Password Error"), message: Text(self.errorMessage), dismissButton: .default(Text("OK")))
-                    }
+                    
+                    }.foregroundColor(.white).frame(width: UIScreen.main.bounds.size.width*0.35, height: UIScreen.main.bounds.size.height*0.05 ).background(Color.earthGreen).clipShape(Capsule()).shadow(color: Color.black.opacity(0.5), radius: 5, x: 5, y: 5)
                 }
                 Spacer()
-            }.padding(.horizontal, UIScreen.main.bounds.width/20)
+        }.padding(.horizontal, UIScreen.main.bounds.width/20).padding(.vertical, UIScreen.main.bounds.height/10)
     }
     
     private func isPasswordValid(password: String) -> Bool {

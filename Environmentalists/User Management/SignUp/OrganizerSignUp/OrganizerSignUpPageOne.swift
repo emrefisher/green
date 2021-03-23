@@ -16,33 +16,38 @@ struct OrganizerSignUpPageOne: View {
     @State private var alert = false
     
     var body: some View {
-        VStack {
-            HStack {
-                Button("Back", action: {
-                    self.accountType = ""
-                })
-                Spacer()
-            }.padding()
+        VStack (spacing: 30) {
+            
             ProgressView(value: CGFloat(self.organizerSignUpManager.pageNumber), total: 6) {
                 HStack(alignment: .center) {
                     Text("Progress: (\(self.organizerSignUpManager.pageNumber)/6)")
                 }
+
             }
             Spacer()
-            Text("Enter Email")
+            Text("Enter Email").font(.largeTitle)
+            Text("Make sure you remember which email you use as you will need it to log in to the app every time.").font(.caption).padding(.horizontal, 30).frame(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
             TextField("Example: abc123@xyz.com", text: self.$organizerSignUpManager.email).textFieldStyle(RoundedBorderTextFieldStyle()).disableAutocorrection(true)
-            Button("Next Page", action: {
-                if self.textFieldValidatorEmail() {
-                    self.organizerSignUpManager.pageNumber += 1
+                .padding(.horizontal, 30)
+            HStack {
+                Button("← Back", action: {
+                    self.accountType = ""
+                }).foregroundColor(.white).frame(width: UIScreen.main.bounds.size.width*0.35, height: UIScreen.main.bounds.size.height*0.05 ).background(Color.fireOrange).clipShape(Capsule()).shadow(color: Color.black.opacity(0.5), radius: 5, x: 5, y: 5).alert(isPresented: $alert) {
+                    Alert(title: Text("Sign-Up Error"), message: Text("Please enter a valid email."), dismissButton: .default(Text("OK")))
                 }
-                else {
-                    self.alert.toggle()
+                Button("Next →", action: {
+                    if self.textFieldValidatorEmail() {
+                        self.organizerSignUpManager.pageNumber += 1
+                    }
+                    else {
+                        self.alert.toggle()
+                    }
+                }).foregroundColor(.white).frame(width: UIScreen.main.bounds.size.width*0.35, height: UIScreen.main.bounds.size.height*0.05 ).background(Color.earthGreen).clipShape(Capsule()).shadow(color: Color.black.opacity(0.5), radius: 5, x: 5, y: 5).alert(isPresented: $alert) {
+                    Alert(title: Text("Sign-Up Error"), message: Text("Please enter a valid email."), dismissButton: .default(Text("OK")))
                 }
-            }).alert(isPresented: $alert) {
-                Alert(title: Text("Sign-Up Error"), message: Text("Please enter a valid email."), dismissButton: .default(Text("OK")))
             }
             Spacer()
-        }.padding(.horizontal, UIScreen.main.bounds.width/20)
+        }.padding(.vertical, UIScreen.main.bounds.height/10).padding(.horizontal, UIScreen.main.bounds.width/20)
     }
     
     private func textFieldValidatorEmail() -> Bool {

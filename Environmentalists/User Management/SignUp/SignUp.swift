@@ -41,32 +41,27 @@ struct SignUp: View {
                         .foregroundColor(Color.black)
                         .fontWeight(.medium)
                         .multilineTextAlignment(.center)
-                        .padding(.top, 20)
                     
-                Spacer()
                     
+                    Image("Third")
+                        .resizable()
+                        .frame(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height/2.10)
                     Button(action: {
                         self.newAccountType = "Activist"
                     }) {
                         
                         Text("Continue").foregroundColor(.white).frame(width: UIScreen.main.bounds.width-100).padding().font(.body)
                         
-                    }.background(Color(#colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1))).clipShape(Capsule())
-                
-                    
-                    Image("Third")
-                        .resizable()
-                        .frame(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height/2.10)
+                    }.background(Color(#colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1))).clipShape(Capsule())
                     
                     Button(action: {
                         self.newAccountType = "Organizer"
                     }) {
                         
-                        Text("Verified Organizer? Click Here")
+                        Text("Verified Organizer? Click ") + Text("Here").underline()
 
                     }
-                }//.padding([.top, .bottom], 50)
-                Spacer()
+                }.padding([.top, .bottom], 50)
             
                 
             }

@@ -16,15 +16,15 @@ struct ActivistSignUpPageFive: View {
     
     var body: some View {
         
-        VStack {
-            
-            Button("Back", action: {
-                self.activistSignUpManager.pageNumber -= 1
-            }).padding(.trailing, 330.0)
-
-            Text("Choose Profile Pic")
-                .font(.headline)
-                .padding(.bottom, 10.0)
+        VStack (spacing: 30) {
+            ProgressView(value: CGFloat(self.activistSignUpManager.pageNumber), total: 6) {
+                HStack(alignment: .center) {
+                    Text("Progress: (\(self.activistSignUpManager.pageNumber)/6)")
+                }
+            }.padding(.top, 85)
+            Spacer()
+            Text("Choose Profile Picture").font(.largeTitle)
+            Text("This is what other users or organizations will see when they view your profile.").font(.caption).padding(.horizontal, 15)
             if self.activistSignUpManager.profilePic != nil {
                 self.activistSignUpManager.profilePic!
                     .resizable()
@@ -44,10 +44,13 @@ struct ActivistSignUpPageFive: View {
                     }
             }
             HStack {
-               
-                Button("Next", action: {
+                Button("← Back", action: {
+                    self.activistSignUpManager.pageNumber -= 1
+                }).foregroundColor(.white).frame(width: UIScreen.main.bounds.size.width*0.35, height: UIScreen.main.bounds.size.height*0.05 ).background(Color.fireOrange).clipShape(Capsule()).shadow(color: Color.black.opacity(0.5), radius: 5, x: 5, y: 5)
+                
+                Button("Next →", action: {
                     self.activistSignUpManager.pageNumber += 1
-                }).frame(width: UIScreen.main.bounds.width - 50, height: UIScreen.main.bounds.height / 20).background(Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1))).clipShape(Capsule()).padding(.vertical, 7.5)
+                }).foregroundColor(.white).frame(width: UIScreen.main.bounds.size.width*0.35, height: UIScreen.main.bounds.size.height*0.05 ).background(Color.earthGreen).clipShape(Capsule()).shadow(color: Color.black.opacity(0.5), radius: 5, x: 5, y: 5)
             }
             Spacer()
         }.sheet(isPresented: $showImagePicker, onDismiss: loadImage) {

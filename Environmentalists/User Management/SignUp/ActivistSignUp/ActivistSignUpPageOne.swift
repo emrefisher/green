@@ -14,36 +14,38 @@ struct ActivistSignUpPageOne: View {
     @State private var alert = false
     
     var body: some View {
-        VStack {
+        VStack (spacing: 30){
     
-            Button("Back", action: {
-                self.accountType = ""
-            }).padding(.trailing, 330.0)
-            .padding(.bottom, 10.0)
-            Text("Enter Email")
-                .font(/*@START_MENU_TOKEN@*/.headline/*@END_MENU_TOKEN@*/)
-            TextField("Example: abc123@xyz.com", text: self.$activistSignUpManager.email).textFieldStyle(RoundedBorderTextFieldStyle()).disableAutocorrection(true)
-                .padding(.bottom, 10.0)
-            Button("Next", action: {
-                if self.textFieldValidatorEmail() {
-                    self.activistSignUpManager.pageNumber += 1
-                    
-                    
-                
+            ProgressView(value: CGFloat(self.activistSignUpManager.pageNumber), total: 6) {
+                HStack(alignment: .center) {
+                    Text("Progress: (\(self.activistSignUpManager.pageNumber)/6)")
                 }
-                else {
-                    self.alert.toggle()
-                }
-            }).frame(width: UIScreen.main.bounds.width - 50, height: UIScreen.main.bounds.height / 20).background(Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1))).clipShape(Capsule()).padding(.bottom, 7.5)
-            .alert(isPresented: $alert) {
-                Alert(title: Text("Sign-Up Error"), message: Text("Please enter a valid email."), dismissButton: .default(Text("OK")))
-                    
+
             }
             Spacer()
-        }.padding(.horizontal, UIScreen.main.bounds.width/20)
-        
-        
-
+            Text("Enter Email").font(.largeTitle)
+            Text("Make sure you remember which email you use as you will need it to log in to the app every time.").font(.caption).padding(.horizontal, 30).frame(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+            TextField("Example: abc123@xyz.com", text: self.$activistSignUpManager.email).textFieldStyle(RoundedBorderTextFieldStyle()).disableAutocorrection(true)
+                .padding(.horizontal, 30)
+            HStack {
+                Button("← Back", action: {
+                    self.accountType = ""
+                }).foregroundColor(.white).frame(width: UIScreen.main.bounds.size.width*0.35, height: UIScreen.main.bounds.size.height*0.05 ).background(Color.fireOrange).clipShape(Capsule()).shadow(color: Color.black.opacity(0.5), radius: 5, x: 5, y: 5).alert(isPresented: $alert) {
+                    Alert(title: Text("Sign-Up Error"), message: Text("Please enter a valid email."), dismissButton: .default(Text("OK")))
+                }
+                Button("Next →", action: {
+                    if self.textFieldValidatorEmail() {
+                        self.activistSignUpManager.pageNumber += 1
+                    }
+                    else {
+                        self.alert.toggle()
+                    }
+                }).foregroundColor(.white).frame(width: UIScreen.main.bounds.size.width*0.35, height: UIScreen.main.bounds.size.height*0.05 ).background(Color.earthGreen).clipShape(Capsule()).shadow(color: Color.black.opacity(0.5), radius: 5, x: 5, y: 5).alert(isPresented: $alert) {
+                    Alert(title: Text("Sign-Up Error"), message: Text("Please enter a valid email."), dismissButton: .default(Text("OK")))
+                }
+            }
+            Spacer()
+        }.padding(.vertical, UIScreen.main.bounds.height/10).padding(.horizontal, UIScreen.main.bounds.width/20)
     }
     
     private func textFieldValidatorEmail() -> Bool {
@@ -59,5 +61,3 @@ struct ActivistSignUpPageOne: View {
         return emailPredicate.evaluate(with: cleanedEmail)
     }
 }
-
-
