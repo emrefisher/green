@@ -127,7 +127,7 @@ extension AboutUs {
 
         let composeVC = MFMailComposeViewController()
         composeVC.mailComposeDelegate = mailComposeDelegate
-
+        composeVC.setToRecipients(["environmendapp@gmail.com"])
 
         vc?.present(composeVC, animated: true)
     }

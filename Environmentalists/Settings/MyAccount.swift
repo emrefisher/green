@@ -78,7 +78,7 @@ Spacer()
                         .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width*3/4)
                         //.frame(maxWidth: UIScreen.main.bounds.width, maxHeight: UIScreen.main.bounds.width*3/4)
                         .aspectRatio(contentMode: .fit)
-                        .offset(y: UIScreen.main.bounds.width/4)
+                        .offset(y: UIScreen.main.bounds.width/3)
                     }
                     else {
                         Image("mountain_landscape")
@@ -114,7 +114,7 @@ Spacer()
                                 }
                                 .padding(UIScreen.main.bounds.width/50)
                                 .background(Color(#colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1))).clipShape(Capsule())
-                                .offset(x: -UIScreen.main.bounds.width/50, y: UIScreen.main.bounds.width/4)
+                                .offset(x: -UIScreen.main.bounds.width/50, y: UIScreen.main.bounds.width/3)
 
 
                         }
@@ -128,13 +128,13 @@ Spacer()
                         }
                         .padding(UIScreen.main.bounds.width/50)
                         .background(Color(#colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1))).clipShape(Capsule())
-                        .offset(x: -UIScreen.main.bounds.width/50, y: UIScreen.main.bounds.width/4 )
+                        .offset(x: -UIScreen.main.bounds.width/50, y: UIScreen.main.bounds.width/3 )
                     }
                     HStack{
                         Spacer()
                             NavigationLink(destination: Settings()) {
                                 Image(systemName: "gear").font(.largeTitle).foregroundColor(.black)
-                            }.offset(x: -UIScreen.main.bounds.width/32, y: UIScreen.main.bounds.width/6)
+                            }.offset(x: -UIScreen.main.bounds.width/32, y: UIScreen.main.bounds.width/5)
                         
                     }
                     VStack {
@@ -143,7 +143,7 @@ Spacer()
                         .font(.headline)
                         Spacer()
 
-                    }.offset(x: UIScreen.main.bounds.width/32, y: UIScreen.main.bounds.width/9)
+                    }.offset(x: UIScreen.main.bounds.width/32, y: UIScreen.main.bounds.width/8)
 
                     HStack() {
                         Text(self.currentOrganizer.currentUserInformation.description!)
@@ -151,7 +151,7 @@ Spacer()
                             .fontWeight(.light)
                             .foregroundColor(Color.black)
                         Spacer()
-                    }.offset(x: UIScreen.main.bounds.width/32, y: UIScreen.main.bounds.width/9)
+                    }.offset(x: UIScreen.main.bounds.width/32, y: UIScreen.main.bounds.width/8)
                     
                     }
 
@@ -196,8 +196,8 @@ Spacer()
                             
                         }
                     }
-                }.listStyle(PlainListStyle()).frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width*2, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/).offset(y: UIScreen.main.bounds.width*2)
-                Spacer()
+                }.listStyle(PlainListStyle()).frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width*3/2, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                //Spacer()
                 }
             }/*.navigationBarTitle("", displayMode: .inline)
             .navigationBarItems(trailing: NavigationLink(destination: Settings()) {
