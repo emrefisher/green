@@ -378,7 +378,7 @@ struct MyAccountActivistView: View {
                         .overlay(Circle().stroke(Color.green, lineWidth: 5))
                         .frame(width: UIScreen.main.bounds.height/8, height: UIScreen.main.bounds.height/8, alignment: .leading)
                         .padding()
-                        .offset(y: UIScreen.main.bounds.width/4)
+                        .offset(y: UIScreen.main.bounds.width/24)
 
                         Spacer()
 
@@ -387,7 +387,7 @@ struct MyAccountActivistView: View {
                         Spacer()
                             NavigationLink(destination: Settings()) {
                                 Image(systemName: "gear").font(.largeTitle).foregroundColor(.black)
-                            }.offset(x: -UIScreen.main.bounds.width/32, y: UIScreen.main.bounds.width/6)
+                            }.offset(x: -UIScreen.main.bounds.width/32, y: -UIScreen.main.bounds.width/8)
                         
                     }
                     VStack {
@@ -396,7 +396,7 @@ struct MyAccountActivistView: View {
                         .font(.headline)
                         Spacer()
 
-                    }.offset(x: UIScreen.main.bounds.width/32, y: UIScreen.main.bounds.width/9)
+                    }.offset(x: UIScreen.main.bounds.width/32, y: -UIScreen.main.bounds.width/12)
 
                     
                     }
@@ -430,6 +430,7 @@ struct MyAccountActivistView: View {
                     }
                 }.pickerStyle(SegmentedPickerStyle())
                 .padding(.horizontal, 25)
+               // .offset(y: UIScreen.main.bounds.width/12)
                 Spacer()
                 
                 
@@ -442,9 +443,9 @@ struct MyAccountActivistView: View {
                             
                         }
                     }
-                }.listStyle(PlainListStyle()).frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width*3/2, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                }.listStyle(PlainListStyle()).frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
 
-            }/*.navigationBarTitle("", displayMode: .inline)
+            }.offset(y: -UIScreen.main.bounds.width/5)/*.navigationBarTitle("", displayMode: .inline)
             .navigationBarItems(trailing: NavigationLink(destination: Settings()) {
                 Image(systemName: "gear").font(.largeTitle).foregroundColor(.black)
             })*/
@@ -513,7 +514,7 @@ struct MyAccountActivistView: View {
                 .resizable()
                 .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width*3/4)
                 .aspectRatio(contentMode: .fit)
-                .offset(y: UIScreen.main.bounds.width/4)
+                .offset(y: UIScreen.main.bounds.width/10)
             
         }
         
