@@ -78,7 +78,7 @@ Spacer()
                         .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width*3/4)
                         //.frame(maxWidth: UIScreen.main.bounds.width, maxHeight: UIScreen.main.bounds.width*3/4)
                         .aspectRatio(contentMode: .fit)
-                        .offset(y: UIScreen.main.bounds.width/3)
+                        .offset(y: UIScreen.main.bounds.width/10)
                     }
                     else {
                         Image("mountain_landscape")
@@ -96,7 +96,7 @@ Spacer()
                         .overlay(Circle().stroke(Color.green, lineWidth: 5))
                         .frame(width: UIScreen.main.bounds.height/8, height: UIScreen.main.bounds.height/8, alignment: .leading)
                         .padding()
-                        .offset(y: UIScreen.main.bounds.width/4)
+                        .offset(y: -UIScreen.main.bounds.width/12)
 
                         Spacer()
                         let completeURL = "https://" + self.currentOrganizer.currentUserInformation.websiteLink!
@@ -114,7 +114,7 @@ Spacer()
                                 }
                                 .padding(UIScreen.main.bounds.width/50)
                                 .background(Color(#colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1))).clipShape(Capsule())
-                                .offset(x: -UIScreen.main.bounds.width/50, y: UIScreen.main.bounds.width/3)
+                                .offset(x: -UIScreen.main.bounds.width/50, y: -UIScreen.main.bounds.width/32)
 
 
                         }
@@ -128,13 +128,13 @@ Spacer()
                         }
                         .padding(UIScreen.main.bounds.width/50)
                         .background(Color(#colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1))).clipShape(Capsule())
-                        .offset(x: -UIScreen.main.bounds.width/50, y: UIScreen.main.bounds.width/3 )
+                        .offset(x: -UIScreen.main.bounds.width/50, y: -UIScreen.main.bounds.width/32 )
                     }
                     HStack{
                         Spacer()
                             NavigationLink(destination: Settings()) {
                                 Image(systemName: "gear").font(.largeTitle).foregroundColor(.black)
-                            }.offset(x: -UIScreen.main.bounds.width/32, y: UIScreen.main.bounds.width/5)
+                            }.offset(x: -UIScreen.main.bounds.width/32, y: -UIScreen.main.bounds.width/6)
                         
                     }
                     VStack {
@@ -143,7 +143,7 @@ Spacer()
                         .font(.headline)
                         Spacer()
 
-                    }.offset(x: UIScreen.main.bounds.width/32, y: UIScreen.main.bounds.width/8)
+                    }.offset(x: UIScreen.main.bounds.width/32, y: -UIScreen.main.bounds.width/4.5)
 
                     HStack() {
                         Text(self.currentOrganizer.currentUserInformation.description!)
@@ -151,7 +151,7 @@ Spacer()
                             .fontWeight(.light)
                             .foregroundColor(Color.black)
                         Spacer()
-                    }.offset(x: UIScreen.main.bounds.width/32, y: UIScreen.main.bounds.width/8)
+                    }.offset(x: UIScreen.main.bounds.width/32, y: -UIScreen.main.bounds.width/4.5)
                     
                     }
 
@@ -174,7 +174,7 @@ Spacer()
                         }.offset(x: UIScreen.main.bounds.width/32)*/
 
                     }
-                }.offset(y: -UIScreen.main.bounds.height/16)
+                }//.offset(y: -UIScreen.main.bounds.height/16)
 
                 //Spacer()
 
@@ -184,9 +184,11 @@ Spacer()
                     }
                 }.pickerStyle(SegmentedPickerStyle())
                 .padding(.horizontal, 25)
+                .offset(y: -UIScreen.main.bounds.width/5.5)
                 Spacer()
                 
                 VStack {
+                    Spacer()
                 List {
                     ForEach((eventIndex == 0) ? currentOrganizer.upcomingEvents : currentOrganizer.pastEvents) { Event in
                         NavigationLink(destination: EventPage(event: Event, navigatingThroughMyAccount: true, eventClicked: .constant(false))) {
@@ -196,9 +198,9 @@ Spacer()
                             
                         }
                     }
-                }.listStyle(PlainListStyle()).frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width*3/2, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                }.listStyle(PlainListStyle()).frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                 //Spacer()
-                }
+                }.offset(y: -UIScreen.main.bounds.width/5)
             }/*.navigationBarTitle("", displayMode: .inline)
             .navigationBarItems(trailing: NavigationLink(destination: Settings()) {
                 Image(systemName: "gear").font(.largeTitle).foregroundColor(.black)
