@@ -44,9 +44,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     didFinishLaunchingWithOptions launchOptions:
         [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     FirebaseApp.configure()
-    /*#if DEBUG
-        Bundle(path: "/Applications/InjectionIII.app/Contents/Resources/iOSInjection.bundle")?.load()
-    #endif*/
     return true
   }
     
