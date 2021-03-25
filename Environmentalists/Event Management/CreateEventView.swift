@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MapKit
 
 enum AlertState {
     case validation, confirmation
@@ -26,10 +27,15 @@ struct CreateEventView: View {
     @State private var showActionSheet = false
     @State private var createEventClicked = false
     @State private var completionAlert = false
+    @State private var pickingLocation = false
+    @State private var tapped = false
+    @State private var search = ""
+    @State private var landmarks: [Landmark] = [Landmark]()
     @State private var sourceType: UIImagePickerController.SourceType = .photoLibrary
     
     
     var body: some View {
+        ZStack {
             VStack(spacing: 0) {
                 
                 HStack {
@@ -73,14 +79,14 @@ struct CreateEventView: View {
                 })
                 .actionSheet(isPresented: self.$showActionSheet) {
                     ActionSheet(title: Text(""), buttons: [
-                                    .default(Text("Choose a Photo")) {
-                                        self.sourceType = .photoLibrary
-                                        self.showEventPicker = true
-                                    },
-                                    .default(Text("Take a Photo")) {
-                                        self.sourceType = .camera
-                                        self.showEventPicker = true
-                                    },
+                        .default(Text("Choose a Photo")) {
+                            self.sourceType = .photoLibrary
+                            self.showEventPicker = true
+                        },
+                        .default(Text("Take a Photo")) {
+                            self.sourceType = .camera
+                            self.showEventPicker = true
+                        },
                         .cancel()
                     ])
                 }
@@ -98,8 +104,20 @@ struct CreateEventView: View {
                     }
                     
                     Section(header: Text("Location")) {
-                        TextField("", text: self.$eventCreationManager.location).disableAutocorrection(true)
-                            .keyboardType(.asciiCapable)
+                        if eventCreationManager.location == "" {
+                            Button(action: {
+                                pickingLocation.toggle()
+                            }) {
+                                Text("Set a Location")
+                            }
+                        }
+                        else {
+                            Button(action: {
+                                pickingLocation.toggle()
+                            }) {
+                                Text(eventCreationManager.location)
+                            }
+                        }
                     }
                     
                     Section(header: Text("Date and Time")) {
@@ -138,23 +156,44 @@ struct CreateEventView: View {
                     
                 }.frame(height: UIScreen.main.bounds.height/1.75)
                 
-        }.edgesIgnoringSafeArea(.all)
+            }.edgesIgnoringSafeArea(.all)
+            .opacity(pickingLocation ? 0 : 1)
             .background(Color.gray.opacity(0.25))
             .navigationBarItems(leading: SearchDirectoryView())
-        .onAppear() {
-            self.eventCreationManager.clearEventData()
-        }
-        .alert(isPresented: self.$completionAlert) {
-            Alert(title: Text(""), message: Text("Event Created Successfully"), dismissButton: .default(Text("OK"), action: {
-                self.eventDate = Date()
+            .onAppear() {
                 self.eventCreationManager.clearEventData()
-                presentationMode.wrappedValue.dismiss()
-            }))
-        }
+            }
+            .alert(isPresented: self.$completionAlert) {
+                Alert(title: Text(""), message: Text("Event Created Successfully"), dismissButton: .default(Text("OK"), action: {
+                    self.eventDate = Date()
+                    self.eventCreationManager.clearEventData()
+                    presentationMode.wrappedValue.dismiss()
+                }))
+            }
             .navigationBarItems(trailing: NavigationLink(destination: SearchDirectoryView()) {
-        Image(systemName: "arrow.left").font(.largeTitle).foregroundColor(.black)
-    })
-        
+                Image(systemName: "arrow.left").font(.largeTitle).foregroundColor(.black)
+            })
+            
+            VStack {
+                TextField("Search", text: $search)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                .padding()
+                    .onChange(of: search, perform: { value in
+                        getNearByLandmarks()
+                    })
+
+                
+                PlaceListView(location: $eventCreationManager.location, pickingLocation: $pickingLocation, landmarks: landmarks) {
+                    // on tap
+                    self.tapped.toggle()
+                }.animation(.spring())
+                
+            }.padding()
+            .background(Color.white)
+            .opacity(pickingLocation ? 1 : 0)
+            
+            
+        }
     }
     
     func loadImage() {
@@ -162,247 +201,77 @@ struct CreateEventView: View {
         self.eventCreationManager.eventPic = inputImage
     }
     
+    private func getNearByLandmarks() {
+        
+        let request = MKLocalSearch.Request()
+        request.naturalLanguageQuery = search
+        
+        let search = MKLocalSearch(request: request)
+        search.start { (response, error) in
+            if let response = response {
+                
+                let mapItems = response.mapItems
+                self.landmarks = mapItems.map {
+                    Landmark(placemark: $0.placemark)
+                }
+                
+            }
+            
+        }
+        
+    }
+    
 }
 
-//struct CreateEventView: View {
-//
-//    @ObservedObject var eventCreationManager = EventCreationManager()
-//    @EnvironmentObject var currentUser: CurrentUser
-//    @State var completionAlert = false
-//
-//    var body: some View {
-//        ZStack {
-//            switch self.eventCreationManager.creationPageIndex {
-//            case 0:
-//                CreateEventPage1(eventCreationManager: self.eventCreationManager)
-//            case 1:
-//                CreateEventPage2(eventCreationManager: self.eventCreationManager)
-//            case 2:
-//                CreateEventPage3(eventCreationManager: self.eventCreationManager, completionAlert: self.$completionAlert)
-//                    .environmentObject(self.currentUser)
-//            default:
-//                Text("Default")
-//            }
-//        }.onAppear() {
-//            self.eventCreationManager.clearEventData()
-//        }
-//        .alert(isPresented: self.$completionAlert) {
-//            Alert(title: Text(""), message: Text("Event Created Successfully"), dismissButton: .default(Text("OK"), action: { self.eventCreationManager.clearEventData()
-//            }))
-//        }
-//    }
-//}
-//
-//struct CreateEventPage1: View {
-//
-//    @ObservedObject var eventCreationManager: EventCreationManager
-//
-//    var body: some View {
-//
-//        ZStack {
-//
-////            LinearGradient(gradient: .init(colors: [Color(#colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1)), Color(#colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1))]), startPoint: .top, endPoint: .bottom).edgesIgnoringSafeArea(.all)
-//
-//            VStack(alignment: .center) {
-//                Text("Create New Event").font(.title).padding(.bottom, 25)
-//                VStack(){
-//                    VStack {
-//                        VStack(alignment: .leading) {
-//                            Text("Title")
-//                                .foregroundColor(Color.black)
-//                                .font(.body)
-//
-//                            TextField("Enter your event title here...", text: self.$eventCreationManager.title)
-//                        }
-//                        VStack(alignment: .leading) {
-//                            Text("Description")
-//                                .font(.body)
-//                            TextField("Enter brief event description here...", text: self.$eventCreationManager.description)
-//
-//                        }
-//                    }
-//                }
-//
-//            }.padding(.horizontal, 25)
-//
-//
-//            VStack {
-//                Spacer()
-//                HStack {
-////                    Button(action: {
-////                        self.sessionIndex = 0
-////                    }) {
-////                        Text("Cancel").font(.body)
-////                            .foregroundColor(.white)
-////                            .padding(.horizontal, 12.5)
-////                            .padding(.vertical, 8.5)
-////                            .background(Color.black)
-////                    }
-//                    Spacer()
-//                    Button(action: {
-//                        self.eventCreationManager.creationPageIndex += 1
-//                    }) {
-//                        Text("Next").font(.body)
-//                            .foregroundColor(.white)
-//                            .padding(.horizontal, 12.5)
-//                            .padding(.vertical, 8.5)
-//                            .background(Color.black)
-//                    }
-//                }.padding(.horizontal, 25)
-//            }.padding(.bottom, 50)
-//
-//        }
-//
-//    }
-//}
-//
-//struct CreateEventPage2: View {
-//
-//    @ObservedObject var eventCreationManager: EventCreationManager
-//    @State private var coverpicker = false
-//
-//    var body: some View {
-//
-//        ZStack {
-//
-////            LinearGradient(gradient: .init(colors: [Color(#colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1)), Color(#colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1))]), startPoint: .top, endPoint: .bottom).edgesIgnoringSafeArea(.all)
-//
-//            VStack(alignment: .center) {
-//                Text("Create New Event").font(.title).padding(.bottom, 25)
-//                VStack(){
-//                    VStack {
-//                        VStack(alignment: .leading) {
-//                            Text("Location")
-//                                .foregroundColor(Color.black)
-//                                .font(.body)
-//
-//                            TextField("Enter the location of your event here...", text: self.$eventCreationManager.location)
-//                        }
-//                        VStack(alignment: .leading) {
-//                            Text("Date & Time")
-//                                .font(.body)
-//                            TextField("Enter Date & Time here...", text: self.$eventCreationManager.date)
-//                            TextField("Enter Time here...", text: self.$eventCreationManager.time)
-//
-//                        }
-//                        HStack{
-//
-//                            Spacer()
-//
-//
-//                            Button(action: {
-//
-//                                self.coverpicker.toggle()
-//
-//                            }) {
-//
-//                                if self.eventCreationManager.coverimagedata.count == 0{
-//
-//                                    Image(systemName: "camera.on.rectangle").resizable().frame(width: 90, height: 70).foregroundColor(.gray)
-//                                }
-//                                else{
-//
-//                                    Image(uiImage: UIImage(data: self.eventCreationManager.coverimagedata)!).resizable().renderingMode(.original).frame(width: 90, height: 90)
-//                                }
-//
-//
-//                            }.sheet(isPresented: self.$coverpicker, content: {
-//
-//                                ImagePicker(picker: self.$coverpicker, imagedata: self.$eventCreationManager.coverimagedata)
-//
-//                            })
-//
-//                            Spacer()
-//                        }
-//
-//                    }
-//                }
-//            }.padding(.horizontal, 25)
-//
-//            VStack() {
-//                Spacer()
-//                HStack {
-//                    Button(action: {
-//                        self.eventCreationManager.creationPageIndex -= 1
-//                    }) {
-//                        Text("Back").font(.body)
-//                            .foregroundColor(.white)
-//                            .padding(.horizontal, 12.5)
-//                            .padding(.vertical, 8.5)
-//                            .background(Color.black)
-//                    }
-//                    Spacer()
-//                    Button(action: {
-//                        self.eventCreationManager.creationPageIndex += 1
-//                    }) {
-//                        Text("Next").font(.body)
-//                            .foregroundColor(.white)
-//                            .padding(.horizontal, 12.5)
-//                            .padding(.vertical, 8.5)
-//                            .background(Color.black)
-//                    }
-//                }
-//            }.padding(.horizontal, 25)
-//
-//        }.padding(.bottom, 50)
-//
-//    }
-//}
-//
-//struct CreateEventPage3: View {
-//
-//    @ObservedObject var eventCreationManager: EventCreationManager
-//    @Binding var completionAlert: Bool
-//    @EnvironmentObject var currentUser: CurrentUser
-//
-//    var body: some View {
-//
-//        ZStack {
-////
-////            LinearGradient(gradient: .init(colors: [Color(#colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1)), Color(#colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1))]), startPoint: .top, endPoint: .bottom).edgesIgnoringSafeArea(.all)
-//
-//
-//            VStack() {
-////                Image("\(self.eventCreationManager.coverimagedata)")
-////                .resizable()
-////                .scaledToFit()
-////                .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height/5)
-//                Text("Review your submission...").font(.title)
-//                Text(self.eventCreationManager.title).font(.body)
-//                Text(self.eventCreationManager.description).font(.body)
-//                Text(self.eventCreationManager.location).font(.body)
-//                Text("\(self.eventCreationManager.date), \(self.eventCreationManager.time)").font(.body)
-//
-//                Spacer()
-//                HStack {
-//                    Button(action: {
-//                        self.eventCreationManager.creationPageIndex -= 1
-//                    }) {
-//                        Text("Back").font(.body)
-//                            .foregroundColor(.white)
-//                            .padding(.horizontal, 12.5)
-//                            .padding(.vertical, 8.5)
-//                            .background(Color.black)
-//                    }
-//                    Spacer()
-//                    Button(action: {
-//                        self.eventCreationManager.publishNewEvent(currentUser: self.currentUser)
-//                        self.completionAlert.toggle()
-//                    }) {
-//                        Text("Publish Event").font(.body)
-//                            .foregroundColor(.white)
-//                            .padding(.horizontal, 12.5)
-//                            .padding(.vertical, 8.5)
-//                            .background(Color.black)
-//                    }
-//                }.padding(.horizontal, 25)
-//
-//            }
-//
-//
-//
-//        }.padding(.bottom, 50)
-//
-//    }
-//}
-//
+struct PlaceListView: View {
+    
+    @Binding var location: String
+    @Binding var pickingLocation: Bool
+    let landmarks: [Landmark]
+    var onTap: () -> ()
+    
+    var body: some View {
+        VStack(alignment: .leading) {
+            
+            List {
+                
+                ForEach(self.landmarks, id: \.id) { landmark in
+                    Button(action: {
+                        location = landmark.name + " " + landmark.title
+                        pickingLocation.toggle()
+                    }) {
+                        VStack(alignment: .leading) {
+                            Text(landmark.name)
+                                .fontWeight(.bold)
+                            
+                            Text(landmark.title)
+                        }
+                    }
+                }
+                
+            }.animation(nil)
+            
+        }.cornerRadius(10)
+    }
+}
+
+struct Landmark {
+    
+    let placemark: MKPlacemark
+    
+    var id: UUID {
+        return UUID()
+    }
+    
+    var name: String {
+        self.placemark.name ?? ""
+    }
+    
+    var title: String {
+        self.placemark.title ?? ""
+    }
+    
+    var coordinate: CLLocationCoordinate2D {
+        self.placemark.coordinate
+    }
+}
