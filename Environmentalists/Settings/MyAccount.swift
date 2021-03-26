@@ -299,30 +299,30 @@ Spacer()
         
     }
     
-    private func getOrganizerEvents() {
-        
-        let database = Firestore.firestore()
-        let eventRef = database.collection("Events")
-        for event in currentOrganizer.currentUserInformation.userEventIDs {
-            eventRef.document(event).getDocument() { (document, error) in
-                if let document = document {
-                    let id = document.documentID
-                    let eventTitle = document.get("Name") as! String
-                    let organizer = document.get("Organizer") as! String
-                    let organizerID = document.get("Organizer ID") as! String
-                    let eventDescription = document.get("Description") as! String
-                    let date = document.get("Date") as! String
-                    let time = document.get("Time") as! String
-                    let location = document.get("Location") as! String
-                    let numAttending = document.get("Number Attending") as! Int
-                    let eventPhotoURL = document.get("Event Photo URL") as! String
-                    self.orgEvents.append(Event(id: id, eventTitle: eventTitle, eventOrganizer: organizer, eventOrganizerID: organizerID, eventDescription: eventDescription, date: date, time: time, location: location, numAttending: numAttending, eventPhotoURL: eventPhotoURL))
-                } else {
-                  print("Document does not exist")
-                }
-              }
-        }
-    }
+//    private func getOrganizerEvents() {
+//
+//        let database = Firestore.firestore()
+//        let eventRef = database.collection("Events")
+//        for event in currentOrganizer.currentUserInformation.userEventIDs {
+//            eventRef.document(event).getDocument() { (document, error) in
+//                if let document = document {
+//                    let id = document.documentID
+//                    let eventTitle = document.get("Name") as! String
+//                    let organizer = document.get("Organizer") as! String
+//                    let organizerID = document.get("Organizer ID") as! String
+//                    let eventDescription = document.get("Description") as! String
+//                    let date = document.get("Date") as! String
+//                    let time = document.get("Time") as! String
+//                    let location = document.get("Location") as! String
+//                    let numAttending = document.get("Number Attending") as! Int
+//                    let eventPhotoURL = document.get("Event Photo URL") as! String
+//                    self.orgEvents.append(Event(id: id, eventTitle: eventTitle, eventOrganizer: organizer, eventOrganizerID: organizerID, eventDescription: eventDescription, date: date, time: time, location: location, numAttending: numAttending, eventPhotoURL: eventPhotoURL))
+//                } else {
+//                  print("Document does not exist")
+//                }
+//              }
+//        }
+//    }
     
     private func delete(at offsets: IndexSet) {
         let removedEvent = orgEvents[offsets.first!]
