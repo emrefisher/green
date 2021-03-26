@@ -785,13 +785,18 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				"GENERATE_MASTER_OBJECT_FILE[arch=*]" = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				"LD_GENERATE_MAP_FILE[arch=*]" = NO;
+				"LD_MAP_FILE_PATH[arch=*]" = "$(TARGET_TEMP_DIR)/$(PRODUCT_NAME)-LinkMap-$(CURRENT_VARIANT)-$(CURRENT_ARCH).txt";
+				"LD_QUOTE_LINKER_ARGUMENTS_FOR_COMPILER_DRIVER[arch=*]" = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				"WARNING_LDFLAGS[arch=*]" = "";
 			};
 			name = Debug;
 		};
@@ -940,8 +945,6 @@
 					"\"Combine\"",
 					"-weak_framework",
 					"\"SwiftUI\"",
-					"-Xlinker",
-					"-interposable",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.campbell23567.Environmentalists;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1040,8 +1043,6 @@
 					"\"Combine\"",
 					"-weak_framework",
 					"\"SwiftUI\"",
-					"-Xlinker",
-					"-interposable",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.campbell23567.Environmentalists;
 				PRODUCT_NAME = "$(TARGET_NAME)";

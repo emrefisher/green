@@ -22,6 +22,7 @@ struct Event: Identifiable, Codable {
     var location: String
     var numAttending: Int
     var eventPhotoURL: String
+    var systemStatus: Bool
     
     enum CodingKeys: String, CodingKey {
         case id = "Event ID"
@@ -34,6 +35,7 @@ struct Event: Identifiable, Codable {
         case location = "Location"
         case numAttending = "Number Attending"
         case eventPhotoURL = "Event Photo URL"
+        case systemStatus = "true"
     }
     
 }
