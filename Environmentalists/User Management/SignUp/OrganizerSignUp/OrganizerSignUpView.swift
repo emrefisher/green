@@ -28,6 +28,8 @@ struct OrganizerSignUpView: View {
         case 5:
             OrganizerSignUpPageSix(organizerSignUpManager: self.organizerSignUpManager)
         case 6:
+            OrganizerSignUpPageSeven(organizerSignUpManager: self.organizerSignUpManager)
+        case 7:
             OrganizerSignUpReviewSubmission(organizerSignUpManager: self.organizerSignUpManager).environmentObject(sessionManager)
         default:
             Text("")
@@ -57,5 +59,9 @@ class OrganizerSignUpManager: ObservableObject {
     @Published var coverPhoto: Image?
     @Published var pickedCoverPhoto: Image?
     @Published var coverPhotoData: Data = Data()
+    @Published var orgFacebook = ""
+    @Published var orgInsta = ""
+    @Published var orgYoutube = ""
+    @Published var orgTwitter = ""
     
 }

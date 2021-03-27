@@ -13,9 +13,9 @@ struct OrganizerSignUpReviewSubmission: View {
     
     var body: some View {
         VStack (spacing: 15) {
-            ProgressView(value: CGFloat(self.organizerSignUpManager.pageNumber), total: 6) {
+            ProgressView(value: CGFloat(self.organizerSignUpManager.pageNumber), total: 7) {
                 HStack(alignment: .center) {
-                    Text("Progress: (\(self.organizerSignUpManager.pageNumber)/6)")
+                    Text("Progress: (\(self.organizerSignUpManager.pageNumber)/7)")
                 }
             }
             Spacer()
