@@ -112,7 +112,7 @@ class EventCreationManager: ObservableObject {
                 }
                 
                 
-                userRef.document(eventID).setData(["Name": self.title, "Organizer": currentUser.currentUserInformation.name, "Organizer ID": currentUser.currentUserInformation.orgID!, "Event ID": eventID, "Date": formattedDate, "Time": formattedTime, "Number Attending": self.numAttending, "Description": self.description, "Location": self.location, "Event Photo URL": "\(url!)"])
+                userRef.document(eventID).setData(["Name": self.title, "Organizer": currentUser.currentUserInformation.name, "Organizer ID": currentUser.currentUserInformation.orgID!, "Event ID": eventID, "Date": formattedDate, "Time": formattedTime, "Number Attending": self.numAttending, "Description": self.description, "Location": self.location, "Event Photo URL": "\(url!)", "systemStatus": true])
                 userRefO.document(currentUser.currentUserInformation.id).updateData(["Events": FieldValue.arrayUnion([eventID])])
 //                currentUser.currentUserInformation.userEventIDs.append(eventID)
 //                currentUser.currentUserInformation.userEvents.append(Event(id: eventID, eventTitle: self.title, eventOrganizer: currentUser.currentUserInformation.name, eventOrganizerID: currentUser.currentUserInformation.orgID!, eventDescription: self.description, date: formattedDate, time: formattedTime, location: self.location, numAttending: self.numAttending, eventPhotoURL: "\(url!)"))

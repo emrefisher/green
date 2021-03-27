@@ -16,6 +16,7 @@ struct SearchDirectoryView: View {
     @EnvironmentObject var currentUser: CurrentUser
     @State var filteredItems = [Event]()
     @State var hasSetFilteredItems = true
+    @State var upcomingEvents = [Event]()
     
     var body: some View {
         
@@ -24,10 +25,30 @@ struct SearchDirectoryView: View {
             SearchDirectoryViewPage(currentUser: self._currentUser, filteredItems: self.$filteredItems, eventManager: self.eventManager)
             
         }.onAppear {
-            self.filteredItems = eventManager.eventInformation
+            removePastEvent(events: self.eventManager.eventInformation)
+            let events = eventManager.eventInformation
+            for event in events {
+                if event.systemStatus == true {
+                    upcomingEvents.append(event)
+                }
+            }
+            self.filteredItems = upcomingEvents
         }
         
     }
+    func removePastEvent(events: [Event]) {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MM dd, yyyy"
+        let now = Date()
+        for event in events {
+            let date = formatter.date(from: event.date)
+            if date! < now {
+                let database = Firestore.firestore()
+                let eventRef = database.collection("Events").document(event.id)
+                eventRef.updateData(["systemStatus": false])
+            }
+    }
+}
 }
 struct SearchDirectoryViewPage: View {
     
