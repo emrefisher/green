@@ -71,6 +71,9 @@ struct MyAccountOrganizerView: View {
 
                 VStack {
 
+                    NavigationLink(destination: Settings()) {
+                        Image(systemName: "gear").font(.largeTitle).foregroundColor(.black)
+                    }.offset(x: -UIScreen.main.bounds.width/32, y: -UIScreen.main.bounds.width/6)
 Spacer()
                     if ( self.currentOrganizer.currentUserInformation.coverPhotoURL != "") {
                     WebImage(url: URL(string: "\(self.currentOrganizer.currentUserInformation.coverPhotoURL)"))
@@ -132,9 +135,58 @@ Spacer()
                     }
                     HStack{
                         Spacer()
-                            NavigationLink(destination: Settings()) {
-                                Image(systemName: "gear").font(.largeTitle).foregroundColor(.black)
-                            }.offset(x: -UIScreen.main.bounds.width/32, y: -UIScreen.main.bounds.width/6)
+                        
+                        
+                        let completeURL = "https://" + self.currentOrganizer.currentUserInformation.websiteLink!
+                        let url = URL(string:  completeURL)
+                        if url == nil {
+                            Text("Link not yet loaded")
+                        }
+                        else  {
+                                Button(action: {
+                                    UIApplication.shared.open(url!)
+                                }) {
+                                    Image("Insta")
+                                        .resizable()
+                                        .frame(width: 45, height: 45)
+                                }
+                                .padding(UIScreen.main.bounds.width/60)
+                                .offset(x: -UIScreen.main.bounds.width/32, y: -UIScreen.main.bounds.width/6)
+                            
+                            Button(action: {
+                                UIApplication.shared.open(url!)
+                            }) {
+                                Image("Twitter")
+                                    .resizable()
+                                    .frame(width: 45, height: 45)
+                            }
+                            .padding(UIScreen.main.bounds.width/60)
+                            .offset(x: -UIScreen.main.bounds.width/32, y: -UIScreen.main.bounds.width/6)
+                            
+                            Button(action: {
+                                UIApplication.shared.open(url!)
+                            }) {
+                                Image("Facebook")
+                                    .resizable()
+                                    .frame(width: 45, height: 45)
+                            }
+                            .padding(UIScreen.main.bounds.width/60)
+                            .offset(x: -UIScreen.main.bounds.width/32, y: -UIScreen.main.bounds.width/6)
+                            
+                            Button(action: {
+                                UIApplication.shared.open(url!)
+                            }) {
+                                Image("Youtube")
+                                    .resizable()
+                                    .frame(width: 45, height: 45)
+                            }
+                            .padding(UIScreen.main.bounds.width/60)
+                            .offset(x: -UIScreen.main.bounds.width/32, y: -UIScreen.main.bounds.width/6)
+                        }
+                                
+                        NavigationLink(destination: Settings()) {
+                            Image(systemName: "gear").font(.largeTitle).foregroundColor(.black)
+                        }.offset(x: -UIScreen.main.bounds.width/32, y: -UIScreen.main.bounds.width/6)
                         
                     }
                     VStack {
@@ -153,6 +205,7 @@ Spacer()
                         Spacer()
                     }.offset(x: UIScreen.main.bounds.width/32, y: -UIScreen.main.bounds.width/4.5)
                     
+                        Spacer()
                     }
 
                     VStack() {
