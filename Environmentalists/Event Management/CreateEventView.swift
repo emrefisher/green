@@ -189,6 +189,7 @@ struct CreateEventView: View {
                 }.animation(.spring())
                 
             }.padding()
+            .padding(.top, UIScreen.main.bounds.height/5)
             .background(Color.white)
             .opacity(pickingLocation ? 1 : 0)
             

@@ -11,16 +11,16 @@ import Photos
 struct SignUp: View {
     
     @EnvironmentObject var sessionManager: UserSessionManager
-
-    @State var newAccountType = ""
+    
+    @State var newAccountType: String = ""
     @State private var showPromoCodeEntry: Bool = false
     @State private var verificationCode: String = ""
+    @State private var alert: Bool = false
     
     var body: some View {
         
-        ZStack {
-
-            if self.newAccountType == "" {
+        if self.newAccountType == "" {
+            ZStack {
                 VStack {
                     HStack{
                         
@@ -31,8 +31,8 @@ struct SignUp: View {
                         }
                         .frame(width: UIScreen.main.bounds.width/10, height: UIScreen.main.bounds.height/8)
                         Spacer()
-                    
-                    
+                        
+                        
                     }.padding(.leading, 15)
                     
                     
@@ -55,41 +55,65 @@ struct SignUp: View {
                     }.background(Color(#colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1))).clipShape(Capsule())
                     
                     Button(action: {
-                        self.newAccountType = "Organizer"
+                        //                            self.newAccountType = "Organizer"
+                        showPromoCodeEntry.toggle()
                     }) {
                         
                         Text("Verified Organizer? Click ") + Text("Here").underline()
-
+                        
                     }
                 }.padding([.top, .bottom], 50)
-            
+                
+                
+                VStack {
+                    Text("Enter Verification Code")
+                    TextField("Verification Code", text: $verificationCode)
+                    Button("Confirm", action: {
+                        if verificationCode == "BetaTestOrg" {
+                            newAccountType = "Organizer"
+                        }
+                        else {
+                            alert.toggle()
+                        }
+                    }).alert(isPresented: $alert) {
+                        Alert(title: Text("Verification Error"), message: Text("Invalid verification code"), dismissButton: .default(Text("OK")))
+                    }
+                }.padding()
+                .cornerRadius(10)
+                .background(RoundedRectangle(cornerRadius: 10)
+                                .fill(Color.white)
+                                .shadow(color: .black, radius: 10, x: 0, y: 0))
+                .padding(.horizontal, UIScreen.main.bounds.width / 10)
+                .opacity(showPromoCodeEntry ? 1 : 0)
+                
                 
             }
+        }
+        
+        
+        
+        
+        
+        
+        else if self.newAccountType == "Activist" {
             
-            
-    
-            else if self.newAccountType == "Activist" {
-                
-                ActivistSignUpView(accountType: $newAccountType)
-                    .environmentObject(sessionManager)
-                
-            }
-            
-            else if self.newAccountType == "Organizer" {
-                
-                OrganizerSignUpView(accountType: $newAccountType)
-                    .environmentObject(sessionManager)
-                
-            }
-            
-            VStack {
-                Text("Please Enter Verification Code.")
-            }
+            ActivistSignUpView(accountType: $newAccountType)
+                .environmentObject(sessionManager)
             
         }
         
+        else if self.newAccountType == "Organizer" {
+            
+            OrganizerSignUpView(accountType: $newAccountType)
+                .environmentObject(sessionManager)
+            
+        }
     }
+    
 }
+
+
+
 
 struct ActivistSignUp: View {
     
