@@ -13,13 +13,13 @@ struct SignUp: View {
     @EnvironmentObject var sessionManager: UserSessionManager
 
     @State var newAccountType = ""
+    @State private var showPromoCodeEntry: Bool = false
+    @State private var verificationCode: String = ""
     
     var body: some View {
         
         ZStack {
-            
-          
-            
+
             if self.newAccountType == "" {
                 VStack {
                     HStack{
@@ -81,6 +81,11 @@ struct SignUp: View {
                     .environmentObject(sessionManager)
                 
             }
+            
+            VStack {
+                Text("Please Enter Verification Code.")
+            }
+            
         }
         
     }

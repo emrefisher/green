@@ -6,12 +6,14 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 struct ActivistSignUpPageOne: View {
     
     @ObservedObject var activistSignUpManager: ActivistSignUpManager
     @Binding var accountType: String
     @State private var alert = false
+    @State private var alertState: EmailAlertState = .invalidEmail
     
     var body: some View {
         VStack (spacing: 30){
@@ -30,18 +32,32 @@ struct ActivistSignUpPageOne: View {
             HStack {
                 Button("← Back", action: {
                     self.accountType = ""
-                }).foregroundColor(.white).frame(width: UIScreen.main.bounds.size.width*0.35, height: UIScreen.main.bounds.size.height*0.05 ).background(Color.fireOrange).clipShape(Capsule()).shadow(color: Color.black.opacity(0.5), radius: 5, x: 5, y: 5).alert(isPresented: $alert) {
-                    Alert(title: Text("Sign-Up Error"), message: Text("Please enter a valid email."), dismissButton: .default(Text("OK")))
-                }
+                }).foregroundColor(.white).frame(width: UIScreen.main.bounds.size.width*0.35, height: UIScreen.main.bounds.size.height*0.05 ).background(Color.fireOrange).clipShape(Capsule()).shadow(color: Color.black.opacity(0.5), radius: 5, x: 5, y: 5)
                 Button("Next →", action: {
-                    if self.textFieldValidatorEmail() {
-                        self.activistSignUpManager.pageNumber += 1
+                    Auth.auth().fetchSignInMethods(forEmail: activistSignUpManager.email, completion: { (signInMethods, error) in
+                        if signInMethods == nil {
+                            if self.textFieldValidatorEmail() {
+                                self.activistSignUpManager.pageNumber += 1
+                            }
+                            else {
+                                alertState = .invalidEmail
+                                alert.toggle()
+                            }
+                        }
+                        else {
+                            alertState = .emailAlreadyInUse
+                            alert.toggle()
+                        }
+                    })
+                }).foregroundColor(.white).frame(width: UIScreen.main.bounds.size.width*0.35, height: UIScreen.main.bounds.size.height*0.05 ).background(Color.earthGreen).clipShape(Capsule()).shadow(color: Color.black.opacity(0.5), radius: 5, x: 5, y: 5)
+                .alert(isPresented: $alert) {
+                    switch alertState {
+                    case .emailAlreadyInUse:
+                        return Alert(title: Text("Sign-Up Error"), message: Text("Email already used by an account."), dismissButton: .default(Text("OK")))
+                    case .invalidEmail:
+                        return Alert(title: Text("Sign-Up Error"), message: Text("Please enter a valid email."), dismissButton: .default(Text("OK")))
                     }
-                    else {
-                        self.alert.toggle()
-                    }
-                }).foregroundColor(.white).frame(width: UIScreen.main.bounds.size.width*0.35, height: UIScreen.main.bounds.size.height*0.05 ).background(Color.earthGreen).clipShape(Capsule()).shadow(color: Color.black.opacity(0.5), radius: 5, x: 5, y: 5).alert(isPresented: $alert) {
-                    Alert(title: Text("Sign-Up Error"), message: Text("Please enter a valid email."), dismissButton: .default(Text("OK")))
+                    
                 }
             }
             Spacer()
