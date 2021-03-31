@@ -69,6 +69,12 @@ class EventCreationManager: ObservableObject {
             return "Error"
         }
         
+        if eventimagedata.count == 0 {
+            self.errorMessage = "Please choose an event image."
+            self.alert.toggle()
+            return "Error"
+        }
+        
         let tempDate = Date()
         if date == tempDate {
             self.errorMessage = "Please choose a date and time."
