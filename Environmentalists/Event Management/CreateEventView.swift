@@ -28,6 +28,7 @@ struct CreateEventView: View {
     @State private var createEventClicked = false
     @State private var completionAlert = false
     @State private var pickingLocation = false
+    @State private var showSamplePicker = false
     @State private var tapped = false
     @State private var search = ""
     @State private var landmarks: [Landmark] = [Landmark]()
@@ -53,7 +54,7 @@ struct CreateEventView: View {
                     
                 }) {
                     
-                    if self.eventCreationManager.eventimagedata.count == 0 {
+                    if self.eventCreationManager.eventimagedata.count == 0 && eventCreationManager.eventPic == nil {
                         ZStack {
                             Rectangle()
                                 .fill(Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)))
@@ -87,6 +88,9 @@ struct CreateEventView: View {
                             self.sourceType = .camera
                             self.showEventPicker = true
                         },
+//                        .default(Text("Use Sample Photo")) {
+//                            self.showSamplePicker = true
+//                        },
                         .cancel()
                     ])
                 }
@@ -158,6 +162,7 @@ struct CreateEventView: View {
                 
             }.edgesIgnoringSafeArea(.all)
             .opacity(pickingLocation ? 0 : 1)
+            .opacity(showSamplePicker ? 0 : 1)
             .background(Color.gray.opacity(0.25))
             .navigationBarItems(leading: SearchDirectoryView())
             .onAppear() {
@@ -193,7 +198,9 @@ struct CreateEventView: View {
             .background(Color.white)
             .opacity(pickingLocation ? 1 : 0)
             
-            
+            VStack {
+                PickerFromSampleImages(eventCreationManager: eventCreationManager, showSamplesPicker: $showSamplePicker)
+            }.opacity(showSamplePicker ? 1 : 0)
         }
     }
     
