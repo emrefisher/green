@@ -43,6 +43,7 @@ struct Event: Identifiable, Codable {
 class EventManager: ObservableObject {
     
     @Published var eventInformation = [Event]()
+    @Published var dateFilteredEventInformation = [Event]()
     private var db = Firestore.firestore()
     
     init() {
@@ -63,7 +64,22 @@ class EventManager: ObservableObject {
             self.eventInformation = documents.compactMap { (queryDocumentSnapshot) -> Event? in
                 return try? queryDocumentSnapshot.data(as: Event.self)
             }
-            print(self.eventInformation)
+            
+            self.filterOutPastEvents()
+            
+        }
+    }
+    
+    private func filterOutPastEvents() {
+        let dateNow = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM d, y h:mm a"
+        self.dateFilteredEventInformation = eventInformation.filter {
+            dateFormatter.date(from: $0.date + " " + $0.time)! > dateNow
+        }
+        
+        self.dateFilteredEventInformation.sort() {
+            dateFormatter.date(from: $0.date + " " + $0.time)! < dateFormatter.date(from: $1.date + " " + $1.time)!
         }
     }
     

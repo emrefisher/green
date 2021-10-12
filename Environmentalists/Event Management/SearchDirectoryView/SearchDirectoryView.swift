@@ -12,44 +12,76 @@ import SDWebImageSwiftUI
 
 struct SearchDirectoryView: View {
     
-    @ObservedObject var eventManager = EventManager()
+    @StateObject var eventManager = EventManager()
     @EnvironmentObject var currentUser: CurrentUser
-    @State var filteredItems = [Event]()
-    @State var hasSetFilteredItems = true
-    @State var upcomingEvents = [Event]()
+    @State var searchText = ""
+    @State var eventClicked = false
     
     var body: some View {
         
-        ZStack {
+        NavigationView {
+            List {
+                ForEach(eventManager.dateFilteredEventInformation) { Event in
+                    ZStack {
+                        
+                        EventRow(event: Event)
+                        
+                        NavigationLink(destination: EventPage(event: Event, navigatingThroughMyAccount: false, eventClicked: $eventClicked)) {
+                            EmptyView()
+                        }.frame(width: 0)
+                            .opacity(0)
+                    }
+                }.listRowSeparator(.hidden)
+            }.listStyle(.plain)
+                .navigationBarTitle("", displayMode: .inline)
             
-            SearchDirectoryViewPage(currentUser: self._currentUser, filteredItems: self.$filteredItems, eventManager: self.eventManager)
-            
-        }.onAppear {
-            removePastEvent(events: self.eventManager.eventInformation)
-            let events = eventManager.eventInformation
-            for event in events {
-                if event.systemStatus == true {
-                    upcomingEvents.append(event)
-                }
-            }
-            self.filteredItems = upcomingEvents
-        }
+        }.searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
         
     }
-    func removePastEvent(events: [Event]) {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MM dd, yyyy"
-        let now = Date()
-        for event in events {
-            let date = formatter.date(from: event.date)
-            if date! < now {
-                let database = Firestore.firestore()
-                let eventRef = database.collection("Events").document(event.id)
-                eventRef.updateData(["systemStatus": false])
-            }
-    }
+    
 }
-}
+
+
+//struct SearchDirectoryView: View {
+//
+//    @ObservedObject var eventManager = EventManager()
+//    @EnvironmentObject var currentUser: CurrentUser
+//    @State var filteredItems = [Event]()
+//    @State var hasSetFilteredItems = true
+//    @State var upcomingEvents = [Event]()
+//
+//    var body: some View {
+//
+//        ZStack {
+//
+//            SearchDirectoryViewPage(currentUser: self._currentUser, filteredItems: self.$filteredItems, eventManager: self.eventManager)
+//
+//        }.onAppear {
+//            removePastEvent(events: self.eventManager.eventInformation)
+//            let events = eventManager.eventInformation
+//            for event in events {
+//                if event.systemStatus == true {
+//                    upcomingEvents.append(event)
+//                }
+//            }
+//            self.filteredItems = upcomingEvents
+//        }
+//
+//    }
+//    func removePastEvent(events: [Event]) {
+//        let formatter = DateFormatter()
+//        formatter.dateFormat = "MM dd, yyyy"
+//        let now = Date()
+//        for event in events {
+//            let date = formatter.date(from: event.date)
+//            if date! < now {
+//                let database = Firestore.firestore()
+//                let eventRef = database.collection("Events").document(event.id)
+//                eventRef.updateData(["systemStatus": false])
+//            }
+//        }
+//    }
+//}
 struct SearchDirectoryViewPage: View {
     
     @EnvironmentObject var currentUser: CurrentUser
@@ -365,7 +397,7 @@ struct EventRow: View {
             )
             .foregroundColor(Color.white)
             .shadow(
-              color: Color.gray,
+                color: Color.black.opacity(0.75),
               radius: 10,
               x: 0,
               y: 0

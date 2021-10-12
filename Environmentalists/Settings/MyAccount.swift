@@ -142,47 +142,47 @@ Spacer()
                         if url == nil {
                             Text("Link not yet loaded")
                         }
-                        else  {
-                                Button(action: {
-                                    UIApplication.shared.open(url!)
-                                }) {
-                                    Image("Insta")
-                                        .resizable()
-                                        .frame(width: 45, height: 45)
-                                }
-                                .padding(UIScreen.main.bounds.width/60)
-                                .offset(x: -UIScreen.main.bounds.width/32, y: -UIScreen.main.bounds.width/6)
-                            
-                            Button(action: {
-                                UIApplication.shared.open(url!)
-                            }) {
-                                Image("Twitter")
-                                    .resizable()
-                                    .frame(width: 45, height: 45)
-                            }
-                            .padding(UIScreen.main.bounds.width/60)
-                            .offset(x: -UIScreen.main.bounds.width/32, y: -UIScreen.main.bounds.width/6)
-                            
-                            Button(action: {
-                                UIApplication.shared.open(url!)
-                            }) {
-                                Image("Facebook")
-                                    .resizable()
-                                    .frame(width: 45, height: 45)
-                            }
-                            .padding(UIScreen.main.bounds.width/60)
-                            .offset(x: -UIScreen.main.bounds.width/32, y: -UIScreen.main.bounds.width/6)
-                            
-                            Button(action: {
-                                UIApplication.shared.open(url!)
-                            }) {
-                                Image("Youtube")
-                                    .resizable()
-                                    .frame(width: 45, height: 45)
-                            }
-                            .padding(UIScreen.main.bounds.width/60)
-                            .offset(x: -UIScreen.main.bounds.width/32, y: -UIScreen.main.bounds.width/6)
-                        }
+//                        else  {
+//                                Button(action: {
+//                                    UIApplication.shared.open(url!)
+//                                }) {
+//                                    Image("Insta")
+//                                        .resizable()
+//                                        .frame(width: 45, height: 45)
+//                                }
+//                                .padding(UIScreen.main.bounds.width/60)
+//                                .offset(x: -UIScreen.main.bounds.width/32, y: -UIScreen.main.bounds.width/6)
+//                            
+//                            Button(action: {
+//                                UIApplication.shared.open(url!)
+//                            }) {
+//                                Image("Twitter")
+//                                    .resizable()
+//                                    .frame(width: 45, height: 45)
+//                            }
+//                            .padding(UIScreen.main.bounds.width/60)
+//                            .offset(x: -UIScreen.main.bounds.width/32, y: -UIScreen.main.bounds.width/6)
+//                            
+//                            Button(action: {
+//                                UIApplication.shared.open(url!)
+//                            }) {
+//                                Image("Facebook")
+//                                    .resizable()
+//                                    .frame(width: 45, height: 45)
+//                            }
+//                            .padding(UIScreen.main.bounds.width/60)
+//                            .offset(x: -UIScreen.main.bounds.width/32, y: -UIScreen.main.bounds.width/6)
+//                            
+//                            Button(action: {
+//                                UIApplication.shared.open(url!)
+//                            }) {
+//                                Image("Youtube")
+//                                    .resizable()
+//                                    .frame(width: 45, height: 45)
+//                            }
+//                            .padding(UIScreen.main.bounds.width/60)
+//                            .offset(x: -UIScreen.main.bounds.width/32, y: -UIScreen.main.bounds.width/6)
+//                        }
                                 
                         NavigationLink(destination: Settings()) {
                             Image(systemName: "gear").font(.largeTitle).foregroundColor(.black)

@@ -191,7 +191,7 @@ struct CreateEventView: View {
                 PlaceListView(location: $eventCreationManager.location, pickingLocation: $pickingLocation, landmarks: landmarks) {
                     // on tap
                     self.tapped.toggle()
-                }.animation(.spring())
+                }
                 
             }.padding()
             .padding(.top, UIScreen.main.bounds.height/5)
@@ -257,7 +257,7 @@ struct PlaceListView: View {
                     }
                 }
                 
-            }.animation(nil)
+            }
             
         }.cornerRadius(10)
     }
