@@ -21,7 +21,7 @@ struct SearchDirectoryView: View {
         
         NavigationView {
             List {
-                ForEach(eventManager.dateFilteredEventInformation) { Event in
+                ForEach(eventSearchResults) { Event in
                     ZStack {
                         
                         EventRow(event: Event)
@@ -36,6 +36,18 @@ struct SearchDirectoryView: View {
                 .navigationBarTitle("", displayMode: .inline)
             
         }.searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
+        
+    }
+    
+    var eventSearchResults: [Event] {
+        if searchText.isEmpty {
+            return eventManager.dateFilteredEventInformation
+        }
+        else {
+            return eventManager.dateFilteredEventInformation.filter {
+                ($0.eventTitle.localizedCaseInsensitiveContains(searchText) || $0.eventOrganizer.localizedCaseInsensitiveContains(searchText))
+            }
+        }
         
     }
     
