@@ -35,7 +35,7 @@ struct SearchDirectoryView: View {
             }.listStyle(.plain)
                 .navigationBarTitle("", displayMode: .inline)
             
-        }.searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
+        }.searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search for Event Title or Event Orgs")
         
     }
     
