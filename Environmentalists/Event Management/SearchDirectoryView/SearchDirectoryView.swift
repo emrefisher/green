@@ -355,7 +355,7 @@ struct EventRow: View {
             WebImage(url: URL(string: self.event.eventPhotoURL))
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-                .frame(width: UIScreen.main.bounds.width*0.91, height: UIScreen.main.bounds.height/4, alignment: .center)
+                .frame(width: UIScreen.main.bounds.width*0.91, height: UIScreen.main.bounds.height/8, alignment: .center)
                 .clipped()
                 .cornerRadius(10)
             
