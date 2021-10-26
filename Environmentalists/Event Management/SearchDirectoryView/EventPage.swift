@@ -33,6 +33,7 @@ struct EventPage: View {
     @State private var isEditingEvent = false
     @State private var editedFields = [String]()
     @State var date = Date()
+    @State var editedEventDate = Date()
     //@ObservedObject var num = monitorAttendees()
     
     var body: some View {
@@ -182,6 +183,7 @@ struct EventPage: View {
         }
         }
         else {
+            VStack {
             Form {
 
                 Section(header: Text("Event Name")) {
@@ -199,6 +201,10 @@ struct EventPage: View {
                         self.editedFields.append("Organization Location")
                     }
                     )}
+                Section(header: Text("Date and Time")) {
+                    DatePicker("Date", selection: $editedEventDate, in: Date()..., displayedComponents: .date)
+                    DatePicker("Time", selection: $editedEventDate, displayedComponents: .hourAndMinute)
+                }
                 /*Section(header: Text("Date and Time")) {
                     DatePicker("Date", selection: $date, in: Date()..., displayedComponents: .date)
                     DatePicker("Time", selection: $date, displayedComponents: .hourAndMinute)
@@ -211,10 +217,11 @@ struct EventPage: View {
                 let formattedDate = formatter.string(from: date)
                 let formattedTime = formatter1.string(from: date)*/
 
+            }.onAppear() {
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "MMM d, y h:mm a"
+                editedEventDate = dateFormatter.date(from: event.date + " " + event.time) ?? Date()
             }
-            
-            VStack {
-                Spacer()
             HStack {
 
 
@@ -244,8 +251,9 @@ struct EventPage: View {
                     .cornerRadius(40)
                     .offset(x: -15, y: -5)
                 }
+            
             }
-            }
+        }
         }
         
     }
@@ -261,7 +269,14 @@ struct EventPage: View {
                 eventRef.document(event).updateData(["Organizer": self.currentOrganizer.currentUserInformation.name])
             }
         }*/
-        eventRef.updateData(["Name": eventInfo.eventTitle, "Description": eventInfo.eventDescription, "Location": eventInfo.location])
+        let formatter = DateFormatter()
+        let formatter1 = DateFormatter()
+        formatter.dateFormat = "MMM d, y"
+        formatter1.pmSymbol = "PM"
+        formatter1.dateFormat = "h:mm a"
+        let formattedDate = formatter.string(from: editedEventDate)
+        let formattedTime = formatter1.string(from: editedEventDate)
+        eventRef.updateData(["Name": eventInfo.eventTitle, "Description": eventInfo.eventDescription, "Location": eventInfo.location, "Date": formattedDate, "Time": formattedTime])
         
     }
     
